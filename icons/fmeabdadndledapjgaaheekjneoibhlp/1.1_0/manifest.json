@@ -1,0 +1,24 @@
+{
+   "action": {
+      "default_icon": "icon.png"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "commands": {
+      "_execute_action": {
+         "description": "Rotate Video Player.",
+         "suggested_key": {
+            "default": "Ctrl+R",
+            "mac": "MacCtrl+R"
+         }
+      }
+   },
+   "description": "Rotate the Video Player to the angle you desire.",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2OBHEZYijickXd0OnOCFKQ22Ncun8qYwXNDjK28rywIidWOL/G566D54Fknnz+uv8QrAPA4tN3m31OgVdDhkvh6/G0MT1m7P2q35TYIMs/4y24yKKCLa1ExxJZexXrQhDSLWCJvnv7g2HcCZjnu8MpViqK5zzMTqjibxxIACozdbcvykONm0ExSsG0CAmCdAewe3mWZuztSc9fsda1emUgSkuprrysyXgsfFWykGxjxusV2KsMAgjGpnK7WyrtEFK8/1Z5uROJKo4IuNGyhp7Kn4wjo/xAqV+oHgS9W9gwL2cEsz1lZpP0bs5CuYO7tuB+nw8JNfODtDYp/ZL5E+8QIDAQAB",
+   "manifest_version": 3,
+   "name": "Video Rotater",
+   "permissions": [ "activeTab", "scripting" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.1"
+}

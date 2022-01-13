@@ -1,0 +1,62 @@
+{
+  "name": "Auto Day",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "description": "搬砖人自动填工时",
+  "browser_action": {
+    "default_icon": {
+      "128": "/icons/icon_128.png",
+      "16": "/icons/icon_16.png",
+      "256": "/icons/icon_256.png",
+      "32": "/icons/icon_32.png",
+      "48": "/icons/icon_48.png",
+      "512": "/icons/icon_512.png",
+      "64": "/icons/icon_64.png"
+    },
+    "default_title": "Auto Day",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ue.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "128": "/icons/icon_128.png",
+    "16": "/icons/icon_16.png",
+    "256": "/icons/icon_256.png",
+    "32": "/icons/icon_32.png",
+    "48": "/icons/icon_48.png",
+    "512": "/icons/icon_512.png",
+    "64": "/icons/icon_64.png"
+  },
+  "web_accessible_resources": [
+    "injected.js",
+    "autoDay.css"
+  ],
+  "homepage_url": "https://gomi.site",
+  "devtools_page": "devtools.html",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "webNavigation",
+    "notifications"
+  ]
+}

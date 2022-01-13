@@ -1,0 +1,34 @@
+{
+    "name": "videoRoll",
+    "version": "1.0.0",
+    "description": "a web ruler component made by canvas and typescript",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gxy5202/light-ruler.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/gxy5202/light-ruler/issues"
+    },
+    "homepage": "https://github.com/gxy5202/light-ruler#readme",
+    "dependencies": {
+        "typescript": "^4.5.2",
+        "vue": "^3.2.26"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^2.0.1",
+        "@vue/compiler-sfc": "^3.2.26",
+        "less": "^4.1.2",
+        "naive-ui": "^2.24.1",
+        "vite": "^2.7.11"
+    }
+}
