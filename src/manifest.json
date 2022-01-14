@@ -1,0 +1,38 @@
+{
+    "name": "VideoRoll",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "vide rotate",
+    "action": {
+        "default_icon": {
+            "128": "/icons/icon_128.png",
+            "16": "/icons/icon_16.png",
+            "256": "/icons/icon_256.png",
+            "32": "/icons/icon_32.png",
+            "48": "/icons/icon_48.png",
+            "512": "/icons/icon_512.png",
+            "64": "/icons/icon_64.png"
+        },
+        "default_title": "VideoRoll",
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content/main.js"],
+            "run_at": "document_start"
+        }
+    ],
+    "icons": {
+        "128": "/icons/icon_128.png",
+        "16": "/icons/icon_16.png",
+        "256": "/icons/icon_256.png",
+        "32": "/icons/icon_32.png",
+        "48": "/icons/icon_48.png",
+        "512": "/icons/icon_512.png",
+        "64": "/icons/icon_64.png"
+    },
+    "web_accessible_resources": ["inject/injected.js"],
+    "homepage_url": "https://gomi.site",
+    "permissions": ["activeTab", "scripting"]
+}

@@ -1,0 +1,26 @@
+{
+    "bilibili": {
+        "name": "bilibili",
+        "tag": "bwp-video"
+    },
+    "youtube": {
+        "name": "Youtube",
+        "tag": "video"
+    },
+    "douyin": {
+        "name": "抖音",
+        "tag": "video"
+    },
+    "tiktok": {
+        "name": "TikTok",
+        "tag": "video"
+    },
+    "vimeo": {
+        "name": "vimeo",
+        "tag": "video"
+    },
+    "iq": {
+        "name": "爱奇艺",
+        "tag": "video"
+    }
+}
