@@ -1,0 +1,27 @@
+{
+    "name": "parcel-namer-nohash",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "build": "babel src --out-dir lib --extensions \".ts\" && yalc push"
+    },
+    "author": "Gomi",
+    "license": "MTI",
+    "repository": {
+        "url": "https://github.com/ol-loginov/parcel-namer-rewrite"
+    },
+    "main": "lib/index.js",
+    "dependencies": {
+        "@parcel/diagnostic": "^2.2.0",
+        "@parcel/namer-default": "^2.2.0",
+        "@parcel/plugin": "^2.2.0"
+    },
+    "files": [
+        "lib/index.js"
+    ],
+    "engines": {
+        "parcel": "^2.2.0",
+        "node": ">= 10.0.0"
+    },
+    "yalcSig": "e295bce3d02260eb48be45698095b221"
+}

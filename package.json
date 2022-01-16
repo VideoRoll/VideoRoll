@@ -2,11 +2,12 @@
     "name": "videoRoll",
     "version": "1.0.0",
     "description": "a web ruler component made by canvas and typescript",
+    "parcel-namer-nohash": false,
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "parcel src/index.html --open",
         "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
-        "build:content": "parcel build src/content/main.js",
+        "build:content": "npm run clean && parcel build src/content/main.js",
         "build": "npm run build:popup",
         "copy:static": "copyfiles -u 1 src/icons/* src/manifest.json src/website.json dist",
         "clean": "rimraf dist",
@@ -35,6 +36,7 @@
         "copyfiles": "^2.4.1",
         "less": "^4.1.2",
         "parcel": "^2.2.0",
+        "parcel-namer-nohash": "file:.yalc/parcel-namer-nohash",
         "parcel-namer-rewrite": "^2.0.0-rc.2"
     }
 }

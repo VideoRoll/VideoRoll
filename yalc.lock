@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "parcel-namer-nohash": {
+      "signature": "e295bce3d02260eb48be45698095b221",
+      "file": true
+    }
+  }
+}
