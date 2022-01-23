@@ -1,8 +1,7 @@
 {
     "name": "videoRoll",
     "version": "1.0.0",
-    "description": "a web ruler component made by canvas and typescript",
-    "parcel-namer-nohash": false,
+    "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "parcel src/index.html --open",
@@ -13,6 +12,7 @@
         "clean": "rimraf dist",
         "dist": "npm run clean && npm run build && npm run copy:static"
     },
+    "source": "src/index.html",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/gxy5202/light-ruler.git"
@@ -36,7 +36,6 @@
         "copyfiles": "^2.4.1",
         "less": "^4.1.2",
         "parcel": "^2.2.0",
-        "parcel-namer-nohash": "file:.yalc/parcel-namer-nohash",
-        "parcel-namer-rewrite": "^2.0.0-rc.2"
+        "parcel-namer-hashless": "^1.0.2"
     }
 }
