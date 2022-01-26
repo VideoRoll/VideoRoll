@@ -1,5 +1,5 @@
 /* .parcelrc */
 {
   "extends": ["@parcel/config-default"],
-  "namers": ["parcel-namer-without-hash"]
+  "namers": ["parcel-namer-hashless"]
 }

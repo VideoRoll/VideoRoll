@@ -36,8 +36,6 @@
         "copyfiles": "^2.4.1",
         "less": "^4.1.2",
         "parcel": "^2.2.0",
-        "parcel-namer-hashless": "^1.0.3",
-        "parcel-namer-rewrite": "^2.0.0-rc.2",
-        "parcel-namer-without-hash": "0.0.1"
+        "parcel-namer-hashless": "^1.0.3"
     }
 }
