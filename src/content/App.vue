@@ -110,6 +110,18 @@ export default defineComponent({
 </script>
 
 <style lang="less">
+.vdo {
+    width: 400px;
+    height: 300px;
+    border: 1px solid red;
+
+    video {
+        width: 100%;
+        height: 100%;
+    }
+}
+</style>
+<style lang="less">
 #app {
     width: 300px;
     background-color: rgb(24, 24, 28);
