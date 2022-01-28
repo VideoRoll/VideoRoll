@@ -4,43 +4,45 @@
  * @Date: 2022-01-13 20:09:30
 -->
 <template>
-    <div class="video-roll-header">
-        <div class="video-roll-logo">
-            <img />
-            <span>VideoRoll</span>
-        </div>
-        <div>
-            <n-switch size="small" v-model:value="isOpen" @update:value="handleChange" />
-        </div>
-    </div>
-    <n-collapse-transition :show="isOpen">
-        <div class="video-roll-content">
-            <div class="video-roll-website">
-                <span>视频网站: bilibili</span>
+    <div>
+        <div class="video-roll-header">
+            <div class="video-roll-logo">
+                <img />
+                <span>VideoRoll</span>
             </div>
-            <div class="video-roll-rotate-control">
-                <n-button
-                    size="30"
-                    v-for="item in rotateBtns"
-                    :class="`rotate-${item.type} rotate-btn`"
-                    :key="item.type"
-                    text
-                    color="#18a058"
-                    :onclick="rotate"
-                    :style="`transform: rotate(${item.deg}deg)`"
-                >
-                    <template #icon>
-                        <n-icon size="30">
-                            <chevron-back-outline />
-                        </n-icon>
-                    </template>
-                </n-button>
+            <div>
+                <n-switch size="small" v-model:value="isOpen" @update:value="handleChange" />
             </div>
         </div>
-    </n-collapse-transition>
-    <div class="video-roll-footer">
-        <div>
-            <span>Powered by Naive UI</span>
+        <n-collapse-transition :show="isOpen">
+            <div class="video-roll-content">
+                <div class="video-roll-website">
+                    <span>视频网站: bilibili</span>
+                </div>
+                <div class="video-roll-rotate-control">
+                    <n-button
+                        size="30"
+                        v-for="item in rotateBtns"
+                        :class="`rotate-${item.type} rotate-btn`"
+                        :key="item.type"
+                        text
+                        color="#18a058"
+                        :onclick="rotate"
+                        :style="`transform: rotate(${item.deg}deg)`"
+                    >
+                        <template #icon>
+                            <n-icon size="30">
+                                <chevron-back-outline />
+                            </n-icon>
+                        </template>
+                    </n-button>
+                </div>
+            </div>
+        </n-collapse-transition>
+        <div class="video-roll-footer">
+            <div>
+                <span>Powered by Naive UI</span>
+            </div>
         </div>
     </div>
 </template>
@@ -48,7 +50,8 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import { NButton, NSwitch, NIcon, NCollapseTransition } from 'naive-ui'
-import { ChevronBackOutline } from '@vicons/ionicons5'
+import { ChevronBackOutline } from '@vicons/ionicons5';
+import WEBSITE from '../website';
 export default defineComponent({
     name: "App",
     setup() {
@@ -74,10 +77,32 @@ export default defineComponent({
             }
         ]);
 
+        /**
+         * 是否开启旋转功能
+         */
         const handleChange = (value) => {
             isOpen.value = value;
+
+            if (value) {
+                console.log(window.location);
+                chrome.tabs.query(
+                    { active: true, currentWindow: true },
+                    function (tabs) {
+                        console.log(tabs, WEBSITE);
+                        // chrome.scripting.executeScript({
+                        //     target: { tabId: tabs[0].id },
+                        //     function: () => {
+                        //         console.log(123);
+                        //     }
+                        // });
+                    }
+                );
+            }
         }
 
+        /**
+         * 旋转
+         */
         const rotate = () => {
             console.log('hhh');
             chrome.tabs.query(
@@ -110,16 +135,16 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-.vdo {
-    width: 400px;
-    height: 300px;
-    border: 1px solid red;
+// .vdo {
+//     width: 400px;
+//     height: 300px;
+//     border: 1px solid red;
 
-    video {
-        width: 100%;
-        height: 100%;
-    }
-}
+//     video {
+//         width: 100%;
+//         height: 100%;
+//     }
+// }
 </style>
 <style lang="less">
 #app {

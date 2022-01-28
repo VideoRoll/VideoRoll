@@ -1,26 +1,26 @@
-{
+export default {
     "bilibili": {
         "name": "bilibili",
-        "tag": "bwp-video"
+        "tags": ["video", "bwp-video"]
     },
     "youtube": {
         "name": "Youtube",
-        "tag": "video"
+        "tags": ["video"]
     },
     "douyin": {
         "name": "抖音",
-        "tag": "video"
+        "tags": ["video"]
     },
     "tiktok": {
         "name": "TikTok",
-        "tag": "video"
+        "tags": ["video"]
     },
     "vimeo": {
         "name": "vimeo",
-        "tag": "video"
+        "tags": ["video"]
     },
     "iq": {
         "name": "爱奇艺",
-        "tag": "video"
+        "tags": ["video"]
     }
 }
