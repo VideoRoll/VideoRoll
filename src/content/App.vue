@@ -85,18 +85,6 @@ export default defineComponent({
 
             if (value) {
                 console.log(window.location);
-                chrome.tabs.query(
-                    { active: true, currentWindow: true },
-                    function (tabs) {
-                        console.log(tabs, WEBSITE);
-                        // chrome.scripting.executeScript({
-                        //     target: { tabId: tabs[0].id },
-                        //     function: () => {
-                        //         console.log(123);
-                        //     }
-                        // });
-                    }
-                );
             }
         }
 
