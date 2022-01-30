@@ -1,8 +1,3 @@
-<!--
- * @description: 
- * @Author: Gouxinyu
- * @Date: 2022-01-13 20:09:30
--->
 <template>
     <div>
         <div class="video-roll-header">
