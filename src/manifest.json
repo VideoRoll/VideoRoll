@@ -2,7 +2,7 @@
     "name": "VideoRoll",
     "version": "1.0.0",
     "manifest_version": 3,
-    "description": "vide rotate",
+    "description": "a wen extension that can help you rotate the video",
     "action": {
         "default_icon": {
             "128": "/icons/icon_128.png",
