@@ -1,14 +1,6 @@
 <template>
     <div>
-        <div class="video-roll-header">
-            <div class="video-roll-logo">
-                <img />
-                <span>VideoRoll</span>
-            </div>
-            <div>
-                <n-switch size="small" v-model:value="isOpen" @update:value="handleChange" />
-            </div>
-        </div>
+        <Head a="50" b="122"></Head>
         <n-collapse-transition :show="isOpen">
             <div class="video-roll-content">
                 <div class="video-roll-website">
@@ -43,13 +35,14 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref } from 'vue';
+import Head from './Head.vue';
 import { NButton, NSwitch, NIcon, NCollapseTransition } from 'naive-ui'
 import { ChevronBackOutline } from '@vicons/ionicons5';
 import WEBSITE from '../website';
 export default defineComponent({
     name: "App",
-    setup() {
+    setup(props) {
         // 受否开启
         const isOpen = ref(false);
 
@@ -112,7 +105,8 @@ export default defineComponent({
         NButton,
         NIcon,
         NCollapseTransition,
-        ChevronBackOutline
+        ChevronBackOutline,
+        Head
     }
 })
 </script>
