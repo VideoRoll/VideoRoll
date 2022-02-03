@@ -13,13 +13,12 @@
             <div>
                 <n-switch size="small" v-model:value="isOpen" @update:value="handleChange" />
             </div>
-            <div>{{ res }}</div>
         </div>
     </div>
 </template>
 
 <script>
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { NButton, NSwitch, NIcon, NCollapseTransition } from 'naive-ui'
 import { ChevronBackOutline } from '@vicons/ionicons5';
 export default defineComponent({
@@ -46,13 +45,6 @@ export default defineComponent({
                 deg: 270
             }
         ]);
-
-        const res = computed(() => {
-            console.log(props.a);
-            console.log(props.b);
-            console.log(Number(props.a) >= Number(props.b));
-            return props.a >= props.b;
-        });
 
         /**
          * 是否开启旋转功能
