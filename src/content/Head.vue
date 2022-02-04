@@ -1,8 +1,3 @@
-<!--
- * @description: 
- * @Author: Gouxinyu
- * @Date: 2022-02-02 14:35:44
--->
 <template>
     <div>
         <div class="video-roll-header">
@@ -22,7 +17,7 @@ import { defineComponent, ref } from 'vue'
 import { NButton, NSwitch, NIcon, NCollapseTransition } from 'naive-ui'
 import { ChevronBackOutline } from '@vicons/ionicons5';
 export default defineComponent({
-    name: "App",
+    name: "Head",
     setup(props) {
         // 受否开启
         const isOpen = ref(false);
@@ -57,23 +52,6 @@ export default defineComponent({
             }
         }
 
-        /**
-         * 旋转
-         */
-        const rotate = () => {
-            console.log('hhh');
-            chrome.tabs.query(
-                { active: true, currentWindow: true },
-                function (tabs) {
-                    chrome.scripting.executeScript({
-                        target: { tabId: tabs[0].id },
-                        function: () => {
-                            console.log(123);
-                        }
-                    });
-                }
-            );
-        }
         return {
             isOpen,
             rotateBtns,
