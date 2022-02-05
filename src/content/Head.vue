@@ -14,7 +14,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import { NButton, NSwitch, NIcon, NCollapseTransition } from 'naive-ui'
+import { NSwitch } from 'naive-ui'
 import { ChevronBackOutline } from '@vicons/ionicons5';
 export default defineComponent({
     name: "Head",
@@ -61,11 +61,7 @@ export default defineComponent({
         }
     },
     components: {
-        NSwitch,
-        NButton,
-        NIcon,
-        NCollapseTransition,
-        ChevronBackOutline
+        NSwitch
     }
 })
 </script>
