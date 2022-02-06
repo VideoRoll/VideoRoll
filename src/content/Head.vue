@@ -22,25 +22,6 @@ export default defineComponent({
         // 受否开启
         const isOpen = ref(false);
 
-        const rotateBtns = ref([
-            {
-                type: 'left',
-                deg: 0
-            },
-            {
-                type: 'up',
-                deg: 90
-            },
-            {
-                type: 'right',
-                deg: 180
-            },
-            {
-                type: 'down',
-                deg: 270
-            }
-        ]);
-
         /**
          * 是否开启旋转功能
          */
@@ -54,10 +35,7 @@ export default defineComponent({
 
         return {
             isOpen,
-            rotateBtns,
-            handleChange,
-            rotate,
-            res
+            handleChange
         }
     },
     components: {
