@@ -14,8 +14,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import { NSwitch } from 'naive-ui'
-import { ChevronBackOutline } from '@vicons/ionicons5';
+import { NSwitch } from 'naive-ui';
 export default defineComponent({
     name: "Head",
     setup(props) {
