@@ -4,5 +4,4 @@
  * @Date: 2022-01-11 23:49:59
  */
 (function () {
-    console.log(window.location);
 })()
