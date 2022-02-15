@@ -1,6 +1,6 @@
 {
     "name": "VideoRoll",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manifest_version": 3,
     "description": "a web extension that can help you rotate the web video",
     "action": {
