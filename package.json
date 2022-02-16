@@ -2,6 +2,7 @@
     "name": "videoRoll",
     "version": "1.0.0",
     "description": "",
+    "author": "Gomi",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "parcel src/index.html --open",
@@ -19,7 +20,6 @@
         "url": "git+https://github.com/gxy5202/light-ruler.git"
     },
     "keywords": [],
-    "author": "",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/gxy5202/light-ruler/issues"
