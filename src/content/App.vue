@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Head a="50" b="122"></Head>
+        <Head></Head>
         <n-collapse-transition :show="isOpen">
             <div class="video-roll-content">
                 <div class="video-roll-website">
@@ -64,17 +64,6 @@ export default defineComponent({
                 deg: 270
             }
         ]);
-
-        /**
-         * 是否开启旋转功能
-         */
-        const handleChange = (value) => {
-            isOpen.value = value;
-
-            if (value) {
-                console.log(window.location);
-            }
-        }
 
         /**
          * 旋转
