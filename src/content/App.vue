@@ -183,4 +183,11 @@ export default defineComponent({
         color: #fff;
     }
 }
+
+.vdo {
+    video {
+        width: 400px;
+        height: 400px;
+    }
+}
 </style>

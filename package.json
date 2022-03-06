@@ -17,14 +17,14 @@
     "source": "src/index.html",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/gxy5202/light-ruler.git"
+        "url": "git+https://github.com/gxy5202/video-roll.git"
     },
     "keywords": [],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/gxy5202/light-ruler/issues"
+        "url": "https://github.com/gxy5202/video-roll/issues"
     },
-    "homepage": "https://github.com/gxy5202/light-ruler#readme",
+    "homepage": "https://github.com/gxy5202/video-roll#readme",
     "dependencies": {
         "@vicons/ionicons5": "^0.11.0",
         "naive-ui": "^2.24.1",
