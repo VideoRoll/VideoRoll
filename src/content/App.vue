@@ -102,18 +102,14 @@ export default defineComponent({
          * 旋转
          */
         const rotate = async (item) => {
-            console.log('旋转');
             let queryOptions = { active: true, currentWindow: true };
             let [tab] = await chrome.tabs.query(queryOptions);
             console.log(tab);
-            // chrome.tabs.sendMessage('', { item }, {}, (res) => {
-            //     console.log(res);
-            // })
-            console.log(item);
+            chrome.tabs.sendMessage(tab.id, { item }, {}, (res) => {
+                console.log(res);
+            })
             const { deg } = item;
             const { hostname } = window.location;
-            console.log(document);
-            console.log(chrome);
             // console.log(WEBSITE);
             let website = null;
             for (const key of Object.keys(WEBSITE)) {
