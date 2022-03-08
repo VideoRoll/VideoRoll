@@ -10,13 +10,6 @@
                 <img />
                 <span>VideoRoll</span>
             </div>
-            <div>
-                <n-switch
-                    size="small"
-                    :value="isOpen"
-                    @update:value="(v) => $emit('handleChange', v)"
-                />
-            </div>
         </div>
     </div>
 </template>
@@ -26,8 +19,6 @@ import { defineComponent, ref } from 'vue'
 import { NSwitch } from 'naive-ui';
 export default defineComponent({
     name: "Head",
-    emits: ['handleChange'],
-    props: ['isOpen'],
     setup(props) {
     },
     components: {

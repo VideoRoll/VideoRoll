@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Head :isOpen="isOpen" @handleChange="handleChange"></Head>
-        <n-collapse-transition :show="isOpen">
+        <Head></Head>
+        <n-collapse-transition>
             <div class="video-roll-content">
                 <div class="video-roll-website">
                     <span>视频网站: bilibili</span>
@@ -44,9 +44,6 @@ import WEBSITE from '../website';
 export default defineComponent({
     name: "App",
     setup(props) {
-        // 受否开启
-        const isOpen = ref(false);
-
         const rotateBtns = ref([
             {
                 type: 'left',
@@ -69,17 +66,6 @@ export default defineComponent({
                 deg: 180
             }
         ]);
-
-        /**
-         * 是否开启旋转功能
-         */
-        const handleChange = (value) => {
-            isOpen.value = value;
-            console.log(value);
-            if (value) {
-                console.log(window.location);
-            }
-        }
 
         const getScaleNumber = (dom: HTMLVideoElement, deg: number) => {
             // get video size
@@ -115,10 +101,14 @@ export default defineComponent({
         /**
          * 旋转
          */
-        const rotate = (item) => {
-            chrome.runtime.sendMessage('', { item }, {}, (res) => {
-                console.log(res);
-            })
+        const rotate = async (item) => {
+            console.log('旋转');
+            let queryOptions = { active: true, currentWindow: true };
+            let [tab] = await chrome.tabs.query(queryOptions);
+            console.log(tab);
+            // chrome.tabs.sendMessage('', { item }, {}, (res) => {
+            //     console.log(res);
+            // })
             console.log(item);
             const { deg } = item;
             const { hostname } = window.location;
@@ -163,14 +153,11 @@ export default defineComponent({
         }
 
         return {
-            isOpen,
             rotateBtns,
-            rotate,
-            handleChange
+            rotate
         }
     },
     components: {
-        NSwitch,
         NButton,
         NIcon,
         NCollapseTransition,
