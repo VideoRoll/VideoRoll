@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Head></Head>
+        <Head :isOpen="isOpen" @handleChange="handleChange"></Head>
         <n-collapse-transition :show="isOpen">
             <div class="video-roll-content">
                 <div class="video-roll-website">
@@ -14,8 +14,8 @@
                         :key="item.type"
                         text
                         color="#18a058"
-                        :onclick="rotate"
-                        :style="`transform: rotate(${item.deg}deg)`"
+                        :onclick="() => rotate(item)"
+                        :style="`transform: rotate(${item.iconDeg}deg)`"
                     >
                         <template #icon>
                             <n-icon size="30">
@@ -34,12 +34,13 @@
     </div>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue';
+<script lang="ts">
+import { defineComponent, ref, provide } from 'vue';
 import Head from './Head.vue';
 import { NButton, NSwitch, NIcon, NCollapseTransition } from 'naive-ui'
 import { ChevronBackOutline } from '@vicons/ionicons5';
 import WEBSITE from '../website';
+
 export default defineComponent({
     name: "App",
     setup(props) {
@@ -49,44 +50,123 @@ export default defineComponent({
         const rotateBtns = ref([
             {
                 type: 'left',
-                deg: 0
+                iconDeg: 0,
+                deg: 270,
             },
             {
                 type: 'up',
-                deg: 90
+                iconDeg: 90,
+                deg: 0
             },
             {
                 type: 'right',
-                deg: 180
+                iconDeg: 180,
+                deg: 90
             },
             {
                 type: 'down',
-                deg: 270
+                iconDeg: 270,
+                deg: 180
             }
         ]);
 
         /**
+         * 是否开启旋转功能
+         */
+        const handleChange = (value) => {
+            isOpen.value = value;
+            console.log(value);
+            if (value) {
+                console.log(window.location);
+            }
+        }
+
+        const getScaleNumber = (dom: HTMLVideoElement, deg: number) => {
+            // get video size
+            const { videoWidth, videoHeight, offsetWidth, offsetHeight } = dom;
+
+            const isHorizonDeg = deg === 90 || deg === 270;
+
+            // 根据原始视频的宽高比例，和容器的宽高比例，计算缩放比例
+            const isHorizonVideo = videoWidth > videoHeight;
+            const isHorizonDom = offsetWidth > offsetHeight;
+
+            // 判断旋转后的缩放比例
+            // 1.若是竖屏视频，但在横屏容器中，初始就是等比缩小的
+            if (isHorizonDeg && !isHorizonVideo && isHorizonDom) {
+                return videoHeight / videoWidth;
+            }
+
+            // 2.若是竖屏视频，横屏中，旋转回0或180
+            if (!isHorizonDeg && !isHorizonVideo && isHorizonDom) {
+                return 1;
+            }
+
+            // 3.若是横屏视频，处在横屏容器中
+            if (isHorizonDeg && isHorizonVideo && isHorizonDom) {
+                return offsetHeight / offsetWidth;
+            }
+
+            if (!isHorizonDeg && isHorizonVideo && isHorizonDom) {
+                return 1;
+            }
+        }
+
+        /**
          * 旋转
          */
-        const rotate = () => {
-            console.log('hhh');
-            chrome.tabs.query(
-                { active: true, currentWindow: true },
-                function (tabs) {
-                    chrome.scripting.executeScript({
-                        target: { tabId: tabs[0].id },
-                        function: () => {
-                            console.log(123);
-                        }
-                    });
+        const rotate = (item) => {
+            chrome.runtime.sendMessage('', { item }, {}, (res) => {
+                console.log(res);
+            })
+            console.log(item);
+            const { deg } = item;
+            const { hostname } = window.location;
+            console.log(document);
+            console.log(chrome);
+            // console.log(WEBSITE);
+            let website = null;
+            for (const key of Object.keys(WEBSITE)) {
+                if (hostname.includes(key)) {
+                    website = WEBSITE[key];
+                    return;
                 }
-            );
+            }
+
+            if (website) {
+                for (const item of website.videoSelector) {
+                    const dom = document.querySelector(item);
+                    if (dom) {
+                        dom.style.transform = `rotate(${deg}deg)`;
+                        return;
+                    }
+                }
+            } else {
+                const dom = document.querySelector('video');
+                if (dom) {
+                    const scale = getScaleNumber(dom, deg);
+                    dom.style.transform = `rotate(${deg}deg) scale(${scale})`;
+                    return;
+                }
+            }
+            // chrome.tabs.query(
+            //     { active: true, currentWindow: true },
+            //     function (tabs) {
+            //         chrome.scripting.executeScript({
+            //             target: { tabId: tabs[0].id },
+            //             function: () => {
+            //                 console.log(123);
+            //             }
+            //         });
+            //     }
+            // );
         }
+
         return {
             isOpen,
             rotateBtns,
-            handleChange,
-            rotate
+            rotate,
+            handleChange
         }
     },
     components: {
@@ -101,16 +181,16 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-// .vdo {
-//     width: 400px;
-//     height: 300px;
-//     border: 1px solid red;
-
-//     video {
-//         width: 100%;
-//         height: 100%;
-//     }
-// }
+.vdo {
+    width: 400px;
+    height: 300px;
+    border: 1px solid blue;
+    overflow: hidden;
+    video {
+        width: 100%;
+        height: 100%;
+    }
+}
 </style>
 <style lang="less">
 #app {
@@ -181,13 +261,6 @@ export default defineComponent({
         height: 30px;
         padding: 10px 0;
         color: #fff;
-    }
-}
-
-.vdo {
-    video {
-        width: 400px;
-        height: 400px;
     }
 }
 </style>

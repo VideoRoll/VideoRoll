@@ -1,26 +1,31 @@
+/*
+ * @description: 
+ * @Author: Gouxinyu
+ * @Date: 2022-01-13 22:57:14
+ */
 export default {
     "bilibili": {
         "name": "bilibili",
-        "tags": ["video", "bwp-video"]
+        "videoSelector": ["video", "bwp-video"]
     },
     "youtube": {
         "name": "Youtube",
-        "tags": ["video"]
+        "videoSelector": ["video"]
     },
     "douyin": {
         "name": "抖音",
-        "tags": ["video"]
+        "videoSelector": ["video"]
     },
     "tiktok": {
         "name": "TikTok",
-        "tags": ["video"]
+        "videoSelector": ["video"]
     },
     "vimeo": {
         "name": "vimeo",
-        "tags": ["video"]
+        "videoSelector": ["video"]
     },
     "iq": {
         "name": "爱奇艺",
-        "tags": ["video"]
+        "videoSelector": ["video"]
     }
 }

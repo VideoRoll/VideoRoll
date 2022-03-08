@@ -1,3 +1,8 @@
+<!--
+ * @description: 
+ * @Author: Gouxinyu
+ * @Date: 2022-02-02 14:35:44
+-->
 <template>
     <div>
         <div class="video-roll-header">
@@ -6,7 +11,11 @@
                 <span>VideoRoll</span>
             </div>
             <div>
-                <n-switch size="small" v-model:value="isOpen" @update:value="handleChange" />
+                <n-switch
+                    size="small"
+                    :value="isOpen"
+                    @update:value="(v) => $emit('handleChange', v)"
+                />
             </div>
         </div>
     </div>
@@ -17,25 +26,9 @@ import { defineComponent, ref } from 'vue'
 import { NSwitch } from 'naive-ui';
 export default defineComponent({
     name: "Head",
+    emits: ['handleChange'],
+    props: ['isOpen'],
     setup(props) {
-        // 受否开启
-        const isOpen = ref(false);
-
-        /**
-         * 是否开启旋转功能
-         */
-        const handleChange = (value) => {
-            isOpen.value = value;
-
-            if (value) {
-                console.log(window.location);
-            }
-        }
-
-        return {
-            isOpen,
-            handleChange
-        }
     },
     components: {
         NSwitch

@@ -7,9 +7,9 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "parcel src/index.html --open",
         "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
-        "build:content": "parcel build src/content/main.js",
-        "build:inject": "parcel build src/inject/injected.js --no-source-maps",
-        "build": "npm run build:popup && npm run build:inject",
+        "build:inject": "parcel build src/inject/injected.js",
+        "build:background": "parcel build src/background/background.js --no-source-maps",
+        "build": "npm run build:popup && npm run build:background && npm run build:inject",
         "copy:static": "copyfiles -u 1 src/icons/* src/manifest.json src/website.json dist",
         "clean": "rimraf dist",
         "dist": "npm run clean && npm run build && npm run copy:static"
