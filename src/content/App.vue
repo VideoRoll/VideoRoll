@@ -6,6 +6,7 @@
                 <span>{{ webInfo.name }}</span>
             </div>
             <div class="video-roll-rotate-control">
+                <chevron-back-outline color="red" />
                 <button
                     size="30"
                     v-for="item in rotateBtns"
@@ -15,9 +16,7 @@
                     color="#18a058"
                     :onclick="() => rotate(item)"
                     :style="`transform: rotate(${item.iconDeg}deg)`"
-                >
-                    <chevron-back-outline />
-                </button>
+                ></button>
             </div>
         </div>
         <div class="video-roll-footer">
@@ -123,18 +122,9 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-.vdo {
-    width: 400px;
-    height: 300px;
-    border: 1px solid blue;
-    overflow: hidden;
-    video {
-        width: 100%;
-        height: 100%;
-    }
+body {
+    margin: 0;
 }
-</style>
-<style lang="less">
 #app {
     width: 300px;
     background-color: rgb(24, 24, 28);
