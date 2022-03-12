@@ -15,14 +15,10 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import { NSwitch } from 'naive-ui';
+import { defineComponent, ref } from 'vue';
 export default defineComponent({
     name: "Head",
     setup(props) {
-    },
-    components: {
-        NSwitch
     }
 })
 </script>

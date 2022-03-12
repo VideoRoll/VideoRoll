@@ -1,31 +1,25 @@
 <template>
     <div>
         <Head></Head>
-        <n-collapse-transition>
-            <div class="video-roll-content">
-                <div class="video-roll-website">
-                    <span>{{ webInfo.name }}</span>
-                </div>
-                <div class="video-roll-rotate-control">
-                    <n-button
-                        size="30"
-                        v-for="item in rotateBtns"
-                        :class="`rotate-${item.type} rotate-btn`"
-                        :key="item.type"
-                        text
-                        color="#18a058"
-                        :onclick="() => rotate(item)"
-                        :style="`transform: rotate(${item.iconDeg}deg)`"
-                    >
-                        <template #icon>
-                            <n-icon size="30">
-                                <chevron-back-outline />
-                            </n-icon>
-                        </template>
-                    </n-button>
-                </div>
+        <div class="video-roll-content">
+            <div class="video-roll-website">
+                <span>{{ webInfo.name }}</span>
             </div>
-        </n-collapse-transition>
+            <div class="video-roll-rotate-control">
+                <button
+                    size="30"
+                    v-for="item in rotateBtns"
+                    :class="`rotate-${item.type} rotate-btn`"
+                    :key="item.type"
+                    text
+                    color="#18a058"
+                    :onclick="() => rotate(item)"
+                    :style="`transform: rotate(${item.iconDeg}deg)`"
+                >
+                    <chevron-back-outline />
+                </button>
+            </div>
+        </div>
         <div class="video-roll-footer">
             <div>
                 <span>Powered by Vue</span>
@@ -37,7 +31,6 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, onMounted } from 'vue';
 import Head from './Head.vue';
-import { NButton, NIcon, NCollapseTransition } from 'naive-ui'
 import { ChevronBackOutline } from '@vicons/ionicons5';
 import WEBSITE from '../website';
 
@@ -123,9 +116,6 @@ export default defineComponent({
         }
     },
     components: {
-        NButton,
-        NIcon,
-        NCollapseTransition,
         ChevronBackOutline,
         Head
     }
