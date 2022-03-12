@@ -10,12 +10,20 @@
  * @param deg
  * @returns
  */
-function getScaleNumber(dom: HTMLVideoElement, deg: number) {
+function getScaleNumber(
+    dom: HTMLVideoElement,
+    backupDom: HTMLElement,
+    deg: number
+) {
     // get video size
-    const { videoWidth, videoHeight, offsetWidth, offsetHeight } = dom;
+    let { videoWidth, videoHeight, offsetWidth, offsetHeight } = dom;
 
     const isHorizonDeg = deg === 90 || deg === 270;
 
+    if (typeof videoWidth === "undefined" || videoWidth === null) {
+        videoWidth = backupDom.offsetWidth;
+        videoHeight = backupDom.offsetHeight;
+    }
     // 根据原始视频的宽高比例，和容器的宽高比例，计算缩放比例
     const isHorizonVideo = videoWidth > videoHeight;
     const isHorizonDom = offsetWidth > offsetHeight;
@@ -53,12 +61,18 @@ function getScaleNumber(dom: HTMLVideoElement, deg: number) {
  */
 function rotateVideo(deg: number, videoSelector: string[]) {
     for (const item of videoSelector) {
-        const dom = document.querySelector(item) as HTMLVideoElement;
+        const isArray = Array.isArray(item);
+        const dom = document.querySelector(
+            isArray ? item[0] : item
+        ) as HTMLVideoElement;
+        const backupDom = isArray
+            ? (document.querySelector(item[1]) as HTMLElement)
+            : dom;
 
         if (!dom) continue;
 
         if (dom) {
-            const scale = getScaleNumber(dom, deg);
+            const scale = getScaleNumber(dom, backupDom, deg);
             dom.style.transform = `rotate(${deg}deg) scale(${scale})`;
             return;
         }

@@ -4,7 +4,7 @@
         <n-collapse-transition>
             <div class="video-roll-content">
                 <div class="video-roll-website">
-                    <span>视频网站: {{ webInfo.name }}</span>
+                    <span>{{ webInfo.name }}</span>
                 </div>
                 <div class="video-roll-rotate-control">
                     <n-button
@@ -28,7 +28,7 @@
         </n-collapse-transition>
         <div class="video-roll-footer">
             <div>
-                <span>Powered by Naive UI</span>
+                <span>Powered by Vue</span>
             </div>
         </div>
     </div>
@@ -52,7 +52,10 @@ export default defineComponent({
 
         const urlReg = /^http(s)?:\/\/(.*?)\//;
 
-        const getWebInfo = (hostName) => {
+        /**
+         * get video info
+         */
+        const getWebInfo = (hostName: string) => {
             for (const key of Object.keys(WEBSITE)) {
                 if (hostName.includes(key)) {
                     const target = WEBSITE[key];
@@ -67,6 +70,9 @@ export default defineComponent({
             }
         }
 
+        /**
+         * 当打开时就获取当前网站的视频信息
+         */
         onMounted(async () => {
             let queryOptions = { active: true, currentWindow: true };
             let [tab] = await chrome.tabs.query(queryOptions);

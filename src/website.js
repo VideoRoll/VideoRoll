@@ -6,26 +6,12 @@
 export default {
     "bilibili": {
         "name": "bilibili",
-        "videoSelector": ["video", "bwp-video"]
+        // [originVideoElement, specialElement]
+        // if originVideoElement cant get videoHieight or videoWifth, use specialElement
+        "videoSelector": ["video", ["bwp-video", ".bilibili-player-popup-inner"]]
     },
-    "youtube": {
-        "name": "Youtube",
-        "videoSelector": ["video"]
-    },
-    "douyin": {
-        "name": "抖音",
-        "videoSelector": ["video"]
-    },
-    "tiktok": {
-        "name": "TikTok",
-        "videoSelector": ["video"]
-    },
-    "vimeo": {
-        "name": "vimeo",
-        "videoSelector": ["video"]
-    },
-    "iq": {
-        "name": "爱奇艺",
-        "videoSelector": ["video"]
+    "pornhub": {
+        "name": "pornhub",
+        "videoSelector": [["video-element video", "video-element video"]]
     }
 }
