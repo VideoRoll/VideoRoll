@@ -6,22 +6,22 @@
                 <span>{{ webInfo.name }}</span>
             </div>
             <div class="video-roll-rotate-control">
-                <chevron-back-outline color="red" />
-                <button
-                    size="30"
+                <div
                     v-for="item in rotateBtns"
-                    :class="`rotate-${item.type} rotate-btn`"
+                    :class="`rotate-${item.type}-${item.iconDeg} rotate-btn`"
                     :key="item.type"
-                    text
-                    color="#18a058"
                     :onclick="() => rotate(item)"
-                    :style="`transform: rotate(${item.iconDeg}deg)`"
-                ></button>
+                >
+                    <chevron-back-outline color="#a494c6" />
+                </div>
             </div>
         </div>
         <div class="video-roll-footer">
             <div>
-                <span>Powered by Vue</span>
+                <span>
+                    Created by
+                    <span class="video-roll-author" @click="toAuthor">Gomi</span>
+                </span>
             </div>
         </div>
     </div>
@@ -36,18 +36,26 @@ import WEBSITE from '../website';
 export default defineComponent({
     name: "App",
     setup(props) {
+        // current website info
         const webInfo = reactive({
             tabId: '',
             name: '',
             videoSelector: []
         });
 
+        // url reg
         const urlReg = /^http(s)?:\/\/(.*?)\//;
 
         /**
          * get video info
          */
-        const getWebInfo = (hostName: string) => {
+        const setWebInfo = (hostName: string) => {
+            if (!hostName) {
+                webInfo.name = 'Error Website';
+                webInfo.videoSelector = ['video'];
+                return;
+            }
+
             for (const key of Object.keys(WEBSITE)) {
                 if (hostName.includes(key)) {
                     const target = WEBSITE[key];
@@ -57,7 +65,7 @@ export default defineComponent({
                 }
             }
             if (!webInfo.name) {
-                webInfo.name = hostName;
+                webInfo.name = hostName || 'Error Website';
                 webInfo.videoSelector = ['video'];
             }
         }
@@ -68,12 +76,12 @@ export default defineComponent({
         onMounted(async () => {
             let queryOptions = { active: true, currentWindow: true };
             let [tab] = await chrome.tabs.query(queryOptions);
-
-            const hostName = urlReg.exec(tab.url)[2];
-            getWebInfo(hostName);
+            const hostName = urlReg.exec(tab.url)?.[2];
+            setWebInfo(hostName);
             webInfo.tabId = tab.id;
         });
 
+        // buttons
         const rotateBtns = ref([
             {
                 type: 'left',
@@ -101,17 +109,26 @@ export default defineComponent({
          * 旋转
          */
         const rotate = async (item) => {
-            let queryOptions = { active: true, currentWindow: true };
-            let [tab] = await chrome.tabs.query(queryOptions);
-            chrome.tabs.sendMessage(tab.id, { webInfo, deg: item.deg }, {}, (res) => {
+            chrome.tabs.sendMessage(webInfo.tabId, { webInfo, deg: item.deg }, {}, (res) => {
                 console.log(res);
             });
         }
 
+        /**
+         * 跳转到Gomi
+         */
+        const toAuthor = () => {
+            chrome.tabs.create({
+                active: true,
+                url: "https://gomi.site"
+            })
+        };
+
         return {
             rotateBtns,
             rotate,
-            webInfo
+            webInfo,
+            toAuthor
         }
     },
     components: {
@@ -135,6 +152,7 @@ body {
         align-items: center;
         background-color: #26262a;
         color: #fff;
+        font-size: 16px;
         font-weight: bold;
         height: 40px;
         padding: 0 10px;
@@ -145,12 +163,15 @@ body {
         flex-direction: column;
         align-items: center;
         .video-roll-website {
-            height: 20px;
+            height: 25px;
+            font-size: 15px;
+            font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
+            color: #a494c6;
             padding: 10px 0;
+            overflow: hidden;
         }
 
         .video-roll-rotate-control {
@@ -162,26 +183,37 @@ body {
             position: relative;
 
             .rotate-btn {
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
                 position: absolute;
+                &:hover {
+                    svg {
+                        color: #d194c0;
+                    }
+                }
             }
 
-            .rotate-up {
+            .rotate-up-90 {
                 left: 50%;
+                transform: rotate(90deg) translateY(50%);
             }
 
-            .rotate-left {
+            .rotate-left-0 {
                 top: 50%;
-                transform: translate(-50%);
+                transform: translateY(-50%);
             }
 
-            .rotate-down {
+            .rotate-down-270 {
                 bottom: 0;
                 left: 50%;
+                transform: rotate(270deg) translateY(-50%);
             }
 
-            .rotate-right {
+            .rotate-right-180 {
                 right: 0;
                 top: 50%;
+                transform: rotate(180deg) translateY(50%);
             }
         }
     }
@@ -193,6 +225,13 @@ body {
         height: 30px;
         padding: 10px 0;
         color: #fff;
+        font-weight: bold;
+        .video-roll-author {
+            cursor: pointer;
+            &:hover {
+                color: #a494c6;
+            }
+        }
     }
 }
 </style>

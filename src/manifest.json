@@ -1,8 +1,8 @@
 {
-    "name": "VideoRoll",
+    "name": "Video Roll",
     "version": "1.0.1",
     "manifest_version": 3,
-    "description": "a web extension that can help you rotate the web video",
+    "description": "A web extension that can help you rotate a video",
     "action": {
         "default_icon": {
             "128": "/icons/icon_128.png",
@@ -13,7 +13,7 @@
             "512": "/icons/icon_512.png",
             "64": "/icons/icon_64.png"
         },
-        "default_title": "VideoRoll",
+        "default_title": "Video Roll",
         "default_popup": "index.html"
     },
     "content_scripts": [
@@ -23,9 +23,6 @@
             "run_at": "document_idle"
         }
     ],
-    "background": {
-        "service_worker": "background.js"
-    },
     "icons": {
         "128": "/icons/icon_128.png",
         "16": "/icons/icon_16.png",
@@ -41,6 +38,6 @@
             "matches": ["https://*/*"]
         }
     ],
-    "homepage_url": "https://www.gomi.site",
+    "homepage_url": "https://gomi.site",
     "permissions": ["activeTab", "scripting"]
 }
