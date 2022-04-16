@@ -1,3 +1,9 @@
+<!--
+ * @description:
+ * @Author: Gouxinyu
+ * @Date: 2022-01-13 22:43:33
+-->
+
 # Video Roll
 
 [![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)](https://imgtu.com/i/bbaiqK)
@@ -14,6 +20,11 @@
 -   旋转视频时，会自动根据视频容器和视频原始大小尺寸进行自适应
 -   轻量级插件，小于 100kb
 -   重视安全性，插件不会收集任何用户信息，仅会使用 tab API 读取当前网页地址
+
+### updated v1.0.2 版本
+
+-   增加了镜像旋转模式
+-   修改了 UI 界面
 
 ### 使用(Useage)
 
