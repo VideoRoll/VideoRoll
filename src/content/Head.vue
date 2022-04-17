@@ -7,7 +7,6 @@
     <div>
         <div class="video-roll-header">
             <div class="video-roll-logo">
-                <img class="video-roll-logo-img" src="../icons/icon_512.png" />
                 <img class="video-roll-logo-text" src="../icons/text.png" />
             </div>
             <div class="video-roll-github" @click="toGithub">
