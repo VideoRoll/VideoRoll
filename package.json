@@ -32,11 +32,11 @@
     },
     "devDependencies": {
         "@parcel/reporter-bundle-analyzer": "^2.4.1",
-        "@parcel/transformer-vue": "^2.2.0",
+        "@parcel/transformer-vue": "^2.4.1",
         "@vue/compiler-sfc": "^3.2.26",
         "copyfiles": "^2.4.1",
         "less": "^4.1.2",
-        "parcel": "^2.2.0",
+        "parcel": "^2.4.1",
         "parcel-namer-hashless": "^1.0.3"
     }
 }
