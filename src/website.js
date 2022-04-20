@@ -1,5 +1,5 @@
 /*
- * @description: 
+ * @description: webcomponents or shadowDom video element
  * @Author: Gouxinyu
  * @Date: 2022-01-13 22:57:14
  */
