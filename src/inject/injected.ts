@@ -54,17 +54,34 @@ function getScaleNumber(
 }
 
 /**
- * 旋转视频
- * @param deg
- * @param videoSelector
+ * find iframe and its document
  * @returns
  */
-function rotateVideo(deg: number, videoSelector: string[]) {
+function getIframeDoc(): Document | null {
+    const iframe = document.querySelector("iframe");
+    if (iframe) {
+        return iframe.contentDocument;
+    }
+    return null;
+}
+
+/**
+ * set video rotate deg
+ * @param deg
+ * @param videoSelector
+ * @param dom
+ * @param doc
+ * @returns
+ */
+function setVideoDeg(
+    deg: number,
+    videoSelector: string[],
+    dom: HTMLVideoElement,
+    doc: Document
+): void {
     for (const item of videoSelector) {
         const isArray = Array.isArray(item);
-        const dom = document.querySelector(
-            isArray ? item[0] : item
-        ) as HTMLVideoElement;
+        dom = doc.querySelector(isArray ? item[0] : item) as HTMLVideoElement;
         const backupDom = isArray
             ? (document.querySelector(item[1]) as HTMLElement)
             : dom;
@@ -73,15 +90,35 @@ function rotateVideo(deg: number, videoSelector: string[]) {
 
         if (dom) {
             const scale = getScaleNumber(dom, backupDom, deg);
+            dom.style.transition = "all 0.5s ease";
             dom.style.transform = `rotate(${deg}deg) scale(${scale})`;
             return;
         }
     }
 }
 
+/**
+ * 旋转视频
+ * @param deg
+ * @param videoSelector
+ * @returns
+ */
+function rotateVideo(deg: number, videoSelector: string[]): void {
+    let dom = null;
+    setVideoDeg(deg, videoSelector, dom, document);
+    // if there is no video element, search iframe
+    if (!dom) {
+        const doc = getIframeDoc();
+        if (doc) {
+            setVideoDeg(deg, videoSelector, dom, doc);
+        }
+    }
+}
+
 (function () {
-    chrome.runtime.onMessage.addListener((a, b) => {
+    chrome.runtime.onMessage.addListener((a, b, c) => {
         const { webInfo, deg } = a;
         rotateVideo(deg, webInfo.videoSelector);
+        c("rotate success");
     });
 })();
