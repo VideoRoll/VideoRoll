@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <Head></Head>
         <div class="video-roll-content">
             <div class="video-roll-website">
@@ -7,11 +8,10 @@
             </div>
             <div class="video-roll-rotate-control">
                 <div
-                    v-for="item in rotateBtns"
-                    :class="`rotate-${item.type}-${item.iconDeg} rotate-btn`"
-                    :key="item.type"
-                    :onclick="() => rotate(item)"
-                >
+                     v-for="item in rotateBtns"
+                     :class="`rotate-${item.type}-${item.iconDeg} rotate-btn`"
+                     :key="item.type"
+                     :onclick="() => rotate(item)">
                     <chevron-back-outline color="#a494c6" />
                 </div>
             </div>
@@ -115,6 +115,13 @@ export default defineComponent({
         }
 
         /**
+         * shortcut key
+         */
+        const onShortCutKey = () => {
+
+        }
+
+        /**
          * 跳转到Gomi
          */
         const toAuthor = () => {
@@ -142,6 +149,7 @@ export default defineComponent({
 body {
     margin: 0;
 }
+
 #app {
     width: 300px;
     background-color: rgb(24, 24, 28);
@@ -162,6 +170,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         .video-roll-website {
             height: 25px;
             font-size: 15px;
@@ -187,6 +196,7 @@ body {
                 height: 30px;
                 cursor: pointer;
                 position: absolute;
+
                 &:hover {
                     svg {
                         color: #d194c0;
@@ -226,8 +236,10 @@ body {
         padding: 10px 0;
         color: #fff;
         font-weight: bold;
+
         .video-roll-author {
             cursor: pointer;
+
             &:hover {
                 color: #a494c6;
             }

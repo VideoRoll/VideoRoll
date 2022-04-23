@@ -1,12 +1,12 @@
 {
     "name": "video-roll",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "a extension that can help you to rotate a video",
     "author": "Gomi",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "parcel src/index.html --open",
-        "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
+        "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash --reporter @parcel/reporter-bundle-analyzer",
         "build:inject": "parcel build src/inject/injected.ts --no-source-maps --no-content-hash",
         "build:background": "parcel build src/background/background.js --no-source-maps",
         "build": "npm run build:popup && npm run build:inject",
@@ -31,11 +31,12 @@
         "vue": "^3.2.26"
     },
     "devDependencies": {
-        "@parcel/transformer-vue": "^2.2.0",
+        "@parcel/reporter-bundle-analyzer": "^2.4.1",
+        "@parcel/transformer-vue": "^2.4.1",
         "@vue/compiler-sfc": "^3.2.26",
         "copyfiles": "^2.4.1",
         "less": "^4.1.2",
-        "parcel": "^2.2.0",
+        "parcel": "^2.4.1",
         "parcel-namer-hashless": "^1.0.3"
     }
 }
