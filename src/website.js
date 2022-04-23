@@ -1,5 +1,6 @@
 /*
  * @description: webcomponents or shadowDom video element
+ * Cause some websites' video player are made by shadowdom, we cant get it by video tag
  * @Author: Gouxinyu
  * @Date: 2022-01-13 22:57:14
  */
