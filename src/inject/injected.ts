@@ -110,7 +110,9 @@ function rotateVideo(deg: number, videoSelector: string[]): void {
     if (!dom) {
         const doc = getIframeDoc();
         if (doc) {
-            setVideoDeg(deg, videoSelector, dom, doc);
+            try {
+                setVideoDeg(deg, videoSelector, dom, doc);
+            } catch (e) {}
         }
     }
 }
