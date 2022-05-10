@@ -1,3 +1,9 @@
+<!--
+ * @description:
+ * @Author: Gouxinyu
+ * @Date: 2022-01-13 22:43:33
+-->
+
 # Video Roll
 
 [![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)](https://imgtu.com/i/bbaiqK)
@@ -20,6 +26,11 @@
 ### 更新日志(Change Log)
 
 ---
+
+-   v1.0.3:
+
+    -   修复跨域 iframe 报错
+    -   增加镜像翻转功能
 
 -   v1.0.2:
     -   支持旋转 (同源)iframe 中的视频
