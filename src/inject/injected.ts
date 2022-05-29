@@ -3,6 +3,9 @@
  * @Author: Gouxinyu
  * @Date: 2022-01-11 23:49:59
  */
+import throlltle from "../utils/throlltle";
+
+let observer = null;
 
 /**
  * 计算视频缩放比例
@@ -90,8 +93,15 @@ function setVideoDeg(
 
         if (dom) {
             const scale = getScaleNumber(dom, backupDom, deg);
-            dom.style.transition = "all 0.5s ease";
-            dom.style.transform = `rotate(${deg}deg) scale(${scale})`;
+            dom.classList.add(`video-roll-${deg} video-roll-transition`);
+            changeScaleNumber(scale);
+            dom.classList.add("video-roll-scale");
+            dom.setAttribute("data-roll", "true");
+
+            // fullScrenStyle(dom, {
+            //     transition: "all 0.5s ease",
+            //     transform: `rotate(${deg}deg) scale(${scale})`,
+            // });
             return;
         }
     }
@@ -105,6 +115,7 @@ function setVideoDeg(
  */
 function rotateVideo(deg: number, videoSelector: string[]): void {
     let dom = null;
+    addStyleClass();
     setVideoDeg(deg, videoSelector, dom, document);
     // if there is no video element, search iframe
     if (!dom) {
@@ -112,8 +123,81 @@ function rotateVideo(deg: number, videoSelector: string[]): void {
         if (doc) {
             try {
                 setVideoDeg(deg, videoSelector, dom, doc);
-            } catch (e) {}
+            } catch (e) {
+                console.warn(`rotate video failed: ${e}`);
+            }
         }
+    }
+}
+
+function changeScaleNumber(scaleNum: number) {
+    const scale = document.getElementById("video-roll-scale");
+    scale.innerHTML = `.video-roll-scale: { scale(${scaleNum}); }`;
+}
+
+/**
+ * 是否存在class
+ * @returns
+ */
+function isExistStyle() {
+    const deg = document.getElementById("video-roll-deg");
+    const scale = document.getElementById("video-roll-scale");
+
+    return deg && scale;
+}
+
+function addStyleClass() {
+    const already = isExistStyle();
+    if (already) return;
+    const deg = document.createElement("style");
+    const scale = document.createElement("style");
+    deg.innerHTML = `
+        .video-roll-90: {
+            transform: rotate(90deg);
+        }
+
+        .video-roll-180: {
+            transform: rotate(180deg);
+        }
+
+        .video-roll-270: {
+            transform: rotate(270deg);
+        }
+
+        .video-roll-360: {
+            transform: rotate(270deg);
+        }
+
+        .video-roll-transition: {
+            transition: all 0.5s ease;
+        }
+    `;
+
+    scale.innerHTML = `.video-roll-scale: { scale(1); }`;
+
+    deg.setAttribute("id", "video-roll-deg");
+    scale.setAttribute("id", "video-roll-scale");
+
+    const head = document.getElementsByName("head")[0];
+    head.appendChild(deg);
+    head.appendChild(scale);
+}
+
+/**
+ * 全屏时更新
+ */
+function fullScrenStyle(dom, style) {
+    const observerFn = function (entries) {
+        for (let entry of entries) {
+            console.log(style);
+            entry.target.classList.add("video-roll");
+        }
+    };
+
+    if (!observer) {
+        const resizeObserver = new ResizeObserver(throlltle(observerFn, 500));
+        observer = resizeObserver;
+        resizeObserver.observe(dom);
     }
 }
 

@@ -17,6 +17,6 @@ export default {
     },
     "youtube": {
         "name": "youtube",
-        "videoSelector": [["video", ".html5-main-video"]]
+        "videoSelector": [[".html5-main-video", "video"]]
     }
 }

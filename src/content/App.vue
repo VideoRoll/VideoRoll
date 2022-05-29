@@ -110,7 +110,7 @@ export default defineComponent({
          */
         const rotate = async (item) => {
             chrome.tabs.sendMessage(webInfo.tabId, { webInfo, deg: item.deg }, {}, (res) => {
-                console.log(res);
+                console.debug(res);
             });
         }
 
