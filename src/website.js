@@ -14,9 +14,5 @@ export default {
     "pornhub": {
         "name": "pornhub",
         "videoSelector": [["video-element video", "video-element video"]]
-    },
-    "youtube": {
-        "name": "youtube",
-        "videoSelector": [[".html5-main-video", "video"]]
     }
 }

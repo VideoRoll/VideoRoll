@@ -3,9 +3,6 @@
  * @Author: Gouxinyu
  * @Date: 2022-01-11 23:49:59
  */
-import throlltle from "../utils/throlltle";
-
-let observer = null;
 
 /**
  * 计算视频缩放比例
@@ -93,15 +90,11 @@ function setVideoDeg(
 
         if (dom) {
             const scale = getScaleNumber(dom, backupDom, deg);
-            dom.classList.add(`video-roll-${deg} video-roll-transition`);
-            changeScaleNumber(scale);
-            dom.classList.add("video-roll-scale");
-            dom.setAttribute("data-roll", "true");
+            replaeClass(deg, scale);
 
-            // fullScrenStyle(dom, {
-            //     transition: "all 0.5s ease",
-            //     transform: `rotate(${deg}deg) scale(${scale})`,
-            // });
+            dom.classList.add("video-roll-transition");
+            dom.classList.add("video-roll-deg-scale");
+            dom.setAttribute("data-roll", "true");
             return;
         }
     }
@@ -130,9 +123,14 @@ function rotateVideo(deg: number, videoSelector: string[]): void {
     }
 }
 
-function changeScaleNumber(scaleNum: number) {
-    const scale = document.getElementById("video-roll-scale");
-    scale.innerHTML = `.video-roll-scale: { scale(${scaleNum}); }`;
+/**
+ * change class content
+ * @param deg
+ * @param scaleNum
+ */
+function replaeClass(deg: number, scaleNum: number) {
+    const degScale = document.getElementById("video-roll-deg-scale");
+    degScale.innerHTML = `.video-roll-deg-scale { transform: rotate(${deg}deg) scale(${scaleNum}) !important; }`;
 }
 
 /**
@@ -140,71 +138,51 @@ function changeScaleNumber(scaleNum: number) {
  * @returns
  */
 function isExistStyle() {
-    const deg = document.getElementById("video-roll-deg");
-    const scale = document.getElementById("video-roll-scale");
+    const degScale = document.getElementById("video-roll-deg-scale");
+    const transition = document.getElementById("video-roll-transition");
 
-    return deg && scale;
-}
-
-function addStyleClass() {
-    const already = isExistStyle();
-    if (already) return;
-    const deg = document.createElement("style");
-    const scale = document.createElement("style");
-    deg.innerHTML = `
-        .video-roll-90: {
-            transform: rotate(90deg);
-        }
-
-        .video-roll-180: {
-            transform: rotate(180deg);
-        }
-
-        .video-roll-270: {
-            transform: rotate(270deg);
-        }
-
-        .video-roll-360: {
-            transform: rotate(270deg);
-        }
-
-        .video-roll-transition: {
-            transition: all 0.5s ease;
-        }
-    `;
-
-    scale.innerHTML = `.video-roll-scale: { scale(1); }`;
-
-    deg.setAttribute("id", "video-roll-deg");
-    scale.setAttribute("id", "video-roll-scale");
-
-    const head = document.getElementsByName("head")[0];
-    head.appendChild(deg);
-    head.appendChild(scale);
+    return degScale && transition;
 }
 
 /**
- * 全屏时更新
+ * add style
+ * @returns
  */
-function fullScrenStyle(dom, style) {
-    const observerFn = function (entries) {
-        for (let entry of entries) {
-            console.log(style);
-            entry.target.classList.add("video-roll");
-        }
-    };
+function addStyleClass() {
+    const already = isExistStyle();
+    if (already) return;
 
-    if (!observer) {
-        const resizeObserver = new ResizeObserver(throlltle(observerFn, 500));
-        observer = resizeObserver;
-        resizeObserver.observe(dom);
-    }
+    const degScale = document.createElement("style");
+    const transition = document.createElement("style");
+    degScale.innerHTML = `
+        .video-roll-deg-scale {}
+    `;
+
+    transition.innerHTML = `.video-roll-transition {
+            transition: all 0.5s ease !important;
+        }`;
+
+    degScale.setAttribute("id", "video-roll-deg-scale");
+    transition.setAttribute("id", "video-roll-transition");
+
+    degScale.setAttribute("type", "text/css");
+    transition.setAttribute("type", "text/css");
+
+    const head = document.getElementsByTagName("head")[0];
+    head.appendChild(degScale);
+    head.appendChild(transition);
 }
 
 (function () {
     chrome.runtime.onMessage.addListener((a, b, c) => {
-        const { webInfo, deg } = a;
-        rotateVideo(deg, webInfo.videoSelector);
+        const { webInfo, deg, style } = a;
+
+        if (style) {
+            addStyleClass();
+        } else {
+            rotateVideo(deg, webInfo.videoSelector);
+        }
+
         c("rotate success");
     });
 })();
