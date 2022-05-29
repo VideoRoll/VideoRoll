@@ -72,6 +72,7 @@ export default defineComponent({
 
         /**
          * 当打开时就获取当前网站的视频信息
+         * 添加样式
          */
         onMounted(async () => {
             let queryOptions = { active: true, currentWindow: true };
@@ -79,6 +80,11 @@ export default defineComponent({
             const hostName = urlReg.exec(tab.url)?.[2];
             setWebInfo(hostName);
             webInfo.tabId = tab.id;
+
+            // add style
+            chrome.tabs.sendMessage(webInfo.tabId, { style: true }, {}, (res) => {
+                console.debug(res);
+            });
         });
 
         // buttons
@@ -110,7 +116,7 @@ export default defineComponent({
          */
         const rotate = async (item) => {
             chrome.tabs.sendMessage(webInfo.tabId, { webInfo, deg: item.deg }, {}, (res) => {
-                console.log(res);
+                console.debug(res);
             });
         }
 
