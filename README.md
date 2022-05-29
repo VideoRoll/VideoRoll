@@ -1,3 +1,9 @@
+<!--
+ * @description: video roll
+ * @Author: Gouxinyu
+ * @Date: 2022-01-13 22:43:33
+-->
+
 # Video Roll
 
 [![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)](https://imgtu.com/i/bbaiqK)
@@ -11,15 +17,23 @@
 ---
 
 -   采用最新 extension V3 标准开发
--   可旋转任何网页中的 HTML5 视频
+-   可旋转任何网页中的 HTML5 视频，支持 90/180/270/360° 旋转
 -   针对播放器使用 Web components 或 Shadow dom 的网站做了特别优化（P 站、B 站）
--   旋转视频时，会自动根据视频容器和视频原始大小尺寸进行自适应
--   轻量级插件，大小只有 100kb 左右
+-   旋转视频时，会自动根据视频容器和视频原始大小尺寸进行自适应，避免旋转后只能展示部分内容的情况
+-   轻量级插件，大小只有 70kb 左右
 -   重视安全性，插件不会收集任何用户信息
 
 ### 更新日志(Change Log)
 
 ---
+
+-   v1.0.3:
+
+    -   修复存在跨域 iframe 时报错问题
+    -   修复 Youtube 全屏时旋转角度失效问题
+
+        bug 贡献者：
+        chrome 用户 @天南地北随遇而安
 
 -   v1.0.2:
     -   支持旋转 (同源)iframe 中的视频

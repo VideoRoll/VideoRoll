@@ -90,8 +90,11 @@ function setVideoDeg(
 
         if (dom) {
             const scale = getScaleNumber(dom, backupDom, deg);
-            dom.style.transition = "all 0.5s ease";
-            dom.style.transform = `rotate(${deg}deg) scale(${scale})`;
+            replaeClass(deg, scale);
+
+            dom.classList.add("video-roll-transition");
+            dom.classList.add("video-roll-deg-scale");
+            dom.setAttribute("data-roll", "true");
             return;
         }
     }
@@ -105,20 +108,81 @@ function setVideoDeg(
  */
 function rotateVideo(deg: number, videoSelector: string[]): void {
     let dom = null;
+    addStyleClass();
     setVideoDeg(deg, videoSelector, dom, document);
     // if there is no video element, search iframe
     if (!dom) {
         const doc = getIframeDoc();
         if (doc) {
-            setVideoDeg(deg, videoSelector, dom, doc);
+            try {
+                setVideoDeg(deg, videoSelector, dom, doc);
+            } catch (e) {
+                console.warn(`rotate video failed: ${e}`);
+            }
         }
     }
 }
 
+/**
+ * change class content
+ * @param deg
+ * @param scaleNum
+ */
+function replaeClass(deg: number, scaleNum: number) {
+    const degScale = document.getElementById("video-roll-deg-scale");
+    degScale.innerHTML = `.video-roll-deg-scale { transform: rotate(${deg}deg) scale(${scaleNum}) !important; }`;
+}
+
+/**
+ * 是否存在class
+ * @returns
+ */
+function isExistStyle() {
+    const degScale = document.getElementById("video-roll-deg-scale");
+    const transition = document.getElementById("video-roll-transition");
+
+    return degScale && transition;
+}
+
+/**
+ * add style
+ * @returns
+ */
+function addStyleClass() {
+    const already = isExistStyle();
+    if (already) return;
+
+    const degScale = document.createElement("style");
+    const transition = document.createElement("style");
+    degScale.innerHTML = `
+        .video-roll-deg-scale {}
+    `;
+
+    transition.innerHTML = `.video-roll-transition {
+            transition: all 0.5s ease !important;
+        }`;
+
+    degScale.setAttribute("id", "video-roll-deg-scale");
+    transition.setAttribute("id", "video-roll-transition");
+
+    degScale.setAttribute("type", "text/css");
+    transition.setAttribute("type", "text/css");
+
+    const head = document.getElementsByTagName("head")[0];
+    head.appendChild(degScale);
+    head.appendChild(transition);
+}
+
 (function () {
     chrome.runtime.onMessage.addListener((a, b, c) => {
-        const { webInfo, deg } = a;
-        rotateVideo(deg, webInfo.videoSelector);
+        const { webInfo, deg, style } = a;
+
+        if (style) {
+            addStyleClass();
+        } else {
+            rotateVideo(deg, webInfo.videoSelector);
+        }
+
         c("rotate success");
     });
 })();
