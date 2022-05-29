@@ -9,7 +9,7 @@
             <div class="video-roll-logo">
                 <img class="video-roll-logo-text" src="../icons/text.png" />
             </div>
-            <div class="video-roll-github" @click="toGithub">
+            <div class="video-roll-github" @click="toGithub" title="star it!">
                 <logo-github color="#ffffff"></logo-github>
             </div>
         </div>
