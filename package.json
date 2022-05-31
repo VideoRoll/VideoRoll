@@ -8,8 +8,8 @@
         "start": "parcel src/index.html --open",
         "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
         "build:inject": "parcel build src/inject/injected.ts --no-source-maps --no-content-hash",
-        "build:background": "parcel build src/background/background.js --no-source-maps",
-        "build": "npm run build:popup && npm run build:inject",
+        "build:background": "parcel build src/background/background.ts --no-source-maps",
+        "build": "npm run build:popup && npm run build:inject && npm run build:background",
         "copy:static": "copyfiles -u 1 src/icons/* src/manifest.json dist",
         "clean": "rimraf dist",
         "dist": "npm run clean && npm run copy:static && npm run build"

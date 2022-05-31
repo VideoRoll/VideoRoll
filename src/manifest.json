@@ -20,9 +20,12 @@
         {
             "matches": ["<all_urls>"],
             "js": ["injected.js"],
-            "run_at": "document_idle"
+            "run_at": "document_start"
         }
     ],
+    "background": {
+        "service_worker": "background.js"
+    },
     "icons": {
         "128": "/icons/icon_128.png",
         "16": "/icons/icon_16.png",
