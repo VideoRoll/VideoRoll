@@ -17,7 +17,8 @@
       "matches": [ "\u003Call_urls>" ],
       "run_at": "document_idle"
    } ],
-   "description": "A web extension that can help you rotate a video",
+   "description": "A web extension that can help you rotate a video. 帮助你旋转任何网页中的HTML5视频。",
+   "differential_fingerprint": "1.e42ba08b5f96e934b48e74285753165895773c867637765a6a1bbd46452d7e2c",
    "homepage_url": "https://gomi.site",
    "icons": {
       "128": "/icons/icon_128.png",
@@ -33,7 +34,7 @@
    "name": "Video Roll",
    "permissions": [ "activeTab", "scripting" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.0.1",
+   "version": "1.0.3",
    "web_accessible_resources": [ {
       "matches": [ "https://*/*" ],
       "resources": [ "injected.js" ]
