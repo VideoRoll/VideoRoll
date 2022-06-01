@@ -14,11 +14,7 @@ function getTabBadge() {
     const videoSelector = VideoRoll.getVideoSelector(hostName);
     const dom = VideoRoll.getVideoDom(videoSelector, document);
 
-    if (dom) {
-        return "roll";
-    } else {
-        return "";
-    }
+    return dom ? "1" : "";
 }
 
 (function () {

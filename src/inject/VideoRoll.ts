@@ -59,8 +59,8 @@ export default class VideoRoll {
      * find iframe and its document
      * @returns
      */
-    static getIframeDoc(): Document | null {
-        const iframe = document.querySelector("iframe");
+    static getIframeDoc(doc = document): Document | null {
+        const iframe = doc.querySelector("iframe");
         if (iframe) {
             return iframe.contentDocument;
         }
@@ -83,7 +83,7 @@ export default class VideoRoll {
         }
 
         if (!dom) {
-            const docWin = this.getIframeDoc();
+            const docWin = this.getIframeDoc(doc);
             if (docWin) {
                 try {
                     return this.getVideoDom(videoSelector, docWin);
