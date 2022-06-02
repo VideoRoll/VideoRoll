@@ -7,6 +7,18 @@ import WEBSITE from "../website";
 
 export default class VideoRoll {
     /**
+     * get url host name
+     * @returns
+     */
+    static getHostName(): string {
+        // url reg
+        const url = window.location.href;
+        const urlReg = /^http(s)?:\/\/(.*?)\//;
+        const hostName = urlReg.exec(url)?.[2];
+        return hostName;
+    }
+
+    /**
      * 计算视频缩放比例
      * @param dom
      * @param deg
@@ -67,6 +79,12 @@ export default class VideoRoll {
         return null;
     }
 
+    /**
+     * get video dom element
+     * @param videoSelector
+     * @param doc
+     * @returns
+     */
     static getVideoDom(videoSelector, doc) {
         let dom = null;
         for (const item of videoSelector) {
@@ -114,14 +132,14 @@ export default class VideoRoll {
                 isArray ? item[0] : item
             ) as HTMLVideoElement;
             const backupDom = isArray
-                ? (document.querySelector(item[1]) as HTMLElement)
+                ? (doc.querySelector(item[1]) as HTMLElement)
                 : dom;
 
             if (!dom) continue;
 
             if (dom) {
                 const scale = this.getScaleNumber(dom, backupDom, deg);
-                this.replaeClass(deg, scale);
+                this.replaeClass(deg, scale, doc);
 
                 dom.classList.add("video-roll-transition");
                 dom.classList.add("video-roll-deg-scale");
@@ -159,8 +177,8 @@ export default class VideoRoll {
      * @param deg
      * @param scaleNum
      */
-    static replaeClass(deg: number, scaleNum: number) {
-        const degScale = document.getElementById("video-roll-deg-scale");
+    static replaeClass(deg: number, scaleNum: number, doc = document) {
+        const degScale = doc.getElementById("video-roll-deg-scale");
         degScale.innerHTML = `.video-roll-deg-scale { transform: rotate(${deg}deg) scale(${scaleNum}) !important; }`;
     }
 
@@ -168,9 +186,9 @@ export default class VideoRoll {
      * 是否存在class
      * @returns
      */
-    static isExistStyle() {
-        const degScale = document.getElementById("video-roll-deg-scale");
-        const transition = document.getElementById("video-roll-transition");
+    static isExistStyle(doc = document) {
+        const degScale = doc.getElementById("video-roll-deg-scale");
+        const transition = doc.getElementById("video-roll-transition");
 
         return degScale && transition;
     }
@@ -202,11 +220,19 @@ export default class VideoRoll {
      * @returns
      */
     static addStyleClass() {
-        const already = this.isExistStyle();
+        const videoSelecter = this.getVideoSelector(this.getHostName());
+        const dom = this.getVideoDom(videoSelecter, document);
+
+        if (!dom) return;
+
+        const doc = document.body.contains(dom)
+            ? document
+            : this.getIframeDoc();
+        const already = this.isExistStyle(doc);
         if (already) return;
 
-        const degScale = document.createElement("style");
-        const transition = document.createElement("style");
+        const degScale = doc.createElement("style");
+        const transition = doc.createElement("style");
         degScale.innerHTML = `
         .video-roll-deg-scale {}
     `;
@@ -221,7 +247,7 @@ export default class VideoRoll {
         degScale.setAttribute("type", "text/css");
         transition.setAttribute("type", "text/css");
 
-        const head = document.getElementsByTagName("head")[0];
+        const head = doc.getElementsByTagName("head")[0];
         head.appendChild(degScale);
         head.appendChild(transition);
     }
