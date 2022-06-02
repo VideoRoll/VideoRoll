@@ -1,6 +1,6 @@
 {
     "name": "Video Roll",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "manifest_version": 3,
     "description": "A web extension that can help you rotate a video. 帮助你旋转任何网页中的HTML5视频。",
     "action": {
@@ -20,9 +20,46 @@
         {
             "matches": ["<all_urls>"],
             "js": ["injected.js"],
-            "run_at": "document_idle"
+            "run_at": "document_start"
         }
     ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "commands": {
+        "90": {
+            "suggested_key": {
+                "default": "Ctrl+Right",
+                "windows": "Ctrl+Right",
+                "mac": "Command+Right"
+            },
+            "description": "Run \"90\" on the current page."
+        },
+        "180": {
+            "suggested_key": {
+                "default": "Ctrl+Down",
+                "windows": "Ctrl+Down",
+                "mac": "Command+Down"
+            },
+            "description": "Run \"180\" on the current page."
+        },
+        "270": {
+            "suggested_key": {
+                "default": "Ctrl+Left",
+                "windows": "Ctrl+Left",
+                "mac": "Command+Left"
+            },
+            "description": "Run \"270\" on the current page."
+        },
+        "0": {
+            "suggested_key": {
+                "default": "Ctrl+Up",
+                "windows": "Ctrl+Up",
+                "mac": "Command+Up"
+            },
+            "description": "Run \"0\" on the current page."
+        }
+    },
     "icons": {
         "128": "/icons/icon_128.png",
         "16": "/icons/icon_16.png",
