@@ -19,8 +19,7 @@
         <div class="video-roll-footer">
             <div>
                 <span>
-                    Created by
-                    <span class="video-roll-author" @click="toAuthor">Gomi</span>
+                    <span class="video-roll-feedback" @click="toFeedBack">feedback</span>
                 </span>
             </div>
         </div>
@@ -121,19 +120,12 @@ export default defineComponent({
         }
 
         /**
-         * shortcut key
+         * 跳转到反馈
          */
-        const onShortCutKey = () => {
-
-        }
-
-        /**
-         * 跳转到Gomi
-         */
-        const toAuthor = () => {
+        const toFeedBack = () => {
             chrome.tabs.create({
                 active: true,
-                url: "https://gomi.site"
+                url: "https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0"
             })
         };
 
@@ -141,7 +133,7 @@ export default defineComponent({
             rotateBtns,
             rotate,
             webInfo,
-            toAuthor
+            toFeedBack
         }
     },
     components: {
@@ -192,7 +184,6 @@ body {
         .video-roll-rotate-control {
             width: 120px;
             height: 120px;
-            // background-color: red;
             border: 5px solid #fff;
             border-radius: 50%;
             position: relative;
@@ -243,12 +234,10 @@ body {
         color: #fff;
         font-weight: bold;
 
-        .video-roll-author {
+        .video-roll-feedback {
             cursor: pointer;
-
-            &:hover {
-                color: #a494c6;
-            }
+            color: #595960;
+            font-weight: normal;
         }
     }
 }

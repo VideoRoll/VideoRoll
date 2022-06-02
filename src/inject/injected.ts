@@ -6,11 +6,24 @@
 
 import VideoRoll from "./VideoRoll";
 
-function getTabBadge() {
+/**
+ * get host name
+ * @returns
+ */
+function getHostName(): string {
     // url reg
     const url = window.location.href;
     const urlReg = /^http(s)?:\/\/(.*?)\//;
     const hostName = urlReg.exec(url)?.[2];
+    return hostName;
+}
+
+/**
+ * get badge text
+ * @returns
+ */
+function getTabBadge(): string {
+    const hostName = getHostName();
     const videoSelector = VideoRoll.getVideoSelector(hostName);
     const dom = VideoRoll.getVideoDom(videoSelector, document);
 
@@ -23,6 +36,7 @@ function getTabBadge() {
      */
     chrome.runtime.onMessage.addListener((a, b, c) => {
         const { webInfo, deg, style, tabId } = a;
+
         /**
          * set badge
          */
@@ -33,7 +47,12 @@ function getTabBadge() {
         } else if (style) {
             VideoRoll.addStyleClass();
         } else {
-            VideoRoll.rotateVideo(deg, webInfo.videoSelector);
+            VideoRoll.rotateVideo(
+                deg,
+                webInfo.videoSelector
+                    ? webInfo.videoSelector
+                    : VideoRoll.getVideoSelector(getHostName())
+            );
         }
 
         c("rotate success");
