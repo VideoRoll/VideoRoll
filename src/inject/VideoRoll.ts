@@ -5,6 +5,11 @@
  */
 import WEBSITE from "../website";
 
+const flipStyle = {
+    none: "",
+    vertical: "rotate3d(1, 0, 0, 180deg)",
+    horizontal: "rotate3d(0, 1, 0, 180deg)",
+};
 export default class VideoRoll {
     /**
      * get url host name
@@ -45,7 +50,7 @@ export default class VideoRoll {
         // 判断旋转后的缩放比例
         // 1.若是竖屏视频，但在横屏容器中，初始就是等比缩小的
         if (isHorizonDeg && !isHorizonVideo && isHorizonDom) {
-            const scale = videoHeight / videoWidth;
+            const scale = offsetWidth / offsetHeight;
             // if video element is shadowdom, cant get video height;
             return Number.isNaN(scale) ? 1 : scale;
         }
@@ -62,6 +67,11 @@ export default class VideoRoll {
 
         if (!isHorizonDeg && isHorizonVideo && isHorizonDom) {
             return 1;
+        }
+
+        // 若是竖屏且容器为竖屏
+        if (!isHorizonVideo && !isHorizonDom && isHorizonDeg) {
+            return videoWidth / videoHeight;
         }
 
         return 1;
@@ -122,6 +132,7 @@ export default class VideoRoll {
      */
     static setVideoDeg(
         deg: number,
+        flip: string,
         videoSelector: string[],
         dom: HTMLVideoElement,
         doc: Document
@@ -139,7 +150,7 @@ export default class VideoRoll {
 
             if (dom) {
                 const scale = this.getScaleNumber(dom, backupDom, deg);
-                this.replaeClass(deg, scale, doc);
+                this.replaeClass(deg, flip, scale, doc);
 
                 dom.classList.add("video-roll-transition");
                 dom.classList.add("video-roll-deg-scale");
@@ -155,16 +166,20 @@ export default class VideoRoll {
      * @param videoSelector
      * @returns
      */
-    static rotateVideo(deg: number, videoSelector: string[]): void {
+    static rotateVideo(
+        deg: number,
+        flip: string,
+        videoSelector: string[]
+    ): void {
         let dom = null;
         this.addStyleClass();
-        this.setVideoDeg(deg, videoSelector, dom, document);
+        this.setVideoDeg(deg, flip, videoSelector, dom, document);
         // if there is no video element, search iframe
         if (!dom) {
             const doc = this.getIframeDoc();
             if (doc) {
                 try {
-                    this.setVideoDeg(deg, videoSelector, dom, doc);
+                    this.setVideoDeg(deg, flip, videoSelector, dom, doc);
                 } catch (e) {
                     console.warn(`rotate video failed: ${e}`);
                 }
@@ -177,9 +192,14 @@ export default class VideoRoll {
      * @param deg
      * @param scaleNum
      */
-    static replaeClass(deg: number, scaleNum: number, doc = document) {
+    static replaeClass(
+        deg: number,
+        flip: string,
+        scaleNum: number,
+        doc = document
+    ) {
         const degScale = doc.getElementById("video-roll-deg-scale");
-        degScale.innerHTML = `.video-roll-deg-scale { transform: rotate(${deg}deg) scale(${scaleNum}) !important; }`;
+        degScale.innerHTML = `.video-roll-deg-scale { transform: ${flipStyle[flip]} rotate(${deg}deg) scale(${scaleNum}) !important; }`;
     }
 
     /**
