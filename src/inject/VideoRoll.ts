@@ -50,7 +50,7 @@ export default class VideoRoll {
         // 判断旋转后的缩放比例
         // 1.若是竖屏视频，但在横屏容器中，初始就是等比缩小的
         if (isHorizonDeg && !isHorizonVideo && isHorizonDom) {
-            const scale = videoHeight / videoWidth;
+            const scale = offsetWidth / offsetHeight;
             // if video element is shadowdom, cant get video height;
             return Number.isNaN(scale) ? 1 : scale;
         }
@@ -67,6 +67,11 @@ export default class VideoRoll {
 
         if (!isHorizonDeg && isHorizonVideo && isHorizonDom) {
             return 1;
+        }
+
+        // 若是竖屏且容器为竖屏
+        if (!isHorizonVideo && !isHorizonDom && isHorizonDeg) {
+            return videoWidth / videoHeight;
         }
 
         return 1;
