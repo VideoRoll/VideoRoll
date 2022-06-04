@@ -17,30 +17,62 @@
             </div>
         </div>
         <div class="video-roll-footer">
-            <div>
-                <span>
-                    <span class="video-roll-feedback" @click="toFeedBack">feedback</span>
-                </span>
+            <div class="video-roll-github" @click="toGithub" title="star it!">
+                <logo-github color="#ffffff"></logo-github>
+            </div>
+
+            <div class="video-roll-home" @click="toHome" title="gomi.site">
+                <home class="home" color="#ffffff"></home>
+            </div>
+
+            <div class="video-roll-thumbs-up" @click="toFeedBack" title="thumbs up!">
+                <thumbs-up class="thumbs-up" color="#ffffff"></thumbs-up>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, onMounted } from 'vue';
+import { defineComponent, reactive, ref, onMounted, inject, provide } from 'vue';
 import Head from './Head.vue';
-import { ChevronBackOutline } from '@vicons/ionicons5';
+import { ChevronBackOutline, LogoGithub, Home, ThumbsUp } from '@vicons/ionicons5';
 import WEBSITE from '../website';
 
 export default defineComponent({
     name: "App",
     setup(props) {
+        const toGithub = () => {
+            chrome.tabs.create({
+                active: true,
+                url: "https://github.com/gxy5202/VideoRoll"
+            })
+        }
+
+        const toHome = () => {
+            chrome.tabs.create({
+                active: true,
+                url: "https://gomi.site"
+            })
+        }
+
         // current website info
         const webInfo = reactive({
             tabId: '',
             name: '',
+            flip: 'none',
+            deg: 0,
             videoSelector: []
         });
+
+        const setFlip = (target) => {
+            webInfo.flip = target.value;
+            chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
+                console.debug(res);
+            });
+        }
+
+        provide('webInfo', webInfo);
+        provide('setFlip', setFlip);
 
         // url reg
         const urlReg = /^http(s)?:\/\/(.*?)\//;
@@ -84,6 +116,14 @@ export default defineComponent({
             chrome.tabs.sendMessage(webInfo.tabId, { style: true }, {}, (res) => {
                 console.debug(res);
             });
+
+            chrome.runtime.onMessage.addListener((a, b, c) => {
+                const { flip } = a;
+                if (flip) {
+                    webInfo.flip = flip;
+                }
+                c('flip');
+            });
         });
 
         // buttons
@@ -114,7 +154,8 @@ export default defineComponent({
          * 旋转
          */
         const rotate = async (item) => {
-            chrome.tabs.sendMessage(webInfo.tabId, { webInfo, deg: item.deg }, {}, (res) => {
+            webInfo.deg = item.deg;
+            chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
                 console.debug(res);
             });
         }
@@ -133,11 +174,16 @@ export default defineComponent({
             rotateBtns,
             rotate,
             webInfo,
-            toFeedBack
+            toFeedBack,
+            toGithub,
+            toHome
         }
     },
     components: {
+        ThumbsUp,
+        Home,
         ChevronBackOutline,
+        LogoGithub,
         Head
     }
 })
@@ -234,10 +280,20 @@ body {
         color: #fff;
         font-weight: bold;
 
-        .video-roll-feedback {
+        .video-roll-github,
+        .video-roll-home,
+        .video-roll-thumbs-up {
+            width: 15px;
+            height: 15px;
+            margin: 5px;
             cursor: pointer;
-            color: #595960;
-            font-weight: normal;
+
+            &:hover {
+                svg {
+                    color: #a494c6 !important;
+                }
+
+            }
         }
     }
 }

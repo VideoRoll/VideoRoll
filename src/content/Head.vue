@@ -4,46 +4,69 @@
  * @Date: 2022-02-02 14:35:44
 -->
 <template>
-    <div>
-        <div class="video-roll-header">
-            <div class="video-roll-logo">
-                <img class="video-roll-logo-text" src="../icons/text.png" />
-            </div>
-            <div class="video-roll-github" @click="toGithub" title="star it!">
-                <logo-github color="#ffffff"></logo-github>
-            </div>
+    <div class="video-roll-header">
+        <div class="video-roll-logo">
+            <img class="video-roll-logo-text" src="../icons/text.png" />
         </div>
+        <div class="video-roll-head-right">
+            <span class="video-roll-mode">Flip: </span>
+            <Select :options="options" :value="webInfo.flip" :select="onSelect"></Select>
+        </div>
+
     </div>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
-import { LogoGithub } from '@vicons/ionicons5';
+import { defineComponent, ref, inject } from 'vue';
+import Select from './components/Select.vue';
+import { InformationCircle } from '@vicons/ionicons5';
 export default defineComponent({
     name: "Head",
     setup(props) {
-        const toGithub = () => {
-            chrome.tabs.create({
-                active: true,
-                url: "https://github.com/gxy5202/VideoRoll"
-            })
-        }
+        // 选中值
+        const webInfo = inject('webInfo');
+
+        // 下拉选项
+        const options = ref([{
+            key: 0,
+            title: 'none',
+            value: 'none'
+        }, {
+            key: 1,
+            title: 'horizontal',
+            value: 'horizontal'
+        }, {
+            key: 2,
+            title: 'vertical',
+            value: 'vertical'
+        }]);
+
+        const onSelect = inject('setFlip');
 
         return {
-            toGithub
+            options,
+            webInfo,
+            onSelect
         }
     },
     components: {
-        LogoGithub
+        Select,
+        InformationCircle
     }
 })
 </script>
 
 <style lang="less">
-.video-roll-github {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+.video-roll-head-right {
+    width: 112px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .video-roll-mode {
+        margin-right: 5px;
+        font-size: 12px;
+    }
 }
 
 .video-roll-logo {

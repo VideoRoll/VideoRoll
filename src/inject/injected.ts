@@ -6,6 +6,8 @@
 
 import VideoRoll from "./VideoRoll";
 
+let currentFlip = "none";
+
 /**
  * get badge text
  * @returns
@@ -23,9 +25,14 @@ function getTabBadge(): string {
      * get message
      */
     chrome.runtime.onMessage.addListener((a, b, c) => {
-        const { webInfo, deg, style, tabId } = a;
+        const { webInfo, style, tabId, flip } = a;
 
         try {
+            if (flip) {
+                c("flip");
+                return;
+            }
+
             /**
              * set badge
              */
@@ -35,9 +42,15 @@ function getTabBadge(): string {
                 return;
             } else if (style) {
                 VideoRoll.addStyleClass();
+                chrome.runtime.sendMessage(
+                    { flip: currentFlip },
+                    function (response) {}
+                );
             } else {
+                currentFlip = webInfo.flip || currentFlip;
                 VideoRoll.rotateVideo(
-                    deg,
+                    webInfo.deg,
+                    currentFlip,
                     webInfo.videoSelector
                         ? webInfo.videoSelector
                         : VideoRoll.getVideoSelector(VideoRoll.getHostName())
