@@ -12,11 +12,24 @@
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") / [Github](https://github.com/gxy5202/ "Github")
 
+### 介绍(Describe)
+
+Video Roll is a web extension that helps you rotate HTML5 videos in any web pages. Different from other rotating extensions, we have specially optimized it for PXhub and Bilibili, and support image flipping. Works fine on most websites(Youtube/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.
+
+Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的浏览器插件。不同于其他旋转插件，我们特意针对 P 站、B 站进行了优化，同时支持镜像翻转。兼容市面上大部分视频网站(Youtube/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left。
+
 ### 主要特性(Features)
 
 ---
 
--   可旋转任何网页中的 HTML5 视频，支持 90/180/270° 旋转
+✅Flipping(horizontal/vertical) - 支持垂直/水平镜像翻转
+✅Rotating 0/90/180/270deg - 支持旋转 0/90/180/270°
+✅Support Pxhub/BiliBili - 支持 P 站、B 站
+✅Support shortcut key - 支持快捷键
+✅Support same-origin iframe - 支持同源 iframe 下的视频
+✅Auto scale video size - 自动计算视频缩放比例
+
+-   可旋转任何网页中的 HTML5 视频，支持 0/90/180/270° 旋转
 -   支持镜像翻转（垂直/水平翻转）
 -   针对播放器使用 Web components 或 Shadow dom 的网站做了特别优化（P 站、B 站）
 -   针对同源 iframe 中的视频做了优化，支持旋转同源 iframe 中的视频(如 dailymotion.com)
