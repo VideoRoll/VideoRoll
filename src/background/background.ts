@@ -55,13 +55,28 @@ chrome.commands.onCommand.addListener((command) => {
     if (currentTabId) {
         chrome.tabs.sendMessage(
             currentTabId,
-            { webInfo: {}, deg: Number(command) },
+            { webInfo: { deg: Number(command) } },
             {},
             function (response) {
-                if (!chrome.runtime.lastError) {
-                } else {
+                if (chrome.runtime.lastError) {
                 }
             }
         );
     }
+
+    if (chrome.runtime.lastError) {
+    }
+});
+
+// set flip
+chrome.runtime.onMessage.addListener((a, b, c) => {
+    const { flip } = a;
+    if (flip) {
+        chrome.tabs.sendMessage(currentTabId, { flip }, {}, function () {
+            if (chrome.runtime.lastError) {
+            }
+        });
+    }
+
+    c("flip");
 });
