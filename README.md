@@ -32,6 +32,8 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 -   ✅70kb bundle size
 -   ✅Respect user privacy
 
+---
+
 -   ✅ 可旋转任何网页中的 HTML5 视频，支持 0/90/180/270° 旋转
 -   ✅ 支持镜像翻转（垂直/水平翻转）
 -   ✅ 针对播放器使用 Web components 或 Shadow dom 的网站做了特别优化（P 站、B 站）
@@ -90,4 +92,6 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 
 ---
 
-若你发现问题或有更好的 idea，欢迎贡献代码~
+如果你觉得这个插件对你有所帮助，please star it.
+
+若你发现问题或有更好的 idea，欢迎贡献想法和代码~
