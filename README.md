@@ -8,7 +8,7 @@
 
 ![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)
 
-![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
+![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll) [![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en)
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") / [Github](https://github.com/gxy5202/ "Github")
 
@@ -29,7 +29,7 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 -   ✅Support Pxhub/BiliBili
 -   ✅Support shortcut key
 -   ✅Support same-origin iframe
--   ✅Auto scale video size
+-   ✅Automatically calculates video scaling
 -   ✅70kb bundle size
 -   ✅Respect user privacy
 
