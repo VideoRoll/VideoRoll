@@ -5,7 +5,7 @@
     "author": "Gomi",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "parcel src/index.html --open",
+        "start": "parcel src/index.html --lazy",
         "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
         "build:inject": "parcel build src/inject/injected.ts --no-source-maps --no-content-hash",
         "build:background": "parcel build src/background/background.ts --no-source-maps",
@@ -37,6 +37,7 @@
         "copyfiles": "^2.4.1",
         "less": "^4.1.2",
         "parcel": "^2.4.1",
-        "parcel-namer-hashless": "^1.0.3"
+        "parcel-namer-hashless": "^1.0.3",
+        "process": "^0.11.10"
     }
 }
