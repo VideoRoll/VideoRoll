@@ -6,11 +6,11 @@
 
 # Video Roll
 
-[![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)](https://imgtu.com/i/bbaiqK)
+![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)
 
-![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
+![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll) [![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en)
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") / [Github](https://github.com/gxy5202/ "Github")
+[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") / [Home Page](https://gomi.site/#/VideoRoll "Home Page")
 
 ### 介绍(Describe)
 
@@ -21,6 +21,7 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 ### 主要特性(Features)
 
 ---
+![bqt7C9.png](https://s3.bmp.ovh/imgs/2022/06/28/58f3517b43b94c5e.png)
 
 -   ✅Support all HTML5 Video
 -   ✅Flipping(horizontal/vertical)
@@ -28,11 +29,12 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 -   ✅Support Pxhub/BiliBili
 -   ✅Support shortcut key
 -   ✅Support same-origin iframe
--   ✅Auto scale video size
+-   ✅Automatically calculates video scaling
 -   ✅70kb bundle size
 -   ✅Respect user privacy
 
----
+
+***
 
 -   ✅ 可旋转任何网页中的 HTML5 视频，支持 0/90/180/270° 旋转
 -   ✅ 支持镜像翻转（垂直/水平翻转）
@@ -75,11 +77,9 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
     -   增加了旋转时的动画
     -   修复了扩展程序管理中显示报错的问题
 
-### 使用(Useage)
+### 安装(Installation)
 
 ---
-
-[![bqt7C9.png](https://s1.ax1x.com/2022/03/13/bqt7C9.png)](https://imgtu.com/i/bqt7C9)
 
 -   **crx 安装**
     在谷歌应用商店或非官方商店直接下载该插件安装即可（由于谷歌对于新开发者采取信任制策略，可能需要数个月才能进入信任名单，如提示不信任，需要点击确认安装）
@@ -100,3 +100,14 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 如果你觉得这个插件对你有所帮助，please star it.
 
 若你发现问题或有更好的 idea，欢迎贡献想法和代码~
+
+
+### 感谢以下开源项目(Acknowledgments)
+
+---
+
+- Vue
+- Parcel
+- Copyfiles
+- Less
+- Visual Studio Code

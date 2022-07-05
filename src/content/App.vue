@@ -51,7 +51,7 @@ export default defineComponent({
         const toHome = () => {
             chrome.tabs.create({
                 active: true,
-                url: "https://gomi.site"
+                url: "https://gomi.site/#/VideoRoll"
             })
         }
 
@@ -150,6 +150,7 @@ export default defineComponent({
             }
         ]);
 
+        console.log(process, '--');
         /**
          * 旋转
          */
