@@ -150,7 +150,7 @@ export default defineComponent({
             }
         ]);
 
-        console.log(process, '--');
+        console.log(process.env.homeUrl, '--');
         /**
          * 旋转
          */
