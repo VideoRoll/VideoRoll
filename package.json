@@ -5,7 +5,7 @@
     "author": "Gomi",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "parcel src/index.html --lazy",
+        "start": "parcel src/index.html --open",
         "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
         "build:inject": "parcel build src/inject/injected.ts --no-source-maps --no-content-hash",
         "build:background": "parcel build src/background/background.ts --no-source-maps",
@@ -19,7 +19,11 @@
         "type": "git",
         "url": "git+https://github.com/gxy5202/video-roll.git"
     },
-    "keywords": [],
+    "keywords": [
+        "rotate video",
+        "video rotater",
+        "transform video"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/gxy5202/video-roll/issues"
