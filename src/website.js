@@ -9,7 +9,7 @@ export default {
         "name": "bilibili",
         // [originVideoElement, specialElement]
         // if originVideoElement cant get videoHieight or videoWifth, use specialElement
-        "videoSelector": ["video", ["bwp-video", ".bilibili-player-popup-inner"]]
+        "videoSelector": ["video", ["bwp-video", ".bpx-player-video-wrap"]]
     },
     "pornhub": {
         "name": "pornhub",
