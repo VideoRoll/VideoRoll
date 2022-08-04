@@ -48,6 +48,9 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 ### 更新日志(Change Log)
 
 ---
+-   v1.0.52:
+    -   fixed: Bilibili旋转不生效
+
 -   v1.0.51:
     -   移除不必要的权限要求
 

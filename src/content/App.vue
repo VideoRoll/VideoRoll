@@ -51,7 +51,7 @@ export default defineComponent({
         const toHome = () => {
             chrome.tabs.create({
                 active: true,
-                url: "https://gomi.site"
+                url: "https://gomi.site/VideoRoll"
             })
         }
 
@@ -61,7 +61,7 @@ export default defineComponent({
             name: '',
             flip: 'none',
             deg: 0,
-            videoSelector: []
+            videoSelector: [] as string[]
         });
 
         const setFlip = (target) => {
