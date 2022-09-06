@@ -25,7 +25,11 @@
         "type": "git",
         "url": "git+https://github.com/gxy5202/video-roll.git"
     },
-    "keywords": [],
+    "keywords": [
+        "rotate video",
+        "video rotater",
+        "transform video"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/gxy5202/video-roll/issues"
@@ -50,6 +54,7 @@
         "jest": "^28.1.3",
         "less": "^4.1.2",
         "parcel": "^2.4.1",
-        "parcel-namer-hashless": "^1.0.3"
+        "parcel-namer-hashless": "^1.0.3",
+        "process": "^0.11.10"
     }
 }

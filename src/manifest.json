@@ -75,6 +75,6 @@
             "matches": ["https://*/*"]
         }
     ],
-    "homepage_url": "https://gomi.site",
+    "homepage_url": "https://gomi.site/VideoRoll",
     "permissions": ["activeTab"]
 }

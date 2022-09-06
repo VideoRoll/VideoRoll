@@ -45,6 +45,12 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 -   ✅ 重视安全性，插件不会收集任何用户信息
 -   ✅ 支持快捷键 ctrl + 方向键
 
+
+### 快捷键使用方式(Shortcut Key useage)
+#### Steps:
+1. 地址栏输入 `chrome://extensions/shortcuts`
+2. 找到Video Roll, 设置快捷键
+
 ### 更新日志(Change Log)
 
 ---
@@ -53,6 +59,10 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 
 -   v1.0.51:
     -   移除不必要的权限要求
+
+-   v1.0.6
+
+    -   修复快捷键有时会失效报错的问题
 
 -   v1.0.5:
 
