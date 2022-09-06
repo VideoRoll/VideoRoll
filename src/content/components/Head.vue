@@ -6,26 +6,31 @@
 <template>
     <div class="video-roll-header">
         <div class="video-roll-logo">
-            <img class="video-roll-logo-text" src="../icons/text.png" />
+            <img class="video-roll-logo-text" src="../../icons/text.png" />
         </div>
         <div class="video-roll-head-right">
-            <span class="video-roll-mode">Flip: </span>
-            <Select :options="options" :value="webInfo.flip" :select="onSelect"></Select>
-        </div>
+            <div class="video-roll-setting-btn" title="settings" @click="onOpenSetting">
+                <settings-sharp class="settings-sharp" color="#fffff">
+                </settings-sharp>
+            </div>
 
+            <!-- <span class="video-roll-mode">Flip: </span>
+            <Select :options="options" :value="webInfo.flip" :select="onSelect"></Select> -->
+        </div>
     </div>
 </template>
 
 <script>
 import { defineComponent, ref, inject } from 'vue';
-import Select from './components/Select.vue';
-import { InformationCircle } from '@vicons/ionicons5';
+// import Select from './components/Select.vue';
+import { InformationCircle, SettingsSharp } from '@vicons/ionicons5';
 export default defineComponent({
     name: "Head",
     setup(props) {
         // 选中值
         const webInfo = inject('webInfo');
 
+        const isShowSetting = ref(false);
         // 下拉选项
         const options = ref([{
             key: 0,
@@ -42,23 +47,37 @@ export default defineComponent({
         }]);
 
         const onSelect = inject('setFlip');
-
+        const onOpenSetting = inject('onOpenSetting');
         return {
             options,
             webInfo,
+            onOpenSetting,
+            isShowSetting,
             onSelect
         }
     },
     components: {
-        Select,
-        InformationCircle
+        // Select,
+        InformationCircle,
+        SettingsSharp
     }
 })
 </script>
 
 <style lang="less">
+.settings-sharp {
+    display: flex;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+
+    &:hover {
+        color: #a494c6;
+    }
+}
+
 .video-roll-head-right {
-    width: 112px;
+    // width: 112px;
     display: flex;
     justify-content: space-between;
     align-items: center;

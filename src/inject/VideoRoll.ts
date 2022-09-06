@@ -6,7 +6,7 @@
 import WEBSITE from "../website";
 
 const flipStyle = {
-    none: "",
+    unset: "",
     vertical: "rotate3d(1, 0, 0, 180deg)",
     horizontal: "rotate3d(0, 1, 0, 180deg)",
 };

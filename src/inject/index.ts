@@ -6,7 +6,7 @@
 
 import VideoRoll from "./VideoRoll";
 
-let currentFlip = "none";
+let currentFlip = "unset";
 
 /**
  * get badge text
@@ -44,7 +44,7 @@ function getTabBadge(): string {
                 VideoRoll.addStyleClass();
                 chrome.runtime.sendMessage(
                     { flip: currentFlip },
-                    function (response) {}
+                    function (response) { }
                 );
             } else {
                 currentFlip = webInfo.flip || currentFlip;

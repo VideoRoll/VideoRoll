@@ -3,7 +3,7 @@
  * @Author: Gouxinyu
  * @Date: 2022-04-23 23:37:22
  */
-let currentTabId = null;
+let currentTabId: number | null = null;
 
 chrome.action.setBadgeBackgroundColor({ color: "#a494c6" });
 
@@ -21,7 +21,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                     text: response.text,
                     tabId: tabId,
                 },
-                () => {}
+                () => { }
             );
         } else {
         }
@@ -43,7 +43,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
                     text: response.text,
                     tabId,
                 },
-                () => {}
+                () => { }
             );
         } else {
         }

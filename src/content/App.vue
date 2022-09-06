@@ -2,45 +2,54 @@
     <div>
 
         <Head></Head>
-        <div class="video-roll-content">
-            <div class="video-roll-website">
-                <span>{{ webInfo.name }}</span>
-            </div>
-            <div class="video-roll-rotate-control">
-                <div
-                     v-for="item in rotateBtns"
-                     :class="`rotate-${item.type}-${item.iconDeg} rotate-btn`"
-                     :key="item.type"
-                     :onclick="() => rotate(item)">
-                    <chevron-back-outline color="#a494c6" />
+        <main>
+            <div>
+                <div class="video-roll-content">
+                    <div class="video-roll-website">
+                        <span>{{ webInfo.name }}</span>
+                    </div>
+                    <div class="video-roll-rotate-control">
+                        <div
+                             v-for="item in rotateBtns"
+                             :class="`rotate-${item.type}-${item.iconDeg} rotate-btn`"
+                             :key="item.type"
+                             :onclick="() => rotate(item)">
+                            <chevron-back-outline color="#a494c6" />
+                        </div>
+                    </div>
+                </div>
+                <div class="video-roll-footer">
+                    <div class="video-roll-github" @click="toGithub" title="star it!">
+                        <logo-github color="#ffffff"></logo-github>
+                    </div>
+
+                    <div class="video-roll-home" @click="toHome" title="gomi.site">
+                        <home class="home" color="#ffffff"></home>
+                    </div>
+
+                    <div class="video-roll-thumbs-up" @click="toFeedBack" title="thumbs up!">
+                        <thumbs-up class="thumbs-up" color="#ffffff"></thumbs-up>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="video-roll-footer">
-            <div class="video-roll-github" @click="toGithub" title="star it!">
-                <logo-github color="#ffffff"></logo-github>
+            <div class="video-roll-setting" v-show="isShow">
+                <SettingPanel></SettingPanel>
             </div>
-
-            <div class="video-roll-home" @click="toHome" title="gomi.site">
-                <home class="home" color="#ffffff"></home>
-            </div>
-
-            <div class="video-roll-thumbs-up" @click="toFeedBack" title="thumbs up!">
-                <thumbs-up class="thumbs-up" color="#ffffff"></thumbs-up>
-            </div>
-        </div>
+        </main>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, onMounted, inject, provide } from 'vue';
-import Head from './Head.vue';
+import Head from './components/Head.vue';
+import SettingPanel from './components/SettingPanel.vue';
 import { ChevronBackOutline, LogoGithub, Home, ThumbsUp } from '@vicons/ionicons5';
 import WEBSITE from '../website';
 
 export default defineComponent({
     name: "App",
     setup(props) {
+        const isShow = ref(false);
         const toGithub = () => {
             chrome.tabs.create({
                 active: true,
@@ -51,21 +60,44 @@ export default defineComponent({
         const toHome = () => {
             chrome.tabs.create({
                 active: true,
-                url: "https://gomi.site/#/VideoRoll"
+                url: "https://gomi.site/VideoRoll"
             })
+        }
+
+        /**
+         * open settings panel
+         */
+        const onOpenSetting = () => {
+            isShow.value = !isShow.value;
         }
 
         // current website info
         const webInfo = reactive({
             tabId: '',
             name: '',
-            flip: 'none',
+            flip: 'unset',
+            ratio: 'auto',
             deg: 0,
-            videoSelector: []
+            videoSelector: [] as string[]
         });
 
-        const setFlip = (target) => {
-            webInfo.flip = target.value;
+        /**
+         * Flip
+         */
+        const setFlip = (data) => {
+            console.log(data);
+            webInfo.flip = data;
+            chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
+                console.debug(res);
+            });
+        }
+
+        /**
+         * Scale
+         */
+        const setScale = (data) => {
+            const ratio = data.left / data.right;
+            webInfo.ratio = ratio;
             chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
                 console.debug(res);
             });
@@ -73,6 +105,8 @@ export default defineComponent({
 
         provide('webInfo', webInfo);
         provide('setFlip', setFlip);
+        provide('setScale', setFlip);
+        provide('onOpenSetting', onOpenSetting);
 
         // url reg
         const urlReg = /^http(s)?:\/\/(.*?)\//;
@@ -174,6 +208,7 @@ export default defineComponent({
         return {
             rotateBtns,
             rotate,
+            isShow,
             webInfo,
             toFeedBack,
             toGithub,
@@ -181,6 +216,7 @@ export default defineComponent({
         }
     },
     components: {
+        SettingPanel,
         ThumbsUp,
         Home,
         ChevronBackOutline,
@@ -193,6 +229,28 @@ export default defineComponent({
 <style lang="less">
 body {
     margin: 0;
+    --van-primary-color: #a494c6 !important;
+    --van-sidebar-width: 65px !important;
+    --van-sidebar-padding: 12.5px var(--van-padding-sm) !important;
+
+    ::-webkit-scrollbar {
+        width: .6em;
+        height: .6em;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(155, 155, 155, 0.4);
+        border-radius: .6em;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(155, 155, 155, .6);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        background: rgba(200, 200, 200, .2);
+    }
 }
 
 #app {
@@ -209,6 +267,10 @@ body {
         font-weight: bold;
         height: 40px;
         padding: 0 10px;
+    }
+
+    main {
+        position: relative;
     }
 
     .video-roll-content {
@@ -270,6 +332,14 @@ body {
                 transform: rotate(180deg) translateY(50%);
             }
         }
+    }
+
+    .video-roll-setting {
+        position: absolute;
+        overflow: overlay;
+        width: 100%;
+        height: 100%;
+        top: 0;
     }
 
     .video-roll-footer {

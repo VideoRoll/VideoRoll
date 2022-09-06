@@ -10,7 +10,7 @@
 
 ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll) [![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en)
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") / [Home Page](https://gomi.site/#/VideoRoll "Home Page")
+[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") / [Home Page](https://gomi.site/VideoRoll "Home Page")
 
 ### 介绍(Describe)
 
@@ -54,6 +54,11 @@ Video Roll 是一个可以帮助你旋转任何网页中 HTML5 视频角度的�
 ### 更新日志(Change Log)
 
 ---
+-   v1.0.52:
+    -   fixed: Bilibili旋转不生效
+
+-   v1.0.51:
+    -   移除不必要的权限要求
 
 -   v1.0.6
 
