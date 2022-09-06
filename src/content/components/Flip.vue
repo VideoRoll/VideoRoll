@@ -5,24 +5,27 @@
 -->
 <template>
     <div class="video-roll-flip">
-        <van-radio-group v-model="checked">
-            <van-radio name="1">单选框 1</van-radio>
-            <van-radio name="2">单选框 2</van-radio>
+        <van-radio-group v-model="checked" @change="setFlip">
+            <van-radio name="unset">Unset</van-radio>
+            <van-radio name="horizontal">Horizontal</van-radio>
+            <van-radio name="vertical">Vertical</van-radio>
         </van-radio-group>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType, onMounted, onUnmounted } from 'vue';
+import { defineComponent, ref, inject } from 'vue';
 import { ChevronDownOutline } from '@vicons/ionicons5';
 export default defineComponent({
     name: "Flip",
     props: {},
-    setup(props) {
-        const checked = ref(1);
+    setup() {
+        const checked = ref('unset');
 
+        const setFlip = inject('setFlip');
         return {
-            checked
+            checked,
+            setFlip
         }
     },
     components: {
@@ -32,4 +35,7 @@ export default defineComponent({
 </script>
 
 <style lang="less">
+.van-radio {
+    margin-bottom: 10px;
+}
 </style>

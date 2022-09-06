@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="video-roll-setting" v-show="isShow">
-                <SettingPanel isShow=""></SettingPanel>
+                <SettingPanel></SettingPanel>
             </div>
         </main>
     </div>
@@ -75,13 +75,29 @@ export default defineComponent({
         const webInfo = reactive({
             tabId: '',
             name: '',
-            flip: 'none',
+            flip: 'unset',
+            ratio: 'auto',
             deg: 0,
             videoSelector: [] as string[]
         });
 
-        const setFlip = (target) => {
-            webInfo.flip = target.value;
+        /**
+         * Flip
+         */
+        const setFlip = (data) => {
+            console.log(data);
+            webInfo.flip = data;
+            chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
+                console.debug(res);
+            });
+        }
+
+        /**
+         * Scale
+         */
+        const setScale = (data) => {
+            const ratio = data.left / data.right;
+            webInfo.ratio = ratio;
             chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
                 console.debug(res);
             });
@@ -89,6 +105,7 @@ export default defineComponent({
 
         provide('webInfo', webInfo);
         provide('setFlip', setFlip);
+        provide('setScale', setFlip);
         provide('onOpenSetting', onOpenSetting);
 
         // url reg

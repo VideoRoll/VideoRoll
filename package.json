@@ -5,18 +5,22 @@
     "author": "Gomi",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "watch:inject": "parcel watch dist/injected.js",
-        "watch:background": "parcel watch dist/background.js",
-        "start": "npm run clean && npm run copy:static && npm run build:inject && npm run build:background && parcel src/index.html --open",
+        "watch:inject": "parcel watch src/inject/injected.ts",
+        "watch:background": "parcel watch src/background/background.ts",
+        "start": "npm run clean && npm run copy:static && parcel watch src/index.html src/inject/index.ts src/background/index.ts",
         "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
-        "build:inject": "parcel build src/inject/injected.ts --no-source-maps --no-content-hash",
-        "build:background": "parcel build src/background/background.ts --no-source-maps",
+        "build:inject": "parcel build src/inject/index.ts --no-source-maps --no-content-hash",
+        "build:background": "parcel build src/background/index.ts --no-source-maps --no-content-hash",
         "build": "npm run build:popup && npm run build:inject && npm run build:background",
         "copy:static": "copyfiles -u 1 src/icons/* src/manifest.json dist",
         "clean": "rimraf dist",
         "dist": "npm run clean && npm run copy:static && npm run build"
     },
-    "source": "src/index.html",
+    "source": [
+        "src/index.html",
+        "src/inject/index.ts",
+        "src/background/index.ts"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/gxy5202/video-roll.git"

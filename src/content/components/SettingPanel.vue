@@ -17,21 +17,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType, onMounted, onUnmounted } from 'vue';
+import { defineComponent, ref, shallowReactive, onMounted, onUnmounted } from 'vue';
 import Flip from './Flip.vue';
+import Scale from './Scale.vue';
 import { ChevronDownOutline } from '@vicons/ionicons5';
 export default defineComponent({
     name: "Tools",
     props: {},
     setup(props) {
-        const components = ref([
+        const components = shallowReactive([
             {
                 title: 'Flip',
                 component: Flip,
             },
             {
                 title: 'Scale',
-                component: Flip,
+                component: Scale,
             },
             {
                 title: 'Room',
@@ -46,16 +47,17 @@ export default defineComponent({
                 component: Flip,
             },
         ])
-        const currentComponent = ref(null);
+
         const active = ref(0);
 
         const onChange = (index: number) => {
-
+            console.log(index);
         }
         return { active, components, onChange };
     },
     components: {
         Flip,
+        Scale,
         ChevronDownOutline
     }
 })
@@ -65,6 +67,10 @@ export default defineComponent({
 .van-config-provider {
     height: 100%;
     display: flex;
+}
+
+.van-sidebar {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .setting-content {
