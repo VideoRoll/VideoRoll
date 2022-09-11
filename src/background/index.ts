@@ -3,80 +3,113 @@
  * @Author: Gouxinyu
  * @Date: 2022-04-23 23:37:22
  */
+import { IActionType } from '../type.d';
+
 let currentTabId: number | null = null;
 
 chrome.action.setBadgeBackgroundColor({ color: "#a494c6" });
 
-// when url changed
+/**
+ * when url has been changed, send a masseage to content.js
+ * and update badge; 
+ */
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     currentTabId = tabId;
-    chrome.tabs.sendMessage(tabId, { tabId }, {}, function (response) {
-        if (
-            !chrome.runtime.lastError &&
-            typeof response === "object" &&
-            "text" in response
-        ) {
-            chrome.action.setBadgeText(
-                {
-                    text: response.text,
-                    tabId: tabId,
-                },
-                () => { }
-            );
-        } else {
-        }
-    });
+    if (changeInfo.status !== 'complete') return;
+
+    function sendMessage() {
+        chrome.tabs.sendMessage(tabId, { tabId, type: IActionType.UPDATE_BADGE }, {}, function (response) {
+            if (
+                !chrome.runtime.lastError &&
+                typeof response === "object" &&
+                "text" in response
+            ) {
+                chrome.action.setBadgeText(
+                    {
+                        text: response.text,
+                        tabId: tabId,
+                    },
+                    () => { }
+                );
+            } else {
+                setTimeout(sendMessage, 500)
+            }
+        });
+    }
+
+    sendMessage();
 });
 
 // when tab actived
 chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
     currentTabId = tabId;
-    chrome.tabs.sendMessage(tabId, { tabId }, {}, function (response) {
-        if (
-            !chrome.runtime.lastError &&
-            typeof response === "object" &&
-            "text" in response
-        ) {
-            chrome.action.setBadgeText(
-                {
-                    text: response.text,
-                    tabId,
-                },
-                () => { }
-            );
-        } else {
-        }
-    });
+
+    function sendMessage() {
+        chrome.tabs.sendMessage(tabId, { tabId, type: IActionType.UPDATE_BADGE }, {}, function (response) {
+            if (
+                !chrome.runtime.lastError &&
+                typeof response === "object" &&
+                "text" in response
+            ) {
+                chrome.action.setBadgeText(
+                    {
+                        text: response.text,
+                        tabId,
+                    },
+                    () => { }
+                );
+            } else {
+                setTimeout(sendMessage, 500);
+            }
+        });
+    }
+
+    sendMessage();
 });
 
-// shortcut key
+/**
+ * shortcut key
+ */
 chrome.commands.onCommand.addListener((command) => {
-    if (currentTabId) {
+
+    function sendMessage() {
         chrome.tabs.sendMessage(
             currentTabId,
-            { webInfo: { deg: Number(command) } },
+            { rollConfig: { deg: Number(command) } },
             {},
             function (response) {
                 if (chrome.runtime.lastError) {
+                    setTimeout(sendMessage, 500);
                 }
             }
         );
     }
 
-    if (chrome.runtime.lastError) {
-    }
+    if (
+        !chrome.runtime.lastError && currentTabId
+    ) {
+        sendMessage();
+    } else { }
 });
 
-// set flip
-chrome.runtime.onMessage.addListener((a, b, c) => {
-    const { flip } = a;
-    if (flip) {
-        chrome.tabs.sendMessage(currentTabId, { flip }, {}, function () {
+/**
+ * update storage
+ */
+chrome.runtime.onMessage.addListener((a, b, send) => {
+    const { rollConfig, type } = a;
+
+    function sendMessage() {
+        chrome.tabs.sendMessage(currentTabId, { rollConfig, type: IActionType.UPDATE_STORAGE }, {}, function () {
             if (chrome.runtime.lastError) {
+                setTimeout(sendMessage, 1000);
             }
         });
     }
 
-    c("flip");
+    if (type === IActionType.UPDATE_STORAGE) {
+        sendMessage();
+    }
+
+    send("update");
 });

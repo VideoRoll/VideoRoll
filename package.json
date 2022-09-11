@@ -9,12 +9,11 @@
         "watch:background": "parcel watch src/background/background.ts",
         "start": "npm run clean && npm run copy:static && parcel watch src/index.html src/inject/index.ts src/background/index.ts",
         "build:popup": "parcel build src/index.html --no-source-maps --no-content-hash",
-        "build:inject": "parcel build src/inject/index.ts --no-source-maps --no-content-hash",
-        "build:background": "parcel build src/background/index.ts --no-source-maps --no-content-hash",
-        "build": "npm run build:popup && npm run build:inject && npm run build:background",
+        "build:inject": "parcel build src/inject/index.ts --dist-dir dist/inject --no-source-maps --no-content-hash",
+        "build:background": "parcel build src/background/index.ts --dist-dir dist/background --no-source-maps --no-content-hash",
+        "build": "npm run clean && npm run copy:static && npm run build:popup && npm run build:inject && npm run build:background",
         "copy:static": "copyfiles -u 1 src/icons/* src/manifest.json dist",
-        "clean": "rimraf dist",
-        "dist": "npm run clean && npm run copy:static && npm run build"
+        "clean": "rimraf dist"
     },
     "source": [
         "src/index.html",
@@ -28,7 +27,9 @@
     "keywords": [
         "rotate video",
         "video rotater",
-        "transform video"
+        "transform video",
+        "html5",
+        "video"
     ],
     "license": "MIT",
     "bugs": {
@@ -37,6 +38,7 @@
     "homepage": "https://github.com/gxy5202/video-roll#readme",
     "dependencies": {
         "@parcel/transformer-typescript-types": "^2.7.0",
+        "@vant/touch-emulator": "^1.4.0",
         "@vicons/ionicons5": "^0.11.0",
         "typescript": "^4.5.2",
         "vant": "4.0.0-rc.0",

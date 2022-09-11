@@ -6,9 +6,14 @@
 <template>
     <div class="video-roll-setting-panel">
         <van-config-provider theme="dark">
-            <van-sidebar v-model="active" @change="onChange">
-                <van-sidebar-item v-for="item in components" :key="item.title" :title="item.title" />
+            <van-sidebar v-model="active">
+                <van-sidebar-item
+                    v-for="item in components"
+                    :key="item.title"
+                    :title="item.title"
+                />
             </van-sidebar>
+
             <div class="setting-content">
                 <component :is="components[active].component" />
             </div>
@@ -17,50 +22,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, shallowReactive, onMounted, onUnmounted } from 'vue';
-import Flip from './Flip.vue';
-import Scale from './Scale.vue';
-import { ChevronDownOutline } from '@vicons/ionicons5';
+import { defineComponent, ref } from "vue";
+import { useComponents } from "../use";
+
 export default defineComponent({
-    name: "Tools",
-    props: {},
-    setup(props) {
-        const components = shallowReactive([
-            {
-                title: 'Flip',
-                component: Flip,
-            },
-            {
-                title: 'Scale',
-                component: Scale,
-            },
-            {
-                title: 'Room',
-                component: Flip,
-            },
-            {
-                title: 'Store',
-                component: Flip,
-            },
-            {
-                title: 'Title',
-                component: Flip,
-            },
-        ])
+    name: "SettingPanel",
+    setup() {
+        const components = useComponents();
 
         const active = ref(0);
 
-        const onChange = (index: number) => {
-            console.log(index);
-        }
-        return { active, components, onChange };
+        return { active, components };
     },
-    components: {
-        Flip,
-        Scale,
-        ChevronDownOutline
-    }
-})
+});
 </script>
 
 <style lang="less">
