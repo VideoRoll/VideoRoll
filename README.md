@@ -56,7 +56,7 @@ Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意
 ### 更新日志(Change Log)
 
 ---
--   v1.0.6:
+-   v1.1.0:
     -   Brand new interface(全新的交互界面)
     -   Support zoom(支持自定义缩放)
     -   Support scale(支持自定义调整比例)
