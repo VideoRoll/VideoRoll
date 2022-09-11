@@ -1,5 +1,5 @@
 <!--
- * @description: VideoRoll
+ * @description: Head
  * @Author: Gouxinyu
  * @Date: 2022-02-02 14:35:44
 -->
@@ -9,59 +9,40 @@
             <img class="video-roll-logo-text" src="../../icons/text.png" />
         </div>
         <div class="video-roll-head-right">
-            <div class="video-roll-setting-btn" title="settings" @click="onOpenSetting">
+            <div
+                class="video-roll-setting-btn"
+                title="settings"
+                @click="onOpenSetting"
+            >
                 <settings-sharp class="settings-sharp" color="#fffff">
                 </settings-sharp>
             </div>
-
-            <!-- <span class="video-roll-mode">Flip: </span>
-            <Select :options="options" :value="webInfo.flip" :select="onSelect"></Select> -->
         </div>
     </div>
 </template>
 
-<script>
-import { defineComponent, ref, inject } from 'vue';
-// import Select from './components/Select.vue';
-import { InformationCircle, SettingsSharp } from '@vicons/ionicons5';
+<script lang="ts">
+import { defineComponent, ref, inject } from "vue";
+import { InformationCircle, SettingsSharp } from "@vicons/ionicons5";
 export default defineComponent({
     name: "Head",
-    setup(props) {
+    setup() {
         // 选中值
-        const webInfo = inject('webInfo');
+        const rollConfig = inject("rollConfig");
 
         const isShowSetting = ref(false);
-        // 下拉选项
-        const options = ref([{
-            key: 0,
-            title: 'none',
-            value: 'none'
-        }, {
-            key: 1,
-            title: 'horizontal',
-            value: 'horizontal'
-        }, {
-            key: 2,
-            title: 'vertical',
-            value: 'vertical'
-        }]);
-
-        const onSelect = inject('setFlip');
-        const onOpenSetting = inject('onOpenSetting');
+        const onOpenSetting = inject("onOpenSetting");
         return {
-            options,
-            webInfo,
+            rollConfig,
             onOpenSetting,
             isShowSetting,
-            onSelect
-        }
+        };
     },
     components: {
-        // Select,
         InformationCircle,
-        SettingsSharp
-    }
-})
+        SettingsSharp,
+    },
+});
 </script>
 
 <style lang="less">

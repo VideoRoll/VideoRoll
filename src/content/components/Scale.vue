@@ -1,52 +1,92 @@
 <!--
- * @description: 
- * @Author: Gouxinyu
- * @Date: 2022-09-06 00:10:12
--->
-<!--
  * @description: Scale Component
  * @Author: Gouxinyu
  * @Date: 2022-06-04 16:34:07
 -->
 <template>
     <div class="video-roll-scale">
-        <van-radio-group v-model="checked" @change="setFlip">
+        <van-radio-group
+            v-model="scale.mode"
+            direction="horizontal"
+            @change="setScaleMode"
+        >
             <van-radio name="auto">Auto</van-radio>
             <van-radio name="custom">Custom</van-radio>
         </van-radio-group>
-        <div class="video-roll-scale-custom" v-show="checked === 'custom'">
-            <van-stepper v-model="customScale.left" step="0.1" :decimal-length="1" :show-plus="false"
-                         :show-minus="false" />
-            <span class="custom-colon">:</span>
-            <van-stepper v-model="customScale.right" step="0.1" :decimal-length="1" :show-plus="false"
-                         :show-minus="false" />
+        <div class="video-roll-scale-custom">
+            <div class="video-roll-scale-slider">
+                <van-divider>X</van-divider>
+                <van-slider
+                    v-model="scale.values[0]"
+                    :min="0"
+                    :max="4"
+                    :step="0.01"
+                    bar-height="4px"
+                    :disabled="scale.mode === 'auto'"
+                    @update:model-value="setScaleX"
+                >
+                    <template #button>
+                        <div class="custom-button">{{ scale.values[0] }}</div>
+                    </template>
+                </van-slider>
+            </div>
+
+            <div class="video-roll-scale-slider">
+                <van-divider>Y</van-divider>
+                <van-slider
+                    v-model="scale.values[1]"
+                    :min="0"
+                    :max="4"
+                    :step="0.01"
+                    bar-height="4px"
+                    :disabled="scale.mode === 'auto'"
+                    @update:model-value="setScaleY"
+                >
+                    <template #button>
+                        <div class="custom-button">{{ scale.values[1] }}</div>
+                    </template>
+                </van-slider>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, reactive } from 'vue';
-import { ChevronDownOutline } from '@vicons/ionicons5';
+import { defineComponent, inject } from "vue";
+import { IRollConfig } from "../../type.d";
+
 export default defineComponent({
     name: "Scale",
-    props: {},
     setup() {
-        const checked = ref('auto');
-        const customScale = reactive({
-            left: 16,
-            right: 9
-        })
-        const setFlip = inject('setFlip');
+        const update = inject("update") as Function;
+        const rollConfig = inject("rollConfig") as IRollConfig;
+
+        let { scale } = rollConfig;
+
+        const setScaleMode = (value: "auto" | "custom") => {
+            rollConfig.scale.mode = value;
+            update("scale", rollConfig.scale);
+        };
+
+        const setScaleX = (value: number) => {
+            rollConfig.scale.values[0] = value;
+            update("scale", rollConfig.scale);
+        };
+
+        const setScaleY = (value: number) => {
+            rollConfig.scale.values[1] = value;
+            update("scale", rollConfig.scale);
+        };
+
         return {
-            checked,
-            setFlip,
-            customScale
-        }
+            scale,
+            setScaleMode,
+            setScaleX,
+            setScaleY,
+        };
     },
-    components: {
-        ChevronDownOutline
-    }
-})
+    components: {},
+});
 </script>
 
 <style lang="less">
@@ -54,16 +94,29 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100px;
-    height: 100px;
-    margin-top: 30px;
+    width: 150px;
+
+    .video-roll-scale-custom {
+        width: 100%;
+    }
 }
 
 .van-radio {
     margin-bottom: 10px;
 }
 
-.custom-colon {
+.scale-label {
     color: #fff;
+}
+
+.custom-button {
+    user-select: none;
+    width: 26px;
+    color: #fff;
+    font-size: 10px;
+    line-height: 18px;
+    text-align: center;
+    background-color: var(--van-primary-color);
+    border-radius: 100px;
 }
 </style>

@@ -5,7 +5,7 @@
 -->
 <template>
     <div class="video-roll-flip">
-        <van-radio-group v-model="checked" @change="setFlip">
+        <van-radio-group v-model="rollConfig.flip" @change="setFlip">
             <van-radio name="unset">Unset</van-radio>
             <van-radio name="horizontal">Horizontal</van-radio>
             <van-radio name="vertical">Vertical</van-radio>
@@ -14,24 +14,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject } from 'vue';
-import { ChevronDownOutline } from '@vicons/ionicons5';
+import { defineComponent, inject } from "vue";
+import { IRollConfig } from "../../type.d";
+
 export default defineComponent({
     name: "Flip",
-    props: {},
     setup() {
-        const checked = ref('unset');
+        const update = inject("update") as Function;
+        const rollConfig = inject("rollConfig") as IRollConfig;
 
-        const setFlip = inject('setFlip');
+        const setFlip = (value: string) => {
+            update("flip", value);
+        };
         return {
-            checked,
-            setFlip
-        }
+            rollConfig,
+            setFlip,
+        };
     },
-    components: {
-        ChevronDownOutline
-    }
-})
+});
 </script>
 
 <style lang="less">
