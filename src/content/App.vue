@@ -1,105 +1,72 @@
 <template>
     <div>
-
         <Head></Head>
-        <div class="video-roll-content">
-            <div class="video-roll-website">
-                <span>{{ webInfo.name }}</span>
-            </div>
-            <div class="video-roll-rotate-control">
-                <div
-                     v-for="item in rotateBtns"
-                     :class="`rotate-${item.type}-${item.iconDeg} rotate-btn`"
-                     :key="item.type"
-                     :onclick="() => rotate(item)">
-                    <chevron-back-outline color="#a494c6" />
+        <main>
+            <div>
+                <div class="video-roll-content">
+                    <div class="video-roll-website">
+                        <span>{{ rollConfig.name }}</span>
+                    </div>
+                    <div class="video-roll-rotate-control">
+                        <div
+                            v-for="item in degBtns"
+                            :class="`rotate-${item.type}-${item.iconDeg} rotate-btn`"
+                            :key="item.type"
+                            :onclick="() => update('deg', item.deg)"
+                        >
+                            <chevron-back-outline color="#a494c6" />
+                        </div>
+                        <div class="rotate-deg-text">{{ rollConfig.deg }}</div>
+                    </div>
                 </div>
+                <Footer></Footer>
             </div>
-        </div>
-        <div class="video-roll-footer">
-            <div class="video-roll-github" @click="toGithub" title="star it!">
-                <logo-github color="#ffffff"></logo-github>
-            </div>
-
-            <div class="video-roll-home" @click="toHome" title="gomi.site">
-                <home class="home" color="#ffffff"></home>
-            </div>
-
-            <div class="video-roll-thumbs-up" @click="toFeedBack" title="thumbs up!">
-                <thumbs-up class="thumbs-up" color="#ffffff"></thumbs-up>
-            </div>
-        </div>
+            <transition name="van-fade">
+                <div class="video-roll-setting" v-show="isShow">
+                    <setting-panel />
+                </div>
+            </transition>
+        </main>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, onMounted, inject, provide } from 'vue';
-import Head from './Head.vue';
-import { ChevronBackOutline, LogoGithub, Home, ThumbsUp } from '@vicons/ionicons5';
-import WEBSITE from '../website';
+import { defineComponent, ref, onMounted, provide } from "vue";
+import Head from "./components/Head.vue";
+import Footer from "./components/Footer.vue";
+import SettingPanel from "./components/SettingPanel.vue";
+import {
+    ChevronBackOutline,
+    LogoGithub,
+    Home,
+    ThumbsUp,
+} from "@vicons/ionicons5";
+import { IActionType } from "../type.d";
+import { useConfig, useDegBtn } from "./use";
+import { initRollConfig, updateRollConfig } from "./utils";
 
 export default defineComponent({
     name: "App",
-    setup(props) {
-        const toGithub = () => {
-            chrome.tabs.create({
-                active: true,
-                url: "https://github.com/gxy5202/VideoRoll"
-            })
-        }
-
-        const toHome = () => {
-            chrome.tabs.create({
-                active: true,
-                url: "https://gomi.site/VideoRoll"
-            })
-        }
-
-        // current website info
-        const webInfo = reactive({
-            tabId: '',
-            name: '',
-            flip: 'none',
-            deg: 0,
-            videoSelector: [] as string[]
-        });
-
-        const setFlip = (target) => {
-            webInfo.flip = target.value;
-            chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
-                console.debug(res);
-            });
-        }
-
-        provide('webInfo', webInfo);
-        provide('setFlip', setFlip);
-
-        // url reg
-        const urlReg = /^http(s)?:\/\/(.*?)\//;
+    setup() {
+        const isShow = ref(false);
 
         /**
-         * get video info
+         * open settings panel
          */
-        const setWebInfo = (hostName: string) => {
-            if (!hostName) {
-                webInfo.name = 'Error Website';
-                webInfo.videoSelector = ['video'];
-                return;
-            }
+        const onOpenSetting = (e) => {
+            isShow.value = !isShow.value;
+        };
 
-            for (const key of Object.keys(WEBSITE)) {
-                if (hostName.includes(key)) {
-                    const target = WEBSITE[key];
-                    webInfo.name = target.name;
-                    webInfo.videoSelector = target.videoSelector;
-                    return;
-                }
-            }
-            if (!webInfo.name) {
-                webInfo.name = hostName || 'Error Website';
-                webInfo.videoSelector = ['video'];
-            }
-        }
+        // current website config
+        const rollConfig = useConfig();
+
+        // buttons
+        const degBtns = useDegBtn();
+
+        const update = updateRollConfig.bind(null, rollConfig);
+        provide("rollConfig", rollConfig);
+        provide("update", update);
+        provide("onOpenSetting", onOpenSetting);
 
         /**
          * 当打开时就获取当前网站的视频信息
@@ -108,90 +75,76 @@ export default defineComponent({
         onMounted(async () => {
             let queryOptions = { active: true, currentWindow: true };
             let [tab] = await chrome.tabs.query(queryOptions);
-            const hostName = urlReg.exec(tab.url)?.[2];
-            setWebInfo(hostName);
-            webInfo.tabId = tab.id;
+
+            initRollConfig(rollConfig, tab);
 
             // add style
-            chrome.tabs.sendMessage(webInfo.tabId, { style: true }, {}, (res) => {
-                console.debug(res);
-            });
+            chrome.tabs.sendMessage(
+                rollConfig.tabId,
+                { rollConfig, type: IActionType.ON_MOUNTED },
+                {},
+                (res) => {
+                    console.debug(res);
+                }
+            );
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
-                const { flip } = a;
-                if (flip) {
-                    webInfo.flip = flip;
+                const { type, rollConfig: config } = a;
+                if (type === IActionType.UPDATE_STORAGE) {
+                    Object.keys(config).forEach((key) => {
+                        if (key in rollConfig) {
+                            rollConfig[key] = config[key];
+                        }
+                    });
                 }
-                c('flip');
+                c("update_storage");
             });
         });
 
-        // buttons
-        const rotateBtns = ref([
-            {
-                type: 'left',
-                iconDeg: 0,
-                deg: 270,
-            },
-            {
-                type: 'up',
-                iconDeg: 90,
-                deg: 0
-            },
-            {
-                type: 'right',
-                iconDeg: 180,
-                deg: 90
-            },
-            {
-                type: 'down',
-                iconDeg: 270,
-                deg: 180
-            }
-        ]);
-
-        /**
-         * 旋转
-         */
-        const rotate = async (item) => {
-            webInfo.deg = item.deg;
-            chrome.tabs.sendMessage(webInfo.tabId, { webInfo }, {}, (res) => {
-                console.debug(res);
-            });
-        }
-
-        /**
-         * 跳转到反馈
-         */
-        const toFeedBack = () => {
-            chrome.tabs.create({
-                active: true,
-                url: "https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0"
-            })
-        };
-
         return {
-            rotateBtns,
-            rotate,
-            webInfo,
-            toFeedBack,
-            toGithub,
-            toHome
-        }
+            degBtns,
+            update,
+            isShow,
+            rollConfig,
+        };
     },
     components: {
+        SettingPanel,
         ThumbsUp,
         Home,
         ChevronBackOutline,
         LogoGithub,
-        Head
-    }
-})
+        Head,
+        Footer,
+    },
+});
 </script>
 
 <style lang="less">
 body {
     margin: 0;
+    --van-primary-color: #a494c6 !important;
+    --van-sidebar-width: 65px !important;
+    --van-sidebar-padding: 12.5px var(--van-padding-sm) !important;
+
+    ::-webkit-scrollbar {
+        width: 0.6em;
+        height: 0.6em;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(155, 155, 155, 0.4);
+        border-radius: 0.6em;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(155, 155, 155, 0.6);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        background: rgba(200, 200, 200, 0.2);
+    }
 }
 
 #app {
@@ -210,12 +163,17 @@ body {
         padding: 0 10px;
     }
 
+    main {
+        position: relative;
+    }
+
     .video-roll-content {
         display: flex;
         flex-direction: column;
         align-items: center;
 
         .video-roll-website {
+            user-select: none;
             height: 25px;
             font-size: 15px;
             font-weight: bold;
@@ -230,9 +188,25 @@ body {
         .video-roll-rotate-control {
             width: 120px;
             height: 120px;
-            border: 5px solid #fff;
+            border: 5px solid #2d2e31;
             border-radius: 50%;
             position: relative;
+
+            .rotate-deg-text {
+                width: 32px;
+                height: 20px;
+                color: #fff;
+                background-color: #a494c6;
+                border-radius: 3px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transform: translate(-50%, -50%);
+            }
 
             .rotate-btn {
                 width: 30px;
@@ -271,30 +245,12 @@ body {
         }
     }
 
-    .video-roll-footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 30px;
-        padding: 10px 0;
-        color: #fff;
-        font-weight: bold;
-
-        .video-roll-github,
-        .video-roll-home,
-        .video-roll-thumbs-up {
-            width: 15px;
-            height: 15px;
-            margin: 5px;
-            cursor: pointer;
-
-            &:hover {
-                svg {
-                    color: #a494c6 !important;
-                }
-
-            }
-        }
+    .video-roll-setting {
+        position: absolute;
+        overflow: overlay;
+        width: 100%;
+        height: 100%;
+        top: 0;
     }
 }
 </style>
