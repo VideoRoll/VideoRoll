@@ -56,7 +56,7 @@ Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意
 ### 更新日志(Change Log)
 
 ---
--   v1.0.6:
+-   v1.1.0:
     -   Brand new interface(全新的交互界面)
     -   Support zoom(支持自定义缩放)
     -   Support scale(支持自定义调整比例)
@@ -101,6 +101,10 @@ Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意
 
 -   **开发模式安装**
     如您无法安装 crx，可以在浏览器的扩展程序中开启“开发者模式”，直接将 dist 文件夹拖入安装即可。
+
+### 捐赠(Sponsoring)
+- [afdian](https://afdian.net/a/gomi_gxy/plan)
+- [official(last page)](https://gomi.site/VideoRoll)
 
 ### 问题反馈(Bug Report)
 
