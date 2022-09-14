@@ -31,7 +31,7 @@
         "html5",
         "video"
     ],
-    "license": "MIT",
+    "license": "Apache-2.0",
     "bugs": {
         "url": "https://github.com/gxy5202/video-roll/issues"
     },
