@@ -4,7 +4,7 @@
  * @Date: 2022-01-13 22:43:33
 -->
 
-# Video Roll
+# ✨Video Roll
 
 ![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)
 
@@ -12,13 +12,13 @@
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") / [Home Page](https://gomi.site/VideoRoll "Home Page")
 
-### 介绍(Describe)
+### ✨介绍(Describe)
 
 Video Roll is a web extension that helps you rotate, scale, zoom and flip HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.We provide an excellent memory system to help the next time you enter the website to take effect directly.
 
 Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意网页中HTML5视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
 
-### 主要特性(Features)
+### ✨主要特性(Features)
 
 ---
 ![](https://tuchuangs.com/imgs/2022/09/11/0b4c21db7b3e0d01.png)
@@ -53,7 +53,7 @@ Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意
 1. 地址栏输入 `chrome://extensions/shortcuts`
 2. 找到Video Roll, 设置快捷键
 
-### 更新日志(Change Log)
+### ✨更新日志(Change Log)
 
 ---
 -   v1.1.0:
@@ -92,7 +92,7 @@ Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意
     -   增加了旋转时的动画
     -   修复了扩展程序管理中显示报错的问题
 
-### 安装(Installation)
+### ✨安装(Installation)
 
 ---
 
@@ -102,17 +102,17 @@ Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意
 -   **开发模式安装**
     如您无法安装 crx，可以在浏览器的扩展程序中开启“开发者模式”，直接将 dist 文件夹拖入安装即可。
 
-### 捐赠(Sponsoring)
+### ✨捐赠(Sponsoring)
 - [afdian](https://afdian.net/a/gomi_gxy/plan)
 - [official(last page)](https://gomi.site/VideoRoll)
 
-### 问题反馈(Bug Report)
+### ✨问题反馈(Bug Report)
 
 ---
 
 若您在使用中遇到任何问题，比如 bug 或者网站有特殊的视频元素无法旋转，请在 issue 中留下问题，我们会尽快解决
 
-### 贡献(Contribution)
+### ✨贡献(Contribution)
 
 ---
 
@@ -121,7 +121,7 @@ Video Roll 是一个帮助你旋转、缩放、调整比例和镜像翻转任意
 若你发现问题或有更好的 idea，欢迎贡献想法和代码~
 
 
-### 感谢以下开源项目(Acknowledgments)
+### ✨感谢以下开源项目(Acknowledgments)
 
 ---
 
