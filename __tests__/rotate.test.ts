@@ -1,13 +1,14 @@
-/*
- * @description: 
- * @Author: Gouxinyu
- * @Date: 2022-08-13 02:02:17
+/**
+ * @jest-environment jsdom
  */
-type S = string | string[];
-function test<T extends S>(params: T): T {
-  if (typeof params === 'string') {
-    return '';
-  } else {
-    return ['']
-  }
-}
+
+import VideoRoll from '../src/inject/VideoRoll';
+
+describe('VideoRoll', () => {
+	test('auto scale', () => {
+		const videoDom = document.createElement('video');
+		videoDom.width = 800;
+		videoDom.height = 400;
+		expect(VideoRoll.getScaleNumber(videoDom, videoDom, 90)).toBeGreaterThan(3);
+	});
+})

@@ -13,7 +13,8 @@
             "dom"
         ],
         "types": [
-            "chrome"
+            "chrome",
+            "jest"
         ]
     },
     "isolatedModules": true,
