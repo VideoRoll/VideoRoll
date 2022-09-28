@@ -4,7 +4,6 @@
  * @Date: 2022-09-11 10:01:32
  */
 import { reactive } from 'vue';
-import { IRollConfig } from '../../type.d';
 
 function useConfig(): IRollConfig {
     const rollConfig = reactive<IRollConfig>({

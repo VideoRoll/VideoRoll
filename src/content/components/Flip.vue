@@ -15,7 +15,6 @@
 
 <script lang="ts">
 import { defineComponent, inject } from "vue";
-import { IRollConfig } from "../../type.d";
 
 export default defineComponent({
     name: "Flip",

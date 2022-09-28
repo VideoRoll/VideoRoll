@@ -24,6 +24,7 @@
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
 import { InformationCircle, SettingsSharp } from "@vicons/ionicons5";
+import { FunctionExpression } from "@vue/compiler-core";
 export default defineComponent({
     name: "Head",
     setup() {
@@ -31,7 +32,7 @@ export default defineComponent({
         const rollConfig = inject("rollConfig");
 
         const isShowSetting = ref(false);
-        const onOpenSetting = inject("onOpenSetting");
+        const onOpenSetting = inject<(e: Event) => void>("onOpenSetting");
         return {
             rollConfig,
             onOpenSetting,

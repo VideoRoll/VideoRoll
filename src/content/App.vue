@@ -41,7 +41,6 @@ import {
     Home,
     ThumbsUp,
 } from "@vicons/ionicons5";
-import { IActionType } from "../type.d";
 import { useConfig, useDegBtn } from "./use";
 import { initRollConfig, updateRollConfig } from "./utils";
 
@@ -53,7 +52,7 @@ export default defineComponent({
         /**
          * open settings panel
          */
-        const onOpenSetting = (e) => {
+        const onOpenSetting = (e: Event) => {
             isShow.value = !isShow.value;
         };
 

@@ -3,35 +3,35 @@
  * @Author: Gouxinyu
  * @Date: 2022-09-06 23:44:14
  */
-export enum IActionType {
+declare enum IActionType {
     ON_MOUNTED = 0,
     UPDATE_STORAGE,
     UPDATE_BADGE,
     UPDATE_CONFIG
 }
 
-export enum IFlipType {
+declare enum IFlipType {
     unset = "",
     vertical = "rotate3d(1, 0, 0, 180deg)",
     horizontal = "rotate3d(0, 1, 0, 180deg)"
 }
 
-export type IFlip = 'unset' | 'horizental' | 'vertical'
+declare type IFlip = 'unset' | 'horizontal' | 'vertical'
 
-export interface IScale {
+declare interface IScale {
     mode: "auto" | 'custom',
     values: [number, number],
 }
 
-export type IZoom = number;
+declare type IZoom = number;
 
-export type IDeg = number;
+declare type IDeg = number;
 
-export type IRollKey = keyof IRollConfig;
+declare type IRollKey = keyof IRollConfig;
 
-export type IRollValue = IRollConfig[IRollKey];
+declare type IRollValue = IRollConfig[IRollKey];
 
-export interface IRollConfig {
+declare interface IRollConfig {
     tabId: number;
     url: string;
     name: string;
@@ -44,4 +44,11 @@ export interface IRollConfig {
     isInit: boolean;
     videoSelector: string[];
     [key: string]: number | string | IFlip | IScale | IZoom | IDeg | boolean | string[]
+}
+
+declare interface IWebSite {
+    [prop: string]: {
+        name: string;
+        videoSelector: any[]
+    }
 }

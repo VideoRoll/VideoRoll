@@ -19,7 +19,7 @@
     },
     "isolatedModules": true,
     "include": [
-        "src/**/*.ts",
+        "__tests__/*.ts",
         "src/**/*.d.ts",
         "src/**/*.tsx",
         "src/**/*.vue"
