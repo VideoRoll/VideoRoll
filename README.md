@@ -14,7 +14,7 @@
 
 ### ✨ 介绍(Describe)
 
-Video Roll is a web extension that helps you rotate, scale, zoom, mve, flip and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.We provide an excellent memory system to help the next time you enter the website to take effect directly.
+Video Roll is a web extension that helps you rotate, scale, zoom, move, flip and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.We provide an excellent memory system to help the next time you enter the website to take effect directly.
 
 Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻转和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
 
