@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "declaration": true,
+        "allowJs": true,
         "target": "esnext",
         "module": "esnext",
         "strict": true,
@@ -8,19 +10,33 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "esModuleInterop": true,
+        "rootDir": "./src",
+        "baseUrl": "./", // types文件夹的相对路径
+        "paths": {
+            "*": [
+                "types/*"
+            ]
+        },
         "lib": [
             "esnext",
             "dom"
         ],
         "types": [
-            "chrome"
+            "chrome",
+            "jest",
+            "node"
         ]
     },
     "isolatedModules": true,
+    "exclude": [
+        "src/**/*.html",
+        "src/popup/content/main.ts"
+    ],
     "include": [
+        "src/*",
         "src/**/*.ts",
-        "src/**/*.d.ts",
         "src/**/*.tsx",
-        "src/**/*.vue"
+        "src/**/**/*.vue",
+        "src/popup/content"
     ]
 }

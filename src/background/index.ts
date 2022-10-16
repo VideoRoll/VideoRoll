@@ -3,9 +3,9 @@
  * @Author: Gouxinyu
  * @Date: 2022-04-23 23:37:22
  */
-import { IActionType } from '../type.d';
+import { IActionType } from '../types/type.d';
 
-let currentTabId: number | null = null;
+let currentTabId: number;
 
 chrome.action.setBadgeBackgroundColor({ color: "#a494c6" });
 

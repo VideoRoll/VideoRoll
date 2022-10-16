@@ -4,11 +4,12 @@
  * @Author: Gouxinyu
  * @Date: 2022-01-13 22:57:14
  */
-export default {
+import { IWebSite } from './types/type.d';
+const WEBSITE: IWebSite = {
     "bilibili": {
         "name": "bilibili",
         // [originVideoElement, specialElement]
-        // if originVideoElement cant get videoHieight or videoWifth, use specialElement
+        // if originVideoElement can't get videoHieight or videoWifth, use specialElement
         "videoSelector": ["video", ["bwp-video", ".bpx-player-video-wrap"]]
     },
     "pornhub": {
@@ -16,3 +17,5 @@ export default {
         "videoSelector": [["video-element video", "video-element video"]]
     }
 }
+
+export default WEBSITE;

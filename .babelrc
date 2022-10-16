@@ -1,0 +1,12 @@
+{
+    "plugins": [
+        "@vue/babel-plugin-jsx"
+    ],
+    "env": {
+        "test": {
+            "plugins": [
+                "@babel/plugin-transform-modules-commonjs",
+            ]
+        }
+    }
+}
