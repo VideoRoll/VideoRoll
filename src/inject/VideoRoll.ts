@@ -4,6 +4,7 @@
  * @Date: 2022-05-31 23:27:36
  */
 import WEBSITE from "../website";
+import { IFlip, IMove, IFilter, IFilterUnit, IRollConfig, IFlipType } from '../types/type.d';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -100,6 +101,7 @@ export default class VideoRoll {
      */
     static getVideoDom(videoSelector: string[], doc: Document): HTMLVideoElement | null {
         let dom = null;
+
         for (const item of videoSelector) {
             const isArray = Array.isArray(item);
             dom = doc.querySelector(
@@ -115,7 +117,7 @@ export default class VideoRoll {
 
         if (!dom) {
             const docWin = this.getIframeDoc(doc);
-            if (docWin) {
+            if (docWin && docWin !== document) {
                 try {
                     return this.getVideoDom(videoSelector, docWin);
                 } catch (e) {
@@ -141,7 +143,7 @@ export default class VideoRoll {
         doc: Document
     ): void {
         this.setRollConfig(rollConfig);
-        const { deg, flip, scale, zoom, videoSelector } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, videoSelector } = rollConfig;
         for (const item of videoSelector) {
             const isArray = Array.isArray(item);
             dom = doc.querySelector(
@@ -157,7 +159,7 @@ export default class VideoRoll {
                 const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(dom, backupDom, deg);
 
                 this.rollConfig.scale.values = scaleNum;
-                this.replaeClass({ deg, flip, scale: scaleNum, zoom }, doc);
+                this.replaeClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
 
                 dom.classList.add("video-roll-transition");
                 dom.classList.add("video-roll-deg-scale");
@@ -179,7 +181,7 @@ export default class VideoRoll {
         // if there is no video element, search iframe
         if (!dom) {
             const doc = this.getIframeDoc();
-            if (doc) {
+            if (doc && doc !== document) {
                 try {
                     this.setVideoDeg(rollConfig, dom, doc);
                 } catch (e) {
@@ -187,6 +189,16 @@ export default class VideoRoll {
                 }
             }
         }
+    }
+
+    static getFilterStyle(filter: IFilter) {
+        let filterStyle = '';
+
+        Object.keys(filter).filter((type) => type !== 'mode').forEach((type: string) => {
+            filterStyle += ` ${type}(${filter[type as keyof IFilter]}${IFilterUnit[type]})`
+        });
+
+        return filterStyle;
     }
 
     /**
@@ -198,13 +210,18 @@ export default class VideoRoll {
         deg: number,
         flip: IFlip,
         scale: [number, number],
-        zoom: number
+        zoom: number,
+        move: IMove,
+        filter: IFilter
     },
         doc = document
     ) {
-        const { deg, flip, scale, zoom } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter } = rollConfig;
         const degScale = doc.getElementById("video-roll-deg-scale") as HTMLElement;
-        degScale.innerHTML = `.video-roll-deg-scale { transform: ${IFlipType[flip]} rotate(${deg}deg) scale3d(${zoom}, ${zoom}, 1) scale(${scale[0]}, ${scale[1]}) !important; }`;
+
+        const filterStyle = filter.mode === 'custom' ? this.getFilterStyle(filter) : filter.mode;
+
+        degScale.innerHTML = `.video-roll-deg-scale { transform: ${IFlipType[flip]} rotate(${deg}deg) scale3d(${zoom}, ${zoom}, 1) scale(${scale[0]}, ${scale[1]}) translate(${move.x}%, ${-move.y}%) !important; filter: ${filterStyle};`;
     }
 
     /**

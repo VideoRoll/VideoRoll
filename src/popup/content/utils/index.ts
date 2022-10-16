@@ -3,8 +3,8 @@
  * @Author: Gouxinyu
  * @Date: 2022-09-11 10:58:15
  */
-import { IRollKey, IRollValue, IScale, IZoom, IFlip, IDeg, IRollConfig, IActionType } from "../../type.d";
-import WEBSITE from "../../website";
+import { IRollKey, IRollValue, IRollConfig, IActionType } from "../../../types/type.d";
+import WEBSITE from "../../../website";
 
 // url reg
 const urlReg = /^http(s)?:\/\/(.*?)\//;
