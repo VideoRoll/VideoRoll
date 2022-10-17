@@ -146,6 +146,9 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 
 -   Vue
 -   Parcel
+-   Jest
+-   Jsx
+-   Typescript
 -   Copyfiles
 -   Less
 -   Vant
