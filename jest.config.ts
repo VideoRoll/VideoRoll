@@ -3,10 +3,14 @@
  * @Author: Gouxinyu
  * @Date: 2022-08-13 02:23:02
  */
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   verbose: true,
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
+  moduleFileExtensions: ['ts', 'js'],
+  extensionsToTreatAsEsm: ['.ts']
 };
 
 export default config;

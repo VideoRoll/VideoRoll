@@ -5,7 +5,7 @@
  */
 
 import VideoRoll from "./VideoRoll";
-import { IActionType } from "../type.d";
+import { IActionType } from '../types/type.d';
 
 // let currentFlip = "unset";
 
