@@ -5,7 +5,7 @@
  */
 
 import VideoRoll from "./VideoRoll";
-import { IActionType } from '../types/type.d';
+import { ActionType } from '../types/type.d';
 
 // let currentFlip = "unset";
 
@@ -16,7 +16,7 @@ import { IActionType } from '../types/type.d';
 function getTabBadge(): string {
     const hostName = VideoRoll.getHostName();
     const videoSelector = VideoRoll.getVideoSelector(hostName);
-    const dom = VideoRoll.getVideoDom(videoSelector, document);
+    const { dom } = VideoRoll.getVideoDom(videoSelector, document);
 
     return dom ? "1" : "";
 }
@@ -29,7 +29,7 @@ function getTabBadge(): string {
         const { rollConfig, tabId, type } = data;
         try {
             switch (type) {
-                case IActionType.UPDATE_BADGE: {
+                case ActionType.UPDATE_BADGE: {
                     const text = getTabBadge();
 
                     const config = JSON.parse(localStorage.getItem(
@@ -42,14 +42,12 @@ function getTabBadge(): string {
                         if (!tabConfig.storeThisTab) {
                             sessionStorage.removeItem(`video-roll-${tabId}`);
                             tabConfig.store = false;
-                            VideoRoll.setRollConfig(tabConfig);
-                            VideoRoll.addStyleClass(true);
+                            VideoRoll.setRollConfig(tabConfig).addStyleClass(true);
                         } else {
                             tabConfig.url = window.location.href;
                             if (!config) tabConfig.store = false;
                             sessionStorage.setItem(`video-roll-${tabId}`, JSON.stringify(tabConfig));
-                            VideoRoll.setRollConfig(tabConfig);
-                            VideoRoll.addStyleClass(true);
+                            VideoRoll.setRollConfig(tabConfig).addStyleClass(true);
                         }
                     }
 
@@ -69,16 +67,15 @@ function getTabBadge(): string {
                             JSON.stringify(config)
                         );
 
-                        VideoRoll.setRollConfig(config);
-                        VideoRoll.addStyleClass(true);
-                        VideoRoll.rotateVideo({
+                        const videoSelector = rollConfig.videoSelector
+                            ? rollConfig.videoSelector
+                            : VideoRoll.getVideoSelector(
+                                VideoRoll.getHostName()
+                            );
+                        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo({
                             ...config,
-                            videoSelector: config.videoSelector
-                                ? config.videoSelector
-                                : VideoRoll.getVideoSelector(
-                                    VideoRoll.getHostName()
-                                ),
-                        });
+                            videoSelector
+                        }).updateAudio();
 
                     }
                     send({ text });
@@ -86,7 +83,7 @@ function getTabBadge(): string {
                 }
                 // when popup onMounted, set init flip value to background,
                 // through backgroundjs sending message to popup to store flip value
-                case IActionType.ON_MOUNTED: {
+                case ActionType.ON_MOUNTED: {
                     // set session storage
                     let config = JSON.parse(localStorage.getItem(
                         `video-roll-${rollConfig.url}`
@@ -111,30 +108,31 @@ function getTabBadge(): string {
                         }
                     }
 
-                    VideoRoll.setRollConfig(config);
-                    VideoRoll.addStyleClass();
+                    VideoRoll.setRollConfig(config).addStyleClass();
 
                     chrome.runtime.sendMessage(
-                        { rollConfig: config, type: IActionType.UPDATE_STORAGE },
+                        { rollConfig: config, type: ActionType.UPDATE_STORAGE },
                         function (response) { }
                     );
                     break;
                 }
 
-                case IActionType.UPDATE_STORAGE:
+                case ActionType.UPDATE_STORAGE:
                     rollConfig.isInit = false;
                     send("flip");
                     return;
-                case IActionType.UPDATE_CONFIG: {
+                case ActionType.UPDATE_CONFIG: {
                     rollConfig.isInit = false;
 
-                    VideoRoll.rotateVideo({
+                    const videoSelector = rollConfig.videoSelector
+                        ? rollConfig.videoSelector
+                        : VideoRoll.getVideoSelector(
+                            VideoRoll.getHostName()
+                        );
+
+                    VideoRoll.updateVideo({
                         ...rollConfig,
-                        videoSelector: rollConfig.videoSelector
-                            ? rollConfig.videoSelector
-                            : VideoRoll.getVideoSelector(
-                                VideoRoll.getHostName()
-                            ),
+                        videoSelector
                     });
 
                     const config = VideoRoll.getRollConfig();

@@ -10,7 +10,7 @@ import {
 } from "@vicons/ionicons5";
 import { useConfig, useDegBtn } from "./use";
 import { initRollConfig, updateRollConfig } from "./utils";
-import { IActionType } from "../../types/type.d";
+import { ActionType } from "../../types/type.d";
 import "./index.less";
 
 export default defineComponent({
@@ -49,7 +49,7 @@ export default defineComponent({
             // add style
             chrome.tabs.sendMessage(
                 rollConfig.tabId,
-                { rollConfig, type: IActionType.ON_MOUNTED },
+                { rollConfig, type: ActionType.ON_MOUNTED },
                 {},
                 (res) => {
                     console.debug(res);
@@ -58,7 +58,7 @@ export default defineComponent({
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config } = a;
-                if (type === IActionType.UPDATE_STORAGE) {
+                if (type === ActionType.UPDATE_STORAGE) {
                     Object.keys(config).forEach((key) => {
                         if (key in rollConfig) {
                             rollConfig[key] = config[key];

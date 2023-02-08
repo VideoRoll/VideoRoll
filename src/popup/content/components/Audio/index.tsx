@@ -14,31 +14,31 @@ export default defineComponent({
         const update = inject("update") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
 
-        const setMoveX = (value: number) => {
-            rollConfig.move.x = value;
-            update("move", rollConfig.move);
+        const setPitch = (value: number) => {
+            rollConfig.audio.pitch = value;
+            update("audio", rollConfig.audio);
         };
 
-        const setMoveY = (value: number) => {
-            rollConfig.move.y = value;
-            update("move", rollConfig.move);
+        const setRate = (value: number) => {
+            rollConfig.audio.rate = value;
+            update("audio", rollConfig.rate);
         };
         return () => (
             <div class="video-roll-move">
                 <div class="move-box">
-                    <van-divider class="move-label">Left - Right</van-divider>
+                    <van-divider class="move-label">down - up</van-divider>
                     <div class="move-slider">
                         <van-slider
-                            v-model={rollConfig.move.x}
+                            v-model={rollConfig.audio.pitch}
                             min={-100}
                             max={100}
                             step={1}
                             bar-height="4px"
-                            onUpdate:modelValue={setMoveX}
+                            onUpdate:modelValue={setPitch}
                             v-slots={{
                                 button: () => (
                                     <div class="custom-button">
-                                        {rollConfig.move.x}
+                                        {rollConfig.audio.pitch}
                                     </div>
                                 ),
                             }}
@@ -46,19 +46,19 @@ export default defineComponent({
                     </div>
                 </div>
                 <div class="move-box">
-                    <van-divider class="move-label">Bottom - Top</van-divider>
+                    <van-divider class="move-label">slow - fast</van-divider>
                     <div class="move-slider">
                         <van-slider
-                            v-model={rollConfig.move.y}
+                            v-model={rollConfig.audio.rate}
                             min={-100}
                             max={100}
                             step={1}
                             bar-height="4px"
-                            onUpdate:modelValue={setMoveY}
+                            onUpdate:modelValue={setRate}
                             v-slots={{
                                 button: () => (
                                     <div class="custom-button">
-                                        {rollConfig.move.y}
+                                        {rollConfig.audio.rate}
                                     </div>
                                 ),
                             }}

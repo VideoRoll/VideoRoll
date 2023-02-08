@@ -49,5 +49,6 @@ export default defineComponent({
         Store: defineAsyncComponent(() => import("../Store")),
         Filter: defineAsyncComponent(() => import("../Filter")),
         Move: defineAsyncComponent(() => import("../Move")),
+        Audio: defineAsyncComponent(() => import("../Audio"))
     },
 });

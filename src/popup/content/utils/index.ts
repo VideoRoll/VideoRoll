@@ -3,7 +3,7 @@
  * @Author: Gouxinyu
  * @Date: 2022-09-11 10:58:15
  */
-import { IRollKey, IRollValue, IRollConfig, IActionType } from "../../../types/type.d";
+import { RollKey, RollValue, IRollConfig, ActionType } from "../../../types/type.d";
 import WEBSITE from "../../../website";
 
 // url reg
@@ -20,13 +20,13 @@ function sendMessage(rollConfig: IRollConfig, extra = {}, send = (res: any) => {
 }) {
     chrome.tabs.sendMessage(
         rollConfig.tabId,
-        { rollConfig, type: IActionType.UPDATE_CONFIG },
+        { rollConfig, type: ActionType.UPDATE_CONFIG },
         extra,
         send
     );
 }
 
-function updateRollConfig(rollConfig: IRollConfig, key: IRollKey, value: IRollValue) {
+function updateRollConfig(rollConfig: IRollConfig, key: RollKey, value: RollValue) {
     if (key in rollConfig) {
         rollConfig[key] = value;
         sendMessage(rollConfig);

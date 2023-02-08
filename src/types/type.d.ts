@@ -4,7 +4,7 @@
  * @Date: 2022-09-06 23:44:14
  */
 
-export enum IFilterUnit {
+export enum FilterUnit {
     blur = 'px',
     brightness = '',
     contrast = '%',
@@ -13,24 +13,29 @@ export enum IFilterUnit {
     invert = '%'
 }
 
-export enum IActionType {
+export enum ActionType {
     ON_MOUNTED = 0,
     UPDATE_STORAGE,
     UPDATE_BADGE,
     UPDATE_CONFIG
 }
 
-export enum IFlipType {
+export enum FlipType {
     unset = "",
     vertical = "rotate3d(1, 0, 0, 180deg)",
     horizontal = "rotate3d(0, 1, 0, 180deg)"
 }
 
-export type IFlip = 'unset' | 'horizontal' | 'vertical'
+export type Flip = 'unset' | 'horizontal' | 'vertical'
 
 export interface IMove {
     x: number;
     y: number;
+}
+
+export interface IAudio {
+    pitch: number;
+    rate: number;
 }
 
 export interface IScale {
@@ -48,29 +53,30 @@ export interface IFilter {
     invert: number;
 }
 
-export type IZoom = number;
+export type Zoom = number;
 
-export type IDeg = number;
+export type Deg = number;
 
-export type IRollKey = keyof IRollConfig;
+export type RollKey = keyof IRollConfig;
 
-export type IRollValue = IRollConfig[IRollKey];
+export type RollValue = IRollConfig[RollKey];
 
 export interface IRollConfig {
     tabId: number;
     url: string;
     name: string;
-    flip: IFlip;
+    flip: Flip;
     scale: IScale;
-    zoom: IZoom;
+    audio: IAudio;
+    zoom: Zoom;
     move: IMove;
-    deg: IDeg;
+    deg: Deg;
     filter: IFilter;
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;
     videoSelector: string[];
-    [key: string]: number | string | IFlip | IFilter | IScale | IZoom | IDeg | IMove | boolean | string[]
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | IAudio| boolean | string[]
 }
 
 export interface IWebSite {
@@ -78,4 +84,9 @@ export interface IWebSite {
         name: string;
         videoSelector: any[]
     }
+}
+
+export interface IVideoDom {
+    dom: HTMLVideoElement | null;
+    backupDom: HTMLVideoElement | HTMLElement | null;
 }
