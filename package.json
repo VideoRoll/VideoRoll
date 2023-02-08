@@ -21,6 +21,9 @@
         "src/inject/index.ts",
         "src/background/index.ts"
     ],
+    "parcel-namer-hashless": {
+        "mode": "all"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/gxy5202/video-roll.git"

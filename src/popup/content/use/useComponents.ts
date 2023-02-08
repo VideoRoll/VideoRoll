@@ -23,6 +23,9 @@ function useComponents() {
             title: "Filter",
         },
         {
+            title: "Audio"
+        },
+        {
             title: "Store"
         },
         {

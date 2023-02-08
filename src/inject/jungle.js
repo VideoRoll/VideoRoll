@@ -1,6 +1,61 @@
+function getMultiplier(x) {
+
+    // don't ask...
+    if (x < 0) {
+        return x / 12
+    } else {
+        var a5 = 1.8149080040913423e-7
+        var a4 = -0.000019413043101157434
+        var a3 = 0.0009795096626987743
+        var a2 = -0.014147877819596033
+        var a1 = 0.23005591195033048
+        var a0 = 0.02278153473118749
+
+        var x1 = x
+        var x2 = x * x
+        var x3 = x * x * x
+        var x4 = x * x * x * x
+        var x5 = x * x * x * x * x
+
+        return a0 + x1 * a1 + x2 * a2 + x3 * a3 + x4 * a4 + x5 * a5
+    }
+
+}
+
+// include https://github.com/cwilso/Audio-Input-Effects/blob/master/js/jungle.js
+
+// Copyright 2012, Google Inc.
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+// 
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 function createFadeBuffer(context, activeTime, fadeTime) {
     var length1 = activeTime * context.sampleRate;
-    var length2 = (activeTime - 2*fadeTime) * context.sampleRate;
+    var length2 = (activeTime - 2 * fadeTime) * context.sampleRate;
     var length = length1 + length2;
     var buffer = context.createBuffer(1, length, context.sampleRate);
     var p = buffer.getChannelData(0);
@@ -36,7 +91,7 @@ function createFadeBuffer(context, activeTime, fadeTime) {
 
 function createDelayTimeBuffer(context, activeTime, fadeTime, shiftUp) {
     var length1 = activeTime * context.sampleRate;
-    var length2 = (activeTime - 2*fadeTime) * context.sampleRate;
+    var length2 = (activeTime - 2 * fadeTime) * context.sampleRate;
     var length = length1 + length2;
     var buffer = context.createBuffer(1, length, context.sampleRate);
     var p = buffer.getChannelData(0);
@@ -44,11 +99,11 @@ function createDelayTimeBuffer(context, activeTime, fadeTime, shiftUp) {
     // 1st part of cycle
     for (var i = 0; i < length1; ++i) {
         if (shiftUp)
-          // This line does shift-up transpose
-          p[i] = (length1-i)/length;
+            // This line does shift-up transpose
+            p[i] = (length1 - i) / length;
         else
-          // This line does shift-down transpose
-          p[i] = i / length1;
+            // This line does shift-down transpose
+            p[i] = i / length1;
     }
 
     // 2nd part
@@ -70,8 +125,6 @@ function Jungle(context) {
     var output = context.createGain();
     this.input = input;
     this.output = output;
-
-    this.previousPitch = 0;
 
     // Delay modulation.
     var mod1 = context.createBufferSource();
@@ -106,8 +159,8 @@ function Jungle(context) {
     var modGain1 = context.createGain();
     var modGain2 = context.createGain();
 
-    var delay1 = context.createDelay(5);
-    var delay2 = context.createDelay(5);
+    var delay1 = context.createDelay();
+    var delay2 = context.createDelay();
     mod1Gain.connect(modGain1);
     mod2Gain.connect(modGain2);
     mod3Gain.connect(modGain1);
@@ -168,19 +221,15 @@ function Jungle(context) {
     this.setDelay(delayTime);
 }
 
-Jungle.prototype.setDelay = function(delayTime) {
-    this.modGain1.gain.setTargetAtTime(0.5*delayTime, this.context.currentTime, 0.010);
-    this.modGain2.gain.setTargetAtTime(0.5*delayTime, this.context.currentTime, 0.010);
+Jungle.prototype.setDelay = function (delayTime) {
+    this.modGain1.gain.setTargetAtTime(0.5 * delayTime, 0, 0.010);
+    this.modGain2.gain.setTargetAtTime(0.5 * delayTime, 0, 0.010);
 }
 
-var previousPitch = -1;
+Jungle.prototype.setPitchOffset = function (mult) {
+    mult = getMultiplier(mult);
 
-Jungle.prototype.setPitchOffset = function(mult, transpose) {
-    if (transpose) {
-      // Divide by 2 for semitones
-      mult = this.transpose(mult / 2);
-    }
-    if (mult>0) { // pitch up
+    if (mult > 0) { // pitch up
         this.mod1Gain.gain.value = 0;
         this.mod2Gain.gain.value = 0;
         this.mod3Gain.gain.value = 1;
@@ -191,41 +240,7 @@ Jungle.prototype.setPitchOffset = function(mult, transpose) {
         this.mod3Gain.gain.value = 0;
         this.mod4Gain.gain.value = 0;
     }
-    this.setDelay(delayTime*Math.abs(mult));
-    this.previousPitch = mult;
-    previousPitch = mult;
+    this.setDelay(delayTime * Math.abs(mult));
 }
 
-
-// Strange stuff taken from:
-// https://github.com/mmckegg/soundbank-pitch-shift/blob/master/index.js
-//
-// Looks like the author did some regression to guess the pitch function.
-//
-// Anyway, it sounds okay for an experiment.
-//
-Jungle.prototype.transpose = function (x){
-
-  if (x<0){
-    return x/12
-  } else if (x == 0) {
-    return 0;
-  } else {
-    var a5 = 1.8149080040913423e-7
-    var a4 = -0.000019413043101157434
-    var a3 = 0.0009795096626987743
-    var a2 = -0.014147877819596033
-    var a1 = 0.23005591195033048
-    var a0 = 0.02278153473118749
-
-    var x1 = x
-    var x2 = x*x
-    var x3 = x*x*x
-    var x4 = x*x*x*x
-    var x5 = x*x*x*x*x
-
-    return a0 + x1*a1 + x2*a2 + x3*a3 + x4*a4 + x5*a5
-  }
-
-}
-
+export default Jungle;

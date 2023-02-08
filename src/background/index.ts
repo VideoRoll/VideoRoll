@@ -3,7 +3,7 @@
  * @Author: Gouxinyu
  * @Date: 2022-04-23 23:37:22
  */
-import { IActionType } from '../types/type.d';
+import { ActionType } from '../types/type.d';
 
 let currentTabId: number;
 
@@ -18,7 +18,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status !== 'complete') return;
 
     function sendMessage() {
-        chrome.tabs.sendMessage(tabId, { tabId, type: IActionType.UPDATE_BADGE }, {}, function (response) {
+        chrome.tabs.sendMessage(tabId, { tabId, type: ActionType.UPDATE_BADGE }, {}, function (response) {
             if (
                 !chrome.runtime.lastError &&
                 typeof response === "object" &&
@@ -46,7 +46,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
     currentTabId = tabId;
 
     function sendMessage() {
-        chrome.tabs.sendMessage(tabId, { tabId, type: IActionType.UPDATE_BADGE }, {}, function (response) {
+        chrome.tabs.sendMessage(tabId, { tabId, type: ActionType.UPDATE_BADGE }, {}, function (response) {
             if (
                 !chrome.runtime.lastError &&
                 typeof response === "object" &&
@@ -100,14 +100,14 @@ chrome.runtime.onMessage.addListener((a, b, send) => {
     const { rollConfig, type } = a;
 
     function sendMessage() {
-        chrome.tabs.sendMessage(currentTabId, { rollConfig, type: IActionType.UPDATE_STORAGE }, {}, function () {
+        chrome.tabs.sendMessage(currentTabId, { rollConfig, type: ActionType.UPDATE_STORAGE }, {}, function () {
             if (chrome.runtime.lastError) {
                 setTimeout(sendMessage, 1000);
             }
         });
     }
 
-    if (type === IActionType.UPDATE_STORAGE) {
+    if (type === ActionType.UPDATE_STORAGE) {
         sendMessage();
     }
 
