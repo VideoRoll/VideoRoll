@@ -33,10 +33,7 @@ export interface IMove {
     y: number;
 }
 
-export interface IAudio {
-    pitch: number;
-    rate: number;
-}
+export type Pitch = number;
 
 export interface IScale {
     mode: "auto" | 'custom',
@@ -67,7 +64,7 @@ export interface IRollConfig {
     name: string;
     flip: Flip;
     scale: IScale;
-    audio: IAudio;
+    pitch: Pitch;
     zoom: Zoom;
     move: IMove;
     deg: Deg;
@@ -76,7 +73,7 @@ export interface IRollConfig {
     store: boolean;
     isInit: boolean;
     videoSelector: string[];
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | IAudio| boolean | string[]
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | boolean | string[]
 }
 
 export interface IWebSite {

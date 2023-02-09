@@ -36,7 +36,7 @@ export default defineComponent({
                         <van-switch
                             v-model={rollConfig.storeThisTab}
                             size="22px"
-                            onUpdate:model-value={setStoreThisTab}
+                            onUpdate:modelValue={setStoreThisTab}
                         />
                     </div>
                 </div>
@@ -48,7 +48,7 @@ export default defineComponent({
                         <van-switch
                             v-model={rollConfig.store}
                             size="22px"
-                            onUpdate:model-value={setStore}
+                            onUpdate:modelValue={setStore}
                         />
                     </div>
                 </div>
