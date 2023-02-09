@@ -7,8 +7,6 @@
 import VideoRoll from "./VideoRoll";
 import { ActionType } from '../types/type.d';
 
-// let currentFlip = "unset";
-
 /**
  * get badge text
  * @returns
@@ -42,12 +40,12 @@ function getTabBadge(): string {
                         if (!tabConfig.storeThisTab) {
                             sessionStorage.removeItem(`video-roll-${tabId}`);
                             tabConfig.store = false;
-                            VideoRoll.setRollConfig(tabConfig).addStyleClass(true);
+                            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
                         } else {
                             tabConfig.url = window.location.href;
                             if (!config) tabConfig.store = false;
                             sessionStorage.setItem(`video-roll-${tabId}`, JSON.stringify(tabConfig));
-                            VideoRoll.setRollConfig(tabConfig).addStyleClass(true);
+                            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
                         }
                     }
 
@@ -75,7 +73,7 @@ function getTabBadge(): string {
                         VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo({
                             ...config,
                             videoSelector
-                        }).updateAudio();
+                        }).updatePitch();
 
                     }
                     send({ text });
@@ -108,7 +106,7 @@ function getTabBadge(): string {
                         }
                     }
 
-                    VideoRoll.setRollConfig(config).addStyleClass();
+                    VideoRoll.setRollConfig(config).addStyleClass().updatePitch();
 
                     chrome.runtime.sendMessage(
                         { rollConfig: config, type: ActionType.UPDATE_STORAGE },
@@ -133,7 +131,7 @@ function getTabBadge(): string {
                     VideoRoll.updateVideo({
                         ...rollConfig,
                         videoSelector
-                    });
+                    }).updatePitch();
 
                     const config = VideoRoll.getRollConfig();
 

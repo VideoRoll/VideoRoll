@@ -3,6 +3,8 @@ function getMultiplier(x) {
     // don't ask...
     if (x < 0) {
         return x / 12
+    } else if (x === 0) {
+        return 0;
     } else {
         var a5 = 1.8149080040913423e-7
         var a4 = -0.000019413043101157434
@@ -227,7 +229,7 @@ Jungle.prototype.setDelay = function (delayTime) {
 }
 
 Jungle.prototype.setPitchOffset = function (mult) {
-    mult = getMultiplier(mult);
+    // mult = getMultiplier(mult);
 
     if (mult > 0) { // pitch up
         this.mod1Gain.gain.value = 0;

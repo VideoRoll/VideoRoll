@@ -12,6 +12,8 @@ export default class VideoRoll {
 
     static audioCtx: AudioContext;
 
+    static audioController: Jungle
+
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
         return this;
@@ -151,7 +153,7 @@ export default class VideoRoll {
     ): void {
         this.setRollConfig(rollConfig);
         const { deg, flip, scale, zoom, move, filter, videoSelector } = rollConfig;
-        
+
         const { dom: videoDom, backupDom } = this.getVideoDom(videoSelector, doc, dom);
 
         dom = videoDom;
@@ -175,7 +177,7 @@ export default class VideoRoll {
      * @param videoSelector
      * @returns
      */
-    static updateVideo(rollConfig: IRollConfig): VideoRoll {
+    static updateVideo(rollConfig: IRollConfig) {
         let dom = null;
         this.setVideoDeg(rollConfig, dom, document);
         // if there is no video element, search iframe
@@ -268,7 +270,7 @@ export default class VideoRoll {
      * add style
      * @returns
      */
-    static addStyleClass(isClear: boolean = false): VideoRoll {
+    static addStyleClass(isClear: boolean = false) {
         const videoSelecter = this.getVideoSelector(this.getHostName());
         const { dom } = this.getVideoDom(videoSelecter, document);
 
@@ -322,25 +324,24 @@ export default class VideoRoll {
         return this;
     }
 
-    static updateAudio() {
+    static updatePitch() {
         if (!this.audioCtx) {
             this.audioCtx = new AudioContext();
+            const { audioCtx } = this;
+            const { dom } = this.getVideoDom(this.rollConfig.videoSelector, document);
+            
+            if (!dom) return;
+
+            const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
+            this.audioController = new Jungle(audioCtx);
+            this.audioController.output.connect(audioCtx.destination);
+            node.connect(this.audioController.input);
+            this.audioController.setPitchOffset(this.rollConfig.pitch);
+            return;
         }
 
-        const { audioCtx } = this;
-        const { dom } = this.getVideoDom(this.rollConfig.videoSelector, document);
-        const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
-        const audioController = new Jungle(audioCtx);
-        audioController.output.connect(audioCtx.destination);
-        node.connect(audioController.input);
-        audioController.setPitchOffset(this.rollConfig.audio.pitch);
-    }
-
-    /**
-     * set video's pitch
-     * @param value
-     */
-    static setPitch(value: number) {
-
+        if (this.audioController) {
+            this.audioController.setPitchOffset(this.rollConfig.pitch);
+        }
     }
 }

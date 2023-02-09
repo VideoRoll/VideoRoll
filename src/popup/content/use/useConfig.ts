@@ -20,10 +20,7 @@ function useConfig(): IRollConfig {
             x: 0,
             y: 0
         },
-        audio: {
-            pitch: 1,
-            rate: 1
-        },
+        pitch: 0,
         filter: {
             mode: 'unset',
             blur: 0,
