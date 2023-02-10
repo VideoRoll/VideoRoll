@@ -20,6 +20,7 @@ function useConfig(): IRollConfig {
             x: 0,
             y: 0
         },
+        pitch: 0,
         filter: {
             mode: 'unset',
             blur: 0,
