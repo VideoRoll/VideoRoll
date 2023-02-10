@@ -8,7 +8,8 @@ import { shallowReactive } from 'vue';
 function useComponents() {
     const components = shallowReactive([
         {
-            title: "Pitch"
+            title: "Pitch",
+            new: true
         },
         {
             title: "Zoom"

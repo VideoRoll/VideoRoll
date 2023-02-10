@@ -26,10 +26,17 @@ export default defineComponent({
                 <van-config-provider theme="dark">
                     <van-sidebar v-model={active.value}>
                         {components.map((item) => (
-                            <van-sidebar-item
-                                key={item.title}
-                                title={item.title}
-                            />
+                            item.new ?
+                                <van-sidebar-item
+                                    key={item.title}
+                                    title={item.title}
+                                    badge="new"
+                                />
+                                : <van-sidebar-item
+                                    key={item.title}
+                                    title={item.title}
+                                />
+
                         ))}
                     </van-sidebar>
                 </van-config-provider>

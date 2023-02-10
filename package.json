@@ -1,6 +1,6 @@
 {
     "name": "video-roll",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "A extension that can help you to rotate a video",
     "author": "Gomi",
     "scripts": {
@@ -8,13 +8,15 @@
         "watch:inject": "parcel watch src/inject/injected.ts",
         "watch:background": "parcel watch src/background/background.ts",
         "preview": "parcel src/popup/index.html",
-        "start": "npm run clean && npm run copy:static && parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts --no-cache",
+        "dev": "npm run clean && npm run copy:static && parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts --no-cache",
         "build:popup": "parcel build src/popup/index.html --dist-dir dist/popup/ --no-source-maps --no-content-hash",
         "build:inject": "parcel build src/inject/index.ts --dist-dir dist/inject --no-source-maps --no-content-hash",
         "build:background": "parcel build src/background/index.ts --dist-dir dist/background --no-source-maps --no-content-hash",
-        "build": "npm run clean && npm run copy:static && npm run build:popup && npm run build:inject && npm run build:background",
+        "build": "npm run clean && npm run copy:static && npm run build:popup && npm run build:inject && npm run build:background && npm run replace",
         "copy:static": "copyfiles -u 1 src/icons/* src/manifest.json dist",
-        "clean": "rimraf dist"
+        "replace": "node build.js",
+        "clean": "rimraf dist",
+        "start": "nom run dev"
     },
     "source": [
         "src/popup/index.html",

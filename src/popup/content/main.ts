@@ -20,6 +20,7 @@ import Slider from "vant/es/Slider/index.mjs";
 import Divider from "vant/es/Divider/index.mjs";
 import Button from "vant/es/Button/index.mjs";
 import Stepper from "vant/es/Stepper/index.mjs";
+import Badge from "vant/es/Badge/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -31,6 +32,7 @@ import "vant/es/Slider/style/index.mjs";
 import "vant/es/Divider/style/index.mjs";
 import "vant/es/Button/style/index.mjs";
 import "vant/es/Stepper/style/index.mjs";
+import "vant/es/Badge/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -43,4 +45,5 @@ createApp(App)
     .use(Switch)
     .use(Button)
     .use(Stepper)
+    .use(Badge)
     .mount("#app");
