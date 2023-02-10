@@ -71,7 +71,7 @@ export default defineComponent({
 
         return () => (
             <div>
-                <Head></Head>
+                <Head isShow={isShow.value}></Head>
                 <main>
                     <div>
                         <div class="video-roll-content">

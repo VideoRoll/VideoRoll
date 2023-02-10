@@ -4,13 +4,16 @@
  * @Date: 2022-09-19 22:53:23
  */
 
-import { defineComponent, ref, inject } from "vue";
-import { InformationCircle, SettingsSharp } from "@vicons/ionicons5";
+import { defineComponent, inject } from "vue";
+import { InformationCircle, OptionsSharp, CloseSharp } from "@vicons/ionicons5";
 import "./index.less";
 
 export default defineComponent({
     name: "Head",
-    setup() {
+    props: {
+        isShow: Boolean
+    },
+    setup(props) {
         const onOpenSetting = inject("onOpenSetting");
         return () => (
             <div class="video-roll-header">
@@ -26,10 +29,17 @@ export default defineComponent({
                         title="settings"
                         onClick={onOpenSetting}
                     >
-                        <settings-sharp
-                            class="settings-sharp"
-                            color="#fffff"
-                        ></settings-sharp>
+                        {
+                            props.isShow ? <close-sharp
+                                class="options-sharp"
+                                color="#fffff"
+                            ></close-sharp> : <options-sharp
+                                class="options-sharp"
+                                color="#fffff"
+                            ></options-sharp>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -37,6 +47,7 @@ export default defineComponent({
     },
     components: {
         InformationCircle,
-        SettingsSharp,
+        OptionsSharp,
+        CloseSharp
     },
 });

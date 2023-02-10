@@ -1,23 +1,30 @@
 .video-roll-pitch {
-    width: 180px;
-    height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin-bottom: 20px;
+    width: 180px;
 
-    .move-box {
-        .move-slider {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .video-roll-zoom-custom {
         width: 100%;
     }
 
-    .move-label {
-        color: rgba(255, 255, 255, 0.596);
+    .zoom-label {
+        width: 40px;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+
+    .custom-button {
+        user-select: none;
+        width: 28px;
+        color: #fff;
+        font-size: 10px;
+        line-height: 18px;
+        text-align: center;
+        background-color: var(--van-primary-color);
+        border-radius: 100px;
     }
 
     .van-slider__bar {

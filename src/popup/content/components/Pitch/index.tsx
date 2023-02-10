@@ -21,26 +21,23 @@ export default defineComponent({
 
         return () => (
             <div class="video-roll-pitch">
-                <div class="move-box">
-                    <van-divider class="move-label">Pitch</van-divider>
-                    <div class="move-slider">
-                        <van-slider
-                            v-model={rollConfig.pitch}
-                            min={-1}
-                            max={1}
-                            step={0.01}
-                            bar-height="4px"
-                            onUpdate:modelValue={setPitch}
-                            v-slots={{
-                                button: () => (
-                                    <div class="custom-button">
-                                        {rollConfig.pitch}
-                                    </div>
-                                ),
-                            }}
-                        ></van-slider>
-                    </div>
-                </div>
+                <span class="zoom-label">low</span>
+                <van-slider
+                    v-model={rollConfig.pitch}
+                    min={-1}
+                    max={1}
+                    step={0.01}
+                    bar-height="4px"
+                    onUpdate:modelValue={setPitch}
+                    v-slots={{
+                        button: () => (
+                            <div class="custom-button">
+                                {rollConfig.pitch}
+                            </div>
+                        ),
+                    }}
+                ></van-slider>
+                <span class="zoom-label">high</span>
             </div>
         );
     },

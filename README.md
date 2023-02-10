@@ -16,9 +16,9 @@
 
 ### ✨ 介绍(Describe)
 
-Video Roll is a web extension that helps you rotate, scale, zoom, move, flip and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.We provide an excellent memory system to help the next time you enter the website to take effect directly.
+Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tune and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.We provide an excellent memory system to help the next time you enter the website to take effect directly.
 
-Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻转和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
+Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻转、调节音调和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
 
 ---
 
@@ -32,6 +32,7 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 -   ✅Move(reposition)
 -   ✅Scale
 -   ✅Rotate 0/90/180/270deg
+-   ✅Tune(Pitch)
 -   ✅Filter
 -   ✅Memory system(You can save all the configuration of the current website so that it will take effect directly next time)
 -   ✅Support shortcut key
@@ -46,6 +47,7 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 -   ✅ 支持自定义缩放
 -   ✅ 支持移动视频位置
 -   ✅ 支持自定义比例调整
+-   ✅ 支持调节视频音调
 -   ✅ 支持设置滤镜效果
 -   ✅ 记忆系统（保存当前网站的配置，下次进入网页直接生效）
 -   ✅ 针对同源 iframe 中的视频做了优化，支持旋转同源 iframe 中的视频(如 dailymotion.com)
@@ -65,6 +67,12 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 ---
 
 ### ✨ 更新日志(Change Log)
+-   v1.1.2:
+
+    -   🐞Bug Fixes: 
+        - Fix the problem that the memory system is invalid.
+    -   ✨Features:
+        - Add tune function. Now you can adjust the pitch of HTML5 Videos.We used [jungle.js](https://github.com/cwilso/Audio-Input-Effects/blob/main/js/jungle.js) (Copyright Google) to accomplish this function. And thanks for the inspiration [Pitch shifter](https://chrome.google.com/webstore/detail/pitch-shifter-html5-video/mpmkclglcbkjchakihfpblainfncennj)
 
 -   v1.1.1:
 
@@ -152,6 +160,8 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 -   Jsx
 -   Typescript
 -   Copyfiles
+-   Jungle
+-   Node
 -   Less
 -   Vant
 -   Visual Studio Code
