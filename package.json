@@ -4,7 +4,7 @@
     "description": "A extension that can help you to rotate a video",
     "author": "Gomi",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
         "watch:inject": "parcel watch src/inject/injected.ts",
         "watch:background": "parcel watch src/background/background.ts",
         "preview": "parcel src/popup/index.html",
@@ -16,7 +16,8 @@
         "copy:static": "copyfiles -u 1 src/icons/* src/manifest.json dist",
         "replace": "node build.js",
         "clean": "rimraf dist",
-        "start": "nom run dev"
+        "start": "npm run dev",
+        "precommit": "npm run test"
     },
     "source": [
         "src/popup/index.html",
@@ -63,6 +64,7 @@
         "@vue/compiler-sfc": "^3.2.26",
         "copyfiles": "^2.4.1",
         "eslint": "^8.23.0",
+        "husky": "^8.0.3",
         "jest": "^29.0.3",
         "jest-environment-jsdom": "^29.0.3",
         "less": "^4.1.2",
