@@ -30,7 +30,8 @@
     "isolatedModules": true,
     "exclude": [
         "src/**/*.html",
-        "src/popup/content/main.ts"
+        "src/popup/content/main.ts",
+        "src/inject/jungle.js"
     ],
     "include": [
         "src/*",
