@@ -50,7 +50,9 @@
         "vue": "^3.2.41"
     },
     "devDependencies": {
+        "@babel/core": "^7.21.0",
         "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+        "@parcel/config-default": "^2.8.3",
         "@parcel/reporter-bundle-analyzer": "^2.4.1",
         "@parcel/transformer-less": "^2.8.3",
         "@parcel/transformer-vue": "^2.8.3",
