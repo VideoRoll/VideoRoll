@@ -18,7 +18,7 @@
             ]
         },
         "lib": [
-            "esnext",
+            "es2021",
             "dom"
         ],
         "types": [

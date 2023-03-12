@@ -162,7 +162,7 @@ export default class VideoRoll {
             const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(dom, backupDom, deg);
 
             this.rollConfig.scale.values = scaleNum;
-            this.replaeClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
+            this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
 
             dom.classList.add("video-roll-transition");
             dom.classList.add("video-roll-deg-scale");
@@ -211,7 +211,7 @@ export default class VideoRoll {
      * @param deg
      * @param scaleNum
      */
-    static replaeClass(rollConfig: {
+    static replaceClass(rollConfig: {
         deg: number,
         flip: Flip,
         scale: [number, number],
