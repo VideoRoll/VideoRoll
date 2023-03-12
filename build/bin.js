@@ -20,7 +20,6 @@ function replacePopupPath() {
     });
 }
 
-
 function replaceServiceWorker() {
     const manifestPath = path.join(__dirname, '../dist/manifest.json');
     fs.readFile(manifestPath, 'utf8', function (err, data) {
