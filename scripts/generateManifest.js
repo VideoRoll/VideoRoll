@@ -10,13 +10,14 @@ const __dirname = dirname(import.meta);
 export default async function generateManifest(browserType) {
     const baseManifestPath = path.join(__dirname, `../src/manifest/manifest.json`);
     const distManifestPath = path.join(__dirname, '../dist/manifest.json');
-    if ((!browserType && !process.env.BROWSER) || !['chromium', 'firefox'].includes(process.env.BROWSER)) {
+
+    if (!browserType && !process.env.BROWSER) {
         await copyFile(baseManifestPath, distManifestPath);
         logger(chalk.greenBright('VideoRoll: generate manifest.json from the base'));
         return;
     }
 
-    const currentManifestPath = path.join(__dirname, `../src/manifest/manifest.${process.env.BROWSER}.json`);
+    const currentManifestPath = path.join(__dirname, `../src/manifest/manifest.${process.env.BROWSER ?? browserType}.json`);
 
     try {
         const currentManifest = await readFile(currentManifestPath, { encoding: 'utf8' });
@@ -24,15 +25,16 @@ export default async function generateManifest(browserType) {
 
         const newManifest = Object.assign(JSON.parse(baseManifest), JSON.parse(currentManifest));
 
-        await writeFile(distManifestPath, JSON.stringify(newManifest));
+        await writeFile(distManifestPath, JSON.stringify(newManifest, null, '\t'));
 
         logger(chalk.greenBright('VideoRoll: generate manifest.json success'));
     } catch(err) {
         logger(chalk.red(`VideoRoll: generate manifest.json faild ${err}`));
     }
-    
-
    
 }
 
-generateManifest();
+if (process.env.BROWSER) {
+    await generateManifest();
+}
+

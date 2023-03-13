@@ -17,7 +17,8 @@ export enum ActionType {
     ON_MOUNTED = 0,
     UPDATE_STORAGE,
     UPDATE_BADGE,
-    UPDATE_CONFIG
+    UPDATE_CONFIG,
+    INIT_SHORT_CUT_KEY
 }
 
 export enum FlipType {
