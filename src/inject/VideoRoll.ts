@@ -91,7 +91,7 @@ export default class VideoRoll {
      * find iframe and its document
      * @returns
      */
-    static getIframeDoc(doc = document): Document {
+    static getIframeDoc(doc = document): Document | undefined {
         const iframe = doc.querySelector("iframe");
         if (iframe) {
             return iframe.contentDocument || doc;
@@ -233,7 +233,7 @@ export default class VideoRoll {
      * 是否存在class
      * @returns
      */
-    static isExistStyle(doc = document) {
+    static isExistStyle(doc: Document | undefined = document) {
         const degScale = doc.getElementById("video-roll-deg-scale");
         const transition = doc.getElementById("video-roll-transition");
 
@@ -279,6 +279,9 @@ export default class VideoRoll {
         const doc = document.body.contains(dom)
             ? document
             : this.getIframeDoc();
+
+        if (!doc) return this;
+
         const styles = this.isExistStyle(doc);
 
         const { storeThisTab, store } = this.getRollConfig();
@@ -324,12 +327,16 @@ export default class VideoRoll {
         return this;
     }
 
+    /**
+     * update pitch
+     * @returns 
+     */
     static updatePitch() {
         if (!this.audioCtx) {
             this.audioCtx = new AudioContext();
             const { audioCtx } = this;
             const { dom } = this.getVideoDom(this.rollConfig.videoSelector, document);
-            
+
             if (!dom) return;
 
             const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
