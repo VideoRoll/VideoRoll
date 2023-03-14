@@ -80,10 +80,12 @@ export function updateBadge(options: any) {
 
     const text = getTabBadge();
 
+    // store this url
     const config = JSON.parse(localStorage.getItem(
         `video-roll-${window.location.href}`
     ) as string);
 
+    // store this tab
     const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${tabId}`) as string);
 
     if (tabConfig) {
@@ -134,7 +136,7 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
     send("flip");
 }
 
-export function updateKeyboardEvent(rollConfig: IRollConfig) {
+export function updateKeyboardEvent(tabId: number) {
     const KEY_CODE = {
         UP: 38,
         DOWN: 40,
@@ -146,9 +148,20 @@ export function updateKeyboardEvent(rollConfig: IRollConfig) {
         return e.ctrlKey || (navigator.platform.indexOf('Mac') === 0 && e.metaKey);
     }
 
-    (function (CODE, config) {
+    (function (CODE, id) {
         document.addEventListener('keydown', (e: KeyboardEvent) => {
             if (isCtrlOrCommand(e)) {
+                // store this url
+                const config = JSON.parse(localStorage.getItem(
+                    `video-roll-${window.location.href}`
+                ) as string);
+
+                // store this tab
+                const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${id}`) as string);
+                
+                if (!config && !tabConfig) return;
+                
+
                 const { keyCode } = e;
                 switch (keyCode) {
                     case CODE.UP:
@@ -169,5 +182,5 @@ export function updateKeyboardEvent(rollConfig: IRollConfig) {
                 updateConfig(config);
             }
         });
-    })(KEY_CODE, rollConfig)
+    })(KEY_CODE, tabId)
 }
