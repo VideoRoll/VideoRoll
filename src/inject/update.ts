@@ -136,12 +136,12 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
     send("flip");
 }
 
-export function updateKeyboardEvent(tabId: number) {
+export function initKeyboardEvent(tabId: number) {
     const KEY_CODE = {
-        UP: 38,
-        DOWN: 40,
-        LEFT: 37,
-        RIGHT: 39
+        UP: 'ArrowUp',
+        DOWN: 'ArrowDown',
+        LEFT: 'ArrowLeft',
+        RIGHT: 'ArrowRight'
     };
 
     function isCtrlOrCommand(e: KeyboardEvent) {
@@ -149,7 +149,7 @@ export function updateKeyboardEvent(tabId: number) {
     }
 
     (function (CODE, id) {
-        document.addEventListener('keydown', (e: KeyboardEvent) => {
+        window.addEventListener('keydown', (e: KeyboardEvent) => {
             if (isCtrlOrCommand(e)) {
                 // store this url
                 const config = JSON.parse(localStorage.getItem(
@@ -159,27 +159,29 @@ export function updateKeyboardEvent(tabId: number) {
                 // store this tab
                 const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${id}`) as string);
                 
+                console.log(tabConfig, config, `video-roll-${id}`, e.code);
                 if (!config && !tabConfig) return;
                 
+                let newConfig = tabConfig || config;
 
-                const { keyCode } = e;
-                switch (keyCode) {
+                const { code } = e;
+                switch (code) {
                     case CODE.UP:
-                        config.deg = 0;
+                        newConfig.deg = 0;
                         break;
                     case CODE.DOWN:
-                        config.deg = 180;
+                        newConfig.deg = 180;
                         break;
                     case CODE.RIGHT:
-                        config.deg = 90;
+                        newConfig.deg = 90;
                         break;
                     case CODE.LEFT:
-                        config.deg = 270;
+                        newConfig.deg = 270;
                         break;
                     default:
                         break;
                 }
-                updateConfig(config);
+                updateConfig(newConfig);
             }
         });
     })(KEY_CODE, tabId)
