@@ -6,7 +6,7 @@
 
 import VideoRoll from "./VideoRoll";
 import { ActionType, IRollConfig } from '../types/type.d';
-import { updateConfig, updateOnMounted, updateStorage, updateBadge, updateKeyboardEvent } from "./update";
+import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent } from "./update";
 
 /**
  * get badge text
@@ -51,7 +51,7 @@ function getTabBadge(): string {
                     break;
                 }
                 case ActionType.INIT_SHORT_CUT_KEY:
-                    updateKeyboardEvent(rollConfig);
+                    initKeyboardEvent(tabId);
                     break;
                 default:
                     break;
