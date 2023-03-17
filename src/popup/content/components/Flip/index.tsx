@@ -4,7 +4,7 @@
  * @Date: 2022-09-19 22:53:23
  */
 import { defineComponent, inject } from "vue";
-import { IRollConfig } from "../../../../types/type.d";
+import type { IRollConfig } from "../../../../types/type.d";
 import "./index.less";
 
 export default defineComponent({

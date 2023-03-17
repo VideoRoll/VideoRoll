@@ -18,19 +18,21 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     currentTabId = tabId;
     if (changeInfo.status !== 'complete') return;
 
-    sendMessage(tabId, {type: ActionType.UPDATE_BADGE}, (response: any) => {
+    sendMessage(tabId, { type: ActionType.UPDATE_BADGE }, (response: any) => {
         if (
             !chrome.runtime.lastError &&
             typeof response === "object" &&
             "text" in response
         ) {
-            chrome.action.setBadgeText(
-                {
-                    text: response.text,
-                    tabId: tabId,
-                },
-                () => { }
-            );
+            chrome.action.setBadgeText({
+                text: response.text,
+                tabId,
+            });
+
+            chrome.action.setBadgeTextColor({
+                color: '#fff',
+                tabId,
+            })
         }
     });
 });
@@ -50,24 +52,17 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
                 {
                     text: response.text,
                     tabId,
-                },
-                () => { }
+                }
             );
+
+            chrome.action.setBadgeTextColor({
+                color: '#fff',
+                tabId,
+            })
         }
     });
 
     sendMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
-});
-
-/**
- * shortcut key
- */
-chrome.commands.onCommand.addListener((command) => {
-    if (
-        !chrome.runtime.lastError && currentTabId
-    ) {
-        sendMessage(currentTabId,  { rollConfig: { deg: Number(command) } });
-    }
 });
 
 /**
@@ -77,7 +72,7 @@ chrome.runtime.onMessage.addListener((a, b, send) => {
     const { rollConfig, type } = a;
 
     if (type === ActionType.UPDATE_STORAGE) {
-        sendMessage(currentTabId,  { rollConfig, type: ActionType.UPDATE_STORAGE });
+        sendMessage(currentTabId, { rollConfig, type: ActionType.UPDATE_STORAGE });
     }
 
     send("update");

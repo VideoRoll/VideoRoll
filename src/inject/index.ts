@@ -5,7 +5,7 @@
  */
 
 import VideoRoll from "./VideoRoll";
-import { ActionType, IRollConfig } from '../types/type.d';
+import { ActionType } from '../types/type.d';
 import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent } from "./update";
 
 /**

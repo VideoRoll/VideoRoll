@@ -5,7 +5,7 @@
  */
 
 import { defineComponent, inject } from "vue";
-import { IRollConfig, IFilter } from "../../../../types/type.d";
+import type { IRollConfig, IFilter } from "../../../../types/type.d";
 import "./index.less";
 
 export default defineComponent({

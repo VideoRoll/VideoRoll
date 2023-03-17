@@ -1,5 +1,8 @@
 import VideoRoll from "./VideoRoll";
 import { ActionType, IRollConfig } from '../types/type.d';
+import { KEY_CODE } from "../types/type.d";
+
+let KeyboardEventCache: Function | null = null;
 
 /**
  * update rollConfig
@@ -80,13 +83,7 @@ export function updateBadge(options: any) {
 
     const text = getTabBadge();
 
-    // store this url
-    const config = JSON.parse(localStorage.getItem(
-        `video-roll-${window.location.href}`
-    ) as string);
-
-    // store this tab
-    const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${tabId}`) as string);
+    const { config, tabConfig } = getStorageConfig(tabId)
 
     if (tabConfig) {
         if (!tabConfig.storeThisTab) {
@@ -136,53 +133,53 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
     send("flip");
 }
 
-export function initKeyboardEvent(tabId: number) {
-    const KEY_CODE = {
-        UP: 'ArrowUp',
-        DOWN: 'ArrowDown',
-        LEFT: 'ArrowLeft',
-        RIGHT: 'ArrowRight'
-    };
+export function getStorageConfig(tabId: number) {
+    const config = JSON.parse(localStorage.getItem(
+        `video-roll-${window.location.href}`
+    ) as string);
 
-    function isCtrlOrCommand(e: KeyboardEvent) {
-        return e.ctrlKey || (navigator.platform.indexOf('Mac') === 0 && e.metaKey);
+    // store this tab
+    const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${tabId}`) as string);
+
+    return { config, tabConfig };
+}
+
+export function isCtrlOrCommand(e: KeyboardEvent) {
+    return e.ctrlKey || (navigator.platform.indexOf('Mac') === 0 && e.metaKey);
+}
+
+export function keyDownEvent(tabId: number, e: KeyboardEvent) {
+    const { config, tabConfig } = getStorageConfig(tabId);
+    if (!config && !tabConfig) return;
+
+    if (isCtrlOrCommand(e)) {
+        let newConfig = tabConfig || config;
+
+        const { code } = e;
+        switch (code) {
+            case KEY_CODE.UP:
+                newConfig.deg = 0;
+                break;
+            case KEY_CODE.DOWN:
+                newConfig.deg = 180;
+                break;
+            case KEY_CODE.RIGHT:
+                newConfig.deg = 90;
+                break;
+            case KEY_CODE.LEFT:
+                newConfig.deg = 270;
+                break;
+            default:
+                break;
+        }
+        updateConfig(newConfig);
     }
+}
 
-    (function (CODE, id) {
-        window.addEventListener('keydown', (e: KeyboardEvent) => {
-            if (isCtrlOrCommand(e)) {
-                // store this url
-                const config = JSON.parse(localStorage.getItem(
-                    `video-roll-${window.location.href}`
-                ) as string);
-
-                // store this tab
-                const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${id}`) as string);
-                
-                console.log(tabConfig, config, `video-roll-${id}`, e.code);
-                if (!config && !tabConfig) return;
-                
-                let newConfig = tabConfig || config;
-
-                const { code } = e;
-                switch (code) {
-                    case CODE.UP:
-                        newConfig.deg = 0;
-                        break;
-                    case CODE.DOWN:
-                        newConfig.deg = 180;
-                        break;
-                    case CODE.RIGHT:
-                        newConfig.deg = 90;
-                        break;
-                    case CODE.LEFT:
-                        newConfig.deg = 270;
-                        break;
-                    default:
-                        break;
-                }
-                updateConfig(newConfig);
-            }
-        });
-    })(KEY_CODE, tabId)
+export function initKeyboardEvent(tabId: number) {
+    if (!KeyboardEventCache) {
+        KeyboardEventCache = keyDownEvent.bind(null, tabId);
+    }
+    window.removeEventListener('keydown', KeyboardEventCache as EventListener);
+    window.addEventListener('keydown', KeyboardEventCache as EventListener, { passive: true });
 }
