@@ -12,7 +12,9 @@ export default class VideoRoll {
 
     static audioCtx: AudioContext;
 
-    static audioController: Jungle
+    static audioController: Jungle;
+
+    static videoDom: HTMLVideoElement | null;
 
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
@@ -107,6 +109,9 @@ export default class VideoRoll {
      */
     static getVideoDom(videoSelector: string[], doc: Document, dom: HTMLVideoElement | null = null): IVideoDom {
         let backupDom = null;
+
+        if (dom) return { dom, backupDom }
+
         for (const item of videoSelector) {
             const isArray = Array.isArray(item);
             dom = doc.querySelector(
@@ -120,13 +125,14 @@ export default class VideoRoll {
             if (!dom) continue;
 
             if (dom) {
+                this.videoDom = dom;
                 return { dom, backupDom };
             }
         }
 
         if (!dom) {
             const docWin = this.getIframeDoc(doc);
-            if (docWin && docWin !== document) {
+            if (docWin && docWin !== document && !this.videoDom) {
                 try {
                     return this.getVideoDom(videoSelector, docWin);
                 } catch (e) {
@@ -154,20 +160,17 @@ export default class VideoRoll {
         this.setRollConfig(rollConfig);
         const { deg, flip, scale, zoom, move, filter, videoSelector } = rollConfig;
 
-        const { dom: videoDom, backupDom } = this.getVideoDom(videoSelector, doc, dom);
+        const { backupDom } = this.getVideoDom(videoSelector, doc, dom);
 
-        dom = videoDom;
-
-        if (dom) {
+        if (this.videoDom) {
             const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(dom, backupDom, deg);
 
             this.rollConfig.scale.values = scaleNum;
             this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
 
-            dom.classList.add("video-roll-transition");
-            dom.classList.add("video-roll-deg-scale");
-            dom.setAttribute("data-roll", "true");
-            return;
+            this.videoDom.classList.add("video-roll-transition");
+            this.videoDom.classList.add("video-roll-deg-scale");
+            this.videoDom.setAttribute("data-roll", "true");
         }
     }
 
@@ -178,14 +181,13 @@ export default class VideoRoll {
      * @returns
      */
     static updateVideo(rollConfig: IRollConfig) {
-        let dom = null;
-        this.setVideoDeg(rollConfig, dom, document);
+        this.setVideoDeg(rollConfig, this.videoDom, document);
         // if there is no video element, search iframe
-        if (!dom) {
+        if (!this.videoDom) {
             const doc = this.getIframeDoc();
             if (doc && doc !== document) {
                 try {
-                    this.setVideoDeg(rollConfig, dom, doc);
+                    this.setVideoDeg(rollConfig, this.videoDom, doc);
                 } catch (e) {
                     console.warn(`rotate video failed: ${e}`);
                     return this;

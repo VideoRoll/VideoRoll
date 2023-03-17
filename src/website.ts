@@ -4,7 +4,7 @@
  * @Author: Gouxinyu
  * @Date: 2022-01-13 22:57:14
  */
-import { IWebSite } from './types/type.d';
+import type { IWebSite } from './types/type.d';
 const WEBSITE: IWebSite = {
     "bilibili": {
         "name": "bilibili",

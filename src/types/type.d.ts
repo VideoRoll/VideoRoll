@@ -88,3 +88,10 @@ export interface IVideoDom {
     dom: HTMLVideoElement | null;
     backupDom: HTMLVideoElement | HTMLElement | null;
 }
+
+export enum KEY_CODE {
+    UP = 'ArrowUp',
+    DOWN = 'ArrowDown',
+    LEFT = 'ArrowLeft',
+    RIGHT = 'ArrowRight'
+}
