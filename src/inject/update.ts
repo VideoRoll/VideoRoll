@@ -78,12 +78,12 @@ export function updateOnMounted(rollConfig: IRollConfig) {
  * update badge
  * @param options
  */
-export function updateBadge(options: any) {
+export async function updateBadge(options: any) {
     const { getTabBadge, tabId, rollConfig, send } = options;
 
-    const text = getTabBadge();
+    const text = await getTabBadge();
 
-    const { config, tabConfig } = getStorageConfig(tabId)
+    const { config, tabConfig } = getStorageConfig(tabId);
 
     if (tabConfig) {
         if (!tabConfig.storeThisTab) {
