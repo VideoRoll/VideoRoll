@@ -32,7 +32,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             chrome.action.setBadgeTextColor({
                 color: '#fff',
                 tabId,
-            })
+            });
+
+            sendMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
         }
     });
 });
@@ -58,11 +60,13 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
             chrome.action.setBadgeTextColor({
                 color: '#fff',
                 tabId,
-            })
+            });
+
+            sendMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
         }
     });
 
-    sendMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
+    
 });
 
 /**

@@ -14,7 +14,9 @@ export default class VideoRoll {
 
     static audioController: Jungle;
 
-    static videoDom: HTMLVideoElement | null;
+    static videoElements: HTMLVideoElement[];
+
+    static documents: (Document | HTMLIFrameElement)[];
 
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
@@ -90,15 +92,45 @@ export default class VideoRoll {
     }
 
     /**
-     * find iframe and its document
-     * @returns
+     * get all documnets includes iframes
      */
-    static getIframeDoc(doc = document): Document | undefined {
-        const iframe = doc.querySelector("iframe");
-        if (iframe) {
-            return iframe.contentDocument || doc;
+    static getDocuments() {
+        const iframes = document.querySelectorAll("iframe");
+        let iframeEls: HTMLIFrameElement[] = [];
+        if (iframes.length) {
+            iframeEls = Array.from(iframes).filter((v) => v.contentDocument);
         }
-        return doc;
+
+        this.documents = [document, ...iframeEls];
+    }
+
+    /**
+     * get all video elements
+     */
+    static async getVideoElements() {
+        this.documents.forEach((doc) => {
+            doc.querySelectorAll
+        })
+    }
+
+    static getVideoBySelector(videoSelector: string[], doc: Document | HTMLIFrameElement) {
+        for (const item of videoSelector) {
+            const isArray = Array.isArray(item);
+            const dom = doc.querySelector(
+                isArray ? item[0] : item
+            ) as HTMLVideoElement;
+
+            const backupDom = isArray
+                ? (doc.querySelector(item[1]) as HTMLElement)
+                : dom;
+
+            if (!dom) continue;
+
+            if (dom) {
+                this.videoElements.push(dom);
+                return Promise.resolve({ dom, backupDom });
+            }
+        }
     }
 
     /**
@@ -107,10 +139,10 @@ export default class VideoRoll {
      * @param doc
      * @returns
      */
-    static getVideoDom(videoSelector: string[], doc: Document, dom: HTMLVideoElement | null = null): IVideoDom {
+    static getVideoDom(videoSelector: string[], doc: Document = document, dom: HTMLVideoElement | null = null): Promise<IVideoDom> {
         let backupDom = null;
 
-        if (dom) return { dom, backupDom }
+        if (dom) return Promise.resolve({ dom, backupDom });
 
         for (const item of videoSelector) {
             const isArray = Array.isArray(item);
@@ -126,22 +158,26 @@ export default class VideoRoll {
 
             if (dom) {
                 this.videoDom = dom;
-                return { dom, backupDom };
+                return Promise.resolve({ dom, backupDom });
             }
         }
 
         if (!dom) {
-            const docWin = this.getIframeDoc(doc);
-            if (docWin && docWin !== document && !this.videoDom) {
-                try {
-                    return this.getVideoDom(videoSelector, docWin);
-                } catch (e) {
-                    console.warn(`rotate video failed: ${e}`);
-                }
-            }
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const docWin = this.doc || this.getIframeDoc(doc);
+                    if (docWin && docWin !== document && !this.videoDom) {
+                        try {
+                            resolve(this.getVideoDom(videoSelector, docWin));
+                        } catch (e) {
+                            console.warn(`rotate video failed: ${e}`);
+                        }
+                    }
+                }, 200);
+            });
         }
 
-        return { dom, backupDom };
+        return Promise.resolve({ dom, backupDom });
     }
 
     /**
@@ -155,23 +191,25 @@ export default class VideoRoll {
     static setVideoDeg(
         rollConfig: IRollConfig,
         dom: HTMLVideoElement | null,
-        doc: Document
+        doc: Document | null
     ): void {
         this.setRollConfig(rollConfig);
         const { deg, flip, scale, zoom, move, filter, videoSelector } = rollConfig;
 
-        const { backupDom } = this.getVideoDom(videoSelector, doc, dom);
+        this.getVideoDom(videoSelector, doc, dom).then(({ dom, backupDom }) => {
+            if (this.videoDom) {
+                const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(dom, backupDom, deg);
 
-        if (this.videoDom) {
-            const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(dom, backupDom, deg);
+                this.rollConfig.scale.values = scaleNum;
+                this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
 
-            this.rollConfig.scale.values = scaleNum;
-            this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
+                this.videoDom.classList.add("video-roll-transition");
+                this.videoDom.classList.add("video-roll-deg-scale");
+                this.videoDom.setAttribute("data-roll", "true");
+            }
+        });
 
-            this.videoDom.classList.add("video-roll-transition");
-            this.videoDom.classList.add("video-roll-deg-scale");
-            this.videoDom.setAttribute("data-roll", "true");
-        }
+
     }
 
     /**
@@ -181,10 +219,10 @@ export default class VideoRoll {
      * @returns
      */
     static updateVideo(rollConfig: IRollConfig) {
-        this.setVideoDeg(rollConfig, this.videoDom, document);
+        this.setVideoDeg(rollConfig, this.videoDom, this.doc);
         // if there is no video element, search iframe
         if (!this.videoDom) {
-            const doc = this.getIframeDoc();
+            const doc = this.doc || this.getIframeDoc();
             if (doc && doc !== document) {
                 try {
                     this.setVideoDeg(rollConfig, this.videoDom, doc);
@@ -272,9 +310,9 @@ export default class VideoRoll {
      * add style
      * @returns
      */
-    static addStyleClass(isClear: boolean = false) {
+    static async addStyleClass(isClear: boolean = false) {
         const videoSelecter = this.getVideoSelector(this.getHostName());
-        const { dom } = this.getVideoDom(videoSelecter, document);
+        const { dom } = await this.getVideoDom(videoSelecter, document)
 
         if (!dom) return this;
 
@@ -333,11 +371,11 @@ export default class VideoRoll {
      * update pitch
      * @returns 
      */
-    static updatePitch() {
+    static async updatePitch() {
         if (!this.audioCtx) {
             this.audioCtx = new AudioContext();
             const { audioCtx } = this;
-            const { dom } = this.getVideoDom(this.rollConfig.videoSelector, document);
+            const { dom } = await this.getVideoDom(this.rollConfig.videoSelector, this.doc);
 
             if (!dom) return;
 
