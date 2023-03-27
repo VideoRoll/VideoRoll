@@ -26,6 +26,12 @@ function sendMessage(rollConfig: IRollConfig, extra = {}, send = (res: any) => {
     );
 }
 
+/**
+ * update config
+ * @param rollConfig
+ * @param key
+ * @param value 
+ */
 function updateRollConfig(rollConfig: IRollConfig, key: RollKey, value: RollValue) {
     if (key in rollConfig) {
         rollConfig[key] = value;
@@ -33,6 +39,12 @@ function updateRollConfig(rollConfig: IRollConfig, key: RollKey, value: RollValu
     }
 }
 
+/**
+ * initialize config
+ * @param rollConfig
+ * @param tab
+ * @returns
+ */
 function initRollConfig(rollConfig: IRollConfig, tab: any): void {
     const { url } = tab;
     rollConfig.tabId = tab.id;
@@ -43,7 +55,9 @@ function initRollConfig(rollConfig: IRollConfig, tab: any): void {
 
     if (!hostName) {
         rollConfig.name = "Error Website";
-        rollConfig.videoSelector = ["video"];
+        rollConfig.videoSelector = {
+            defaultDom: 'video'
+        };
         return;
     }
 
@@ -58,7 +72,7 @@ function initRollConfig(rollConfig: IRollConfig, tab: any): void {
 
     if (!rollConfig.name) {
         rollConfig.name = hostName || "Error Website";
-        rollConfig.videoSelector = ["video"];
+        rollConfig.videoSelector = { defaultDom: 'video' };
     }
 };
 

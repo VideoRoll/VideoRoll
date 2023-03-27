@@ -10,11 +10,11 @@ const WEBSITE: IWebSite = {
         "name": "bilibili",
         // [originVideoElement, specialElement]
         // if originVideoElement can't get videoHieight or videoWifth, use specialElement
-        "videoSelector": ["video", ["bwp-video", ".bpx-player-video-wrap"]]
-    },
-    "pornhub": {
-        "name": "pornhub",
-        "videoSelector": [["video-element video", "video-element video"]]
+        "videoSelector": {
+            defaultDom: 'video',
+            shadowDom: 'bwp-video',
+            wrapDom: '.bpx-player-video-wrap'
+        }
     }
 }
 
