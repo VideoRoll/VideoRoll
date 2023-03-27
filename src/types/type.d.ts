@@ -73,20 +73,23 @@ export interface IRollConfig {
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;
-    videoSelector: string[];
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | boolean | string[]
+    videoSelector: VideoSelector;
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | boolean | VideoSelector
 }
+
+export type VideoSelector = {
+    defaultDom: string;
+    shadowDom?: string;
+    wrapDom?: string
+}
+
+export type VideoElement = { shadowElement: HTMLElement,  wrapElement: HTMLElement } | HTMLVideoElement;
 
 export interface IWebSite {
     [prop: string]: {
         name: string;
-        videoSelector: any[]
+        videoSelector: VideoSelector
     }
-}
-
-export interface IVideoDom {
-    dom: HTMLVideoElement | null;
-    backupDom: HTMLVideoElement | HTMLElement | null;
 }
 
 export enum KEY_CODE {

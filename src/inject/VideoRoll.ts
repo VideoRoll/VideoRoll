@@ -5,7 +5,7 @@
  */
 import WEBSITE from "../website";
 import Jungle from "./jungle";
-import { Flip, IMove, IFilter, FilterUnit, IRollConfig, FlipType, IVideoDom } from '../types/type.d';
+import { Flip, IMove, IFilter, FilterUnit, IRollConfig, FlipType, IVideoDom, VideoSelector, VideoElement } from '../types/type.d';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -14,9 +14,11 @@ export default class VideoRoll {
 
     static audioController: Jungle;
 
-    static videoElements: HTMLVideoElement[];
+    static videoElements: VideoElement[];
 
     static documents: (Document | HTMLIFrameElement)[];
+
+    static videoNumbers: number = 0;
 
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
@@ -42,19 +44,28 @@ export default class VideoRoll {
      * @returns
      */
     static getScaleNumber(
-        dom: HTMLVideoElement,
-        backupDom: HTMLVideoElement | HTMLElement | null,
+        target: VideoElement,
         deg: number
     ): [number, number] {
-        // get video size
-        let { videoWidth, videoHeight, offsetWidth, offsetHeight } = dom;
+        let videoWidth = 0;
+        let videoHeight = 0;
+        let offsetWidth = 0; 
+        let offsetHeight = 0;
+
+        if (typeof target === 'object' && 'wrapElement' in target && 'shadowElement' in  target) {
+            offsetWidth = target.shadowElement.offsetWidth;
+            offsetHeight = target.shadowElement.offsetHeight;
+            videoWidth = offsetWidth;
+            videoHeight = offsetHeight;
+        } else {
+            offsetWidth = target.offsetWidth;
+            offsetHeight = target.offsetHeight;
+            videoWidth = target.videoWidth;
+            videoHeight = target.videoHeight;
+        }
 
         const isHorizonDeg = deg === 90 || deg === 270;
 
-        if (backupDom && (typeof videoWidth === "undefined" || videoWidth === null)) {
-            videoWidth = backupDom.offsetWidth;
-            videoHeight = backupDom.offsetHeight;
-        }
         // 根据原始视频的宽高比例，和容器的宽高比例，计算缩放比例
         const isHorizonVideo = videoWidth > videoHeight;
         const isHorizonDom = offsetWidth > offsetHeight;
@@ -94,7 +105,7 @@ export default class VideoRoll {
     /**
      * get all documnets includes iframes
      */
-    static getDocuments() {
+    static updateDocuments() {
         const iframes = document.querySelectorAll("iframe");
         let iframeEls: HTMLIFrameElement[] = [];
         if (iframes.length) {
@@ -107,30 +118,38 @@ export default class VideoRoll {
     /**
      * get all video elements
      */
-    static async getVideoElements() {
+    static async updateVideoElements(videoSelector: VideoSelector) {
+        if (!this.videoElements.length) return;
+
         this.documents.forEach((doc) => {
-            doc.querySelectorAll
+            this.setVideoBySelector(videoSelector, doc);
         })
     }
 
-    static getVideoBySelector(videoSelector: string[], doc: Document | HTMLIFrameElement) {
-        for (const item of videoSelector) {
-            const isArray = Array.isArray(item);
-            const dom = doc.querySelector(
-                isArray ? item[0] : item
-            ) as HTMLVideoElement;
-
-            const backupDom = isArray
-                ? (doc.querySelector(item[1]) as HTMLElement)
-                : dom;
-
-            if (!dom) continue;
-
-            if (dom) {
-                this.videoElements.push(dom);
-                return Promise.resolve({ dom, backupDom });
+    static setVideoBySelector(videoSelector: VideoSelector, doc: Document | HTMLIFrameElement) {
+        const { shadowDom, defaultDom, wrapDom } = videoSelector;
+        if (shadowDom && wrapDom) {
+            const shadowElement = doc.querySelector(shadowDom);
+            const wrapElement = doc.querySelector(wrapDom);
+            // if is shadow element, we can't get videoWidth and videoHeight, so we need use wrapDom
+            if (shadowElement && wrapElement) {
+                this.videoElements.push({ shadowElement, wrapElement });
+                return;
             }
         }
+
+        if (defaultDom) {
+            const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
+            if (defaultElements) {
+                this.videoElements.push(...Array.from(defaultElements));
+            }
+        }
+
+        this.setVideoNumbers();
+    }
+
+    static setVideoNumbers(): void {
+        this.videoNumbers = this.videoElements.length;
     }
 
     /**
@@ -196,20 +215,16 @@ export default class VideoRoll {
         this.setRollConfig(rollConfig);
         const { deg, flip, scale, zoom, move, filter, videoSelector } = rollConfig;
 
-        this.getVideoDom(videoSelector, doc, dom).then(({ dom, backupDom }) => {
-            if (this.videoDom) {
-                const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(dom, backupDom, deg);
+        this.videoElements.forEach((target) => {
+            const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);
 
-                this.rollConfig.scale.values = scaleNum;
-                this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
+            this.rollConfig.scale.values = scaleNum;
+            this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
 
-                this.videoDom.classList.add("video-roll-transition");
-                this.videoDom.classList.add("video-roll-deg-scale");
-                this.videoDom.setAttribute("data-roll", "true");
-            }
+            this.videoDom.classList.add("video-roll-transition");
+            this.videoDom.classList.add("video-roll-deg-scale");
+            this.videoDom.setAttribute("data-roll", "true");
         });
-
-
     }
 
     /**
