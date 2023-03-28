@@ -4,38 +4,27 @@
  * @Date: 2022-01-11 23:49:59
  */
 
-import VideoRoll from "./VideoRoll";
 import { ActionType } from '../types/type.d';
 import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent } from "./update";
-
-/**
- * get badge text
- * @returns
- */
-function getTabBadge(): string {
-    const hostName = VideoRoll.getHostName();
-    const videoSelector = VideoRoll.getVideoSelector(hostName);
-    const { dom } = VideoRoll.getVideoDom(videoSelector, document);
-
-    return dom ? "1" : "";
-}
+import { sendRuntimeMessage } from "../util";
 
 (function () {
     /**
      * get message from popup or backgound
      */
-    chrome.runtime.onMessage.addListener((data, b, send) => {
+    chrome.runtime.onMessage.addListener(async (data, b, send) => {
         const { rollConfig, tabId, type } = data;
+
         try {
             switch (type) {
-                case ActionType.UPDATE_BADGE: {
+                case ActionType.GET_BADGE: {
                     updateBadge({
                         tabId,
-                        rollConfig,
-                        getTabBadge,
-                        send
-                    })
-                    return;
+                        rollConfig
+                    }).then((res) => {
+                        sendRuntimeMessage(tabId, { ...res, type: ActionType.UPDATE_BADGE })
+                    });
+                    break;
                 }
                 // when popup onMounted, set init flip value to background,
                 // through backgroundjs sending message to popup to store flip value
@@ -54,7 +43,7 @@ function getTabBadge(): string {
                     initKeyboardEvent(tabId);
                     break;
                 default:
-                    break;
+                    return;
             }
 
             send("rotate success");
