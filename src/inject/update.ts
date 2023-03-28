@@ -4,6 +4,34 @@ import { KEY_CODE } from "../types/type.d";
 
 let KeyboardEventCache: Function | null = null;
 
+const MAX_TIMES = 5;
+const TIME = 250;
+
+let times = 0;
+
+/**
+ * get badge text
+ * @returns
+ */
+async function getTabBadge(): Promise<string> {
+    const videoSelector = VideoRoll.getVideoSelector(VideoRoll.getHostName())
+    VideoRoll.updateDocuments().updateVideoElements(videoSelector);
+
+    if (times < MAX_TIMES) {
+        times++;
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(getTabBadge());
+            }, TIME);
+        });   
+    }
+    return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
+}
+
+function resetTimes() {
+    times = 0;
+}
+
 /**
  * update rollConfig
  * @param rollConfig
@@ -11,16 +39,7 @@ let KeyboardEventCache: Function | null = null;
 export function updateConfig(rollConfig: IRollConfig) {
     rollConfig.isInit = false;
 
-    const videoSelector = rollConfig.videoSelector
-        ? rollConfig.videoSelector
-        : VideoRoll.getVideoSelector(
-            VideoRoll.getHostName()
-        );
-
-    VideoRoll.updateVideo({
-        ...rollConfig,
-        videoSelector
-    }).updatePitch();
+    VideoRoll.updateVideo(rollConfig).updatePitch();
 
     const config = VideoRoll.getRollConfig();
 
@@ -79,8 +98,9 @@ export function updateOnMounted(rollConfig: IRollConfig) {
  * @param options
  */
 export async function updateBadge(options: any) {
-    const { getTabBadge, tabId, rollConfig, send } = options;
+    const { tabId, rollConfig } = options;
 
+    resetTimes();
     const text = await getTabBadge();
 
     const { config, tabConfig } = getStorageConfig(tabId);
@@ -114,18 +134,11 @@ export async function updateBadge(options: any) {
             JSON.stringify(config)
         );
 
-        const videoSelector = rollConfig.videoSelector
-            ? rollConfig.videoSelector
-            : VideoRoll.getVideoSelector(
-                VideoRoll.getHostName()
-            );
-        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo({
-            ...config,
-            videoSelector
-        }).updatePitch();
+        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updatePitch();
 
     }
-    send({ text });
+
+    return Promise.resolve({ text });
 }
 
 export function updateStorage(rollConfig: IRollConfig, send: Function) {

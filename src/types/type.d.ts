@@ -18,7 +18,8 @@ export enum ActionType {
     UPDATE_STORAGE,
     UPDATE_BADGE,
     UPDATE_CONFIG,
-    INIT_SHORT_CUT_KEY
+    INIT_SHORT_CUT_KEY,
+    GET_BADGE
 }
 
 export enum FlipType {
@@ -83,7 +84,9 @@ export type VideoSelector = {
     wrapDom?: string
 }
 
-export type VideoElement = { shadowElement: HTMLElement,  wrapElement: HTMLElement } | HTMLVideoElement;
+export type VideoObject = { shadowElement: HTMLElement,  wrapElement: HTMLElement };
+
+export type VideoElement = VideoObject | HTMLVideoElement;
 
 export interface IWebSite {
     [prop: string]: {
