@@ -38,8 +38,6 @@ export default defineComponent({
                                 color="#fffff"
                             ></options-sharp>
                         }
-
-
                     </div>
                 </div>
             </div>

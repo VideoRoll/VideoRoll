@@ -4,6 +4,7 @@
  * @Date: 2022-04-23 23:37:22
  */
 import { ActionType } from '../types/type.d';
+import { sendTabMessage, setBadge } from '../util';
 
 let currentTabId: number;
 
@@ -17,27 +18,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     currentTabId = tabId;
     if (changeInfo.status !== 'complete') return;
 
-    function sendMessage() {
-        chrome.tabs.sendMessage(tabId, { tabId, type: ActionType.UPDATE_BADGE }, {}, function (response) {
-            if (
-                !chrome.runtime.lastError &&
-                typeof response === "object" &&
-                "text" in response
-            ) {
-                chrome.action.setBadgeText(
-                    {
-                        text: response.text,
-                        tabId: tabId,
-                    },
-                    () => { }
-                );
-            } else {
-                setTimeout(sendMessage, 500)
-            }
-        });
-    }
-
-    sendMessage();
+    sendTabMessage(tabId, { type: ActionType.GET_BADGE }, (response: any) => {
+        sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
+    });
 });
 
 // when tab actived
@@ -45,70 +28,27 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
     currentTabId = tabId;
 
-    function sendMessage() {
-        chrome.tabs.sendMessage(tabId, { tabId, type: ActionType.UPDATE_BADGE }, {}, function (response) {
-            if (
-                !chrome.runtime.lastError &&
-                typeof response === "object" &&
-                "text" in response
-            ) {
-                chrome.action.setBadgeText(
-                    {
-                        text: response.text,
-                        tabId,
-                    },
-                    () => { }
-                );
-            } else {
-                setTimeout(sendMessage, 500);
-            }
-        });
-    }
-
-    sendMessage();
+    sendTabMessage(tabId, { type: ActionType.GET_BADGE }, (response: any) => {
+        sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
+    });
 });
 
-/**
- * shortcut key
- */
-chrome.commands.onCommand.addListener((command) => {
-
-    function sendMessage() {
-        chrome.tabs.sendMessage(
-            currentTabId,
-            { rollConfig: { deg: Number(command) } },
-            {},
-            function (response) {
-                if (chrome.runtime.lastError) {
-                    setTimeout(sendMessage, 500);
-                }
-            }
-        );
-    }
-
-    if (
-        !chrome.runtime.lastError && currentTabId
-    ) {
-        sendMessage();
-    } else { }
-});
 
 /**
  * update storage
  */
 chrome.runtime.onMessage.addListener((a, b, send) => {
-    const { rollConfig, type } = a;
+    const { rollConfig, type, text, tabId } = a;
 
-    function sendMessage() {
-        chrome.tabs.sendMessage(currentTabId, { rollConfig, type: ActionType.UPDATE_STORAGE }, {}, function () {
-            if (chrome.runtime.lastError) {
-                setTimeout(sendMessage, 1000);
-            }
-        });
-    }
-
-    if (type === ActionType.UPDATE_STORAGE) {
-        sendMessage();
+    switch(type) {
+        case ActionType.UPDATE_STORAGE:
+            sendTabMessage(currentTabId, { rollConfig, type: ActionType.UPDATE_STORAGE });
+            break;
+        case ActionType.UPDATE_BADGE:
+            setBadge(tabId, text);
+            break;
+        default:
+            break;
     }
 
     send("update");
