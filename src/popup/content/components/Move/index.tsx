@@ -6,6 +6,7 @@
 
 import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
+import { getDefaultConfig } from '../../use/useConfig';
 import "./index.less";
 
 export default defineComponent({
@@ -23,49 +24,59 @@ export default defineComponent({
             rollConfig.move.y = value;
             update("move", rollConfig.move);
         };
+
+        const reset = () => {
+            setMoveX(getDefaultConfig().move.x);
+            setMoveY(getDefaultConfig().move.y)
+        };
+
         return () => (
-            <div class="video-roll-move">
-                <div class="move-box">
-                    <van-divider class="move-label">Left - Right</van-divider>
-                    <div class="move-slider">
-                        <van-slider
-                            v-model={rollConfig.move.x}
-                            min={-100}
-                            max={100}
-                            step={1}
-                            bar-height="4px"
-                            onUpdate:modelValue={setMoveX}
-                            v-slots={{
-                                button: () => (
-                                    <div class="custom-button">
-                                        {rollConfig.move.x}
-                                    </div>
-                                ),
-                            }}
-                        ></van-slider>
+            <>
+                <van-button class="video-roll-resetBtn" size="mini" icon="replay" type="primary" onClick={reset}>reset</van-button>
+                <div class="video-roll-move">
+                    <div class="move-box">
+                        <van-divider class="move-label">Left - Right</van-divider>
+                        <div class="move-slider">
+                            <van-slider
+                                v-model={rollConfig.move.x}
+                                min={-100}
+                                max={100}
+                                step={1}
+                                bar-height="4px"
+                                onUpdate:modelValue={setMoveX}
+                                v-slots={{
+                                    button: () => (
+                                        <div class="custom-button">
+                                            {rollConfig.move.x}
+                                        </div>
+                                    ),
+                                }}
+                            ></van-slider>
+                        </div>
+                    </div>
+                    <div class="move-box">
+                        <van-divider class="move-label">Bottom - Top</van-divider>
+                        <div class="move-slider">
+                            <van-slider
+                                v-model={rollConfig.move.y}
+                                min={-100}
+                                max={100}
+                                step={1}
+                                bar-height="4px"
+                                onUpdate:modelValue={setMoveY}
+                                v-slots={{
+                                    button: () => (
+                                        <div class="custom-button">
+                                            {rollConfig.move.y}
+                                        </div>
+                                    ),
+                                }}
+                            ></van-slider>
+                        </div>
                     </div>
                 </div>
-                <div class="move-box">
-                    <van-divider class="move-label">Bottom - Top</van-divider>
-                    <div class="move-slider">
-                        <van-slider
-                            v-model={rollConfig.move.y}
-                            min={-100}
-                            max={100}
-                            step={1}
-                            bar-height="4px"
-                            onUpdate:modelValue={setMoveY}
-                            v-slots={{
-                                button: () => (
-                                    <div class="custom-button">
-                                        {rollConfig.move.y}
-                                    </div>
-                                ),
-                            }}
-                        ></van-slider>
-                    </div>
-                </div>
-            </div>
+            </>
+
         );
     },
 });

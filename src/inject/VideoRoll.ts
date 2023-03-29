@@ -128,10 +128,19 @@ export default class VideoRoll {
         return this;
     }
 
+    /**
+     * clear all cache
+     */
     static clearVideoElements() {
         this.videoElements = [];
     }
 
+    /**
+     * set videoElements
+     * @param videoSelector 
+     * @param doc 
+     * @returns 
+     */
     static setVideoBySelector(videoSelector: VideoSelector, doc: Document | HTMLIFrameElement) {
         const { shadowDom, defaultDom, wrapDom } = videoSelector;
 
@@ -171,8 +180,14 @@ export default class VideoRoll {
         this.setRollConfig(rollConfig);
         const { deg, flip, scale, zoom, move, filter } = rollConfig;
 
-        this.videoElements.forEach((target) => {
-            const dom = (target as VideoObject).shadowElement ?? target
+        for(const target of this.videoElements) {
+            const dom = (target as VideoObject).shadowElement ?? target;
+
+            // if a video's readyState is empty, ignore it. 
+            if ('readyState' in dom && (dom.readyState as number) === 0) {
+                continue;
+            }
+
             const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);
 
             this.rollConfig.scale.values = scaleNum;
@@ -183,7 +198,7 @@ export default class VideoRoll {
             dom.classList.add("video-roll-transition");
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
-        });
+        }
 
         return this;
     }
@@ -257,6 +272,10 @@ export default class VideoRoll {
         return videoSelector;
     }
 
+    /**
+     * get roll config
+     * @returns
+     */
     static getRollConfig() {
         return this.rollConfig;
     }
