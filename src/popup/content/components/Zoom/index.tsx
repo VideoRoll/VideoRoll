@@ -6,7 +6,7 @@
 
 import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
-import { getDefaultConfig } from '../../use/useConfig.ts';
+import { getDefaultConfig } from '../../use';
 import "./index.less";
 
 export default defineComponent({

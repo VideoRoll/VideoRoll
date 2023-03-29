@@ -1,12 +1,12 @@
 /*
- * @description: mve Component
+ * @description: move Component
  * @Author: Gouxinyu
  * @Date: 2022-09-19 22:53:23
  */
 
 import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
-import { getDefaultConfig } from '../../use/useConfig';
+import { getDefaultConfig } from '../../use';
 import "./index.less";
 
 export default defineComponent({
