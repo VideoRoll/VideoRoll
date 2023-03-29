@@ -6,23 +6,24 @@
 
 # 📺 Video Roll
 
-![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)
+<center> ![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)
 
-[![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
+[![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://badgen.net/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") /
 [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") /
 [Home Page](https://gomi.site/VideoRoll "Home Page")
 
-### ✨ 介绍(Describe)
+English / [简体中文](README-zh_CN.md)
+</center>
+
+### ✨ Describe
 
 Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tune and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.We provide an excellent memory system to help the next time you enter the website to take effect directly.
 
-Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻转、调节音调和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
-
 ---
 
-### ✨ 主要特性(Features)
+### ✨ Features
 
 ![](https://tuchuangs.com/imgs/2022/09/11/0b4c21db7b3e0d01.png)
 
@@ -42,126 +43,150 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 
 ---
 
--   ✅ 可旋转任何网页中的 HTML5 视频，支持 0/90/180/270° 旋转
--   ✅ 支持镜像翻转（垂直/水平翻转）
--   ✅ 支持自定义缩放
--   ✅ 支持移动视频位置
--   ✅ 支持自定义比例调整
--   ✅ 支持调节视频音调
--   ✅ 支持设置滤镜效果
--   ✅ 记忆系统（保存当前网站的配置，下次进入网页直接生效）
--   ✅ 针对同源 iframe 中的视频做了优化，支持旋转同源 iframe 中的视频(如 dailymotion.com)
--   ✅ 旋转视频时，会自动根据视频容器和视频原始大小尺寸进行自适应，避免旋转后只能展示部分内容的情况
--   ✅ 重视安全性，插件不会收集任何用户信息
--   ✅ 支持快捷键 ctrl + 方向键
+### ✨ Shortcut Key useage
+
+-   ctrl+ArrowUp(0deg)
+-   ctrl+ArrowRight(90deg)
+-   ctrl+ArrowDown(180deg)
+-   ctrl+ArrowLeft(270deg)
 
 ---
 
-### ✨ 快捷键使用方式(Shortcut Key useage)
+### ✨ Change Log
+-   v1.1.3:
 
-#### Steps:
+    -   🐞Bug Fixes: 
+        - Fix the problem that the shortcut key is invalid.
 
-1. 地址栏输入 `chrome://extensions/shortcuts`
-2. 找到 Video Roll, 设置快捷键
+    -   ✨Features:
+        - Add reset button.
 
----
+    -   🌈Development:
+        - Rewrite the build flow.
+        - Change yarn into pnpm.
 
-### ✨ 更新日志(Change Log)
 -   v1.1.2:
 
     -   🐞Bug Fixes: 
         - Fix the problem that the memory system is invalid.
+
     -   ✨Features:
         - Add tune function. Now you can adjust the pitch of HTML5 Videos.We used [jungle.js](https://github.com/cwilso/Audio-Input-Effects/blob/main/js/jungle.js) (Copyright Google) to accomplish this function. And thanks for the inspiration [Pitch shifter](https://chrome.google.com/webstore/detail/pitch-shifter-html5-video/mpmkclglcbkjchakihfpblainfncennj)
 
 -   v1.1.1:
 
-    -   Add move function.
-    -   Add filter function.
-    -   Set 'Remenber this tab' as default option.
-    -   Change .vue into .tsx for better typescript dev experience.
+    -   ✨Features:
+        - Add move function.
+        - Add filter function.
+        - Set 'Remenber this tab' as default option.
+    
+    -   🌈Development:
+        - Change .vue into .tsx for better typescript dev experience.
 
 -   v1.1.0:
 
-    -   Brand new interface(全新的交互界面)
-    -   Support zoom(支持自定义缩放)
-    -   Support scale(支持自定义调整比例)
-    -   Add memory system(增加记忆系统)
+    -   ✨Features:
+        - Brand new interface.
+        - Support zoom.
+        - Support scale.
+        - Add memory system.
 
 -   v1.0.52:
 
-    -   fixed: Bilibili 旋转不生效
+    -   🐞Bug Fixes: 
+        - Fix the problem that Bilibili is not working.
 
 -   v1.0.51:
 
-    -   移除不必要的权限要求
+    -   Remove unnecessary permissions.
 
 -   v1.0.5:
 
-    -   增加镜像翻转功能（垂直/水平翻转），可同时镜像翻转和二维旋转
-    -   优化界面
+    -   ✨Features:
+        - Support flip.
+        - Brand new interface.
 
 -   v1.0.4:
 
-    -   增加快捷键操作：Ctrl+Right(90deg)/Ctrl+Down(180deg)/Ctrl+Left(270deg)/Ctrl+Up(0deg)
-    -   增加小图标 badge
+    -   ✨Features:
+        - Support shortcut key：Ctrl+Right(90deg)/Ctrl+Down(180deg)/Ctrl+Left(270deg)/Ctrl+Up(0deg)
+        - Add badge.
 
 -   v1.0.3:
 
-    -   修复存在跨域 iframe 时报错问题
-    -   修复 Youtube 全屏时旋转角度失效问题
+    -   🐞Bug Fixes: 
+        - Fix the problem that F12 reporting an error when rotating iframe's video.
+        - Fix the problem that Youtube fullscreen is not working.
 
-        bug 贡献者：
-        chrome 用户 @天南地北随遇而安
+        bug reporter：
+        chrome user @天南地北随遇而安
 
 -   v1.0.2:
-    -   支持旋转 (同源)iframe 中的视频
-    -   增加了旋转时的动画
-    -   修复了扩展程序管理中显示报错的问题
+
+    -   🐞Bug Fixes: 
+        - Fixed an error display in extension management.
+
+    -   ✨Features:
+        - Support same-origin iframe.
+        - Add rotate animation.
+        
 
 ---
 
-### ✨ 安装(Installation)
+### ✨ Installation
 
--   **crx 安装**
-    在谷歌应用商店或非官方商店直接下载该插件安装即可（由于谷歌对于新开发者采取信任制策略，可能需要数个月才能进入信任名单，如提示不信任，需要点击确认安装）
+-   **crx**
+    - [chrome.zzzmh.cn](https://chrome.zzzmh.cn/info/cokngoholafkeghnhhdlmiadlojpindm)
+    - [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store")
+    - [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons")
 
--   **开发模式安装**
-    如您无法安装 crx，可以在浏览器的扩展程序中开启“开发者模式”，直接将 dist 文件夹拖入安装即可。
+
+-   **developer mode**
+    If you can't install crx，you can open chrome's developer mode.
 
 ---
 
-### ✨ 捐赠(Sponsoring)
+### ✨ Sponsoring
 
 -   [afdian](https://afdian.net/a/gomi_gxy/plan)
 -   [official(last page)](https://gomi.site/VideoRoll)
 
 ---
 
-### ✨ 问题反馈(Bug Report)
+### ✨ Bug Report
 
-若您在使用中遇到任何问题，比如 bug 或者网站有特殊的视频元素无法旋转，请在 issue 中留下问题，我们会尽快解决。
-
----
-
-### ✨ 贡献(Contribution)
-
-如果你觉得这个插件对你有所帮助，please star it.
-
-若你发现问题或有更好的 idea，欢迎贡献想法和代码~
+If you have any questions, please commit a issue.
 
 ---
 
-### ✨ 感谢以下开源项目(Acknowledgments)
+### ✨ Contribution
 
--   Vue
--   Parcel
--   Jest
--   Jsx
--   Typescript
--   Copyfiles
--   Jungle
--   Node
--   Less
--   Vant
--   Visual Studio Code
+If you like this extension，please star it.
+If you have any good idea, please commit a issue or send a PR.
+
+#### Development steps
+
+1. clone this repo to your local.
+2. `pnpm install`
+3. dev: `pnpm run dev:chromium`, then you can drag and drop the dist folder into chrome's extension management.(make sure open developer mode). Parcel will do the hot reload work for you, just change your code, then reclick the popup button.
+4. build: `pnpm run build`. Both chromium zip and firefox zip will be done.
+
+
+---
+
+### ✨ Acknowledgments
+
+-   vue
+-   parcel
+-   parcel-namer-hashless
+-   jest
+-   jsx
+-   typescript
+-   copyfiles
+-   jungle
+-   node
+-   less
+-   vant
+-   visual Studio Code
+-   pnpm
+-   yarn

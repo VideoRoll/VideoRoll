@@ -9,7 +9,7 @@ const config: Config = {
   verbose: true,
   preset: "ts-jest",
   testEnvironment: "jsdom",
-  moduleFileExtensions: ['ts', 'js'],
+  moduleFileExtensions: ['js', 'ts'],
   extensionsToTreatAsEsm: ['.ts']
 };
 

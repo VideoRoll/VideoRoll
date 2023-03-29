@@ -17,7 +17,9 @@ export enum ActionType {
     ON_MOUNTED = 0,
     UPDATE_STORAGE,
     UPDATE_BADGE,
-    UPDATE_CONFIG
+    UPDATE_CONFIG,
+    INIT_SHORT_CUT_KEY,
+    GET_BADGE
 }
 
 export enum FlipType {
@@ -72,18 +74,30 @@ export interface IRollConfig {
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;
-    videoSelector: string[];
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | boolean | string[]
+    videoSelector: VideoSelector;
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | boolean | VideoSelector
 }
+
+export type VideoSelector = {
+    defaultDom: string;
+    shadowDom?: string;
+    wrapDom?: string
+}
+
+export type VideoObject = { shadowElement: HTMLElement,  wrapElement: HTMLElement };
+
+export type VideoElement = VideoObject | HTMLVideoElement;
 
 export interface IWebSite {
     [prop: string]: {
         name: string;
-        videoSelector: any[]
+        videoSelector: VideoSelector
     }
 }
 
-export interface IVideoDom {
-    dom: HTMLVideoElement | null;
-    backupDom: HTMLVideoElement | HTMLElement | null;
+export enum KEY_CODE {
+    UP = 'ArrowUp',
+    DOWN = 'ArrowDown',
+    LEFT = 'ArrowLeft',
+    RIGHT = 'ArrowRight'
 }

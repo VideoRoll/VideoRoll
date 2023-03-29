@@ -5,7 +5,8 @@
  */
 
 import { defineComponent, inject } from "vue";
-import { IRollConfig } from "../../../../types/type.d";
+import type { IRollConfig } from "../../../../types/type.d";
+import { getDefaultConfig } from '../../use';
 import "./index.less";
 
 export default defineComponent({
@@ -18,24 +19,32 @@ export default defineComponent({
             rollConfig.zoom = value;
             update("zoom", value);
         };
+
+        const reset = () => {
+            setZoomNum(getDefaultConfig().zoom);
+        };
+
         return () => (
-            <div class="video-roll-zoom">
-                <span class="zoom-label">out</span>
-                <van-slider
-                    v-model={rollConfig.zoom}
-                    min={0}
-                    max={3}
-                    step={0.01}
-                    bar-height="4px"
-                    onUpdate:modelValue={setZoomNum}
-                    v-slots={{
-                        button: () => (
-                            <div class="custom-button">{rollConfig.zoom}</div>
-                        ),
-                    }}
-                ></van-slider>
-                <span class="zoom-label">in</span>
-            </div>
+            <>
+                <van-button class="video-roll-resetBtn" size="mini" icon="replay" type="primary" onClick={reset}>reset</van-button>
+                <div class="video-roll-zoom">
+                    <span class="zoom-label">out</span>
+                    <van-slider
+                        v-model={rollConfig.zoom}
+                        min={0}
+                        max={3}
+                        step={0.01}
+                        bar-height="4px"
+                        onUpdate:modelValue={setZoomNum}
+                        v-slots={{
+                            button: () => (
+                                <div class="custom-button">{rollConfig.zoom}</div>
+                            ),
+                        }}
+                    ></van-slider>
+                    <span class="zoom-label">in</span>
+                </div>
+            </>
         );
     },
 });
