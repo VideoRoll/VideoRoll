@@ -4,9 +4,17 @@
  * @Date: 2022-01-13 22:43:33
 -->
 
-# 📺 Video Roll
+<p align="center">
+  <a href="https://gomi.site/VideoRoll">
+    <img width="230" src="src/icons/icon_512.png">
+  </a>
+</p>
 
-<center> ![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)
+<h1 align="center">
+Video Roll
+</h1>
+
+<div align="center">
 
 [![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://badgen.net/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
@@ -15,7 +23,7 @@
 [Home Page](https://gomi.site/VideoRoll "Home Page")
 
 English / [简体中文](README-zh_CN.md)
-</center>
+</div>
 
 ### ✨ Describe
 
