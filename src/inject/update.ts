@@ -5,7 +5,7 @@ import { KEY_CODE } from "../types/type.d";
 let KeyboardEventCache: Function | null = null;
 
 const MAX_TIMES = 5;
-const TIME = 300;
+const TIME = 230;
 
 let times = 0;
 
