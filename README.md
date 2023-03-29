@@ -8,7 +8,7 @@
 
 <center> ![bbaiqK.png](https://s1.ax1x.com/2022/03/13/bbaiqK.png)
 
-[![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
+[![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://badgen.net/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") /
 [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") /
@@ -54,6 +54,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
 
 ### ✨ Change Log
 -   v1.1.3:
+
     -   🐞Bug Fixes: 
         - Fix the problem that the shortcut key is invalid.
 
@@ -63,6 +64,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
     -   🌈Development:
         - Rewrite the build flow.
         - Change yarn into pnpm.
+
 -   v1.1.2:
 
     -   🐞Bug Fixes: 
@@ -72,6 +74,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
         - Add tune function. Now you can adjust the pitch of HTML5 Videos.We used [jungle.js](https://github.com/cwilso/Audio-Input-Effects/blob/main/js/jungle.js) (Copyright Google) to accomplish this function. And thanks for the inspiration [Pitch shifter](https://chrome.google.com/webstore/detail/pitch-shifter-html5-video/mpmkclglcbkjchakihfpblainfncennj)
 
 -   v1.1.1:
+
     -   ✨Features:
         - Add move function.
         - Add filter function.
@@ -81,6 +84,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
         - Change .vue into .tsx for better typescript dev experience.
 
 -   v1.1.0:
+
     -   ✨Features:
         - Brand new interface.
         - Support zoom.
@@ -88,6 +92,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
         - Add memory system.
 
 -   v1.0.52:
+
     -   🐞Bug Fixes: 
         - Fix the problem that Bilibili is not working.
 
@@ -96,6 +101,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
     -   Remove unnecessary permissions.
 
 -   v1.0.5:
+
     -   ✨Features:
         - Support flip.
         - Brand new interface.
@@ -107,6 +113,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
         - Add badge.
 
 -   v1.0.3:
+
     -   🐞Bug Fixes: 
         - Fix the problem that F12 reporting an error when rotating iframe's video.
         - Fix the problem that Youtube fullscreen is not working.
@@ -115,6 +122,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
         chrome user @天南地北随遇而安
 
 -   v1.0.2:
+
     -   🐞Bug Fixes: 
         - Fixed an error display in extension management.
 
