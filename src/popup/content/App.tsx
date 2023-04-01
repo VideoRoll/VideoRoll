@@ -1,16 +1,15 @@
 import { defineComponent, ref, onMounted, provide, Transition } from "vue";
+import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
 import SettingPanel from "./components/SettingPanel";
 import {
     ChevronBackOutline,
-    LogoGithub,
-    Home,
-    ThumbsUp,
 } from "@vicons/ionicons5";
 import { useConfig, useDegBtn } from "./use";
 import { initRollConfig, updateRollConfig } from "./utils";
 import { ActionType } from "../../types/type.d";
+
 import "./index.less";
 
 export default defineComponent({
@@ -41,20 +40,21 @@ export default defineComponent({
          * 添加样式
          */
         onMounted(async () => {
-            let queryOptions = { active: true, currentWindow: true };
-            let [tab] = await chrome.tabs.query(queryOptions);
+            const queryOptions = { active: true, currentWindow: true };
+            const [tab] = await browser.tabs.query(queryOptions);
 
             initRollConfig(rollConfig, tab);
+
+            console.log(rollConfig, tab);
 
             // add style
             chrome.tabs.sendMessage(
                 rollConfig.tabId,
-                { rollConfig, type: ActionType.ON_MOUNTED },
-                {},
-                (res) => {
-                    console.debug(res);
-                }
-            );
+                { rollConfig: JSON.parse(JSON.stringify(rollConfig)), type: ActionType.ON_MOUNTED },
+                {}
+            ).then((res) => {
+                console.debug(res);
+            });
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config } = a;
@@ -85,7 +85,7 @@ export default defineComponent({
                                         key={item.type}
                                         onClick={() => update("deg", item.deg)}
                                     >
-                                        <chevron-back-outline color="#a494c6" />
+                                        <ChevronBackOutline />
                                     </div>
                                 ))}
 
@@ -96,23 +96,13 @@ export default defineComponent({
                         </div>
                         <Footer></Footer>
                     </div>
-                    <transition name="van-fade">
+                    <Transition name="van-fade">
                         <div class="video-roll-setting" v-show={isShow.value}>
-                            <setting-panel />
+                            <SettingPanel />
                         </div>
-                    </transition>
+                    </Transition>
                 </main>
             </div>
         );
-    },
-    components: {
-        SettingPanel,
-        ThumbsUp,
-        Home,
-        ChevronBackOutline,
-        LogoGithub,
-        Head,
-        Footer,
-        Transition,
-    },
+    }
 });

@@ -65,6 +65,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
 
     -   🐞Bug Fixes: 
         - Fix the problem that the shortcut key is invalid.
+        - When there is more than one video element then the function is invalid.
 
     -   ✨Features:
         - Add reset button.

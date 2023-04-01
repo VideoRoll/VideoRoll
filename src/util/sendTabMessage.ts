@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 /**
  * 这里需要解决并发导致同一个port被多次触发
  * @param tabId 
@@ -5,9 +7,9 @@
  * @param callback 
  */
 export function sendTabMessage(tabId: number, options: any, callback?: Function) {
-    chrome.tabs.sendMessage(tabId, { tabId, ...options }, {}).then((response) => {
-        if (chrome.runtime.lastError) {
-            console.debug(chrome.runtime.lastError.message);
+    browser.tabs.sendMessage(tabId, { tabId, ...options }, {}).then((response) => {
+        if (browser.runtime.lastError) {
+            console.debug(browser.runtime.lastError.message);
         }
 
         if (typeof callback === 'function') {

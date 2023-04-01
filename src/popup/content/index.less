@@ -3,7 +3,7 @@ body {
 
     margin: 0;
     --van-primary-color: #a494c6 !important;
-    --van-sidebar-width: 65px !important;
+    --van-sidebar-width: 70px !important;
     --van-sidebar-padding: 12.5px var(--van-padding-sm) !important;
     --van-sidebar-background: #1f1f1f97 !important;
     --van-sidebar-selected-background: #5d5d6045 !important;
@@ -60,7 +60,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #a494c6;
+            color: var(--van-primary-color);
             padding: 10px 0;
             overflow: hidden;
         }
@@ -71,12 +71,13 @@ body {
             border: 5px solid #2d2e31;
             border-radius: 50%;
             position: relative;
+            color: var(--van-primary-color);
 
             .rotate-deg-text {
                 width: 32px;
                 height: 20px;
                 color: #fff;
-                background-color: #a494c6;
+                background-color: var(--van-primary-color);
                 border-radius: 3px;
                 position: absolute;
                 left: 50%;

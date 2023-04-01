@@ -5,7 +5,7 @@
  */
 import WEBSITE from "../website";
 import Jungle from "./jungle";
-import { Flip, IMove, IFilter, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject } from '../types/type.d';
+import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject } from '../types/type.d';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -178,7 +178,7 @@ export default class VideoRoll {
         rollConfig: IRollConfig
     ) {
         this.setRollConfig(rollConfig);
-        const { deg, flip, scale, zoom, move, filter } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, focus } = rollConfig;
 
         for(const target of this.videoElements) {
             const dom = (target as VideoObject).shadowElement ?? target;
@@ -192,7 +192,7 @@ export default class VideoRoll {
 
             this.rollConfig.scale.values = scaleNum;
             this.documents.forEach((doc) => {
-                this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
+                this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter, focus }, doc);
             });
 
             dom.classList.add("video-roll-transition");
@@ -224,16 +224,33 @@ export default class VideoRoll {
         scale: [number, number],
         zoom: number,
         move: IMove,
-        filter: IFilter
+        filter: IFilter,
+        focus: Focus
     },
         doc = document
     ) {
-        const { deg, flip, scale, zoom, move, filter } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, focus } = rollConfig;
         const degScale = doc.getElementById("video-roll-deg-scale") as HTMLElement;
 
         const filterStyle = filter.mode === 'custom' ? this.getFilterStyle(filter) : filter.mode;
 
-        degScale.innerHTML = `.video-roll-deg-scale { transform: ${FlipType[flip]} rotate(${deg}deg) scale3d(${zoom}, ${zoom}, 1) scale(${scale[0]}, ${scale[1]}) translate(${move.x}%, ${-move.y}%) !important; filter: ${filterStyle};`;
+        degScale.innerHTML = `.video-roll-deg-scale { 
+            transform: ${FlipType[flip]} rotate(${deg}deg) scale3d(${zoom}, ${zoom}, 1) scale(${scale[0]}, ${scale[1]}) translate(${move.x}%, ${-move.y}%) !important; 
+            filter: ${filterStyle}; }
+
+            .video-roll-deg-scale::before {
+                background-color: #000;
+                bottom: 0;
+                content: "";
+                display: ${focus.on ? 'block' : 'none'};
+                left: 0;
+                opacity: .9;
+                position: fixed;
+                right: 0;
+                top: 0;
+                z-index: 1002;
+            }
+        `;
     }
 
     /**
@@ -352,7 +369,7 @@ export default class VideoRoll {
             return;
         }
 
-        if (this.audioController) {
+        if (this.audioController.length) {
             this.audioController.forEach((v) => {
                 v.setPitchOffset(this.rollConfig.pitch);
             })

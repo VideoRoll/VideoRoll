@@ -5,7 +5,7 @@
  */
 
 import { defineComponent, inject } from "vue";
-import { InformationCircle, OptionsSharp, CloseSharp } from "@vicons/ionicons5";
+import { OptionsSharp, CloseSharp } from "@vicons/ionicons5";
 import "./index.less";
 
 export default defineComponent({
@@ -14,7 +14,7 @@ export default defineComponent({
         isShow: Boolean
     },
     setup(props) {
-        const onOpenSetting = inject("onOpenSetting");
+        const onOpenSetting = inject("onOpenSetting") as () => void;
         return () => (
             <div class="video-roll-header">
                 <div class="video-roll-logo">
@@ -30,22 +30,15 @@ export default defineComponent({
                         onClick={onOpenSetting}
                     >
                         {
-                            props.isShow ? <close-sharp
+                            props.isShow ? <CloseSharp
                                 class="options-sharp"
-                                color="#fffff"
-                            ></close-sharp> : <options-sharp
+                            ></CloseSharp> : <OptionsSharp
                                 class="options-sharp"
-                                color="#fffff"
-                            ></options-sharp>
+                            ></OptionsSharp>
                         }
                     </div>
                 </div>
             </div>
         );
-    },
-    components: {
-        InformationCircle,
-        OptionsSharp,
-        CloseSharp
-    },
+    }
 });

@@ -8,9 +8,10 @@ specifiers:
   '@parcel/transformer-less': ^2.8.3
   '@parcel/transformer-vue': ^2.8.3
   '@parcel/validator-typescript': ^2.8.3
-  '@types/chrome': ^0.0.196
+  '@types/chrome': ^0.0.227
   '@types/jest': ^29.0.3
   '@types/node': ^18.8.4
+  '@types/webextension-polyfill': ^0.10.0
   '@typescript-eslint/eslint-plugin': ^5.36.1
   '@typescript-eslint/parser': ^5.36.1
   '@vant/touch-emulator': ^1.4.0
@@ -35,12 +36,14 @@ specifiers:
   typescript: ^4.8.4
   vant: 4.0.0-rc.0
   vue: ^3.2.41
+  webextension-polyfill: ^0.10.0
 
 dependencies:
   '@vant/touch-emulator': 1.4.0
   '@vicons/ionicons5': 0.11.0
   vant: 4.0.0-rc.0_vue@3.2.47
   vue: 3.2.47
+  webextension-polyfill: 0.10.0
 
 devDependencies:
   '@babel/core': 7.21.0
@@ -50,9 +53,10 @@ devDependencies:
   '@parcel/transformer-less': 2.8.3
   '@parcel/transformer-vue': 2.8.3
   '@parcel/validator-typescript': 2.8.3_typescript@4.9.5
-  '@types/chrome': 0.0.196
+  '@types/chrome': 0.0.227
   '@types/jest': 29.4.0
   '@types/node': 18.14.2
+  '@types/webextension-polyfill': 0.10.0
   '@typescript-eslint/eslint-plugin': 5.54.0_6mj2wypvdnknez7kws2nfdgupi
   '@typescript-eslint/parser': 5.54.0_ycpbpc6yetojsgtrx3mwntkhsu
   '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.21.0
@@ -1902,8 +1906,8 @@ packages:
       '@babel/types': 7.21.2
     dev: true
 
-  /@types/chrome/0.0.196:
-    resolution: {integrity: sha512-LAjGIQYC0wyiYu6lVT03dBrHBfYTMsM8EmNfQ+UdZipGZe8OUiir6weoa9oQoBw3T3RLzBCp9m904T+rFtpPAg==}
+  /@types/chrome/0.0.227:
+    resolution: {integrity: sha512-l1sVnf/1wZ/oNPw5X7OJMZjQlqVf3tPO50aE/aETHQRbrYhlHZkwv7lcuOWCimRSkFdHvAW4M+RIBAZACblXng==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.10
@@ -1986,6 +1990,10 @@ packages:
 
   /@types/tough-cookie/4.0.2:
     resolution: {integrity: sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==}
+    dev: true
+
+  /@types/webextension-polyfill/0.10.0:
+    resolution: {integrity: sha512-If4EcaHzYTqcbNMp/FdReVdRmLL/Te42ivnJII551bYjhX19bWem5m14FERCqdJA732OloGuxCRvLBvcMGsn4A==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -5674,6 +5682,10 @@ packages:
   /weak-lru-cache/1.2.2:
     resolution: {integrity: sha512-DEAoo25RfSYMuTGc9vPJzZcZullwIqRDSI9LOy+fkCJPi6hykCnfKaXTuPBDuXAUcqHXyOgFtHNp/kB2FjYHbw==}
     dev: true
+
+  /webextension-polyfill/0.10.0:
+    resolution: {integrity: sha512-c5s35LgVa5tFaHhrZDnr3FpQpjj1BB+RXhLTYUxGqBVN460HkbM8TBtEqdXWbpTKfzwCcjAZVF7zXCYSKtcp9g==}
+    dev: false
 
   /webidl-conversions/7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}

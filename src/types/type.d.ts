@@ -56,6 +56,10 @@ export type Zoom = number;
 
 export type Deg = number;
 
+export type Focus = {
+    on: boolean;
+}
+
 export type RollKey = keyof IRollConfig;
 
 export type RollValue = IRollConfig[RollKey];
@@ -68,6 +72,7 @@ export interface IRollConfig {
     scale: IScale;
     pitch: Pitch;
     zoom: Zoom;
+    focus: Focus;
     move: IMove;
     deg: Deg;
     filter: IFilter;
@@ -75,7 +80,7 @@ export interface IRollConfig {
     store: boolean;
     isInit: boolean;
     videoSelector: VideoSelector;
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | boolean | VideoSelector
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 
 export type VideoSelector = {

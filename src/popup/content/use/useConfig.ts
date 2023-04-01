@@ -19,6 +19,9 @@ const defaultConfig = {
         x: 0,
         y: 0
     },
+    focus: {
+        on: false
+    },
     pitch: 0,
     filter: {
         mode: 'unset',
