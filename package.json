@@ -18,7 +18,7 @@
         "build": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background && pnpm run build:zip",
         "copy:static": "copyfiles -u 1 src/icons/* dist",
         "build:zip": "node scripts/build.js",
-        "clean": "rimraf dist && rimraf zip",
+        "clean": "rimraf dist && rimraf chromiumExt.zip && rimraf firefoxExt.zip",
         "start": "pnpm run dev",
         "precommit": "pnpm run test"
     },
@@ -29,7 +29,10 @@
     ],
     "type": "module",
     "parcel-namer-hashless": {
-        "mode": "all"
+        "mode": "all",
+        "exclude": [
+            "$polyfill.js"
+        ]
     },
     "repository": {
         "type": "git",
@@ -51,7 +54,8 @@
         "@vant/touch-emulator": "^1.4.0",
         "@vicons/ionicons5": "^0.11.0",
         "vant": "4.0.0-rc.0",
-        "vue": "^3.2.41"
+        "vue": "^3.2.41",
+        "webextension-polyfill": "^0.10.0"
     },
     "devDependencies": {
         "@babel/core": "^7.21.0",
@@ -61,9 +65,10 @@
         "@parcel/transformer-less": "^2.8.3",
         "@parcel/transformer-vue": "^2.8.3",
         "@parcel/validator-typescript": "^2.8.3",
-        "@types/chrome": "^0.0.196",
+        "@types/chrome": "^0.0.227",
         "@types/jest": "^29.0.3",
         "@types/node": "^18.8.4",
+        "@types/webextension-polyfill": "^0.10.0",
         "@typescript-eslint/eslint-plugin": "^5.36.1",
         "@typescript-eslint/parser": "^5.36.1",
         "@vue/babel-plugin-jsx": "^1.1.1",

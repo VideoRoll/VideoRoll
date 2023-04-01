@@ -56,6 +56,7 @@ export default defineComponent({
         Store: defineAsyncComponent(() => import("../Store")),
         Filter: defineAsyncComponent(() => import("../Filter")),
         Move: defineAsyncComponent(() => import("../Move")),
-        Pitch: defineAsyncComponent(() => import("../Pitch"))
+        Pitch: defineAsyncComponent(() => import("../Pitch")),
+        Focus: defineAsyncComponent(() => import("../Focus"))
     },
 });
