@@ -27,7 +27,7 @@ English / [简体中文](README-zh_CN.md)
 
 ### ✨ Describe
 
-Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tune and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left.We provide an excellent memory system to help the next time you enter the website to take effect directly.
+Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tune, focus and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left/B.We provide an excellent memory system to help the next time you enter the website to take effect directly.
 
 ---
 
@@ -42,6 +42,7 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
 -   ✅Scale
 -   ✅Rotate 0/90/180/270deg
 -   ✅Tune(Pitch)
+-   ✅Focus(Turn the lights off)
 -   ✅Filter
 -   ✅Memory system(You can save all the configuration of the current website so that it will take effect directly next time)
 -   ✅Support shortcut key
@@ -52,15 +53,35 @@ Video Roll is a web extension that helps you rotate, scale, zoom, move, flip, tu
 ---
 
 ### ✨ Shortcut Key useage
-
+#### Rotate
 -   ctrl+ArrowUp(0deg)
 -   ctrl+ArrowRight(90deg)
 -   ctrl+ArrowDown(180deg)
 -   ctrl+ArrowLeft(270deg)
 
+#### Focus
+ctrl+B
+
 ---
 
 ### ✨ Change Log
+-   v1.1.4:
+
+    -   🐞Bug Fixes: 
+        - Background.js's message posting error.
+        - When there is more than one video element, a scaling error may occur.
+
+    -   📺Platform Support:
+        - Now we support Firefox!
+
+    -   ✨Features:
+        - Add focus mode(known as 'Turn off the lights').
+        - ctrl+B to toggle focus mode.
+
+    -   🌈Development:
+        - Add webextension-polyfill to resolve diffrent platform's API.
+
+
 -   v1.1.3:
 
     -   🐞Bug Fixes: 
@@ -199,3 +220,4 @@ If you have any good idea, please commit a issue or send a PR.
 -   visual Studio Code
 -   pnpm
 -   yarn
+-   webextension-polyfill

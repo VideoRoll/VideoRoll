@@ -104,5 +104,12 @@ export enum KEY_CODE {
     UP = 'ArrowUp',
     DOWN = 'ArrowDown',
     LEFT = 'ArrowLeft',
-    RIGHT = 'ArrowRight'
+    RIGHT = 'ArrowRight',
+    B = 'KeyB'
+}
+
+export interface IRealVideoPlayer {
+    width: number;
+    height: number;
+    player: HTMLVideoElement | null;
 }
