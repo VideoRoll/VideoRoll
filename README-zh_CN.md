@@ -26,7 +26,7 @@ Video Roll
 
 ### ✨ 介绍
 
-Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻转、调节音调和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
+Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻转、调节音调、专注和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left/B。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
 
 ---
 
@@ -42,6 +42,7 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 -   ✅ 支持移动视频位置
 -   ✅ 支持自定义比例调整
 -   ✅ 支持调节视频音调
+-   ✅ 专注模式
 -   ✅ 支持设置滤镜效果
 -   ✅ 记忆系统（保存当前网站的配置，下次进入网页直接生效）
 -   ✅ 针对同源 iframe 中的视频做了优化，支持旋转同源 iframe 中的视频(如 dailymotion.com)
@@ -53,14 +54,34 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 
 ### ✨ 快捷键使用方式
 
+#### 旋转角度
 -   ctrl+ArrowUp(旋转0度)
 -   ctrl+ArrowRight(旋转90度)
 -   ctrl+ArrowDown(旋转180度)
 -   ctrl+ArrowLeft(旋转270度)
 
+#### 专注模式
+ctrl+B
+
 ---
 
 ### ✨ 更新日志
+-   v1.1.4:
+
+    -   🐞Bug Fixes: 
+        - 修复Background.js消息传递报错问题。
+        - 修复当一个页面存在多个视频元素时，旋转可能出现缩放比例计算错误的问题。
+
+    -   📺Platform Support:
+        - 现在已支持Firefox!
+
+    -   ✨Features:
+        - 增加专注模式（类似 Turn off the lights）。
+        - ctrl+B 开启和关闭专注模式。
+
+    -   🌈Development:
+        - 添加 webextension-polyfill 解决不同平台的API兼容问题。
+
 -   v1.1.3:
 
     -   🐞Bug Fixes: 
@@ -196,3 +217,4 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 -   visual Studio Code
 -   pnpm
 -   yarn
+-   webextension-polyfill

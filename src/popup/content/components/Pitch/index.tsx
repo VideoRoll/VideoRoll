@@ -1,5 +1,5 @@
 /*
- * @description: mve Component
+ * @description: pitch Component
  * @Author: Gouxinyu
  * @Date: 2022-09-19 22:53:23
  */

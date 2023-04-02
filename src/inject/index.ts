@@ -3,7 +3,7 @@
  * @Author: Gouxinyu
  * @Date: 2022-01-11 23:49:59
  */
-
+import browser from 'webextension-polyfill';
 import { ActionType } from '../types/type.d';
 import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent } from "./update";
 import { sendRuntimeMessage } from "../util";

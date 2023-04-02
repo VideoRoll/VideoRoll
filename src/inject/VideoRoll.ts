@@ -5,7 +5,7 @@
  */
 import WEBSITE from "../website";
 import Jungle from "./jungle";
-import { Flip, IMove, IFilter, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject } from '../types/type.d';
+import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer } from '../types/type.d';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -19,6 +19,10 @@ export default class VideoRoll {
     static documents: Document[] = [];
 
     static videoNumbers: number = 0;
+
+    static realVideoPlayer: IRealVideoPlayer = { width: 0, height: 0, player: null };
+
+    static rootElement: HTMLElement | undefined;
 
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
@@ -109,7 +113,13 @@ export default class VideoRoll {
         const iframes = document.querySelectorAll("iframe") ?? [];
         const iframeEls: HTMLIFrameElement[] = Array.from(iframes).filter((v) => v.contentDocument);
 
-        this.documents = [document, ...iframeEls.map((v) => v.contentDocument as Document)];
+        this.documents = [document, ...iframeEls.map((v) => {
+            if (v.contentDocument) {
+                // @ts-ignore
+                v.contentDocument.iframeElement = v;
+            }
+            return v.contentDocument as Document;
+        })];
 
         return this;
     }
@@ -121,18 +131,14 @@ export default class VideoRoll {
         if (!this.documents.length) return;
 
         this.clearVideoElements();
+        this.clearRootElement();
+        this.clearRealVideoPlayer();
+
         this.documents.forEach((doc) => {
             this.setVideoBySelector(videoSelector, doc);
         });
 
         return this;
-    }
-
-    /**
-     * clear all cache
-     */
-    static clearVideoElements() {
-        this.videoElements = [];
     }
 
     /**
@@ -147,7 +153,7 @@ export default class VideoRoll {
         if (shadowDom && wrapDom) {
             const shadowElement = doc.querySelector(shadowDom);
             const wrapElement = doc.querySelector(wrapDom);
-            // if is shadow element, we can't get videoWidth and videoHeight, so we need use wrapDom
+            // if it is shadow element(whitch hides its content), we can't get videoWidth and videoHeight, so we need use wrapDom
             if (shadowElement && wrapElement) {
                 this.videoElements.push({ shadowElement, wrapElement } as VideoElement);
                 this.setVideoNumbers();
@@ -158,7 +164,18 @@ export default class VideoRoll {
         if (defaultDom) {
             const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
             if (defaultElements) {
-                this.videoElements.push(...Array.from(defaultElements));
+                this.videoElements.push(...Array.from(defaultElements).map((v, i) => {
+                    // @ts-ignore
+                    v.parentDocument = doc;
+
+                    if (i === 0) {
+                        this.setRealVideoPlayer(v);
+                    } else if (this.isRealVideoPlayer(v)) {
+                        this.setRealVideoPlayer(v);
+                    }
+
+                    return v;
+                }));
             }
         }
 
@@ -167,6 +184,46 @@ export default class VideoRoll {
 
     static setVideoNumbers(): void {
         this.videoNumbers = this.videoElements.length;
+    }
+
+    static setRootElement(element: HTMLElement) {
+        this.rootElement = element;
+    }
+
+    static setRealVideoPlayer(realPlayer: HTMLVideoElement) {
+        this.realVideoPlayer = {
+            width: realPlayer.offsetWidth,
+            height: realPlayer.offsetHeight,
+            player: realPlayer
+        };
+    }
+
+    /**
+     * clear all cache
+     */
+    static clearVideoElements() {
+        this.videoElements = [];
+    }
+
+    static clearRootElement() {
+        this.rootElement = void 0;
+    }
+
+    static clearRealVideoPlayer() {
+        this.realVideoPlayer = { width: 0, height: 0, player: null };
+    }
+
+    static isRealVideoPlayer(player: HTMLVideoElement): boolean {
+        const isSmaller = player.offsetWidth < this.realVideoPlayer.width || player.offsetHeight < this.realVideoPlayer.height;
+
+        // this may be ads video player
+        if (player.muted && player.loop && isSmaller) return false;
+
+        if ('readyState' in player && player.readyState === 0) return false;
+
+        if (isSmaller && player.readyState === 0) return false;
+
+        return true;
     }
 
     /**
@@ -178,21 +235,23 @@ export default class VideoRoll {
         rollConfig: IRollConfig
     ) {
         this.setRollConfig(rollConfig);
-        const { deg, flip, scale, zoom, move, filter } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, focus } = rollConfig;
 
-        for(const target of this.videoElements) {
+        for (const target of this.videoElements) {
             const dom = (target as VideoObject).shadowElement ?? target;
 
             // if a video's readyState is empty, ignore it. 
-            if ('readyState' in dom && (dom.readyState as number) === 0) {
-                continue;
-            }
+            if (!this.isRealVideoPlayer(dom as HTMLVideoElement)) continue;
 
             const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);
 
             this.rollConfig.scale.values = scaleNum;
             this.documents.forEach((doc) => {
-                this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter }, doc);
+                this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter, focus }, doc);
+
+                this.videoElements.forEach((video) => {
+                    this.updateFocus(doc, video as HTMLVideoElement, focus.on);
+                });
             });
 
             dom.classList.add("video-roll-transition");
@@ -224,16 +283,32 @@ export default class VideoRoll {
         scale: [number, number],
         zoom: number,
         move: IMove,
-        filter: IFilter
+        filter: IFilter,
+        focus: Focus
     },
         doc = document
     ) {
-        const { deg, flip, scale, zoom, move, filter } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, focus } = rollConfig;
         const degScale = doc.getElementById("video-roll-deg-scale") as HTMLElement;
 
         const filterStyle = filter.mode === 'custom' ? this.getFilterStyle(filter) : filter.mode;
 
-        degScale.innerHTML = `.video-roll-deg-scale { transform: ${FlipType[flip]} rotate(${deg}deg) scale3d(${zoom}, ${zoom}, 1) scale(${scale[0]}, ${scale[1]}) translate(${move.x}%, ${-move.y}%) !important; filter: ${filterStyle};`;
+        degScale.innerHTML = `.video-roll-deg-scale { 
+            transform: ${FlipType[flip]} rotate(${deg}deg) scale3d(${zoom}, ${zoom}, 1) scale(${scale[0]}, ${scale[1]}) translate(${move.x}%, ${-move.y}%) !important; 
+            filter: ${filterStyle}; 
+        }
+        #video-roll-root-mask {
+            display: ${focus.on ? 'block' : 'none'};
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 20000 !important;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        `;
     }
 
     /**
@@ -243,8 +318,9 @@ export default class VideoRoll {
     static isExistStyle(doc: Document) {
         const degScale = doc.getElementById("video-roll-deg-scale");
         const transition = doc.getElementById("video-roll-transition");
+        const root = document.getElementById("video-roll-root");
 
-        return degScale && transition ? [degScale, transition] : null;
+        return degScale && transition && root ? [degScale, transition, root] : null;
     }
 
     /**
@@ -305,9 +381,10 @@ export default class VideoRoll {
 
             const degScale = doc.createElement("style");
             const transition = doc.createElement("style");
+
             degScale.innerHTML = `
-            .video-roll-deg-scale {}
-        `;
+                .video-roll-deg-scale {}
+            `;
 
             transition.innerHTML = `.video-roll-transition {
                 transition: all 0.5s ease !important;
@@ -320,8 +397,13 @@ export default class VideoRoll {
             transition.setAttribute("type", "text/css");
 
             const head = doc.getElementsByTagName("head")[0];
-            head.appendChild(degScale);
-            head.appendChild(transition);
+
+            if (head) {
+                head.appendChild(degScale);
+                head.appendChild(transition);
+            }
+
+            this.addMaskElement();
         });
 
         if (storeThisTab) {
@@ -332,30 +414,114 @@ export default class VideoRoll {
     }
 
     /**
+     * add mask element(for focus mode)
+     */
+    static addMaskElement() {
+        const root = document.createElement("style");
+        root.innerHTML = '.video-roll-root {}';
+        root.setAttribute("id", "video-roll-root");
+        root.setAttribute("type", "text/css");
+
+        const documentHead = document.getElementsByTagName("head")[0];
+        documentHead.appendChild(root);
+
+        if (!document.getElementById('video-roll-root-mask')) {
+            const mask = document.createElement("div");
+            mask.setAttribute("id", "video-roll-root-mask");
+            document.body.appendChild(mask);
+        }
+    }
+
+    /**
+     * find the video's root wrapper element
+     * @param dom
+     * @param rect
+     * @returns
+     */
+    static findVideoRootElement(dom: HTMLElement, rect: [number, number]): HTMLElement {
+        const { parentElement } = dom;
+
+        if (parentElement && (parentElement.offsetWidth === rect[0] || parentElement.offsetHeight <= rect[1])) {
+            return this.findVideoRootElement(parentElement, rect);
+        }
+
+        return dom;
+    }
+
+    /**
+     * update focus mode
+     * @param doc
+     * @param video 
+     * @param focus
+     * @returns
+     */
+    static updateFocus(doc: Document, video: HTMLVideoElement, focus: boolean): void {
+        if (!focus && !this.rootElement) return;
+
+        // @ts-ignore
+        if (video.parentDocument !== doc || !this.isRealVideoPlayer(video)) return;
+
+        let rootDom;
+        if ('iframeElement' in doc) {
+            const iframe = doc.iframeElement as HTMLElement;
+            rootDom = this.rootElement ?? this.findVideoRootElement(iframe, [iframe.offsetWidth, iframe.offsetHeight]);
+        } else {
+            rootDom = this.rootElement ?? this.findVideoRootElement(video, [video.offsetWidth, video.offsetHeight]);
+        }
+
+        this.setRootElement(rootDom);
+
+        rootDom.classList.add('video-roll-root');
+
+        const { offsetWidth, offsetHeight } = rootDom;
+        const rootStyle = document.getElementById("video-roll-root");
+
+        if (rootStyle) {
+            rootStyle.innerHTML = focus ? `.video-roll-root { position: fixed !important; top: 10% !important; z-index: 200001 !important; width: ${offsetWidth}px !important; height: ${offsetHeight}px !important; } body * { z-index: auto !important; } body { overflow: hidden !important; }` : '.video-roll-root {}';
+        }
+    }
+
+    /**
      * update pitch
      * @returns 
      */
     static async updatePitch() {
-        if (!this.audioCtx) {
-            this.audioCtx = new AudioContext();
-            const { audioCtx } = this;
+        try {
+            if (!this.audioCtx) {
+                this.audioCtx = new AudioContext();
+                const { audioCtx } = this;
 
-            this.videoElements.forEach((dom) => {
-                const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
-                this.audioController.push(new Jungle(audioCtx));
+                const setPitch = () => {
+                    for (const dom of this.videoElements) {
+                        const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
+                        this.audioController.push(new Jungle(audioCtx));
+                        this.audioController.forEach((v) => {
+                            v.output.connect(audioCtx.destination);
+                            node.connect(v.input);
+                            v.setPitchOffset(this.rollConfig.pitch);
+                        });
+                    }
+                }
+
+                if (audioCtx.state !== 'running') {
+                    audioCtx.resume().then(() => {
+                        setPitch();
+                    });
+                } else {
+                    setPitch();
+                }
+
+                return;
+            }
+
+            if (this.audioController.length) {
                 this.audioController.forEach((v) => {
-                    v.output.connect(audioCtx.destination);
-                    node.connect(v.input);
                     v.setPitchOffset(this.rollConfig.pitch);
-                });
-            });
-            return;
+                })
+            }
+        } catch (err) {
+            console.debug(err);
         }
 
-        if (this.audioController) {
-            this.audioController.forEach((v) => {
-                v.setPitchOffset(this.rollConfig.pitch);
-            })
-        }
     }
 }
