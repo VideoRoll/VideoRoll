@@ -35,7 +35,10 @@ export interface IMove {
     y: number;
 }
 
-export type Pitch = number;
+export type Pitch = {
+    on: 0 | 1;
+    value: number;
+};
 
 export interface IScale {
     mode: "auto" | 'custom',
