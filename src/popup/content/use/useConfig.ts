@@ -22,7 +22,10 @@ const defaultConfig = {
     focus: {
         on: false
     },
-    pitch: 0,
+    pitch: {
+        on: 0,
+        value: 0
+    },
     filter: {
         mode: 'unset',
         blur: 0,

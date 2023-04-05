@@ -60,6 +60,10 @@ export function updateConfig(rollConfig: IRollConfig) {
     );
 }
 
+/**
+ * fired when open popup
+ * @param rollConfig
+ */
 export function updateOnMounted(rollConfig: IRollConfig) {
     // set session storage
     let config = JSON.parse(localStorage.getItem(
@@ -89,7 +93,7 @@ export function updateOnMounted(rollConfig: IRollConfig) {
 
     chrome.runtime.sendMessage(
         { rollConfig: config, type: ActionType.UPDATE_STORAGE },
-        function (response) { }
+        (res) => { console.debug(res); }
     );
 }
 
@@ -146,6 +150,11 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
     send("flip");
 }
 
+/**
+ * get Storage
+ * @param tabId
+ * @returns 
+ */
 export function getStorageConfig(tabId: number) {
     const config = JSON.parse(localStorage.getItem(
         `video-roll-${window.location.href}`
@@ -181,6 +190,9 @@ export function keyDownEvent(tabId: number, e: KeyboardEvent) {
                 break;
             case KEY_CODE.LEFT:
                 newConfig.deg = 270;
+                break;
+            case KEY_CODE.B:
+                newConfig.focus.on = !newConfig.focus.on;
                 break;
             default:
                 return;

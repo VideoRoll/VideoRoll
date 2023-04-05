@@ -35,7 +35,10 @@ export interface IMove {
     y: number;
 }
 
-export type Pitch = number;
+export type Pitch = {
+    on: 0 | 1;
+    value: number;
+};
 
 export interface IScale {
     mode: "auto" | 'custom',
@@ -104,5 +107,12 @@ export enum KEY_CODE {
     UP = 'ArrowUp',
     DOWN = 'ArrowDown',
     LEFT = 'ArrowLeft',
-    RIGHT = 'ArrowRight'
+    RIGHT = 'ArrowRight',
+    B = 'KeyB'
+}
+
+export interface IRealVideoPlayer {
+    width: number;
+    height: number;
+    player: HTMLVideoElement | null;
 }

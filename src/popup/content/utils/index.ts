@@ -5,6 +5,7 @@
  */
 import { RollKey, RollValue, IRollConfig, ActionType } from "../../../types/type.d";
 import WEBSITE from "../../../website";
+import { clone } from "../../../util";
 
 // url reg
 const urlReg = /^http(s)?:\/\/(.*?)\//;
@@ -20,7 +21,7 @@ function sendMessage(rollConfig: IRollConfig, extra = {}, send = (res: any) => {
 }) {
     chrome.tabs.sendMessage(
         rollConfig.tabId,
-        { rollConfig, type: ActionType.UPDATE_CONFIG },
+        { rollConfig: clone(rollConfig), type: ActionType.UPDATE_CONFIG },
         extra,
         send
     );

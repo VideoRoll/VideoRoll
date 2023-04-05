@@ -1,5 +1,3 @@
-import browser from "webextension-polyfill";
-
 type Browser = typeof chrome;
 type API_KEYS = keyof Browser;
 type API_VAKUES = Browser[API_KEYS];
@@ -37,4 +35,15 @@ export function getBrowser(key: API_KEYS ): API_VAKUES {
     }
         
     return chrome[key];
+}
+
+export function getBrowserType(): string {
+    const userAgent = navigator.userAgent;
+    if (userAgent.indexOf("Firefox") !== -1) return 'firefox';
+
+    if (userAgent.indexOf("Chrome") !== -1) return 'chrome';
+
+    if (userAgent.indexOf("Edg") !== -1) return 'edg';
+
+    return 'chrome';
 }

@@ -9,14 +9,12 @@ import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboard
 import { sendRuntimeMessage } from "../util";
 
 (function () {
-    console.log('inject执行');
     /**
      * get message from popup or backgound
      */
     chrome.runtime.onMessage.addListener(async (data, b, send) => {
         const { rollConfig, tabId, type } = data;
 
-        console.log(tabId, type, rollConfig, '监听触发');
         try {
             switch (type) {
                 case ActionType.GET_BADGE: {

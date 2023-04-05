@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 
 /**
- * 这里需要解决并发导致同一个port被多次触发
+ * send runtime message
  * @param tabId 
  * @param options 
  * @param callback 

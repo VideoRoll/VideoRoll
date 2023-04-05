@@ -8,6 +8,7 @@ import {
 } from "@vicons/ionicons5";
 import { useConfig, useDegBtn } from "./use";
 import { initRollConfig, updateRollConfig } from "./utils";
+import { clone } from "../../util";
 import { ActionType } from "../../types/type.d";
 
 import "./index.less";
@@ -45,16 +46,15 @@ export default defineComponent({
 
             initRollConfig(rollConfig, tab);
 
-            console.log(rollConfig, tab);
-
             // add style
             chrome.tabs.sendMessage(
                 rollConfig.tabId,
-                { rollConfig: JSON.parse(JSON.stringify(rollConfig)), type: ActionType.ON_MOUNTED },
-                {}
-            ).then((res) => {
-                console.debug(res);
-            });
+                { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED },
+                {},
+                (res) => {
+                    console.debug(res);
+                }
+            )
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config } = a;
