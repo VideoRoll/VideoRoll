@@ -24,6 +24,11 @@ export default defineComponent({
                     />
                 </div>
                 <div class="video-roll-head-right">
+                    <div class="video-roll-setting-btn" title="refresh">
+                        <CloseSharp
+                            class="options-sharp"
+                        ></CloseSharp>
+                    </div>
                     <div
                         class="video-roll-setting-btn"
                         title="settings"
