@@ -266,7 +266,7 @@ export default class VideoRoll {
         let filterStyle = '';
 
         Object.keys(filter).filter((type) => type !== 'mode').forEach((type: string) => {
-            filterStyle += ` ${type}(${filter[type as keyof IFilter]}${(FilterUnit as any)[type]})`
+            filterStyle += ` ${type}(${filter[type as keyof IFilter]}${(FilterUnit as any)[type]})`;
         });
 
         return filterStyle;

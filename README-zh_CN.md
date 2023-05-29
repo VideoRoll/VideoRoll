@@ -17,11 +17,12 @@ Video Roll
 
 [![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://badgen.net/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") /
-[Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") /
+[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
+[Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
+[Firefox Add-ons](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons") |
 [Home Page](https://gomi.site/VideoRoll "Home Page")
 
-[English](README.md) / 简体中文
+[English](README.md) | 简体中文
 </div>
 
 ### ✨ 介绍
@@ -62,104 +63,6 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 
 #### 专注模式
 ctrl+B
-
----
-
-### ✨ 更新日志
--   v1.1.4:
-
-    -   🐞Bug Fixes: 
-        - 修复Background.js消息传递报错问题。
-        - 修复当一个页面存在多个视频元素时，旋转可能出现缩放比例计算错误的问题。
-
-    -   📺Platform Support:
-        - 现在已支持Firefox!
-
-    -   ✨Features:
-        - 增加专注模式（类似 Turn off the lights）。
-        - ctrl+B 开启和关闭专注模式。
-
-    -   🌈Development:
-        - 添加 webextension-polyfill 解决不同平台的API兼容问题。
-
--   v1.1.3:
-
-    -   🐞Bug Fixes: 
-        - 修复快捷键失效问题。
-        - 修复当网站存在多个视频元素时，功能失效的问题。
-
-    -   ✨Features:
-        - 增加重置按钮。
-
-    -   🌈Development:
-        - 重构打包构建流程。
-        - yarn切换到pnpm。
-
--   v1.1.2:
-
-    -   🐞Bug Fixes: 
-        - 修复记忆系统失效问题。
-
-    -   ✨Features:
-        - 增加调节视频音调功能。我们使用了 [jungle.js](https://github.com/cwilso/Audio-Input-Effects/blob/main/js/jungle.js) (Copyright Google)来完成这个功能。 感谢 [Pitch shifter](https://chrome.google.com/webstore/detail/pitch-shifter-html5-video/mpmkclglcbkjchakihfpblainfncennj) 带来的灵感。
-
--   v1.1.1:
-
-    -   ✨Features:
-        - 增加移动位置功能。
-        - 增加滤镜功能。
-        - 将 'Remenber this tab' 默认开启。
-
-    -   🌈Development:
-        - 将vue用tsx重写，得到更好的ts支持。
-
--   v1.1.0:
-
-    -   ✨Features:
-        - 全新的交互界面。
-        - 支持自定义缩放。
-        - 支持自定义调整比例。
-        - 增加记忆系统。
-
--   v1.0.52:
-
-    -   🐞Bug Fixes: 
-        - 修复 Bilibili 旋转不生效。
-
--   v1.0.51:
-
-    -   移除不必要的权限要求。
-
--   v1.0.5:
-
-    -   ✨Features:
-        - 增加镜像翻转功能（垂直/水平翻转），可同时镜像翻转和二维旋转。
-        - 优化界面。
-
--   v1.0.4:
-
-    -   ✨Features:
-        - 增加快捷键操作：Ctrl+Right(90deg)/Ctrl+Down(180deg)/Ctrl+Left(270deg)/Ctrl+Up(0deg)。
-        - 增加小图标 badge。
-
--   v1.0.3:
-
-    -   🐞Bug Fixes: 
-        - 修复存在跨域 iframe 时报错问题。
-        - 修复 Youtube 全屏时旋转角度失效问题。
-
-        bug 贡献者：
-        chrome 用户 @天南地北随遇而安
-
--   v1.0.2:
-
-    -   🐞Bug Fixes:
-        - 修复了扩展程序管理中显示报错的问题。
-
-    -   ✨Features:
-        - 支持旋转 (同源)iframe 中的视频。
-        - 增加了旋转时的动画。
-        
 
 ---
 
