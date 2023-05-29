@@ -75,7 +75,7 @@ export default defineComponent({
                 <main>
                     <div>
                         <div class="video-roll-content">
-                            <div class="video-roll-website">
+                            {/* <div class="video-roll-website">
                                 <span>{rollConfig.name}</span>
                             </div>
                             <div class="video-roll-rotate-control">
@@ -92,15 +92,17 @@ export default defineComponent({
                                 <div class="rotate-deg-text">
                                     {rollConfig.deg}
                                 </div>
-                            </div>
+                            </div> */}
+                            {/* 布局 */}
+                            <div></div>
                         </div>
                         <Footer></Footer>
                     </div>
-                    <Transition name="van-fade">
+                    {/* <Transition name="van-fade">
                         <div class="video-roll-setting" v-show={isShow.value}>
                             <SettingPanel />
                         </div>
-                    </Transition>
+                    </Transition> */}
                 </main>
             </div>
         );
