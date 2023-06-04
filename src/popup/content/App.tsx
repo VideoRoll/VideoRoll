@@ -3,6 +3,7 @@ import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
 import SettingPanel from "./components/SettingPanel";
+import GridPanel from './components/GridPanel';
 import {
     ChevronBackOutline,
 } from "@vicons/ionicons5";
@@ -94,7 +95,7 @@ export default defineComponent({
                                 </div>
                             </div> */}
                             {/* 布局 */}
-                            <div></div>
+                            <GridPanel></GridPanel>
                         </div>
                         <Footer></Footer>
                     </div>
