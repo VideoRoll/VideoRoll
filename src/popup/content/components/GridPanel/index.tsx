@@ -12,7 +12,6 @@ import {
     h,
 } from "vue";
 import { useComponents } from "../../use";
-import "./index.less";
 
 export default defineComponent({
     name: "SettingPanel",
