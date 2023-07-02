@@ -14,7 +14,7 @@ import {
 import { useComponents } from "../../use";
 
 export default defineComponent({
-    name: "SettingPanel",
+    name: "GridPanel",
     setup() {
         const components = useComponents();
 
@@ -23,7 +23,9 @@ export default defineComponent({
         return () => (
             <div class="video-roll-setting-panel">
                 <van-config-provider theme="dark">
-                    <div>123</div>
+                    <div class="video-roll-actions">
+
+                    </div>
                 </van-config-provider>
                 <van-config-provider class="setting-content-box" theme="dark">
                     <div class="setting-content">
