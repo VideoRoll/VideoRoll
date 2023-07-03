@@ -1,5 +1,5 @@
 /*
- * @description: settingpanel Component
+ * @description: grid Component
  * @Author: Gouxinyu
  * @Date: 2022-09-19 22:53:23
  */
@@ -27,11 +27,11 @@ export default defineComponent({
 
                     </div>
                 </van-config-provider>
-                <van-config-provider class="setting-content-box" theme="dark">
+                {/* <van-config-provider class="setting-content-box" theme="dark">
                     <div class="setting-content">
                         {h(resolveComponent(components[active.value].title))}
                     </div>
-                </van-config-provider>
+                </van-config-provider> */}
             </div>
             // <div class="video-roll-setting-panel">
             //     <van-config-provider theme="dark">
