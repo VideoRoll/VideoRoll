@@ -4,9 +4,6 @@ import Head from "./components/Head";
 import Footer from "./components/Footer";
 import SettingPanel from "./components/SettingPanel";
 import GridPanel from './components/GridPanel';
-import {
-    ChevronBackOutline,
-} from "@vicons/ionicons5";
 import { useConfig, useDegBtn } from "./use";
 import { initRollConfig, updateRollConfig } from "./utils";
 import { clone } from "../../util";
@@ -28,9 +25,6 @@ export default defineComponent({
 
         // current website config
         const rollConfig = useConfig();
-
-        // buttons
-        const degBtns = useDegBtn();
 
         const update = updateRollConfig.bind(null, rollConfig);
         provide("rollConfig", rollConfig);
