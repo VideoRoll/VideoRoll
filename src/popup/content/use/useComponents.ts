@@ -4,35 +4,57 @@
  * @Date: 2022-09-11 11:12:50
  */
 import { shallowReactive } from 'vue';
+import {
+    defineComponent,
+    ref,
+    defineAsyncComponent,
+    resolveComponent,
+    h,
+} from "vue";
 
 function useComponents() {
     const components = shallowReactive([
         {
-            title: "Focus"
+            title: "rotate",
+            grid: 4,
+            component: defineAsyncComponent(() => import("../components/Rotate"))
         },
         {
-            title: "Pitch"
+            title: "Focus",
+            grid: 4,
+            component: defineAsyncComponent(() => import("../components/Focus"))
         },
         {
-            title: "Zoom"
+            title: "Pitch",
+            component: defineAsyncComponent(() => import("../components/Pitch"))
+        },
+        {
+            title: "Zoom",
+            component: defineAsyncComponent(() => import("../components/Zoom"))
         },
         {
             title: "Move",
+            component: defineAsyncComponent(() => import("../components/Move"))
         },
         {
-            title: "Scale"
+            title: "Scale",
+            component: defineAsyncComponent(() => import("../components/Scale"))
         },
         {
-            title: "Flip"
+            title: "Flip",
+            component: defineAsyncComponent(() => import("../components/Flip"))
         },
         {
             title: "Filter",
+            component: defineAsyncComponent(() => import("../components/Filter"))
         },
         {
-            title: "Store"
+            title: "Store",
+            component: defineAsyncComponent(() => import("../components/Store"))
         },
         {
-            title: "About"
+            title: "About",
+            component: defineAsyncComponent(() => import("../components/About"))
         },
     ]);
 
