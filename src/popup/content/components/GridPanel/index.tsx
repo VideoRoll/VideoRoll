@@ -12,6 +12,7 @@ import {
     h,
 } from "vue";
 import { useComponents } from "../../use";
+import './index.less';
 
 export default defineComponent({
     name: "GridPanel",
@@ -24,7 +25,13 @@ export default defineComponent({
             <div class="video-roll-setting-panel">
                 <van-config-provider theme="dark">
                     <div class="video-roll-actions">
-                        
+                            <van-grid gutter={10}>
+                                {
+                                    components.map((item) => <van-grid-item key={item.title} icon="photo-o" text="文字" >
+                                       <div class="grid-item">{item.title}</div>
+                                    </van-grid-item>)
+                                }
+                            </van-grid>
                     </div>
                 </van-config-provider>
                 {/* <van-config-provider class="setting-content-box" theme="dark">

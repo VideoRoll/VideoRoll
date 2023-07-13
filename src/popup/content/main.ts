@@ -21,6 +21,9 @@ import Divider from "vant/es/Divider/index.mjs";
 import Button from "vant/es/Button/index.mjs";
 import Stepper from "vant/es/Stepper/index.mjs";
 import Badge from "vant/es/Badge/index.mjs";
+import Grid from "vant/es/Grid/index.mjs";
+import Row from "vant/es/Row/index.mjs";
+import Col from "vant/es/Col/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -33,6 +36,9 @@ import "vant/es/Divider/style/index.mjs";
 import "vant/es/Button/style/index.mjs";
 import "vant/es/Stepper/style/index.mjs";
 import "vant/es/Badge/style/index.mjs";
+import "vant/es/Grid/style/index.mjs";
+import "vant/es/Col/style/index.mjs";
+import "vant/es/Row/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -46,4 +52,7 @@ createApp(App)
     .use(Button)
     .use(Stepper)
     .use(Badge)
+    .use(Grid)
+    .use(Col)
+    .use(Row)
     .mount("#app");

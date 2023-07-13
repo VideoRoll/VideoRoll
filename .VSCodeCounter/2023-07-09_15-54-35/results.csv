@@ -1,0 +1,70 @@
+"filename", "language", "JavaScript", "JSON with Comments", "TypeScript", "HTML", "JSON", "Markdown", "TypeScript JSX", "Less", "YAML", "comment", "blank", "total"
+"c:\programs\video-roll\VideoRoll\.eslintrc.js", "JavaScript", 25, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 31
+"c:\programs\video-roll\VideoRoll\CHANGELOG.md", "Markdown", 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 32, 96
+"c:\programs\video-roll\VideoRoll\README-zh_CN.md", "Markdown", 0, 0, 0, 0, 0, 84, 0, 0, 0, 5, 35, 124
+"c:\programs\video-roll\VideoRoll\README.md", "Markdown", 0, 0, 0, 0, 0, 85, 0, 0, 0, 5, 36, 126
+"c:\programs\video-roll\VideoRoll\__tests__\rotate.test.ts", "TypeScript", 0, 0, 110, 0, 0, 0, 0, 0, 0, 13, 23, 146
+"c:\programs\video-roll\VideoRoll\jest.config.ts", "TypeScript", 0, 0, 9, 0, 0, 0, 0, 0, 0, 5, 2, 16
+"c:\programs\video-roll\VideoRoll\package.json", "JSON", 0, 0, 0, 0, 19, 0, 0, 0, 0, 73, 0, 92
+"c:\programs\video-roll\VideoRoll\pnpm-lock.yaml", "YAML", 0, 0, 0, 0, 0, 0, 0, 0, 5386, 0, 717, 6103
+"c:\programs\video-roll\VideoRoll\scripts\build.js", "JavaScript", 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 13
+"c:\programs\video-roll\VideoRoll\scripts\compress.js", "JavaScript", 26, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 38
+"c:\programs\video-roll\VideoRoll\scripts\generateManifest.js", "JavaScript", 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 41
+"c:\programs\video-roll\VideoRoll\scripts\replacePath.js", "JavaScript", 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 23
+"c:\programs\video-roll\VideoRoll\src\background\index.ts", "TypeScript", 0, 0, 30, 0, 0, 0, 0, 0, 0, 13, 12, 55
+"c:\programs\video-roll\VideoRoll\src\inject\VideoRoll.ts", "TypeScript", 0, 0, 334, 0, 0, 0, 0, 0, 0, 91, 100, 525
+"c:\programs\video-roll\VideoRoll\src\inject\index.ts", "TypeScript", 0, 0, 41, 0, 0, 0, 0, 0, 0, 10, 4, 55
+"c:\programs\video-roll\VideoRoll\src\inject\jungle.js", "JavaScript", 167, 0, 0, 0, 0, 0, 0, 0, 0, 44, 37, 248
+"c:\programs\video-roll\VideoRoll\src\inject\panel\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\programs\video-roll\VideoRoll\src\inject\update.ts", "TypeScript", 0, 0, 151, 0, 0, 0, 0, 0, 0, 23, 37, 211
+"c:\programs\video-roll\VideoRoll\src\manifest\manifest.chromium.json", "JSON", 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 1, 19
+"c:\programs\video-roll\VideoRoll\src\manifest\manifest.firefox.json", "JSON", 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 1, 22
+"c:\programs\video-roll\VideoRoll\src\manifest\manifest.json", "JSON", 0, 0, 0, 0, 28, 0, 0, 0, 0, 6, 0, 34
+"c:\programs\video-roll\VideoRoll\src\popup\content\App.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 62, 0, 0, 33, 11, 106
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\About\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 6
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\About\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 56, 0, 0, 5, 3, 64
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Filter\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 4, 24
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Filter\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 98, 0, 0, 5, 8, 111
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Flip\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Flip\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 22, 0, 0, 5, 4, 31
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Focus\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 4, 20
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Focus\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 32, 0, 0, 5, 4, 41
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Footer\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 2, 24
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Footer\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 43, 0, 0, 5, 8, 56
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\GridPanel\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 4
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\GridPanel\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 43, 0, 0, 33, 6, 82
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Head\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 32, 0, 1, 6, 39
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Head\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 42, 0, 0, 5, 3, 50
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Move\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 4, 27
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Move\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 70, 0, 0, 5, 8, 83
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Pitch\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 7, 49
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Pitch\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 64, 0, 0, 5, 10, 79
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Rotate\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 52, 0, 17, 9, 78
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Rotate\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 31, 0, 0, 5, 5, 41
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Scale\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 6, 34
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Scale\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 91, 0, 0, 5, 9, 105
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\SettingPanel\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 25, 0, 1, 5, 31
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\SettingPanel\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 52, 0, 0, 5, 6, 63
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Store\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 3, 23
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Store\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 49, 0, 0, 5, 5, 59
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Zoom\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 3, 29
+"c:\programs\video-roll\VideoRoll\src\popup\content\components\Zoom\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 40, 0, 0, 5, 6, 51
+"c:\programs\video-roll\VideoRoll\src\popup\content\index.less", "Less", 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 9, 64
+"c:\programs\video-roll\VideoRoll\src\popup\content\main.ts", "TypeScript", 0, 0, 47, 0, 0, 0, 0, 0, 0, 6, 6, 59
+"c:\programs\video-roll\VideoRoll\src\popup\content\use\index.ts", "TypeScript", 0, 0, 3, 0, 0, 0, 0, 0, 0, 5, 0, 8
+"c:\programs\video-roll\VideoRoll\src\popup\content\use\useComponents.ts", "TypeScript", 0, 0, 54, 0, 0, 0, 0, 0, 0, 5, 3, 62
+"c:\programs\video-roll\VideoRoll\src\popup\content\use\useConfig.ts", "TypeScript", 0, 0, 46, 0, 0, 0, 0, 0, 0, 5, 5, 56
+"c:\programs\video-roll\VideoRoll\src\popup\content\use\useDegBtn.ts", "TypeScript", 0, 0, 27, 0, 0, 0, 0, 0, 0, 5, 3, 35
+"c:\programs\video-roll\VideoRoll\src\popup\content\utils\index.ts", "TypeScript", 0, 0, 53, 0, 0, 0, 0, 0, 0, 24, 10, 87
+"c:\programs\video-roll\VideoRoll\src\popup\index.html", "HTML", 0, 0, 0, 13, 0, 0, 0, 0, 0, 5, 2, 20
+"c:\programs\video-roll\VideoRoll\src\types\shims-vue.d.ts", "TypeScript", 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 1, 11
+"c:\programs\video-roll\VideoRoll\src\types\type.d.ts", "TypeScript", 0, 0, 93, 0, 0, 0, 0, 0, 0, 5, 20, 118
+"c:\programs\video-roll\VideoRoll\src\util\clone.ts", "TypeScript", 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7
+"c:\programs\video-roll\VideoRoll\src\util\getBrowser.ts", "TypeScript", 0, 0, 32, 0, 0, 0, 0, 0, 0, 6, 11, 49
+"c:\programs\video-roll\VideoRoll\src\util\index.ts", "TypeScript", 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"c:\programs\video-roll\VideoRoll\src\util\sendRuntimeMessage.ts", "TypeScript", 0, 0, 11, 0, 0, 0, 0, 0, 0, 6, 2, 19
+"c:\programs\video-roll\VideoRoll\src\util\sendTabMessage.ts", "TypeScript", 0, 0, 11, 0, 0, 0, 0, 0, 0, 6, 2, 19
+"c:\programs\video-roll\VideoRoll\src\util\setBadge.ts", "TypeScript", 0, 0, 13, 0, 0, 0, 0, 0, 0, 1, 2, 16
+"c:\programs\video-roll\VideoRoll\src\website.ts", "TypeScript", 0, 0, 12, 0, 0, 0, 0, 0, 0, 8, 2, 22
+"c:\programs\video-roll\VideoRoll\tsconfig.json", "JSON with Comments", 0, 26, 0, 0, 0, 0, 0, 0, 0, 18, 0, 44
+"Total", "-", 271, 26, 1094, 13, 86, 233, 795, 374, 5386, 559, 1298, 10135
