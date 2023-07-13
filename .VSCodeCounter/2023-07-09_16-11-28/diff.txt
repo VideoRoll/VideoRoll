@@ -1,0 +1,119 @@
+Date : 2023-07-09 16:11:28
+Directory : c:\programs\video-roll\VideoRoll\src
+Total : 59 files,  2312 codes, 423 comments, 392 blanks, all 3127 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript     |         19 |        975 |        224 |        222 |      1,421 |
+| TypeScript JSX |         16 |        795 |        131 |         97 |      1,023 |
+| Less           |         15 |        374 |         19 |         62 |        455 |
+| JavaScript     |          5 |         88 |         38 |          7 |        133 |
+| JSON           |          3 |         67 |          6 |          2 |         75 |
+| HTML           |          1 |         13 |          5 |          2 |         20 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                  | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                     |         59 |      2,312 |        423 |        392 |      3,127 |
+| . (Files)                                                                             |          1 |         12 |          8 |          2 |         22 |
+| ..                                                                                    |          4 |        -79 |         -6 |        -30 |       -115 |
+| ..\scripts                                                                            |          4 |        -79 |         -6 |        -30 |       -115 |
+| background                                                                            |          1 |         30 |         13 |         12 |         55 |
+| inject                                                                                |          5 |        693 |        168 |        179 |      1,040 |
+| inject (Files)                                                                        |          4 |        693 |        168 |        178 |      1,039 |
+| inject\panel                                                                          |          1 |          0 |          0 |          1 |          1 |
+| manifest                                                                              |          3 |         67 |          6 |          2 |         75 |
+| popup                                                                                 |         37 |      1,412 |        205 |        187 |      1,804 |
+| popup (Files)                                                                         |          1 |         13 |          5 |          2 |         20 |
+| popup\content                                                                         |         36 |      1,399 |        200 |        185 |      1,784 |
+| popup\content (Files)                                                                 |          3 |        164 |         39 |         26 |        229 |
+| popup\content\components                                                              |         28 |      1,052 |        117 |        138 |      1,307 |
+| popup\content\components\About                                                        |          2 |         62 |          5 |          3 |         70 |
+| popup\content\components\Filter                                                       |          2 |        118 |          5 |         12 |        135 |
+| popup\content\components\Flip                                                         |          2 |         25 |          5 |          4 |         34 |
+| popup\content\components\Focus                                                        |          2 |         48 |          5 |          8 |         61 |
+| popup\content\components\Footer                                                       |          2 |         65 |          5 |         10 |         80 |
+| popup\content\components\GridPanel                                                    |          2 |         47 |         33 |          6 |         86 |
+| popup\content\components\Head                                                         |          2 |         74 |          6 |          9 |         89 |
+| popup\content\components\Move                                                         |          2 |         93 |          5 |         12 |        110 |
+| popup\content\components\Pitch                                                        |          2 |        106 |          5 |         17 |        128 |
+| popup\content\components\Rotate                                                       |          2 |         83 |         22 |         14 |        119 |
+| popup\content\components\Scale                                                        |          2 |        119 |          5 |         15 |        139 |
+| popup\content\components\SettingPanel                                                 |          2 |         77 |          6 |         11 |         94 |
+| popup\content\components\Store                                                        |          2 |         69 |          5 |          8 |         82 |
+| popup\content\components\Zoom                                                         |          2 |         66 |          5 |          9 |         80 |
+| popup\content\use                                                                     |          4 |        130 |         20 |         11 |        161 |
+| popup\content\utils                                                                   |          1 |         53 |         24 |         10 |         87 |
+| types                                                                                 |          2 |         98 |         10 |         21 |        129 |
+| util                                                                                  |          6 |         79 |         19 |         19 |        117 |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                              | language       | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\programs\video-roll\VideoRoll\scripts\build.js                                     | JavaScript     |         -8 |          0 |         -5 |        -13 |
+| c:\programs\video-roll\VideoRoll\scripts\compress.js                                  | JavaScript     |        -26 |         -6 |         -6 |        -38 |
+| c:\programs\video-roll\VideoRoll\scripts\generateManifest.js                          | JavaScript     |        -28 |          0 |        -13 |        -41 |
+| c:\programs\video-roll\VideoRoll\scripts\replacePath.js                               | JavaScript     |        -17 |          0 |         -6 |        -23 |
+| c:\programs\video-roll\VideoRoll\src\background\index.ts                              | TypeScript     |         30 |         13 |         12 |         55 |
+| c:\programs\video-roll\VideoRoll\src\inject\VideoRoll.ts                              | TypeScript     |        334 |         91 |        100 |        525 |
+| c:\programs\video-roll\VideoRoll\src\inject\index.ts                                  | TypeScript     |         41 |         10 |          4 |         55 |
+| c:\programs\video-roll\VideoRoll\src\inject\jungle.js                                 | JavaScript     |        167 |         44 |         37 |        248 |
+| c:\programs\video-roll\VideoRoll\src\inject\panel\index.tsx                           | TypeScript JSX |          0 |          0 |          1 |          1 |
+| c:\programs\video-roll\VideoRoll\src\inject\update.ts                                 | TypeScript     |        151 |         23 |         37 |        211 |
+| c:\programs\video-roll\VideoRoll\src\manifest\manifest.chromium.json                  | JSON           |         18 |          0 |          1 |         19 |
+| c:\programs\video-roll\VideoRoll\src\manifest\manifest.firefox.json                   | JSON           |         21 |          0 |          1 |         22 |
+| c:\programs\video-roll\VideoRoll\src\manifest\manifest.json                           | JSON           |         28 |          6 |          0 |         34 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\App.tsx                            | TypeScript JSX |         62 |         33 |         11 |        106 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\About\index.less        | Less           |          6 |          0 |          0 |          6 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\About\index.tsx         | TypeScript JSX |         56 |          5 |          3 |         64 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Filter\index.less       | Less           |         20 |          0 |          4 |         24 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Filter\index.tsx        | TypeScript JSX |         98 |          5 |          8 |        111 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Flip\index.less         | Less           |          3 |          0 |          0 |          3 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Flip\index.tsx          | TypeScript JSX |         22 |          5 |          4 |         31 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Focus\index.less        | Less           |         16 |          0 |          4 |         20 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Focus\index.tsx         | TypeScript JSX |         32 |          5 |          4 |         41 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Footer\index.less       | Less           |         22 |          0 |          2 |         24 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Footer\index.tsx        | TypeScript JSX |         43 |          5 |          8 |         56 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\GridPanel\index.less    | Less           |          4 |          0 |          0 |          4 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\GridPanel\index.tsx     | TypeScript JSX |         43 |         33 |          6 |         82 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Head\index.less         | Less           |         32 |          1 |          6 |         39 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Head\index.tsx          | TypeScript JSX |         42 |          5 |          3 |         50 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Move\index.less         | Less           |         23 |          0 |          4 |         27 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Move\index.tsx          | TypeScript JSX |         70 |          5 |          8 |         83 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Pitch\index.less        | Less           |         42 |          0 |          7 |         49 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Pitch\index.tsx         | TypeScript JSX |         64 |          5 |         10 |         79 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Rotate\index.less       | Less           |         52 |         17 |          9 |         78 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Rotate\index.tsx        | TypeScript JSX |         31 |          5 |          5 |         41 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Scale\index.less        | Less           |         28 |          0 |          6 |         34 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Scale\index.tsx         | TypeScript JSX |         91 |          5 |          9 |        105 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\SettingPanel\index.less | Less           |         25 |          1 |          5 |         31 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\SettingPanel\index.tsx  | TypeScript JSX |         52 |          5 |          6 |         63 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Store\index.less        | Less           |         20 |          0 |          3 |         23 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Store\index.tsx         | TypeScript JSX |         49 |          5 |          5 |         59 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Zoom\index.less         | Less           |         26 |          0 |          3 |         29 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Zoom\index.tsx          | TypeScript JSX |         40 |          5 |          6 |         51 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\index.less                         | Less           |         55 |          0 |          9 |         64 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\main.ts                            | TypeScript     |         47 |          6 |          6 |         59 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\index.ts                       | TypeScript     |          3 |          5 |          0 |          8 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\useComponents.ts               | TypeScript     |         54 |          5 |          3 |         62 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\useConfig.ts                   | TypeScript     |         46 |          5 |          5 |         56 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\useDegBtn.ts                   | TypeScript     |         27 |          5 |          3 |         35 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\utils\index.ts                     | TypeScript     |         53 |         24 |         10 |         87 |
+| c:\programs\video-roll\VideoRoll\src\popup\index.html                                 | HTML           |         13 |          5 |          2 |         20 |
+| c:\programs\video-roll\VideoRoll\src\types\shims-vue.d.ts                             | TypeScript     |          5 |          5 |          1 |         11 |
+| c:\programs\video-roll\VideoRoll\src\types\type.d.ts                                  | TypeScript     |         93 |          5 |         20 |        118 |
+| c:\programs\video-roll\VideoRoll\src\util\clone.ts                                    | TypeScript     |          7 |          0 |          0 |          7 |
+| c:\programs\video-roll\VideoRoll\src\util\getBrowser.ts                               | TypeScript     |         32 |          6 |         11 |         49 |
+| c:\programs\video-roll\VideoRoll\src\util\index.ts                                    | TypeScript     |          5 |          0 |          2 |          7 |
+| c:\programs\video-roll\VideoRoll\src\util\sendRuntimeMessage.ts                       | TypeScript     |         11 |          6 |          2 |         19 |
+| c:\programs\video-roll\VideoRoll\src\util\sendTabMessage.ts                           | TypeScript     |         11 |          6 |          2 |         19 |
+| c:\programs\video-roll\VideoRoll\src\util\setBadge.ts                                 | TypeScript     |         13 |          1 |          2 |         16 |
+| c:\programs\video-roll\VideoRoll\src\website.ts                                       | TypeScript     |         12 |          8 |          2 |         22 |
+| Total                                                                                 |                |      2,312 |        423 |        392 |      3,127 |
++---------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

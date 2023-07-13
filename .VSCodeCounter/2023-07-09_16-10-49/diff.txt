@@ -1,0 +1,129 @@
+Date : 2023-07-09 16:10:49
+Directory : c:\programs\video-roll\VideoRoll\scripts
+Total : 64 files,  -8199 codes, -553 comments, -1268 blanks, all -10020 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| HTML               |          1 |        -13 |         -5 |         -2 |        -20 |
+| JSON with Comments |          1 |        -26 |        -18 |          0 |        -44 |
+| JSON               |          4 |        -86 |        -79 |         -2 |       -167 |
+| JavaScript         |          2 |       -192 |        -49 |        -38 |       -279 |
+| Markdown           |          3 |       -233 |        -10 |       -103 |       -346 |
+| Less               |         15 |       -374 |        -19 |        -62 |       -455 |
+| TypeScript JSX     |         16 |       -795 |       -131 |        -97 |     -1,023 |
+| TypeScript         |         21 |     -1,094 |       -242 |       -247 |     -1,583 |
+| YAML               |          1 |     -5,386 |          0 |       -717 |     -6,103 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                  | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                     |         64 |     -8,199 |       -553 |     -1,268 |    -10,020 |
+| ..                                                                                    |         64 |     -8,199 |       -553 |     -1,268 |    -10,020 |
+| .. (Files)                                                                            |          8 |     -5,698 |       -111 |       -823 |     -6,632 |
+| ..\__tests__                                                                          |          1 |       -110 |        -13 |        -23 |       -146 |
+| ..\src                                                                                |         55 |     -2,391 |       -429 |       -422 |     -3,242 |
+| ..\src (Files)                                                                        |          1 |        -12 |         -8 |         -2 |        -22 |
+| ..\src\background                                                                     |          1 |        -30 |        -13 |        -12 |        -55 |
+| ..\src\inject                                                                         |          5 |       -693 |       -168 |       -179 |     -1,040 |
+| ..\src\inject (Files)                                                                 |          4 |       -693 |       -168 |       -178 |     -1,039 |
+| ..\src\inject\panel                                                                   |          1 |          0 |          0 |         -1 |         -1 |
+| ..\src\manifest                                                                       |          3 |        -67 |         -6 |         -2 |        -75 |
+| ..\src\popup                                                                          |         37 |     -1,412 |       -205 |       -187 |     -1,804 |
+| ..\src\popup (Files)                                                                  |          1 |        -13 |         -5 |         -2 |        -20 |
+| ..\src\popup\content                                                                  |         36 |     -1,399 |       -200 |       -185 |     -1,784 |
+| ..\src\popup\content (Files)                                                          |          3 |       -164 |        -39 |        -26 |       -229 |
+| ..\src\popup\content\components                                                       |         28 |     -1,052 |       -117 |       -138 |     -1,307 |
+| ..\src\popup\content\components\About                                                 |          2 |        -62 |         -5 |         -3 |        -70 |
+| ..\src\popup\content\components\Filter                                                |          2 |       -118 |         -5 |        -12 |       -135 |
+| ..\src\popup\content\components\Flip                                                  |          2 |        -25 |         -5 |         -4 |        -34 |
+| ..\src\popup\content\components\Focus                                                 |          2 |        -48 |         -5 |         -8 |        -61 |
+| ..\src\popup\content\components\Footer                                                |          2 |        -65 |         -5 |        -10 |        -80 |
+| ..\src\popup\content\components\GridPanel                                             |          2 |        -47 |        -33 |         -6 |        -86 |
+| ..\src\popup\content\components\Head                                                  |          2 |        -74 |         -6 |         -9 |        -89 |
+| ..\src\popup\content\components\Move                                                  |          2 |        -93 |         -5 |        -12 |       -110 |
+| ..\src\popup\content\components\Pitch                                                 |          2 |       -106 |         -5 |        -17 |       -128 |
+| ..\src\popup\content\components\Rotate                                                |          2 |        -83 |        -22 |        -14 |       -119 |
+| ..\src\popup\content\components\Scale                                                 |          2 |       -119 |         -5 |        -15 |       -139 |
+| ..\src\popup\content\components\SettingPanel                                          |          2 |        -77 |         -6 |        -11 |        -94 |
+| ..\src\popup\content\components\Store                                                 |          2 |        -69 |         -5 |         -8 |        -82 |
+| ..\src\popup\content\components\Zoom                                                  |          2 |        -66 |         -5 |         -9 |        -80 |
+| ..\src\popup\content\use                                                              |          4 |       -130 |        -20 |        -11 |       -161 |
+| ..\src\popup\content\utils                                                            |          1 |        -53 |        -24 |        -10 |        -87 |
+| ..\src\types                                                                          |          2 |        -98 |        -10 |        -21 |       -129 |
+| ..\src\util                                                                           |          6 |        -79 |        -19 |        -19 |       -117 |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                              | language           | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\programs\video-roll\VideoRoll\.eslintrc.js                                         | JavaScript         |        -25 |         -5 |         -1 |        -31 |
+| c:\programs\video-roll\VideoRoll\CHANGELOG.md                                         | Markdown           |        -64 |          0 |        -32 |        -96 |
+| c:\programs\video-roll\VideoRoll\README-zh_CN.md                                      | Markdown           |        -84 |         -5 |        -35 |       -124 |
+| c:\programs\video-roll\VideoRoll\README.md                                            | Markdown           |        -85 |         -5 |        -36 |       -126 |
+| c:\programs\video-roll\VideoRoll\__tests__\rotate.test.ts                             | TypeScript         |       -110 |        -13 |        -23 |       -146 |
+| c:\programs\video-roll\VideoRoll\jest.config.ts                                       | TypeScript         |         -9 |         -5 |         -2 |        -16 |
+| c:\programs\video-roll\VideoRoll\package.json                                         | JSON               |        -19 |        -73 |          0 |        -92 |
+| c:\programs\video-roll\VideoRoll\pnpm-lock.yaml                                       | YAML               |     -5,386 |          0 |       -717 |     -6,103 |
+| c:\programs\video-roll\VideoRoll\src\background\index.ts                              | TypeScript         |        -30 |        -13 |        -12 |        -55 |
+| c:\programs\video-roll\VideoRoll\src\inject\VideoRoll.ts                              | TypeScript         |       -334 |        -91 |       -100 |       -525 |
+| c:\programs\video-roll\VideoRoll\src\inject\index.ts                                  | TypeScript         |        -41 |        -10 |         -4 |        -55 |
+| c:\programs\video-roll\VideoRoll\src\inject\jungle.js                                 | JavaScript         |       -167 |        -44 |        -37 |       -248 |
+| c:\programs\video-roll\VideoRoll\src\inject\panel\index.tsx                           | TypeScript JSX     |          0 |          0 |         -1 |         -1 |
+| c:\programs\video-roll\VideoRoll\src\inject\update.ts                                 | TypeScript         |       -151 |        -23 |        -37 |       -211 |
+| c:\programs\video-roll\VideoRoll\src\manifest\manifest.chromium.json                  | JSON               |        -18 |          0 |         -1 |        -19 |
+| c:\programs\video-roll\VideoRoll\src\manifest\manifest.firefox.json                   | JSON               |        -21 |          0 |         -1 |        -22 |
+| c:\programs\video-roll\VideoRoll\src\manifest\manifest.json                           | JSON               |        -28 |         -6 |          0 |        -34 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\App.tsx                            | TypeScript JSX     |        -62 |        -33 |        -11 |       -106 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\About\index.less        | Less               |         -6 |          0 |          0 |         -6 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\About\index.tsx         | TypeScript JSX     |        -56 |         -5 |         -3 |        -64 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Filter\index.less       | Less               |        -20 |          0 |         -4 |        -24 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Filter\index.tsx        | TypeScript JSX     |        -98 |         -5 |         -8 |       -111 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Flip\index.less         | Less               |         -3 |          0 |          0 |         -3 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Flip\index.tsx          | TypeScript JSX     |        -22 |         -5 |         -4 |        -31 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Focus\index.less        | Less               |        -16 |          0 |         -4 |        -20 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Focus\index.tsx         | TypeScript JSX     |        -32 |         -5 |         -4 |        -41 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Footer\index.less       | Less               |        -22 |          0 |         -2 |        -24 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Footer\index.tsx        | TypeScript JSX     |        -43 |         -5 |         -8 |        -56 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\GridPanel\index.less    | Less               |         -4 |          0 |          0 |         -4 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\GridPanel\index.tsx     | TypeScript JSX     |        -43 |        -33 |         -6 |        -82 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Head\index.less         | Less               |        -32 |         -1 |         -6 |        -39 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Head\index.tsx          | TypeScript JSX     |        -42 |         -5 |         -3 |        -50 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Move\index.less         | Less               |        -23 |          0 |         -4 |        -27 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Move\index.tsx          | TypeScript JSX     |        -70 |         -5 |         -8 |        -83 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Pitch\index.less        | Less               |        -42 |          0 |         -7 |        -49 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Pitch\index.tsx         | TypeScript JSX     |        -64 |         -5 |        -10 |        -79 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Rotate\index.less       | Less               |        -52 |        -17 |         -9 |        -78 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Rotate\index.tsx        | TypeScript JSX     |        -31 |         -5 |         -5 |        -41 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Scale\index.less        | Less               |        -28 |          0 |         -6 |        -34 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Scale\index.tsx         | TypeScript JSX     |        -91 |         -5 |         -9 |       -105 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\SettingPanel\index.less | Less               |        -25 |         -1 |         -5 |        -31 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\SettingPanel\index.tsx  | TypeScript JSX     |        -52 |         -5 |         -6 |        -63 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Store\index.less        | Less               |        -20 |          0 |         -3 |        -23 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Store\index.tsx         | TypeScript JSX     |        -49 |         -5 |         -5 |        -59 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Zoom\index.less         | Less               |        -26 |          0 |         -3 |        -29 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\components\Zoom\index.tsx          | TypeScript JSX     |        -40 |         -5 |         -6 |        -51 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\index.less                         | Less               |        -55 |          0 |         -9 |        -64 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\main.ts                            | TypeScript         |        -47 |         -6 |         -6 |        -59 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\index.ts                       | TypeScript         |         -3 |         -5 |          0 |         -8 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\useComponents.ts               | TypeScript         |        -54 |         -5 |         -3 |        -62 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\useConfig.ts                   | TypeScript         |        -46 |         -5 |         -5 |        -56 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\use\useDegBtn.ts                   | TypeScript         |        -27 |         -5 |         -3 |        -35 |
+| c:\programs\video-roll\VideoRoll\src\popup\content\utils\index.ts                     | TypeScript         |        -53 |        -24 |        -10 |        -87 |
+| c:\programs\video-roll\VideoRoll\src\popup\index.html                                 | HTML               |        -13 |         -5 |         -2 |        -20 |
+| c:\programs\video-roll\VideoRoll\src\types\shims-vue.d.ts                             | TypeScript         |         -5 |         -5 |         -1 |        -11 |
+| c:\programs\video-roll\VideoRoll\src\types\type.d.ts                                  | TypeScript         |        -93 |         -5 |        -20 |       -118 |
+| c:\programs\video-roll\VideoRoll\src\util\clone.ts                                    | TypeScript         |         -7 |          0 |          0 |         -7 |
+| c:\programs\video-roll\VideoRoll\src\util\getBrowser.ts                               | TypeScript         |        -32 |         -6 |        -11 |        -49 |
+| c:\programs\video-roll\VideoRoll\src\util\index.ts                                    | TypeScript         |         -5 |          0 |         -2 |         -7 |
+| c:\programs\video-roll\VideoRoll\src\util\sendRuntimeMessage.ts                       | TypeScript         |        -11 |         -6 |         -2 |        -19 |
+| c:\programs\video-roll\VideoRoll\src\util\sendTabMessage.ts                           | TypeScript         |        -11 |         -6 |         -2 |        -19 |
+| c:\programs\video-roll\VideoRoll\src\util\setBadge.ts                                 | TypeScript         |        -13 |         -1 |         -2 |        -16 |
+| c:\programs\video-roll\VideoRoll\src\website.ts                                       | TypeScript         |        -12 |         -8 |         -2 |        -22 |
+| c:\programs\video-roll\VideoRoll\tsconfig.json                                        | JSON with Comments |        -26 |        -18 |          0 |        -44 |
+| Total                                                                                 |                    |     -8,199 |       -553 |     -1,268 |    -10,020 |
++---------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

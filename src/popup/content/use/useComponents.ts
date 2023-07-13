@@ -15,13 +15,53 @@ import {
 function useComponents() {
     const components = shallowReactive([
         {
-            title: "rotate",
-            grid: 4,
-            component: defineAsyncComponent(() => import("../components/Rotate"))
+            type: 'row',
+            children: [
+                {
+                    type: 'container',
+                    col: 16,
+                    children: [{
+                        type: 'component',
+                        title: "rotate",
+                        component: defineAsyncComponent(() => import("../components/Rotate"))
+                    }]
+                },
+                {
+                    type: "container",
+                    col: 8,
+                    children: [
+                        {
+                            type: 'row',
+                            children: [
+                                {
+                                    type: 'component',
+                                    title: 'Focus',
+                                    col: 24,
+                                    component: defineAsyncComponent(() => import("../components/Focus"))
+                                },
+                            ]
+                        },
+                        {
+                            type: 'row',
+                            children: [
+                                {
+                                    type: 'component',
+                                    col: 24,
+                                    component: defineAsyncComponent(() => import("../components/Rotate"))
+                                },
+                            ]
+                        }
+                    ]
+                    
+                }
+            ]  
         },
         {
+            type: 'row',
+            children: [
+                
+            ],
             title: "Focus",
-            grid: 4,
             component: defineAsyncComponent(() => import("../components/Focus"))
         },
         {
