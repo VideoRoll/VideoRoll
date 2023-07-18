@@ -1,4 +1,35 @@
-.grid-item {
-    width: 200px;
-    height: 200px;
+.video-roll-container {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(214, 213, 215, 0.112);
+    align-items: center;
+}
+
+.van-row {
+    width: 100%;
+    height: 100%;
+
+    .van-col {
+        height: 100%;
+    }
+}
+
+.video-roll-setting-panel {
+    .van-swipe {
+        cursor: default !important;
+    }
+
+    .van-swipe-item {
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .video-roll-container-title {
+        color: #ffffffa1;
+        text-align: center;
+        padding: 2px 0;
+    }
 }

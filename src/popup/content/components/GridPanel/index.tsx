@@ -12,6 +12,7 @@ import {
     h,
 } from "vue";
 import { useComponents } from "../../use";
+import render from '../../utils/render';
 import './index.less';
 
 export default defineComponent({
@@ -19,63 +20,16 @@ export default defineComponent({
     setup() {
         const components = useComponents();
 
-        const active = ref(0);
-
         return () => (
             <div class="video-roll-setting-panel">
                 <van-config-provider theme="dark">
-                    <div class="video-roll-actions">
-                            <van-grid gutter={10}>
-                                {
-                                    components.map((item) => <van-grid-item key={item.title} icon="photo-o" text="文字" >
-                                       <div class="grid-item">{item.title}</div>
-                                    </van-grid-item>)
-                                }
-                            </van-grid>
-                    </div>
+                    <van-swipe touchable={false}>
+                        {
+                            render(components)
+                        }
+                    </van-swipe>
                 </van-config-provider>
-                {/* <van-config-provider class="setting-content-box" theme="dark">
-                    <div class="setting-content">
-                        {h(resolveComponent(components[active.value].title))}
-                    </div>
-                </van-config-provider> */}
             </div>
-            // <div class="video-roll-setting-panel">
-            //     <van-config-provider theme="dark">
-            //         <van-sidebar v-model={active.value}>
-            //             {components.map((item) => (
-            //                 item.new ?
-            //                     <van-sidebar-item
-            //                         key={item.title}
-            //                         title={item.title}
-            //                         badge="new"
-            //                     />
-            //                     : <van-sidebar-item
-            //                         key={item.title}
-            //                         title={item.title}
-            //                     />
-
-            //             ))}
-            //         </van-sidebar>
-            //     </van-config-provider>
-            //     <van-config-provider class="setting-content-box" theme="dark">
-            //         <div class="setting-content">
-            //             {h(resolveComponent(components[active.value].title))}
-            //         </div>
-            //     </van-config-provider>
-            // </div>
         );
-    },
-    components: {
-        About: defineAsyncComponent(() => import("../About")),
-        Flip: defineAsyncComponent(() => import("../Flip")),
-        Zoom: defineAsyncComponent(() => import("../Zoom")),
-        Scale: defineAsyncComponent(() => import("../Scale")),
-        Store: defineAsyncComponent(() => import("../Store")),
-        Filter: defineAsyncComponent(() => import("../Filter")),
-        Move: defineAsyncComponent(() => import("../Move")),
-        Pitch: defineAsyncComponent(() => import("../Pitch")),
-        Focus: defineAsyncComponent(() => import("../Focus")),
-        Rotate: defineAsyncComponent(() => import("../Rotate"))
-    },
+    }
 });
