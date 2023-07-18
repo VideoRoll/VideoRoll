@@ -32,6 +32,36 @@ body {
     height: 500px;
     background-color: rgb(24, 24, 28);
 
+    .video-roll-icon {
+        width: 25px;
+        height: 25px;
+        animation: rotateIcon 0.3s ease-in-out
+    }
+
+    .video-roll-item {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .video-roll-on {
+        background-image: linear-gradient( 135deg, #CE9FFC 10%, #7367F0 100%);;
+    }
+    .video-roll-off {
+        background: transparent;
+    }
+
+    @keyframes rotateIcon {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
     .video-roll-header {
         display: flex;
         justify-content: space-between;

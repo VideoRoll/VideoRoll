@@ -34,7 +34,7 @@ specifiers:
   ts-jest: ^29.0.2
   ts-node: ^10.9.1
   typescript: ^4.8.4
-  vant: 4.0.0-rc.0
+  vant: 4.6.2
   vue: ^3.2.41
   vue-grid-layout: ^2.4.0
   webextension-polyfill: ^0.10.0
@@ -42,7 +42,7 @@ specifiers:
 dependencies:
   '@vant/touch-emulator': 1.4.0
   '@vicons/ionicons5': 0.11.0
-  vant: 4.0.0-rc.0_vue@3.2.47
+  vant: 4.6.2_vue@3.2.47
   vue: 3.2.47
   vue-grid-layout: 2.4.0
   webextension-polyfill: 0.10.0
@@ -2365,10 +2365,6 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vant/icons/1.8.0:
-    resolution: {integrity: sha512-sKfEUo2/CkQFuERxvkuF6mGQZDKu3IQdj5rV9Fm0weJXtchDSSQ+zt8qPCNUEhh9Y8shy5PzxbvAfOOkCwlCXg==}
-    dev: false
-
   /@vant/popperjs/1.3.0:
     resolution: {integrity: sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==}
     dev: false
@@ -2377,8 +2373,12 @@ packages:
     resolution: {integrity: sha512-Zt+zISV0+wpOew2S1siOJ3G22y+hapHAKmXM+FhpvWzsRc4qahaYXatCAITuuXt0EcDp7WvEeTO4F7p9AtX/pw==}
     dev: false
 
-  /@vant/use/1.5.0:
-    resolution: {integrity: sha512-Dk7aMn7gLpoDew2tix/mjXpP0PoERWcxWh+pRY4xxl0MG4eeByAAyZSE6PgMpof4Yorqn7yq8KmeQcaVnxq2cg==}
+  /@vant/use/1.5.2_vue@3.2.47:
+    resolution: {integrity: sha512-CBK61iT568dCHUwFFsErGbW6/5tmrPnZJKGtcSy7Tjcrmws8Ku+YZo7IUFD9Xkj9MfSJ4pfhQ7pU2KouP5Cojg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.2.47
     dev: false
 
   /@vicons/ionicons5/0.11.0:
@@ -2482,6 +2482,10 @@ packages:
 
   /@vue/shared/3.2.47:
     resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
+
+  /@vue/shared/3.3.4:
+    resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
+    dev: false
 
   /abab/2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
@@ -3771,6 +3775,10 @@ packages:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
     dev: true
 
+  /graceful-fs/4.2.11:
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+    dev: true
+
   /grapheme-splitter/1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
@@ -4277,7 +4285,7 @@ packages:
       '@jest/types': 29.4.3
       '@types/stack-utils': 2.0.1
       chalk: 4.1.2
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       micromatch: 4.0.5
       pretty-format: 29.4.3
       slash: 3.0.0
@@ -4434,7 +4442,7 @@ packages:
       '@types/node': 18.14.2
       chalk: 4.1.2
       ci-info: 3.8.0
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       picomatch: 2.3.1
     dev: true
 
@@ -4597,7 +4605,7 @@ packages:
       tslib: 2.5.0
     optionalDependencies:
       errno: 0.1.8
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       image-size: 0.5.5
       make-dir: 2.1.0
       mime: 1.6.0
@@ -5884,14 +5892,14 @@ packages:
       convert-source-map: 1.9.0
     dev: true
 
-  /vant/4.0.0-rc.0_vue@3.2.47:
-    resolution: {integrity: sha512-EmKxADs1Elws7TdWqNa/ppbnWt2EDx6IhHdtWR3O4p1TZ+C0CAy4iVdCeCFDdQrWAEVExvLAZToGqwnWjV6bUQ==}
+  /vant/4.6.2_vue@3.2.47:
+    resolution: {integrity: sha512-6EHCCAGM5a9VVzpBg/wZNPDFmJ8T1a4k29DPNcEMW3X670awW3rnD7+/x3dw+bE17JhhSg49V/+fQwBP2iQkAg==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
-      '@vant/icons': 1.8.0
       '@vant/popperjs': 1.3.0
-      '@vant/use': 1.5.0
+      '@vant/use': 1.5.2_vue@3.2.47
+      '@vue/shared': 3.3.4
       vue: 3.2.47
     dev: false
 

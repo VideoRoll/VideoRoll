@@ -6,6 +6,7 @@
 
 /// <reference path="../types/shims-vue.d.ts" />
 import { createApp } from "vue";
+import { Row } from 'vant';
 import '@vant/touch-emulator';
 
 import App from "./App";
@@ -15,30 +16,31 @@ import Sidebar from "vant/es/sidebar/index.mjs";
 import SidebarItem from "vant/es/sidebar-item/index.mjs";
 import RadioGroup from "vant/es/radio-group/index.mjs";
 import Radio from "vant/es/radio/index.mjs";
-import Switch from "vant/es/Switch/index.mjs";
-import Slider from "vant/es/Slider/index.mjs";
-import Divider from "vant/es/Divider/index.mjs";
-import Button from "vant/es/Button/index.mjs";
-import Stepper from "vant/es/Stepper/index.mjs";
-import Badge from "vant/es/Badge/index.mjs";
-import Grid from "vant/es/Grid/index.mjs";
-import Row from "vant/es/Row/index.mjs";
-import Col from "vant/es/Col/index.mjs";
+import Switch from "vant/es/switch/index.mjs";
+import Slider from "vant/es/slider/index.mjs";
+import Divider from "vant/es/divider/index.mjs";
+import Button from "vant/es/button/index.mjs";
+import Stepper from "vant/es/stepper/index.mjs";
+import Badge from "vant/es/badge/index.mjs";
+import Col from "vant/es/col/index.mjs";
+import Swipe from "vant/es/swipe/index.mjs";
+import SwipeItem from "vant/es/swipe-item/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
 import "vant/es/config-provider/style/index.mjs";
 import "vant/es/radio-group/style/index.mjs";
 import "vant/es/radio/style/index.mjs";
-import "vant/es/Switch/style/index.mjs";
-import "vant/es/Slider/style/index.mjs";
-import "vant/es/Divider/style/index.mjs";
-import "vant/es/Button/style/index.mjs";
-import "vant/es/Stepper/style/index.mjs";
-import "vant/es/Badge/style/index.mjs";
-import "vant/es/Grid/style/index.mjs";
-import "vant/es/Col/style/index.mjs";
-import "vant/es/Row/style/index.mjs";
+import "vant/es/switch/style/index.mjs";
+import "vant/es/slider/style/index.mjs";
+import "vant/es/divider/style/index.mjs";
+import "vant/es/button/style/index.mjs";
+import "vant/es/stepper/style/index.mjs";
+import "vant/es/badge/style/index.mjs";
+import "vant/es/col/style/index.mjs";
+import "vant/es/row/style/index.mjs";
+import "vant/es/swipe/style/index.mjs";
+import "vant/es/swipe-item/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -52,7 +54,8 @@ createApp(App)
     .use(Button)
     .use(Stepper)
     .use(Badge)
-    .use(Grid)
     .use(Col)
     .use(Row)
+    .use(Swipe)
+    .use(SwipeItem)
     .mount("#app");
