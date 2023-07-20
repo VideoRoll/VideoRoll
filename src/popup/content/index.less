@@ -1,6 +1,4 @@
 body {
-    --van-primary-color: #a494c6 !important;
-
     margin: 0;
     --van-primary-color: #a494c6 !important;
     --van-sidebar-width: 70px !important;
@@ -38,6 +36,11 @@ body {
         animation: rotateIcon 0.3s ease-in-out
     }
 
+    .video-roll-label {
+        color: #fff;
+        font-size: 14px;
+    }
+
     .video-roll-item {
         width: 100%;
         height: 100%;
@@ -47,10 +50,14 @@ body {
         cursor: pointer;
     }
     .video-roll-on {
-        background-image: linear-gradient( 135deg, #CE9FFC 10%, #7367F0 100%);;
+        background-image: linear-gradient( 135deg, #CE9FFC 10%, #7367F0 100%);
+        filter: contrast(200%);
     }
     .video-roll-off {
         background: transparent;
+        &:hover {
+            background-image: linear-gradient( 135deg, #CE9FFC 10%, #7367F0 100%)
+        }
     }
 
     @keyframes rotateIcon {

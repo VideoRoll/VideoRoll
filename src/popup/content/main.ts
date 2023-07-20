@@ -8,6 +8,7 @@
 import { createApp } from "vue";
 import { Row } from 'vant';
 import '@vant/touch-emulator';
+import 'vant/lib/index.css'
 
 import App from "./App";
 
@@ -25,6 +26,7 @@ import Badge from "vant/es/badge/index.mjs";
 import Col from "vant/es/col/index.mjs";
 import Swipe from "vant/es/swipe/index.mjs";
 import SwipeItem from "vant/es/swipe-item/index.mjs";
+import Popup from "vant/es/popup/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -41,6 +43,7 @@ import "vant/es/col/style/index.mjs";
 import "vant/es/row/style/index.mjs";
 import "vant/es/swipe/style/index.mjs";
 import "vant/es/swipe-item/style/index.mjs";
+import "vant/es/popup/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -58,4 +61,5 @@ createApp(App)
     .use(Row)
     .use(Swipe)
     .use(SwipeItem)
+    .use(Popup)
     .mount("#app");
