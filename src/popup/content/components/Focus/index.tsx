@@ -21,20 +21,14 @@ export default defineComponent({
         };
         return () => (
             <div title='Focus mode' class={`video-roll-focus video-roll-item ${rollConfig.focus.on ? 'video-roll-on' : 'video-roll-off'}`} onClick={setFocus}>
-                <div class="focus-switch-box">
-                    <span class="focus-label">
+                <div class="video-roll-icon-box">
+                    <span class="video-roll-label">
                         {
                             rollConfig.focus.on ? <EyeOutline
                             class="video-roll-icon"
                         ></EyeOutline> : <EyeOffOutline class="video-roll-icon"></EyeOffOutline>
                         }
                     </span>
-                    {/* <van-switch
-                        class="focus-switch-btn"
-                        v-model={rollConfig.focus.on}
-                        size="22px"
-                        onUpdate: modelValue={setFocus}
-                    /> */}
                 </div>
             </div>
         );

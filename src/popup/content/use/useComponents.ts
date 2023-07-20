@@ -49,7 +49,7 @@ function useComponents() {
             children: [{
                 type: 'row',
                 style: {
-                    margin: '20px 0',
+                    margin: '30px 0',
                     height: '120px'
                 },
                 children: [
@@ -104,8 +104,8 @@ function useComponents() {
                                         children: [
                                             {
                                                 type: 'component',
-                                                component: null
-                                                // component: defineAsyncComponent(() => import("../components/Store"))
+                                                // component: null
+                                                component: defineAsyncComponent(() => import("../components/Store"))
                                             }
                                         ]
                                     }
@@ -118,7 +118,7 @@ function useComponents() {
             {
                 type: 'row',
                 style: {
-                    margin: '20px 0',
+                    margin: '30px 0',
                     height: '40px'
                 },
                 children: [
@@ -129,8 +129,8 @@ function useComponents() {
                         col: 8,
                         children: [{
                             type: 'component',
-                            component: null
-                            // component: defineAsyncComponent(() => import("../components/Move"))
+                            // component: null
+                            component: defineAsyncComponent(() => import("../components/Move"))
                         }]
                     },
                     {
@@ -160,7 +160,7 @@ function useComponents() {
             {
                 type: 'row',
                 style: {
-                    margin: '20px 0',
+                    margin: '30px 0',
                     height: '40px'
                 },
                 children: [
@@ -180,7 +180,7 @@ function useComponents() {
             {
                 type: 'row',
                 style: {
-                    margin: '20px 0',
+                    margin: '30px 0',
                     height: '40px'
                 },
                 children: [
