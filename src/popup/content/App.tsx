@@ -2,8 +2,8 @@ import { defineComponent, ref, onMounted, provide, Transition } from "vue";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
-import SettingPanel from "./components/SettingPanel";
 import GridPanel from './components/GridPanel';
+import Info from './components/Info';
 import { useConfig, useDegBtn } from "./use";
 import { initRollConfig, updateRollConfig } from "./utils";
 import { clone } from "../../util";
@@ -68,26 +68,8 @@ export default defineComponent({
             <div>
                 <Head isShow={isShow.value}></Head>
                 <main>
+                    <Info></Info>
                     <div class="video-roll-content">
-                        {/* <div class="video-roll-website">
-                                <span>{rollConfig.name}</span>
-                            </div>
-                            <div class="video-roll-rotate-control">
-                                {degBtns.value.map((item) => (
-                                    <div
-                                        class={`rotate-${item.type}-${item.iconDeg} rotate-btn`}
-                                        key={item.type}
-                                        onClick={() => update("deg", item.deg)}
-                                    >
-                                        <ChevronBackOutline />
-                                    </div>
-                                ))}
-
-                                <div class="rotate-deg-text">
-                                    {rollConfig.deg}
-                                </div>
-                            </div> */}
-                        {/* 布局 */}
                         <GridPanel></GridPanel>
                     </div>
                     <Footer></Footer>
