@@ -6,8 +6,19 @@
 import { reactive } from 'vue';
 import { IRollConfig } from '../../../types/type';
 
+const defaultFilterConfig = {
+    mode: 'unset',
+    blur: 0,
+    brightness: 1,
+    contrast: 100,
+    grayscale: 0,
+    'hue-rotate': 0,
+    invert: 0
+}
+
 const defaultConfig = {
     tabId: 0,
+    videoNumber: 0,
     url: '',
     name: '',
     flip: 'unset',
@@ -22,15 +33,12 @@ const defaultConfig = {
     focus: {
         on: false
     },
-    pitch: 0,
+    pitch: {
+        on: false,
+        value: 0
+    },
     filter: {
-        mode: 'unset',
-        blur: 0,
-        brightness: 1,
-        contrast: 100,
-        grayscale: 0,
-        'hue-rotate': 0,
-        invert: 0
+        ...defaultFilterConfig
     },
     zoom: 1,
     deg: 0,
@@ -50,4 +58,4 @@ function useConfig(): IRollConfig {
     return rollConfig;
 }
 
-export { useConfig, getDefaultConfig };
+export { useConfig, getDefaultConfig, defaultFilterConfig };

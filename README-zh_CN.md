@@ -33,7 +33,7 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 
 ### ✨ 主要特性
 
-![](https://tuchuangs.com/imgs/2022/09/11/0b4c21db7b3e0d01.png)
+![9603e49b7121b314caf11da224ab3667.png](https://i.mji.rip/2023/07/24/9603e49b7121b314caf11da224ab3667.png)
 
 ---
 

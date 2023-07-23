@@ -1,12 +1,15 @@
-body {
-    --van-primary-color: #a494c6 !important;
-
-    margin: 0;
+:root {
     --van-primary-color: #a494c6 !important;
     --van-sidebar-width: 70px !important;
     --van-sidebar-padding: 12.5px var(--van-padding-sm) !important;
     --van-sidebar-background: #1f1f1f97 !important;
     --van-sidebar-selected-background: #5d5d6045 !important;
+    --video-roll-background-active: linear-gradient(135deg, #CE9FFC 10%, #7367F0 100%);
+}
+
+body {
+    margin: 0;
+
     ::-webkit-scrollbar {
         width: 0.3em;
         height: 0.6em;
@@ -29,7 +32,163 @@ body {
 
 #app {
     width: 300px;
+    height: 500px;
     background-color: rgb(24, 24, 28);
+
+    .van-row:first-of-type {
+        margin-top: 0 !important;
+    }
+
+    .van-swipe__indicators {
+        bottom: 0;
+    }
+
+    .van-swipe__indicator {
+        width: 12px;
+        height: 12px;
+        background-image: var(--video-roll-background-active);
+        cursor: pointer;
+
+        &:hover {
+            background-image: var(--video-roll-background-active);
+        }
+    }
+
+    .video-roll-headBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 10px 0;
+
+        .reload-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+
+            .video-roll-icon {
+                width: 15px;
+                height: 15px;
+            }
+
+            &:hover {
+                filter: contrast(200%);
+            }
+
+            background-image: var(--video-roll-background-active);
+        }
+    }
+
+    .video-roll-content {
+        box-sizing: border-box;
+        border-bottom: 1px solid var(--van-divider-border-color);
+        padding-bottom: 15px;
+    }
+
+    .custom-button {
+        width: 26px;
+        color: #fff;
+        font-size: 10px;
+        line-height: 18px;
+        text-align: center;
+        background-image: var(--video-roll-background-active);
+        border-radius: 100px;
+        user-select: none;
+
+        &:hover {
+            filter: contrast(200%);
+        }
+    }
+
+    .video-roll-switch {
+        color: #fff;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+        box-shadow: 2px 2px 4px #5d5f626c, -2px -2px 4px #5d5f626c;
+
+        .video-roll-icon {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .video-roll-switch-off {
+        background-color: rgba(155, 155, 155, 0.4);
+
+        &:hover {
+            background-image: var(--video-roll-background-active)
+        }
+    }
+
+    .video-roll-switch-on {
+        background-image: var(--video-roll-background-active);
+
+        &:hover {
+            filter: contrast(200%);
+        }
+    }
+
+    .video-roll-long-box {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .video-roll-icon {
+        width: 25px;
+        height: 25px;
+        animation: rotateIcon 0.3s ease-in-out
+    }
+
+    .video-roll-label {
+        color: #fff;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-roll-item {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .video-roll-on {
+        background-image: var(--video-roll-background-active);
+        filter: contrast(200%);
+    }
+
+    .video-roll-off {
+        background: transparent;
+
+        &:hover {
+            background-image: var(--video-roll-background-active)
+        }
+    }
+
+    @keyframes rotateIcon {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 
     .video-roll-header {
         display: flex;
@@ -47,85 +206,6 @@ body {
         position: relative;
     }
 
-    .video-roll-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .video-roll-website {
-            user-select: none;
-            height: 25px;
-            font-size: 15px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--van-primary-color);
-            padding: 10px 0;
-            overflow: hidden;
-        }
-
-        .video-roll-rotate-control {
-            width: 120px;
-            height: 120px;
-            border: 5px solid #2d2e31;
-            border-radius: 50%;
-            position: relative;
-            color: var(--van-primary-color);
-
-            .rotate-deg-text {
-                width: 32px;
-                height: 20px;
-                color: #fff;
-                background-color: var(--van-primary-color);
-                border-radius: 3px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                font-weight: bold;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                transform: translate(-50%, -50%);
-            }
-
-            .rotate-btn {
-                width: 30px;
-                height: 30px;
-                cursor: pointer;
-                position: absolute;
-
-                &:hover {
-                    svg {
-                        color: #d194c0;
-                    }
-                }
-            }
-
-            .rotate-up-90 {
-                left: 50%;
-                transform: rotate(90deg) translateY(50%);
-            }
-
-            .rotate-left-0 {
-                top: 50%;
-                transform: translateY(-50%);
-            }
-
-            .rotate-down-270 {
-                bottom: 0;
-                left: 50%;
-                transform: rotate(270deg) translateY(-50%);
-            }
-
-            .rotate-right-180 {
-                right: 0;
-                top: 50%;
-                transform: rotate(180deg) translateY(50%);
-            }
-        }
-    }
-
     .video-roll-setting {
         position: absolute;
         overflow: hidden;
@@ -136,7 +216,17 @@ body {
 
     .video-roll-resetBtn {
         position: absolute;
-        right: 20px;
-        top: 10px;
+        left: 0;
+        right: 0;
+        bottom: 20px;
+        margin: auto;
+        width: 60px;
+        border: none;
+
+        &:hover {
+            filter: contrast(200%);
+        }
+
+        background-image: var(--video-roll-background-active);
     }
 }

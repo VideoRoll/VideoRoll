@@ -35,7 +35,10 @@ export interface IMove {
     y: number;
 }
 
-export type Pitch = number;
+export type Pitch = {
+    on: boolean;
+    value: number;
+};
 
 export interface IScale {
     mode: "auto" | 'custom',
@@ -66,6 +69,7 @@ export type RollValue = IRollConfig[RollKey];
 
 export interface IRollConfig {
     tabId: number;
+    videoNumber: number;
     url: string;
     name: string;
     flip: Flip;

@@ -1,4 +1,10 @@
 ### ✨ Change Log
+-   v1.1.5:
+    -   ✨Features:
+        - Brand new UI, better user experience!
+        - Add reload page button.
+        - Add switch to control pitch function.
+
 -   v1.1.4:
 
     -   🐞Bug Fixes: 

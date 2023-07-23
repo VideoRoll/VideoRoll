@@ -5,7 +5,8 @@
  */
 
 import { defineComponent, inject } from "vue";
-import { OptionsSharp, CloseSharp } from "@vicons/ionicons5";
+import { LogoUsd } from "@vicons/ionicons5";
+import { createURL } from '../../utils';
 import "./index.less";
 
 export default defineComponent({
@@ -14,7 +15,10 @@ export default defineComponent({
         isShow: Boolean
     },
     setup(props) {
-        const onOpenSetting = inject("onOpenSetting") as () => void;
+        const toDonate = () => {
+            createURL('https://afdian.net/a/gomi_gxy/plan');
+        }
+
         return () => (
             <div class="video-roll-header">
                 <div class="video-roll-logo">
@@ -24,18 +28,11 @@ export default defineComponent({
                     />
                 </div>
                 <div class="video-roll-head-right">
-                    <div
-                        class="video-roll-setting-btn"
-                        title="settings"
-                        onClick={onOpenSetting}
-                    >
-                        {
-                            props.isShow ? <CloseSharp
-                                class="options-sharp"
-                            ></CloseSharp> : <OptionsSharp
-                                class="options-sharp"
-                            ></OptionsSharp>
-                        }
+                    <div class="video-roll-setting-btn" title="donate" onClick={toDonate}>
+                        <LogoUsd
+                            class="logo-usd"
+                        ></LogoUsd>
+                        <span>Donate</span>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSe
 export default class VideoRoll {
     static rollConfig: IRollConfig;
 
-    static audioCtx: AudioContext;
+    static audioCtx: AudioContext | null;
 
     static audioController: Jungle[] = [];
 
@@ -266,7 +266,7 @@ export default class VideoRoll {
         let filterStyle = '';
 
         Object.keys(filter).filter((type) => type !== 'mode').forEach((type: string) => {
-            filterStyle += ` ${type}(${filter[type as keyof IFilter]}${(FilterUnit as any)[typeof type]})`
+            filterStyle += ` ${type}(${filter[type as keyof IFilter]}${(FilterUnit as any)[type]})`;
         });
 
         return filterStyle;
@@ -477,7 +477,18 @@ export default class VideoRoll {
         const rootStyle = document.getElementById("video-roll-root");
 
         if (rootStyle) {
-            rootStyle.innerHTML = focus ? `.video-roll-root { position: fixed !important; top: 10% !important; z-index: 200001 !important; width: ${offsetWidth}px !important; height: ${offsetHeight}px !important; } body * { z-index: auto !important; } body { overflow: hidden !important; }` : '.video-roll-root {}';
+            rootStyle.innerHTML = focus ? `.video-roll-root { position: fixed !important; top: 5% !important; z-index: 200001 !important; width: ${offsetWidth}px !important; height: ${offsetHeight}px !important; } body * { z-index: auto !important; } body { overflow: hidden !important; }` : '.video-roll-root {}';
+        }
+    }
+
+    static setPitchController(audioCtx: AudioContext) {
+        for (const dom of this.videoElements) {
+            const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
+            this.audioController.push(new Jungle(audioCtx));
+            this.audioController.forEach((v) => {
+                v.output.connect(audioCtx.destination);
+                node.connect(v.input);
+            });
         }
     }
 
@@ -486,42 +497,39 @@ export default class VideoRoll {
      * @returns 
      */
     static async updatePitch() {
+        const { on, value } = this.rollConfig.pitch;
+
         try {
+            if (!on && this.audioController.length) {
+                // set to 0
+                this.audioController.forEach((v) => {
+                    v.setPitchOffset(value);
+                })
+                return;
+            };
+
+            if (!on && !this.audioCtx) {
+                return;
+            }
+
             if (!this.audioCtx) {
                 this.audioCtx = new AudioContext();
                 const { audioCtx } = this;
 
-                const setPitch = () => {
-                    for (const dom of this.videoElements) {
-                        const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
-                        this.audioController.push(new Jungle(audioCtx));
-                        this.audioController.forEach((v) => {
-                            v.output.connect(audioCtx.destination);
-                            node.connect(v.input);
-                            v.setPitchOffset(this.rollConfig.pitch);
-                        });
-                    }
-                }
-
                 if (audioCtx.state !== 'running') {
-                    audioCtx.resume().then(() => {
-                        setPitch();
-                    });
-                } else {
-                    setPitch();
+                    await audioCtx.resume();   
                 }
 
-                return;
+                this.setPitchController(audioCtx);
             }
 
-            if (this.audioController.length) {
+            if (this.audioController.length && on) {
                 this.audioController.forEach((v) => {
-                    v.setPitchOffset(this.rollConfig.pitch);
+                    v.setPitchOffset(value);
                 })
             }
         } catch (err) {
             console.debug(err);
         }
-
     }
 }

@@ -1,0 +1,29 @@
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#app .video-roll-info {
+    .flex-start();
+
+    .video-roll-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    .video-roll-info-item {
+        .flex-start();
+        margin-right: 20px;
+        color: var(--van-primary-color);
+        font-weight: bold;
+    }
+
+    .video-roll-info-itemText {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

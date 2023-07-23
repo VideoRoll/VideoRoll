@@ -40,6 +40,10 @@ function updateRollConfig(rollConfig: IRollConfig, key: RollKey, value: RollValu
     }
 }
 
+function reloadPage(tabId: number) {
+    chrome.tabs.reload(tabId);
+}
+
 /**
  * initialize config
  * @param rollConfig
@@ -84,4 +88,4 @@ function createURL(url: string) {
     });
 }
 
-export { initRollConfig, updateRollConfig, createURL }
+export { initRollConfig, updateRollConfig, createURL, reloadPage }

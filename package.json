@@ -1,6 +1,6 @@
 {
     "name": "video-roll",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "A web extension that can help you rotate, zoom, move, scale, flip, tune, focus and filter a video",
     "author": "Gomi",
     "scripts": {
@@ -50,8 +50,9 @@
     "dependencies": {
         "@vant/touch-emulator": "^1.4.0",
         "@vicons/ionicons5": "^0.11.0",
-        "vant": "4.0.0-rc.0",
+        "vant": "4.6.2",
         "vue": "^3.2.41",
+        "vue-grid-layout": "^2.4.0",
         "webextension-polyfill": "^0.10.0"
     },
     "devDependencies": {
@@ -81,7 +82,7 @@
         "jest-environment-jsdom": "^29.0.3",
         "less": "^4.1.2",
         "parcel": "^2.8.3",
-        "parcel-namer-hashless": "^1.0.4",
+        "parcel-namer-hashless": "^1.0.5",
         "process": "^0.11.10",
         "ts-jest": "^29.0.2",
         "ts-node": "^10.9.1",
