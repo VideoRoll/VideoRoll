@@ -66,7 +66,7 @@ function useComponents() {
                     {
                         type: "container",
                         col: 8,
-                        title: 'Store',
+                        title: 'Cache Site',
                         showTitle: true,
                         style: {
                             flexDirection: "column",
@@ -195,129 +195,25 @@ function useComponents() {
         },
         {
             type: 'swiper',
-            children: [{
+            children: [
+            {
                 type: 'row',
+                style: {
+                    margin: '30px 0',
+                    height: '40px'
+                },
                 children: [
                     {
                         type: 'container',
-                        col: 16,
-                        title: "rotate",
+                        title: "Filter",
+                        showTitle: true,
+                        col: 8,
                         children: [{
                             type: 'component',
-                            component: defineAsyncComponent(() => import("../components/Rotate"))
+                            component: defineAsyncComponent(() => import("../components/Filter"))
                         }]
-                    },
-                    {
-                        type: "container",
-                        col: 8,
-                        style: {
-                            flexDirection: "column",
-                            background: 'none',
-                            justifyContent: 'space-between',
-                        },
-                        children: [
-                            {
-                                type: 'row',
-                                children: [
-                                    {
-                                        type: 'container',
-                                        title: 'Focus',
-                                        col: 24,
-                                        children: [
-                                            {
-                                                type: 'component',
-                                                component: null
-                                                // component: defineAsyncComponent(() => import("../components/Focus"))
-                                            }
-                                        ]
-                                    },
-                                ]
-                            },
-                            {
-                                type: 'row',
-                                children: [
-                                    {
-                                        type: 'container',
-                                        title: 'Store',
-                                        col: 24,
-                                        children: [
-                                            {
-                                                type: 'component',
-                                                component: null
-                                                // component: defineAsyncComponent(() => import("../components/Store"))
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
                     }
-                ]
-            },
-            {
-                type: 'row',
-                children: [
-                    {
-                        type: 'container',
-                        title: "Move",
-                        col: 8,
-                        children: [{
-                            type: 'component',
-                            component: null
-                            // component: defineAsyncComponent(() => import("../components/Move"))
-                        }]
-                    },
-                    {
-                        type: 'container',
-                        col: 8,
-                        title: "Scale",
-                        children: [{
-                            type: 'component',
-                            component: null
-                            // component: defineAsyncComponent(() => import("../components/Scale"))
-                        }]
-                    },
-                    {
-                        type: 'container',
-                        col: 8,
-                        title: "Flip",
-                        children: [{
-                            type: 'component',
-                            component: null
-                            // component: defineAsyncComponent(() => import("../components/Flip"))
-                        }]
-                    },
                 ],
-            },
-            {
-                type: 'row',
-                children: [
-                    {
-                        type: 'container',
-                        col: 24,
-                        title: "Pitch",
-                        children: [{
-                            type: 'component',
-                            component: null
-                            // component: defineAsyncComponent(() => import("../components/Pitch"))
-                        }]
-                    },
-                ]
-            },
-            {
-                type: 'row',
-                children: [
-                    {
-                        type: 'container',
-                        title: "Zoom",
-                        col: 24,
-                        children: [{
-                            type: 'component',
-                            component: null
-                            // component: defineAsyncComponent(() => import("../components/Zoom"))
-                        }]
-                    },
-                ]
             }]
         }
     ]);

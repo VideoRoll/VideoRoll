@@ -32,17 +32,53 @@ body {
 
 #app {
     width: 300px;
-    height: 520px;
+    height: 500px;
     background-color: rgb(24, 24, 28);
+
+    .van-row:first-of-type {
+        margin-top: 0 !important;
+    }
+
     .van-swipe__indicators {
         bottom: 0;
     }
+
     .van-swipe__indicator {
         width: 12px;
         height: 12px;
         background-image: var(--video-roll-background-active);
         cursor: pointer;
+
         &:hover {
+            background-image: var(--video-roll-background-active);
+        }
+    }
+
+    .video-roll-headBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 10px 0;
+
+        .reload-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+
+            .video-roll-icon {
+                width: 15px;
+                height: 15px;
+            }
+
+            &:hover {
+                filter: contrast(200%);
+            }
+
             background-image: var(--video-roll-background-active);
         }
     }
@@ -52,6 +88,7 @@ body {
         border-bottom: 1px solid var(--van-divider-border-color);
         padding-bottom: 15px;
     }
+
     .custom-button {
         width: 26px;
         color: #fff;
@@ -76,7 +113,7 @@ body {
         align-items: center;
         width: 25px;
         height: 25px;
-        box-shadow: 2px 2px 5px #5d5f626c, -2px -2px 5px #5d5f626c;
+        box-shadow: 2px 2px 4px #5d5f626c, -2px -2px 4px #5d5f626c;
 
         .video-roll-icon {
             width: 15px;
@@ -86,6 +123,7 @@ body {
 
     .video-roll-switch-off {
         background-color: rgba(155, 155, 155, 0.4);
+
         &:hover {
             background-image: var(--video-roll-background-active)
         }

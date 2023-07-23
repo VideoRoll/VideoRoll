@@ -31,7 +31,6 @@ export default defineComponent({
         }
 
         const updateRenderContent = (content: VueElement) => {
-            console.log(content);
             renderContent.value = content;
         }
 

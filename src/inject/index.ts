@@ -9,6 +9,7 @@ import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboard
 import { sendRuntimeMessage } from "../util";
 
 (function () {
+    let videoNumber: number = 0;
     /**
      * get message from popup or backgound
      */
@@ -22,6 +23,7 @@ import { sendRuntimeMessage } from "../util";
                         tabId,
                         rollConfig
                     }).then((res) => {
+                        videoNumber = Number(res?.text);
                         sendRuntimeMessage(tabId, { ...res, type: ActionType.UPDATE_BADGE })
                     });
                     break;
@@ -29,14 +31,14 @@ import { sendRuntimeMessage } from "../util";
                 // when popup onMounted, set init flip value to background,
                 // through backgroundjs sending message to popup to store flip value
                 case ActionType.ON_MOUNTED: {
-                    updateOnMounted(rollConfig);
+                    updateOnMounted({ ...rollConfig, videoNumber });
                     break;
                 }
                 case ActionType.UPDATE_STORAGE:
-                    updateStorage(rollConfig, send);
+                    updateStorage({ ...rollConfig, videoNumber }, send);
                     return;
                 case ActionType.UPDATE_CONFIG: {
-                    updateConfig(rollConfig);
+                    updateConfig({ ...rollConfig, videoNumber });
                     break;
                 }
                 case ActionType.INIT_SHORT_CUT_KEY:

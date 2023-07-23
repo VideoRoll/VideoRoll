@@ -4,7 +4,9 @@
  * @Date: 2022-09-19 22:53:23
  */
 
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, computed, shallowReactive } from "vue";
+import { ColorPaletteOutline } from "@vicons/ionicons5";
+import { defaultFilterConfig } from '../../use/useConfig'
 import type { IRollConfig, IFilter } from "../../../../types/type.d";
 import "./index.less";
 
@@ -13,6 +15,8 @@ export default defineComponent({
     setup() {
         const update = inject("update") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
+        const setPopupShow = inject("setPopupShow") as Function;
+        const updateRenderContent = inject("updateRenderContent") as Function;
 
         let { filter } = rollConfig as IRollConfig;
 
@@ -29,7 +33,7 @@ export default defineComponent({
             update("filter", rollConfig.filter);
         };
 
-        const filterConfigs = [
+        const filterConfigs = shallowReactive([
             {
                 type: "blur",
                 range: [0, 100],
@@ -60,9 +64,11 @@ export default defineComponent({
                 range: [0, 100],
                 step: 1,
             },
-        ];
+        ]);
 
-        return () => (
+        const isDefault = computed(() => rollConfig.filter.mode === 'unset');
+
+        const popupRender = () => (
             <div class="video-roll-filter">
                 <van-radio-group
                     v-model={filter.mode}
@@ -105,6 +111,26 @@ export default defineComponent({
                     ))}
                 </div>
             </div>
+        )
+
+        const showPopup = () => {
+            setPopupShow(true);
+            updateRenderContent(popupRender)
+        }
+
+        return () => (
+            
+            <div title='Stretch' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
+            <div class="video-roll-icon-box">
+                <span class="video-roll-label">
+                    {
+                        <ColorPaletteOutline
+                            class="video-roll-icon"
+                        ></ColorPaletteOutline>
+                    }
+                </span>
+            </div>
+        </div>
         );
     },
 });
