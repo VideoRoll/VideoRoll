@@ -500,6 +500,18 @@ export default class VideoRoll {
         const { on, value } = this.rollConfig.pitch;
 
         try {
+            if (!on && this.audioController.length) {
+                // set to 0
+                this.audioController.forEach((v) => {
+                    v.setPitchOffset(value);
+                })
+                return;
+            };
+
+            if (!on && !this.audioCtx) {
+                return;
+            }
+
             if (!this.audioCtx) {
                 this.audioCtx = new AudioContext();
                 const { audioCtx } = this;
@@ -511,15 +523,10 @@ export default class VideoRoll {
                 this.setPitchController(audioCtx);
             }
 
-            if (this.audioController.length) {
+            if (this.audioController.length && on) {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
-
-                if (!on) {
-                    this.audioController.forEach((v) => v.disconnect());
-                    this.audioController = [];
-                };
             }
         } catch (err) {
             console.debug(err);

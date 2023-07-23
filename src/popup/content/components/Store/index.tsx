@@ -22,10 +22,6 @@ export default defineComponent({
             update("store", rollConfig.store);
         };
 
-        const setStoreThisTab = (value: boolean) => {
-            rollConfig.storeThisTab = value;
-            update("storeThisTab", value);
-        };
         return () => (
             <div class={`video-roll-store video-roll-item ${rollConfig.store ? 'video-roll-on' : 'video-roll-off'}`} onClick={setStore}>
                 <div class="video-roll-icon-box">

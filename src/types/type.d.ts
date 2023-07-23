@@ -69,6 +69,7 @@ export type RollValue = IRollConfig[RollKey];
 
 export interface IRollConfig {
     tabId: number;
+    videoNumber: number;
     url: string;
     name: string;
     flip: Flip;

@@ -11,7 +11,7 @@ export default function render(children: IRowConfig[] | IContainerConfig[] | ICo
                     }
                 </van-swipe-item>
             case 'row':
-                return <van-row justify="center" gutter='10' wrap={true} style={{...item.style}}>
+                return <van-row justify="start" gutter='10' wrap={true} style={{...item.style}}>
                     {
                         render(item.children)
                     }

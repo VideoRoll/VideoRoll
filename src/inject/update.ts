@@ -89,6 +89,8 @@ export function updateOnMounted(rollConfig: IRollConfig) {
         }
     }
 
+    config = Object.assign(config, { videoNumber: rollConfig.videoNumber })
+
     VideoRoll.setRollConfig(config).addStyleClass().updatePitch();
 
     chrome.runtime.sendMessage(

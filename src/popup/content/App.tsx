@@ -1,11 +1,12 @@
 import { defineComponent, ref, onMounted, provide, Transition } from "vue";
+import { RefreshOutline } from "@vicons/ionicons5";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
 import Info from './components/Info';
-import { useConfig, useDegBtn } from "./use";
-import { initRollConfig, updateRollConfig } from "./utils";
+import { useConfig } from "./use";
+import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
 import { clone } from "../../util";
 import { ActionType } from "../../types/type.d";
 
@@ -31,6 +32,9 @@ export default defineComponent({
         provide("update", update);
         provide("onOpenSetting", onOpenSetting);
 
+        const onReload = () => {
+            reloadPage(rollConfig.tabId);
+        }
         /**
          * 当打开时就获取当前网站的视频信息
          * 添加样式
@@ -52,15 +56,24 @@ export default defineComponent({
             )
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
-                const { type, rollConfig: config } = a;
-                if (type === ActionType.UPDATE_STORAGE) {
-                    Object.keys(config).forEach((key) => {
-                        if (key in rollConfig) {
-                            rollConfig[key] = config[key];
-                        }
-                    });
+                const { type, rollConfig: config, text } = a;
+                switch(type) {
+                    case ActionType.UPDATE_STORAGE:
+                        console.log(config, '---config');
+                        Object.keys(config).forEach((key) => {
+                            if (key in rollConfig) {
+                                rollConfig[key] = config[key];
+                            }
+                        });
+                        break;
+                    case ActionType.UPDATE_BADGE:
+                        rollConfig.videoNumber = Number(text);
+                        break;
+                    default:
+                        break;
                 }
-                c("update_storage");
+
+                c("update");
             });
         });
 
@@ -68,7 +81,13 @@ export default defineComponent({
             <div>
                 <Head isShow={isShow.value}></Head>
                 <main>
-                    <Info></Info>
+                    <div class="video-roll-headBar">
+                        <Info></Info>
+                        <div title="reload page" class="reload-btn" onClick={onReload}>
+                            <RefreshOutline class="video-roll-icon"></RefreshOutline>
+                        </div>
+                    </div>
+                   
                     <div class="video-roll-content">
                         <GridPanel></GridPanel>
                     </div>
