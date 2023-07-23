@@ -23,7 +23,7 @@ const defaultConfig = {
         on: false
     },
     pitch: {
-        on: 0,
+        on: false,
         value: 0
     },
     filter: {

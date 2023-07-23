@@ -5,6 +5,7 @@
  */
 
 import { defineComponent, inject } from "vue";
+import { PulseOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type";
 import { getDefaultConfig } from '../../use';
 import "./index.less";
@@ -15,41 +16,24 @@ export default defineComponent({
         const update = inject("update") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
 
-        const setPitchOn = (value: 0 | 1) => {
-            rollConfig.pitch.on = value;
-            update("pitch", rollConfig.pitch);
-        };
-
         const setPitch = (value: number) => {
             rollConfig.pitch.value = value;
             update("pitch", rollConfig.pitch);
         };
 
-        const reset = () => {
-            setPitch(getDefaultConfig().pitch.value);
+        const setPitchOn = () => {
+            rollConfig.pitch.on = !rollConfig.pitch.on;
+            if (!rollConfig.pitch.on) rollConfig.pitch.value = 0;
+            update("pitch", rollConfig.pitch);
         };
 
         return () => (
             <>
-                <van-button class="video-roll-resetBtn" size="mini" icon="replay" type="primary" onClick={reset}>reset</van-button>
-                <div class="video-roll-pitch-box">
-                    <van-radio-group
-                        v-model={rollConfig.pitch.on}
-                        direction="horizontal"
-                        onChange={setPitchOn}
-                    >
-                        <van-radio name={0} >Unset</van-radio>
-                        <van-radio name={1} >Custom</van-radio>
-                    </van-radio-group>
-                    <van-divider
-                        class={!rollConfig.pitch.on
-                            ? "disable-label"
-                            : "enable-label"}
-                    >
-                        Pitch
-                    </van-divider>
+                <div class="video-roll-long-box">
+                    <div class={`video-roll-switch ${rollConfig.pitch.on ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={setPitchOn}>
+                        <PulseOutline class="video-roll-icon"></PulseOutline>
+                    </div>
                     <div class="video-roll-pitch">
-                        <span class="zoom-label">low</span>
                         <van-slider
                             v-model={rollConfig.pitch.value}
                             min={-1}
@@ -66,13 +50,9 @@ export default defineComponent({
                                 ),
                             }}
                         ></van-slider>
-                        <span class="zoom-label">high</span>
                     </div>
                 </div>
-
-
             </>
-
         );
     },
 });

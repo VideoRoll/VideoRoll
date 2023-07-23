@@ -6,13 +6,12 @@
 
 import { defineComponent, inject, computed } from "vue";
 import { MoveOutline } from "@vicons/ionicons5";
-import type { IRollConfig } from "../../../../types/type.d";
+import type { IRollConfig } from "../../../../types/type";
 import { getDefaultConfig } from '../../use';
-<ion-icon name="move-outline"></ion-icon>
 import "./index.less";
 
 export default defineComponent({
-    name: "Move",
+    name: "Repostion",
     setup() {
         const update = inject("update") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
@@ -38,7 +37,6 @@ export default defineComponent({
 
         const popupRender = () => (
             <>
-                <van-button class="video-roll-resetBtn" size="mini" icon="replay" type="primary" onClick={reset}>reset</van-button>
                 <div class="video-roll-move">
                     <div class="move-box">
                         <van-divider class="move-label">Left - Right</van-divider>
@@ -81,6 +79,7 @@ export default defineComponent({
                         </div>
                     </div>
                 </div>
+                <van-button class="video-roll-resetBtn" size="mini" icon="replay" type="primary" onClick={reset}>reset</van-button>
             </>
         )
 
@@ -90,14 +89,12 @@ export default defineComponent({
         }
 
         return () => (
-            <div title='Focus mode' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
+            <div title='Repostion' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
-                        {
-                            <MoveOutline
-                                class="video-roll-icon"
-                            ></MoveOutline> 
-                        }
+                        <MoveOutline
+                            class="video-roll-icon"
+                        ></MoveOutline>
                     </span>
                 </div>
             </div>

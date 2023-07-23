@@ -10,7 +10,7 @@ import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSe
 export default class VideoRoll {
     static rollConfig: IRollConfig;
 
-    static audioCtx: AudioContext;
+    static audioCtx: AudioContext | null;
 
     static audioController: Jungle[] = [];
 
@@ -498,7 +498,6 @@ export default class VideoRoll {
      */
     static async updatePitch() {
         const { on, value } = this.rollConfig.pitch;
-        if (!on) return;
 
         try {
             if (!this.audioCtx) {
@@ -516,6 +515,11 @@ export default class VideoRoll {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
+
+                if (!on) {
+                    this.audioController.forEach((v) => v.disconnect());
+                    this.audioController = [];
+                };
             }
         } catch (err) {
             console.debug(err);

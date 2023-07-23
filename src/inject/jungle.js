@@ -245,4 +245,9 @@ Jungle.prototype.setPitchOffset = function (mult) {
     this.setDelay(delayTime * Math.abs(mult));
 }
 
+Jungle.prototype.disconnect = function() {
+    this.input?.disconnect();
+    this.output?.disconnect();
+}
+
 export default Jungle;

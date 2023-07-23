@@ -52,10 +52,10 @@ export default defineComponent({
         About: defineAsyncComponent(() => import("../About")),
         Flip: defineAsyncComponent(() => import("../Flip")),
         Zoom: defineAsyncComponent(() => import("../Zoom")),
-        Scale: defineAsyncComponent(() => import("../Scale")),
+        Scale: defineAsyncComponent(() => import("../Stretch")),
         Store: defineAsyncComponent(() => import("../Store")),
         Filter: defineAsyncComponent(() => import("../Filter")),
-        Move: defineAsyncComponent(() => import("../Move")),
+        Move: defineAsyncComponent(() => import("../Repostion")),
         Pitch: defineAsyncComponent(() => import("../Pitch")),
         Focus: defineAsyncComponent(() => import("../Focus"))
     },

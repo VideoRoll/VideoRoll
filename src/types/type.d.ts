@@ -36,7 +36,7 @@ export interface IMove {
 }
 
 export type Pitch = {
-    on: 0 | 1;
+    on: boolean;
     value: number;
 };
 
