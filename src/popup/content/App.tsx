@@ -1,5 +1,5 @@
 import { defineComponent, ref, onMounted, provide, Transition } from "vue";
-import { RefreshOutline } from "@vicons/ionicons5";
+import { ReloadOutline } from "@vicons/ionicons5";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
@@ -84,7 +84,7 @@ export default defineComponent({
                     <div class="video-roll-headBar">
                         <Info></Info>
                         <div title="reload page" class="reload-btn" onClick={onReload}>
-                            <RefreshOutline class="video-roll-icon"></RefreshOutline>
+                            <ReloadOutline class="video-roll-icon"></ReloadOutline>
                         </div>
                     </div>
                    
