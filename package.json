@@ -1,7 +1,7 @@
 {
     "name": "video-roll",
-    "version": "1.1.5",
-    "description": "A web extension that can help you rotate, zoom, move, scale, flip, tune, focus and filter a video",
+    "version": "1.1.6",
+    "description": "Rotate, zoom, reposition, stretch, flip, tune, focus and filter videos",
     "author": "Gomi",
     "scripts": {
         "test": "jest",
