@@ -1,8 +1,8 @@
 {
     "name": "Video Roll",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "manifest_version": 3,
-    "description": "help you rotate, zoom, move, scale, flip, tune, focus and filter a video. 旋转、缩放、移动、调整比例、镜像翻转、调节音调、专注、滤镜视频。",
+    "description": "Rotate, zoom, reposition, stretch, flip, tune, focus and filter videos. 旋转、缩放、移动、调整比例、镜像翻转、调节音调、专注、滤镜视频。",
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
