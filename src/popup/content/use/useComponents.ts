@@ -66,7 +66,7 @@ function useComponents() {
                     {
                         type: "container",
                         col: 8,
-                        title: 'Cache Site',
+                        title: 'PictureInPicture',
                         showTitle: true,
                         style: {
                             flexDirection: "column",
@@ -99,13 +99,13 @@ function useComponents() {
                                 children: [
                                     {
                                         type: 'container',
-                                        title: 'Store',
+                                        title: 'pictureInPicture',
                                         showTitle: false,
                                         col: 24,
                                         children: [
                                             {
                                                 type: 'component',
-                                                component: defineAsyncComponent(() => import("../components/Store"))
+                                                component: defineAsyncComponent(() => import("../components/PictureInPicture"))
                                             }
                                         ]
                                     }
@@ -212,6 +212,18 @@ function useComponents() {
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Filter"))
                         }]
+                    },
+                    {
+                        type: 'container',
+                        title: 'Cache Site',
+                        showTitle: true,
+                        col: 8,
+                        children: [
+                            {
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Store"))
+                            }
+                        ]
                     }
                 ],
             }]

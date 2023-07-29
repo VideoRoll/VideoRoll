@@ -22,6 +22,7 @@ const defaultConfig = {
     url: '',
     name: '',
     flip: 'unset',
+    pictureInPicture: false,
     scale: {
         mode: 'auto',
         values: [1, 1],

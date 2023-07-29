@@ -235,7 +235,7 @@ export default class VideoRoll {
         rollConfig: IRollConfig
     ) {
         this.setRollConfig(rollConfig);
-        const { deg, flip, scale, zoom, move, filter, focus } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, focus, pictureInPicture } = rollConfig;
 
         for (const target of this.videoElements) {
             const dom = (target as VideoObject).shadowElement ?? target;
@@ -251,6 +251,7 @@ export default class VideoRoll {
 
                 this.videoElements.forEach((video) => {
                     this.updateFocus(doc, video as HTMLVideoElement, focus.on);
+                    this.togglePictureInPicture(pictureInPicture);
                 });
             });
 
@@ -517,7 +518,7 @@ export default class VideoRoll {
                 const { audioCtx } = this;
 
                 if (audioCtx.state !== 'running') {
-                    await audioCtx.resume();   
+                    await audioCtx.resume();
                 }
 
                 this.setPitchController(audioCtx);
@@ -530,6 +531,20 @@ export default class VideoRoll {
             }
         } catch (err) {
             console.debug(err);
+        }
+    }
+
+    /**
+     * HTMLVideoElement.requestPictureInPicture()
+     */
+    static togglePictureInPicture(pictureInPicture: boolean) {
+        if (!pictureInPicture && document.pictureInPictureElement) {
+            document.exitPictureInPicture();
+            return;
+        } 
+        
+        if (pictureInPicture && document.pictureInPictureEnabled && this.realVideoPlayer.player) {
+            this.realVideoPlayer.player.requestPictureInPicture();
         }
     }
 }

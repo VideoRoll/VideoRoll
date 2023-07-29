@@ -1,32 +1,30 @@
 /*
- * @description: store Component
+ * @description: pictureInPicture Component
  * @Author: Gouxinyu
  * @Date: 2022-09-19 22:53:23
  */
 import { defineComponent, inject } from "vue";
-import { EyeOutline, EyeOffOutline } from "@vicons/ionicons5";
+import { TvOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
 import "./index.less";
 
 export default defineComponent({
-    name: "Focus",
+    name: "PictureInPicture",
     setup() {
         const update = inject("update") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
 
-        const setFocus = () => {
-            rollConfig.focus.on = !rollConfig.focus.on;
-            update("focus", rollConfig.focus);
+        const setPictureInPicture = () => {
+            rollConfig.pictureInPicture = !rollConfig.pictureInPicture;
+            update("pictureInPicture", rollConfig.pictureInPicture);
         };
         return () => (
-            <div title='Focus mode' class={`video-roll-focus video-roll-item ${rollConfig.focus.on ? 'video-roll-on' : 'video-roll-off'}`} onClick={setFocus}>
+            <div title='picture in picture' class={`video-roll-focus video-roll-item ${rollConfig.pictureInPicture ? 'video-roll-on' : 'video-roll-off'}`} onClick={setPictureInPicture}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
-                        {
-                            rollConfig.focus.on ? <EyeOutline
+                        <TvOutline
                             class="video-roll-icon"
-                        ></EyeOutline> : <EyeOffOutline class="video-roll-icon"></EyeOffOutline>
-                        }
+                        ></TvOutline>
                     </span>
                 </div>
             </div>
