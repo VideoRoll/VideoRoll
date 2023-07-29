@@ -7,7 +7,6 @@
 import { defineComponent, inject } from "vue";
 import { ExpandOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
-import { getDefaultConfig } from '../../use';
 import "./index.less";
 
 export default defineComponent({
