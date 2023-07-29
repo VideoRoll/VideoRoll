@@ -80,6 +80,7 @@ export interface IRollConfig {
     move: IMove;
     deg: Deg;
     filter: IFilter;
+    pictureInPicture: boolean;
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;

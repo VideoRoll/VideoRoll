@@ -5,11 +5,19 @@
     "description": "Rotate, zoom, reposition, stretch, flip, tune, focus and filter videos. 旋转、缩放、移动、调整比例、镜像翻转、调节音调、专注、滤镜视频。",
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
-            "js": ["inject/index.js"],
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "inject/index.js"
+            ],
             "run_at": "document_start"
         }
     ],
+    "options_ui": {
+        "page": "options/index.html",
+        "open_in_tab": true
+    },
     "background": {
         "service_worker": "background/index.js"
     },
@@ -24,10 +32,16 @@
     },
     "web_accessible_resources": [
         {
-            "resources": ["inject/index.js"],
-            "matches": ["https://*/*"]
+            "resources": [
+                "inject/index.js"
+            ],
+            "matches": [
+                "https://*/*"
+            ]
         }
     ],
     "homepage_url": "https://gomi.site/VideoRoll",
-    "permissions": ["activeTab"]
+    "permissions": [
+        "activeTab"
+    ]
 }
