@@ -2,8 +2,6 @@ import { defineComponent, ref, onMounted, provide, Transition } from "vue";
 import { ReloadOutline } from "@vicons/ionicons5";
 import browser from "webextension-polyfill";
 
-import "./index.less";
-
 export default defineComponent({
     name: "App",
     setup() {
