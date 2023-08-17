@@ -119,7 +119,7 @@ If you have any good idea, please commit a issue or send a PR.
 -   node
 -   less
 -   vant
--   visual Studio Code
+-   visual studio code
 -   pnpm
 -   yarn
 -   webextension-polyfill
