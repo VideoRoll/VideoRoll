@@ -7,7 +7,7 @@ export default defineComponent({
     setup() {
         return () => (
             <div>
-                <div>123</div>
+                <div>test</div>
                 <main>
                 </main>
             </div>
