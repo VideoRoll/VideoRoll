@@ -7,7 +7,7 @@ export default defineComponent({
     setup() {
         return () => (
             <div>
-                <div>test</div>
+                <div>test原来</div>
                 <main>
                 </main>
             </div>
