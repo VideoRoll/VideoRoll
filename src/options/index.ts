@@ -1,16 +1,10 @@
-/*
- * @description: popup entry
- * @Author: Gouxinyu
- * @Date: 2022-01-13 19:43:08
- */
-
-/// <reference path="../types/shims-vue.d.ts" />
 import { createApp } from "vue";
 import { Row } from 'vant';
-import '@vant/touch-emulator';s
+
+import '@vant/touch-emulator';
 import 'vant/lib/index.css'
 
-import App from "./options";
+import App from "./app";
 
 import ConfigProvider from "vant/es/config-provider/index.mjs";
 import Sidebar from "vant/es/sidebar/index.mjs";
