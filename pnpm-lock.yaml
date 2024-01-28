@@ -101,8 +101,8 @@ devDependencies:
     specifier: ^2.8.3
     version: 2.8.3
   parcel-namer-hashless:
-    specifier: ^1.0.6
-    version: 1.0.6(@parcel/core@2.8.3)
+    specifier: ^1.0.5
+    version: 1.0.5(@parcel/core@2.8.3)
   process:
     specifier: ^0.11.10
     version: 0.11.10
@@ -4739,8 +4739,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /parcel-namer-hashless@1.0.6(@parcel/core@2.8.3):
-    resolution: {integrity: sha512-C+WEXQDUPKavsOPvG9X4S92VBwZNL5InsnuIOASUXcdh6nldlPC8BfmXXLXt8M+9H/H4tuAqOLugYN1KTMf+yQ==}
+  /parcel-namer-hashless@1.0.5(@parcel/core@2.8.3):
+    resolution: {integrity: sha512-0bKvqHJMavIhKPYxMbKQYLGH2zG+eS1LHpxDRj4UuyOxpj7RoQOlAb9hQ0aR/cuFWEGhQgiCaHU+jWzHnHcm/w==}
     engines: {node: '>= 16.0.0', parcel: 2.x}
     dependencies:
       '@parcel/namer-default': 2.8.3(@parcel/core@2.8.3)
