@@ -84,7 +84,7 @@
         "jest-environment-jsdom": "^29.0.3",
         "less": "^4.1.2",
         "parcel": "^2.8.3",
-        "parcel-namer-hashless": "^1.0.6",
+        "parcel-namer-hashless": "^1.0.5",
         "process": "^0.11.10",
         "ts-jest": "^29.0.2",
         "ts-node": "^10.9.1",
