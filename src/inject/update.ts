@@ -28,6 +28,9 @@ async function getTabBadge(): Promise<string> {
     return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
 }
 
+/**
+ * reset time
+ */
 function resetTimes() {
     times = 0;
 }

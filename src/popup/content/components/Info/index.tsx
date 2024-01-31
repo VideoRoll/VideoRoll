@@ -5,7 +5,7 @@
  */
 
 import { defineComponent, inject, computed } from "vue";
-import { GlobeOutline, VideocamOutline } from "@vicons/ionicons5";
+import { GlobeOutline, VideocamOutline, DownloadSharp } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
 import "./index.less";
 
@@ -27,6 +27,11 @@ export default defineComponent({
                         class="video-roll-icon"
                     ></VideocamOutline>
                     <span title="video number" class="video-roll-info-itemText">{rollConfig.videoNumber}</span>
+                </div>
+                <div class="video-roll-info-item">
+                    <DownloadSharp
+                        class="video-roll-icon"
+                    ></DownloadSharp>
                 </div>
             </div>
         );
