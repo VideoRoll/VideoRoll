@@ -14,6 +14,9 @@ export default defineComponent({
     setup() {
         const rollConfig = inject("rollConfig") as IRollConfig;
 
+        const toDownload = () => {
+            window.open('https://ssyoutube.com/en164qB/youtube-video-downloader', '__blank');
+        }
         return () => (
             <div class="video-roll-info">
                 <div class="video-roll-info-item">
@@ -31,6 +34,7 @@ export default defineComponent({
                 <div class="video-roll-info-item">
                     <DownloadSharp
                         class="video-roll-icon"
+                        onClick={toDownload}
                     ></DownloadSharp>
                 </div>
             </div>
