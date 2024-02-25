@@ -66,7 +66,7 @@ function useComponents() {
                     {
                         type: "container",
                         col: 8,
-                        title: 'PictureInPicture',
+                        title: 'Pic In Pic',
                         showTitle: true,
                         style: {
                             flexDirection: "column",
@@ -99,7 +99,7 @@ function useComponents() {
                                 children: [
                                     {
                                         type: 'container',
-                                        title: 'pictureInPicture',
+                                        title: 'Pic In Pic',
                                         showTitle: false,
                                         col: 24,
                                         children: [
