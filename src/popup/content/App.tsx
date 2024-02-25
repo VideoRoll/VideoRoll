@@ -87,7 +87,7 @@ export default defineComponent({
                             <ReloadOutline class="video-roll-icon"></ReloadOutline>
                         </div>
                     </div>
-                   
+                    
                     <div class="video-roll-content">
                         <GridPanel></GridPanel>
                     </div>
