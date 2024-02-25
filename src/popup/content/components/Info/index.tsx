@@ -17,6 +17,7 @@ export default defineComponent({
         const toDownload = () => {
             window.open('https://ssyoutube.com/en164qB/youtube-video-downloader', '__blank');
         }
+        
         return () => (
             <div class="video-roll-info">
                 <div class="video-roll-info-item">

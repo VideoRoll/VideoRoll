@@ -30,9 +30,10 @@ export default defineComponent({
         return () => (
             <>
                 <div class="video-roll-long-box">
-                    <div class={`video-roll-switch ${rollConfig.pitch.on ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={setPitchOn}>
+                    <van-switch v-model={rollConfig.pitch.on} size="15px"></van-switch>
+                    {/* <div class={`video-roll-switch ${rollConfig.pitch.on ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={setPitchOn}>
                         <PulseOutline class="video-roll-icon"></PulseOutline>
-                    </div>
+                    </div> */}
                     <div class="video-roll-pitch">
                         <van-slider
                             v-model={rollConfig.pitch.value}
