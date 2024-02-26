@@ -53,7 +53,7 @@
     "dependencies": {
         "@vant/touch-emulator": "^1.4.0",
         "@vicons/ionicons5": "^0.11.0",
-        "vant": "4.6.2",
+        "vant": "4.8.5",
         "vue": "^3.2.41",
         "webextension-polyfill": "^0.10.0"
     },
