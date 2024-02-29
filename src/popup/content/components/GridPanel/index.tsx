@@ -45,7 +45,14 @@ export default defineComponent({
         return () => (
             <div class="video-roll-setting-panel">
                 <van-config-provider theme="dark">
-                    <van-swipe ref={swipeRef} touchable={false} v-slots={{
+                    <van-tabs sticky animated>
+                        {
+                            render(components)
+                        }
+                        
+                        {/* <van-tab title="Audio"></van-tab> */}
+                    </van-tabs>
+                    {/* <van-swipe ref={swipeRef} touchable={false} v-slots={{
                         indicator: () => {
                             return <div class="van-swipe__indicators">
                                 {
@@ -57,7 +64,7 @@ export default defineComponent({
                         {
                             render(components)
                         }
-                    </van-swipe>
+                    </van-swipe> */}
                     <van-popup v-model:show={popupShow.value} round closeable style={{ width: '250px' , height: '250px', padding: '20px', overflow: 'hidden'}}>{
                         h(renderContent.value)
                     }</van-popup>

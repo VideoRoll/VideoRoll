@@ -10,9 +10,13 @@ import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSe
 export default class VideoRoll {
     static rollConfig: IRollConfig;
 
-    static audioCtx: AudioContext | null;
+    static audioPitchCtx: AudioContext | null = null;
 
     static audioController: Jungle[] = [];
+
+    static audioVolumeCtx: AudioContext | null = null;
+
+    static volumeController: any[] = [];
 
     static videoElements: VideoElement[] = [];
 
@@ -263,6 +267,15 @@ export default class VideoRoll {
         return this;
     }
 
+    /**
+     * update audio
+     */
+    static async updateAudio() {
+        await this.updatePitch();
+        await this.updateVolume();
+        return this;
+    }
+
     static getFilterStyle(filter: IFilter) {
         let filterStyle = '';
 
@@ -506,28 +519,75 @@ export default class VideoRoll {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
-                return;
+                this.audioController.length = 0;
+                this.audioPitchCtx = null;
+                return this;
             };
 
-            if (!on && !this.audioCtx) {
-                return;
+            if (!on && !this.audioPitchCtx) {
+                return this;
             }
 
-            if (!this.audioCtx) {
-                this.audioCtx = new AudioContext();
-                const { audioCtx } = this;
+            if (!this.audioPitchCtx) {
+                this.audioPitchCtx = new AudioContext();
+                const { audioPitchCtx } = this;
 
-                if (audioCtx.state !== 'running') {
-                    await audioCtx.resume();
+                if (audioPitchCtx.state !== 'running') {
+                    await audioPitchCtx.resume();
                 }
 
-                this.setPitchController(audioCtx);
+                this.setPitchController(audioPitchCtx);
             }
 
             if (this.audioController.length && on) {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
+            }
+        } catch (err) {
+            console.debug(err);
+        }
+
+        return this;
+    }
+
+    /**
+     * update volume
+     * @returns 
+     */
+    static async updateVolume() {
+        const volume = this.rollConfig.volume;
+
+
+        try {
+            if (volume !== 1 && !this.audioVolumeCtx) {
+                this.audioVolumeCtx = new AudioContext();
+                const { audioVolumeCtx } = this;
+
+                if (audioVolumeCtx.state !== 'running') {
+                    await audioVolumeCtx.resume();
+                }
+
+                for (const dom of this.videoElements) {
+                    const source = this.audioVolumeCtx.createMediaElementSource(dom as HTMLMediaElement);
+                    const node = this.audioVolumeCtx.createGain();
+                    source.connect(node);
+                    node.connect(this.audioVolumeCtx.destination);
+                    node.gain.value = volume;
+    
+                    this.volumeController.push({ type: 'source', instance: source }, { type: 'node', instance: node });
+                }
+
+                return;
+            }
+            
+            if (this.volumeController.length) {
+                this.volumeController.forEach((v) => {
+                    if (v.type === 'node') {
+                        v.instance.gain.value = volume;
+                    }
+                });
+                return;
             }
         } catch (err) {
             console.debug(err);

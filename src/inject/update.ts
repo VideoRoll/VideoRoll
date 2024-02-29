@@ -42,7 +42,7 @@ function resetTimes() {
 export function updateConfig(rollConfig: IRollConfig) {
     rollConfig.isInit = false;
 
-    VideoRoll.updateVideo(rollConfig).updatePitch();
+    VideoRoll.updateVideo(rollConfig).updateAudio();
 
     const config = VideoRoll.getRollConfig();
 
@@ -94,7 +94,7 @@ export function updateOnMounted(rollConfig: IRollConfig) {
 
     config = Object.assign(config, { videoNumber: rollConfig.videoNumber })
 
-    VideoRoll.setRollConfig(config).addStyleClass().updatePitch();
+    VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
     chrome.runtime.sendMessage(
         { rollConfig: config, type: ActionType.UPDATE_STORAGE },
@@ -118,12 +118,12 @@ export async function updateBadge(options: any) {
         if (!tabConfig.storeThisTab) {
             sessionStorage.removeItem(`video-roll-${tabId}`);
             tabConfig.store = false;
-            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
+            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         } else {
             tabConfig.url = window.location.href;
             if (!config) tabConfig.store = false;
             sessionStorage.setItem(`video-roll-${tabId}`, JSON.stringify(tabConfig));
-            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
+            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         }
     }
 
@@ -143,7 +143,7 @@ export async function updateBadge(options: any) {
             JSON.stringify(config)
         );
 
-        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updatePitch();
+        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updateAudio();
 
     }
 

@@ -38,6 +38,7 @@ const defaultConfig = {
         on: false,
         value: 0
     },
+    volume: 1,
     filter: {
         ...defaultFilterConfig
     },

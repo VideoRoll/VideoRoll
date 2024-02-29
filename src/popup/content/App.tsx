@@ -59,7 +59,6 @@ export default defineComponent({
                 const { type, rollConfig: config, text } = a;
                 switch(type) {
                     case ActionType.UPDATE_STORAGE:
-                        console.log(config, '---config');
                         Object.keys(config).forEach((key) => {
                             if (key in rollConfig) {
                                 rollConfig[key] = config[key];
@@ -81,22 +80,10 @@ export default defineComponent({
             <div>
                 <Head isShow={isShow.value}></Head>
                 <main>
-                    <div class="video-roll-headBar">
-                        <Info></Info>
-                        <div title="reload page" class="reload-btn" onClick={onReload}>
-                            <ReloadOutline class="video-roll-icon"></ReloadOutline>
-                        </div>
-                    </div>
-                    
                     <div class="video-roll-content">
                         <GridPanel></GridPanel>
                     </div>
                     <Footer></Footer>
-                    {/* <Transition name="van-fade">
-                        <div class="video-roll-setting" v-show={isShow.value}>
-                            <SettingPanel />
-                        </div>
-                    </Transition> */}
                 </main>
             </div>
         );

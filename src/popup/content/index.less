@@ -85,8 +85,12 @@ body {
 
     .video-roll-content {
         box-sizing: border-box;
-        border-bottom: 1px solid var(--van-divider-border-color);
-        padding-bottom: 15px;
+        // padding-bottom: 15px;
+    }
+
+    .popover-size {
+        width: 100%;
+        height: 100%;
     }
 
     .custom-button {
@@ -204,6 +208,10 @@ body {
 
     main {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 455px;
     }
 
     .video-roll-setting {
@@ -228,5 +236,9 @@ body {
         }
 
         background-image: var(--video-roll-background-active);
+    }
+
+    .van-tabs__content {
+        padding-top: 5px;
     }
 }
