@@ -20,24 +20,20 @@ export default defineComponent({
         const setVolume = (value: number) => {
             rollConfig.volume = value;
             update("volume", rollConfig.volume);
-            // debounce(() => {
-            //     update("volume", rollConfig.volume);
-            // }, 300);
         };
 
         return () => (
             <>
                 <div class="video-roll-long-box">
                     <div class={`video-roll-switch ${rollConfig.volume !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setVolume(1)}>
-                        {/* <ExpandOutline class="video-roll-icon"></ExpandOutline> */}
                         reset
                     </div>
                     <div class="video-roll-pitch">
                         <van-slider
                             v-model={rollConfig.volume}
-                            min={-3}
+                            min={0}
                             max={6}
-                            step={0.1}
+                            step={0.01}
                             bar-height="4px"
                             onUpdate:modelValue={setVolume}
                             v-slots={{

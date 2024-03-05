@@ -83,7 +83,7 @@ function useComponents() {
                             {
                                 type: 'row',
                                 style: {
-                                    height: '50px'
+                                    height: '45px'
                                 },
                                 children: [
                                     {
@@ -103,7 +103,7 @@ function useComponents() {
                             {
                                 type: 'row',
                                 style: {
-                                    height: '50px'
+                                    height: '45px'
                                 },
                                 children: [
                                     {
@@ -224,7 +224,8 @@ function useComponents() {
                         }]
                     },
                 ]
-            }]
+            }
+            ]
         },
         {
             type: 'tab',
@@ -268,6 +269,25 @@ function useComponents() {
                         },
                     ]
                 },
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            col: 24,
+                            title: "Playback Rate",
+                            showTitle: true,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
+                            }]
+                        },
+                    ]
+                }
             ]
         }
     ]);
