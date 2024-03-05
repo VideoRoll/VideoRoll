@@ -24,19 +24,13 @@ export default defineComponent({
         const components = useComponents();
         const popupShow = ref<boolean>(false);
         const renderContent = ref();
-        const activeSwiper = ref<number>(0);
-        const swipeRef = ref<SwipeInstance>();
+
         const setPopupShow = (value: boolean) => {
             popupShow.value = value;
         }
 
         const updateRenderContent = (content: VueElement) => {
             renderContent.value = content;
-        }
-
-        const toSwiper = (value: number) => {
-            swipeRef.value?.swipeTo(value);
-            activeSwiper.value = value;
         }
 
         provide('setPopupShow', setPopupShow);
@@ -49,22 +43,7 @@ export default defineComponent({
                         {
                             render(components)
                         }
-                        
-                        {/* <van-tab title="Audio"></van-tab> */}
                     </van-tabs>
-                    {/* <van-swipe ref={swipeRef} touchable={false} v-slots={{
-                        indicator: () => {
-                            return <div class="van-swipe__indicators">
-                                {
-                                    components.map((v, i) => <div class={`van-swipe__indicator ${activeSwiper.value === i ? 'van-swipe__indicator--active' : ''}`} onClick={() => toSwiper(i)}></div>)
-                                }
-                            </div>
-                        }
-                    }}>
-                        {
-                            render(components)
-                        }
-                    </van-swipe> */}
                     <van-popup v-model:show={popupShow.value} round closeable style={{ width: '250px' , height: '250px', padding: '20px', overflow: 'hidden'}}>{
                         h(renderContent.value)
                     }</van-popup>

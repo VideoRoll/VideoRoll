@@ -3,10 +3,15 @@
  * @Author: Gouxinyu
  * @Date: 2022-04-23 23:37:22
  */
+import { createURL } from '../popup/content/utils';
 import { ActionType } from '../types/type.d';
 import { sendTabMessage, setBadge, getBrowser } from '../util';
 
 let currentTabId: number | undefined;
+
+chrome.runtime.onInstalled.addListener(() => {
+    createURL('https://videoroll.netlify.app/')
+});
 
 (getBrowser('action') as typeof chrome.action).setBadgeBackgroundColor({ color: "#a494c6" });
 

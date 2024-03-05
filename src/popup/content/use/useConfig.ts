@@ -31,6 +31,7 @@ const defaultConfig = {
         x: 0,
         y: 0
     },
+    playbackRate: 1,
     focus: {
         on: false
     },

@@ -4,17 +4,15 @@
  * @Date: 2022-05-31 23:27:36
  */
 import WEBSITE from "../website";
-import Jungle from "./jungle";
+import Audiohacker from "audio-hacker";
 import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer } from '../types/type.d';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
 
-    static audioPitchCtx: AudioContext | null = null;
+    static audioCtx: AudioContext | null = null;
 
-    static audioController: Jungle[] = [];
-
-    static audioVolumeCtx: AudioContext | null = null;
+    static audioController: Audiohacker[] = [];
 
     static volumeController: any[] = [];
 
@@ -273,6 +271,7 @@ export default class VideoRoll {
     static async updateAudio() {
         await this.updatePitch();
         await this.updateVolume();
+        this.updatePlaybackRate();
         return this;
     }
 
@@ -495,14 +494,12 @@ export default class VideoRoll {
         }
     }
 
-    static setPitchController(audioCtx: AudioContext) {
+    static createAudiohacker() {
+        if (!this.audioCtx) return;
+
         for (const dom of this.videoElements) {
-            const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
-            this.audioController.push(new Jungle(audioCtx));
-            this.audioController.forEach((v) => {
-                v.output.connect(audioCtx.destination);
-                node.connect(v.input);
-            });
+            const node = this.audioCtx.createMediaElementSource(dom as HTMLMediaElement);
+            this.audioController.push(new Audiohacker(this.audioCtx, node));
         }
     }
 
@@ -519,24 +516,22 @@ export default class VideoRoll {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
-                this.audioController.length = 0;
-                this.audioPitchCtx = null;
                 return this;
             };
 
-            if (!on && !this.audioPitchCtx) {
+            if (!on && !this.audioCtx) {
                 return this;
             }
 
-            if (!this.audioPitchCtx) {
-                this.audioPitchCtx = new AudioContext();
-                const { audioPitchCtx } = this;
+            if (!this.audioCtx) {
+                this.audioCtx = new AudioContext();
+                const { audioCtx } = this;
 
-                if (audioPitchCtx.state !== 'running') {
-                    await audioPitchCtx.resume();
+                if (audioCtx.state !== 'running') {
+                    await audioCtx.resume();
                 }
 
-                this.setPitchController(audioPitchCtx);
+                this.createAudiohacker();
             }
 
             if (this.audioController.length && on) {
@@ -558,36 +553,35 @@ export default class VideoRoll {
     static async updateVolume() {
         const volume = this.rollConfig.volume;
 
-
         try {
-            if (volume !== 1 && !this.audioVolumeCtx) {
-                this.audioVolumeCtx = new AudioContext();
-                const { audioVolumeCtx } = this;
+            if (volume !== 1 && !this.audioCtx) {
+                this.audioCtx = new AudioContext();
+                const { audioCtx } = this;
 
-                if (audioVolumeCtx.state !== 'running') {
-                    await audioVolumeCtx.resume();
+                if (audioCtx.state !== 'running') {
+                    await audioCtx.resume();
                 }
-
-                for (const dom of this.videoElements) {
-                    const source = this.audioVolumeCtx.createMediaElementSource(dom as HTMLMediaElement);
-                    const node = this.audioVolumeCtx.createGain();
-                    source.connect(node);
-                    node.connect(this.audioVolumeCtx.destination);
-                    node.gain.value = volume;
-    
-                    this.volumeController.push({ type: 'source', instance: source }, { type: 'node', instance: node });
-                }
-
+                this.createAudiohacker();
                 return;
             }
             
-            if (this.volumeController.length) {
-                this.volumeController.forEach((v) => {
-                    if (v.type === 'node') {
-                        v.instance.gain.value = volume;
-                    }
+            if (this.audioController.length) {
+                this.audioController.forEach((v) => {
+                    v.setVolume(volume);
                 });
                 return;
+            }
+        } catch (err) {
+            console.debug(err);
+        }
+    }
+
+    static updatePlaybackRate() {
+        const playbackRate = this.rollConfig.playbackRate;
+
+        try {
+            for (const dom of this.videoElements) {
+                (dom as VideoElement).playbackRate = playbackRate;
             }
         } catch (err) {
             console.debug(err);
