@@ -31,6 +31,7 @@ const defaultConfig = {
         x: 0,
         y: 0
     },
+    playbackRate: 1,
     focus: {
         on: false
     },
@@ -38,6 +39,7 @@ const defaultConfig = {
         on: false,
         value: 0
     },
+    volume: 1,
     filter: {
         ...defaultFilterConfig
     },

@@ -29,6 +29,8 @@ import SwipeItem from "vant/es/swipe-item/index.mjs";
 import Popup from "vant/es/popup/index.mjs";
 import Popover from "vant/es/popover/index.mjs";
 import Notify from "vant/es/notify/index.mjs";
+import Tab from "vant/es/tab/index.mjs";
+import Tabs from "vant/es/tabs/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -48,6 +50,8 @@ import "vant/es/swipe-item/style/index.mjs";
 import "vant/es/popup/style/index.mjs"; 
 import "vant/es/popover/style/index.mjs";
 import "vant/es/notify/style/index.mjs";
+import "vant/es/tab/style/index.mjs";
+import "vant/es/tabs/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -68,4 +72,6 @@ createApp(App)
     .use(Popup)
     .use(Popover)
     .use(Notify)
+    .use(Tab)
+    .use(Tabs)
     .mount("#app");

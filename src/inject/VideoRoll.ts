@@ -4,15 +4,17 @@
  * @Date: 2022-05-31 23:27:36
  */
 import WEBSITE from "../website";
-import Jungle from "./jungle";
+import Audiohacker from "audio-hacker";
 import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer } from '../types/type.d';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
 
-    static audioCtx: AudioContext | null;
+    static audioCtx: AudioContext | null = null;
 
-    static audioController: Jungle[] = [];
+    static audioController: Audiohacker[] = [];
+
+    static volumeController: any[] = [];
 
     static videoElements: VideoElement[] = [];
 
@@ -263,6 +265,16 @@ export default class VideoRoll {
         return this;
     }
 
+    /**
+     * update audio
+     */
+    static async updateAudio() {
+        await this.updatePitch();
+        await this.updateVolume();
+        this.updatePlaybackRate();
+        return this;
+    }
+
     static getFilterStyle(filter: IFilter) {
         let filterStyle = '';
 
@@ -482,14 +494,12 @@ export default class VideoRoll {
         }
     }
 
-    static setPitchController(audioCtx: AudioContext) {
+    static createAudiohacker() {
+        if (!this.audioCtx) return;
+
         for (const dom of this.videoElements) {
-            const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
-            this.audioController.push(new Jungle(audioCtx));
-            this.audioController.forEach((v) => {
-                v.output.connect(audioCtx.destination);
-                node.connect(v.input);
-            });
+            const node = this.audioCtx.createMediaElementSource(dom as HTMLMediaElement);
+            this.audioController.push(new Audiohacker(this.audioCtx, node));
         }
     }
 
@@ -506,11 +516,11 @@ export default class VideoRoll {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
-                return;
+                return this;
             };
 
             if (!on && !this.audioCtx) {
-                return;
+                return this;
             }
 
             if (!this.audioCtx) {
@@ -521,13 +531,57 @@ export default class VideoRoll {
                     await audioCtx.resume();
                 }
 
-                this.setPitchController(audioCtx);
+                this.createAudiohacker();
             }
 
             if (this.audioController.length && on) {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
+            }
+        } catch (err) {
+            console.debug(err);
+        }
+
+        return this;
+    }
+
+    /**
+     * update volume
+     * @returns 
+     */
+    static async updateVolume() {
+        const volume = this.rollConfig.volume;
+
+        try {
+            if (volume !== 1 && !this.audioCtx) {
+                this.audioCtx = new AudioContext();
+                const { audioCtx } = this;
+
+                if (audioCtx.state !== 'running') {
+                    await audioCtx.resume();
+                }
+                this.createAudiohacker();
+                return;
+            }
+            
+            if (this.audioController.length) {
+                this.audioController.forEach((v) => {
+                    v.setVolume(volume);
+                });
+                return;
+            }
+        } catch (err) {
+            console.debug(err);
+        }
+    }
+
+    static updatePlaybackRate() {
+        const playbackRate = this.rollConfig.playbackRate;
+
+        try {
+            for (const dom of this.videoElements) {
+                (dom as VideoElement).playbackRate = playbackRate;
             }
         } catch (err) {
             console.debug(err);

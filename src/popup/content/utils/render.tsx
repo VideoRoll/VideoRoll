@@ -1,9 +1,15 @@
 import { h } from 'vue';
-import { IComponentConfig, IContainerConfig, IRowConfig, ISwiperConfig } from '../use/useComponents'
+import { IComponentConfig, IContainerConfig, IRowConfig, ISwiperConfig, ITabConfig } from '../use/useComponents'
 
-export default function render(children: IRowConfig[] | IContainerConfig[] | IComponentConfig[] | ISwiperConfig[]) {
+export default function render(children: IRowConfig[] | IContainerConfig[] | IComponentConfig[] | ISwiperConfig[] | ITabConfig[]) {
     return children.map((item) => {
         switch (item.type) {
+            case 'tab':
+                return <van-tab title={item.title}>
+                    {
+                        render(item.children)
+                    }
+                </van-tab>
             case 'swiper':
                 return <van-swipe-item>
                     {

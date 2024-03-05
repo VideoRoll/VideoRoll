@@ -75,7 +75,9 @@ export interface IRollConfig {
     flip: Flip;
     scale: IScale;
     pitch: Pitch;
+    volume: number;
     zoom: Zoom;
+    playbackRate: number;
     focus: Focus;
     move: IMove;
     deg: Deg;
