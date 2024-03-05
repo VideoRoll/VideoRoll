@@ -35,7 +35,10 @@ export interface IMove {
     y: number;
 }
 
-export type Pitch = number;
+export type Pitch = {
+    on: boolean;
+    value: number;
+};
 
 export interface IScale {
     mode: "auto" | 'custom',
@@ -56,26 +59,35 @@ export type Zoom = number;
 
 export type Deg = number;
 
+export type Focus = {
+    on: boolean;
+}
+
 export type RollKey = keyof IRollConfig;
 
 export type RollValue = IRollConfig[RollKey];
 
 export interface IRollConfig {
     tabId: number;
+    videoNumber: number;
     url: string;
     name: string;
     flip: Flip;
     scale: IScale;
     pitch: Pitch;
+    volume: number;
     zoom: Zoom;
+    playbackRate: number;
+    focus: Focus;
     move: IMove;
     deg: Deg;
     filter: IFilter;
+    pictureInPicture: boolean;
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;
     videoSelector: VideoSelector;
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | boolean | VideoSelector
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 
 export type VideoSelector = {
@@ -99,5 +111,12 @@ export enum KEY_CODE {
     UP = 'ArrowUp',
     DOWN = 'ArrowDown',
     LEFT = 'ArrowLeft',
-    RIGHT = 'ArrowRight'
+    RIGHT = 'ArrowRight',
+    B = 'KeyB'
+}
+
+export interface IRealVideoPlayer {
+    width: number;
+    height: number;
+    player: HTMLVideoElement | null;
 }

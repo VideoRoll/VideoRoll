@@ -1,16 +1,15 @@
 import { defineComponent, ref, onMounted, provide, Transition } from "vue";
+import { ReloadOutline } from "@vicons/ionicons5";
+import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
-import SettingPanel from "./components/SettingPanel";
-import {
-    ChevronBackOutline,
-    LogoGithub,
-    Home,
-    ThumbsUp,
-} from "@vicons/ionicons5";
-import { useConfig, useDegBtn } from "./use";
-import { initRollConfig, updateRollConfig } from "./utils";
+import GridPanel from './components/GridPanel';
+import Info from './components/Info';
+import { useConfig } from "./use";
+import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
+import { clone } from "../../util";
 import { ActionType } from "../../types/type.d";
+
 import "./index.less";
 
 export default defineComponent({
@@ -28,44 +27,52 @@ export default defineComponent({
         // current website config
         const rollConfig = useConfig();
 
-        // buttons
-        const degBtns = useDegBtn();
-
         const update = updateRollConfig.bind(null, rollConfig);
         provide("rollConfig", rollConfig);
         provide("update", update);
         provide("onOpenSetting", onOpenSetting);
 
+        const onReload = () => {
+            reloadPage(rollConfig.tabId);
+        }
         /**
          * 当打开时就获取当前网站的视频信息
          * 添加样式
          */
         onMounted(async () => {
-            let queryOptions = { active: true, currentWindow: true };
-            let [tab] = await chrome.tabs.query(queryOptions);
+            const queryOptions = { active: true, currentWindow: true };
+            const [tab] = await browser.tabs.query(queryOptions);
 
             initRollConfig(rollConfig, tab);
 
             // add style
             chrome.tabs.sendMessage(
                 rollConfig.tabId,
-                { rollConfig, type: ActionType.ON_MOUNTED },
+                { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED },
                 {},
                 (res) => {
                     console.debug(res);
                 }
-            );
+            )
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
-                const { type, rollConfig: config } = a;
-                if (type === ActionType.UPDATE_STORAGE) {
-                    Object.keys(config).forEach((key) => {
-                        if (key in rollConfig) {
-                            rollConfig[key] = config[key];
-                        }
-                    });
+                const { type, rollConfig: config, text } = a;
+                switch(type) {
+                    case ActionType.UPDATE_STORAGE:
+                        Object.keys(config).forEach((key) => {
+                            if (key in rollConfig) {
+                                rollConfig[key] = config[key];
+                            }
+                        });
+                        break;
+                    case ActionType.UPDATE_BADGE:
+                        rollConfig.videoNumber = Number(text);
+                        break;
+                    default:
+                        break;
                 }
-                c("update_storage");
+
+                c("update");
             });
         });
 
@@ -73,46 +80,12 @@ export default defineComponent({
             <div>
                 <Head isShow={isShow.value}></Head>
                 <main>
-                    <div>
-                        <div class="video-roll-content">
-                            <div class="video-roll-website">
-                                <span>{rollConfig.name}</span>
-                            </div>
-                            <div class="video-roll-rotate-control">
-                                {degBtns.value.map((item) => (
-                                    <div
-                                        class={`rotate-${item.type}-${item.iconDeg} rotate-btn`}
-                                        key={item.type}
-                                        onClick={() => update("deg", item.deg)}
-                                    >
-                                        <chevron-back-outline color="#a494c6" />
-                                    </div>
-                                ))}
-
-                                <div class="rotate-deg-text">
-                                    {rollConfig.deg}
-                                </div>
-                            </div>
-                        </div>
-                        <Footer></Footer>
+                    <div class="video-roll-content">
+                        <GridPanel></GridPanel>
                     </div>
-                    <transition name="van-fade">
-                        <div class="video-roll-setting" v-show={isShow.value}>
-                            <setting-panel />
-                        </div>
-                    </transition>
+                    <Footer></Footer>
                 </main>
             </div>
         );
-    },
-    components: {
-        SettingPanel,
-        ThumbsUp,
-        Home,
-        ChevronBackOutline,
-        LogoGithub,
-        Head,
-        Footer,
-        Transition,
-    },
+    }
 });

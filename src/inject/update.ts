@@ -28,6 +28,9 @@ async function getTabBadge(): Promise<string> {
     return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
 }
 
+/**
+ * reset time
+ */
 function resetTimes() {
     times = 0;
 }
@@ -39,7 +42,7 @@ function resetTimes() {
 export function updateConfig(rollConfig: IRollConfig) {
     rollConfig.isInit = false;
 
-    VideoRoll.updateVideo(rollConfig).updatePitch();
+    VideoRoll.updateVideo(rollConfig).updateAudio();
 
     const config = VideoRoll.getRollConfig();
 
@@ -60,6 +63,10 @@ export function updateConfig(rollConfig: IRollConfig) {
     );
 }
 
+/**
+ * fired when open popup
+ * @param rollConfig
+ */
 export function updateOnMounted(rollConfig: IRollConfig) {
     // set session storage
     let config = JSON.parse(localStorage.getItem(
@@ -85,11 +92,13 @@ export function updateOnMounted(rollConfig: IRollConfig) {
         }
     }
 
-    VideoRoll.setRollConfig(config).addStyleClass().updatePitch();
+    config = Object.assign(config, { videoNumber: rollConfig.videoNumber })
+
+    VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
     chrome.runtime.sendMessage(
         { rollConfig: config, type: ActionType.UPDATE_STORAGE },
-        function (response) { }
+        (res) => { console.debug(res); }
     );
 }
 
@@ -109,12 +118,12 @@ export async function updateBadge(options: any) {
         if (!tabConfig.storeThisTab) {
             sessionStorage.removeItem(`video-roll-${tabId}`);
             tabConfig.store = false;
-            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
+            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         } else {
             tabConfig.url = window.location.href;
             if (!config) tabConfig.store = false;
             sessionStorage.setItem(`video-roll-${tabId}`, JSON.stringify(tabConfig));
-            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
+            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         }
     }
 
@@ -134,7 +143,7 @@ export async function updateBadge(options: any) {
             JSON.stringify(config)
         );
 
-        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updatePitch();
+        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updateAudio();
 
     }
 
@@ -146,6 +155,11 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
     send("flip");
 }
 
+/**
+ * get Storage
+ * @param tabId
+ * @returns 
+ */
 export function getStorageConfig(tabId: number) {
     const config = JSON.parse(localStorage.getItem(
         `video-roll-${window.location.href}`
@@ -181,6 +195,9 @@ export function keyDownEvent(tabId: number, e: KeyboardEvent) {
                 break;
             case KEY_CODE.LEFT:
                 newConfig.deg = 270;
+                break;
+            case KEY_CODE.B:
+                newConfig.focus.on = !newConfig.focus.on;
                 break;
             default:
                 return;

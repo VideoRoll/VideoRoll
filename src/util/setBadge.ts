@@ -1,12 +1,15 @@
+import { getBrowser } from "./getBrowser";
+
 export function setBadge(tabId: number, text: string) {
-    chrome.action.setBadgeText(
+    (getBrowser('action') as typeof chrome.action).setBadgeText(
         {
             text,
             tabId,
         }
     );
-
-    chrome.action.setBadgeTextColor({
+    
+    // @types/chrome has a bug here
+    (getBrowser('action') as any).setBadgeTextColor({
         color: '#fff',
         tabId,
     });

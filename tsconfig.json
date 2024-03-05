@@ -24,7 +24,8 @@
         "types": [
             "chrome",
             "jest",
-            "node"
+            "node",
+            "webextension-polyfill"
         ]
     },
     "isolatedModules": true,

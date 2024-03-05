@@ -2,4 +2,6 @@ node_modules
 .parcel-cache
 dist
 test
+.VSCoudeCounter
 *.zip
+parcel-bundle-reports
