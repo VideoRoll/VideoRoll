@@ -204,6 +204,7 @@ export default class VideoRoll {
      * clear all cache
      */
     static clearVideoElements() {
+        this.videoElements.length = 0;
         this.videoElements = [];
     }
 
@@ -581,7 +582,7 @@ export default class VideoRoll {
 
         try {
             for (const dom of this.videoElements) {
-                (dom as VideoElement).playbackRate = playbackRate;
+                (dom as HTMLMediaElement).playbackRate = playbackRate;
             }
         } catch (err) {
             console.debug(err);
