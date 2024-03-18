@@ -18,8 +18,13 @@ export default defineComponent({
         const toGithub = () => {
             createURL('https://github.com/gxy5202/VideoRoll');
         };
-        const toDonate = () => {
-            createURL('https://afdian.net/a/gomi_gxy/plan');
+        const toSettings = () => {
+             if (chrome.runtime.openOptionsPage) {
+                chrome.runtime.openOptionsPage();
+              } else {
+                createURL(chrome.runtime.getURL('options.html'));
+              }
+            // createURL('https://afdian.net/a/gomi_gxy/plan');
         }
 
         const toHome = () => {
@@ -40,7 +45,7 @@ export default defineComponent({
                 </div>
                 <div class="video-roll-head-right">
                     <van-space>
-                        <div class="video-roll-setting-btn" title="settings" onClick={toDonate}>
+                        <div class="video-roll-setting-btn" title="settings" onClick={toSettings}>
                             <SettingsSharp class="logo-usd"></SettingsSharp>
                         </div>
                         <van-divider vertical></van-divider>

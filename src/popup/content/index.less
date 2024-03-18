@@ -1,6 +1,6 @@
 :root {
     --van-primary-color: #a494c6 !important;
-    --van-sidebar-width: 70px !important;
+    --van-sidebar-width: 100px !important;
     --van-sidebar-padding: 12.5px var(--van-padding-sm) !important;
     --van-sidebar-background: #1f1f1f97 !important;
     --van-sidebar-selected-background: #5d5d6045 !important;
@@ -39,48 +39,11 @@ body {
         margin-top: 0 !important;
     }
 
-    .van-swipe__indicators {
-        bottom: 0;
-    }
-
-    .van-swipe__indicator {
-        width: 12px;
-        height: 12px;
-        background-image: var(--video-roll-background-active);
-        cursor: pointer;
-
-        &:hover {
-            background-image: var(--video-roll-background-active);
-        }
-    }
-
     .video-roll-headBar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 10px 0;
-
-        .reload-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 20px;
-            height: 20px;
-            color: #fff;
-            border-radius: 50%;
-            cursor: pointer;
-
-            .video-roll-icon {
-                width: 15px;
-                height: 15px;
-            }
-
-            &:hover {
-                filter: contrast(200%);
-            }
-
-            background-image: var(--video-roll-background-active);
-        }
     }
 
     .video-roll-content {
