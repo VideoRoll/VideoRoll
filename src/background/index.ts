@@ -38,7 +38,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
     currentTabId = tabId;
 
+    console.log('onUpdated');
     sendTabMessage(tabId, { type: ActionType.GET_BADGE }, (response: any) => {
+        console.log('res');
         sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
     });
 });
@@ -47,6 +49,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
     currentTabId = tabId;
+    console.log('onActivated');
 });
 
 

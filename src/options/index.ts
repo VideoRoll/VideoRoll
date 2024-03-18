@@ -3,8 +3,9 @@ import { Row } from 'vant';
 
 import '@vant/touch-emulator';
 import 'vant/lib/index.css'
+import './index.less';
 
-import App from "./app";
+import App from "./App";
 
 import ConfigProvider from "vant/es/config-provider/index.mjs";
 import Sidebar from "vant/es/sidebar/index.mjs";
@@ -21,6 +22,9 @@ import Col from "vant/es/col/index.mjs";
 import Swipe from "vant/es/swipe/index.mjs";
 import SwipeItem from "vant/es/swipe-item/index.mjs";
 import Popup from "vant/es/popup/index.mjs";
+import Form from "vant/es/form/index.mjs";
+import Field from "vant/es/field/index.mjs";
+import CellGroup from "vant/es/cell-group/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -38,6 +42,9 @@ import "vant/es/row/style/index.mjs";
 import "vant/es/swipe/style/index.mjs";
 import "vant/es/swipe-item/style/index.mjs";
 import "vant/es/popup/style/index.mjs";
+import "vant/es/form/style/index.mjs";
+import "vant/es/field/style/index.mjs";
+import "vant/es/cell-group/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -56,4 +63,7 @@ createApp(App)
     .use(Swipe)
     .use(SwipeItem)
     .use(Popup)
-    .mount("#app");
+    .use(Form)
+    .use(Field)
+    .use(CellGroup)
+    .mount("#options-root");

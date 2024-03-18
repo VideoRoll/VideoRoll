@@ -1,16 +1,33 @@
-import { defineComponent, ref, onMounted, provide, Transition } from "vue";
+import { defineComponent, ref, onMounted, provide, Transition, h } from "vue";
 import { ReloadOutline } from "@vicons/ionicons5";
-import browser from "webextension-polyfill";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+
+import './index.less';
+import { OPTIONS_MENU } from "./config";
+import Panel from "./components/Panel";
 
 export default defineComponent({
     name: "App",
     setup() {
+        const active = ref(0);
+        const onChange = (item: any, index: number) => {
+            active.value = index;
+        }
         return () => (
-            <div>
-                <div>test原来</div>
-                <main>
-                </main>
-            </div>
+            <van-config-provider theme="dark">
+                <div>
+                    <Header></Header>
+                    <main>
+                        <Navbar active={active.value} onChange={onChange}></Navbar>
+                        <Panel v-slots={{
+                            content: () => h(OPTIONS_MENU[active.value].component)
+                        }}>
+                        </Panel>
+                    </main>
+                </div>
+            </van-config-provider>
+
         );
     }
 });

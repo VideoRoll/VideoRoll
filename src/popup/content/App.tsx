@@ -1,13 +1,11 @@
-import { defineComponent, ref, onMounted, provide, Transition } from "vue";
-import { ReloadOutline } from "@vicons/ionicons5";
+import { defineComponent, ref, onMounted, provide, watch } from "vue";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
-import Info from './components/Info';
 import { useConfig } from "./use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
-import { clone } from "../../util";
+import { clone, getSessionStorage } from "../../util";
 import { ActionType } from "../../types/type.d";
 
 import "./index.less";
@@ -16,6 +14,7 @@ export default defineComponent({
     name: "App",
     setup() {
         const isShow = ref(false);
+        const tabId = ref(0);
 
         /**
          * open settings panel
@@ -32,9 +31,16 @@ export default defineComponent({
         provide("update", update);
         provide("onOpenSetting", onOpenSetting);
 
-        const onReload = () => {
-            reloadPage(rollConfig.tabId);
-        }
+        watch(() => tabId.value, (value: number) => {
+            if (!value) return;
+            const config = getSessionStorage(value);
+
+            Object.keys(config).forEach((key) => {
+                if (key in rollConfig) {
+                    rollConfig[key] = config[key];
+                }
+            });
+        })
         /**
          * 当打开时就获取当前网站的视频信息
          * 添加样式
@@ -42,6 +48,7 @@ export default defineComponent({
         onMounted(async () => {
             const queryOptions = { active: true, currentWindow: true };
             const [tab] = await browser.tabs.query(queryOptions);
+            tabId.value = tab.id as number;
 
             initRollConfig(rollConfig, tab);
 
@@ -57,7 +64,7 @@ export default defineComponent({
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config, text } = a;
-                switch(type) {
+                switch (type) {
                     case ActionType.UPDATE_STORAGE:
                         Object.keys(config).forEach((key) => {
                             if (key in rollConfig) {

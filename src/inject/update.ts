@@ -1,6 +1,8 @@
 import VideoRoll from "./VideoRoll";
 import { ActionType, IRollConfig } from '../types/type.d';
 import { KEY_CODE } from "../types/type.d";
+import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage } from "../util/storage";
+import { getDefaultConfig } from "../popup/content/use/useConfig";
 
 let KeyboardEventCache: Function | null = null;
 
@@ -47,20 +49,14 @@ export function updateConfig(rollConfig: IRollConfig) {
     const config = VideoRoll.getRollConfig();
 
     if (config.store) {
-        localStorage.setItem(
-            `video-roll-${rollConfig.url}`,
-            JSON.stringify(config)
-        );
+        setLocalStorage(rollConfig);
     } else {
         localStorage.removeItem(
             `video-roll-${rollConfig.url}`
         );
     }
 
-    sessionStorage.setItem(
-        `video-roll-${rollConfig.tabId}`,
-        JSON.stringify(config)
-    );
+    setSessionStorage(rollConfig, config);
 }
 
 /**
@@ -69,26 +65,18 @@ export function updateConfig(rollConfig: IRollConfig) {
  */
 export function updateOnMounted(rollConfig: IRollConfig) {
     // set session storage
-    let config = JSON.parse(localStorage.getItem(
-        `video-roll-${rollConfig.url}`
-    ) as string);
+    let config = getLocalStorage(rollConfig.url);
 
     if (!config) {
-        config = JSON.parse(sessionStorage.getItem(`video-roll-${rollConfig.tabId}`) as string);
+        config = getSessionStorage(rollConfig.tabId);
     }
 
     if (!config) {
         config = rollConfig;
-        sessionStorage.setItem(
-            `video-roll-${config.tabId}`,
-            JSON.stringify(config)
-        );
+        setSessionStorage(config);
 
         if (rollConfig.store) {
-            localStorage.setItem(
-                `video-roll-${config.url}`,
-                JSON.stringify(config)
-            );
+            setLocalStorage(rollConfig);
         }
     }
 
@@ -132,10 +120,7 @@ export async function updateBadge(options: any) {
 
         if (tabConfig?.storeThisTab) {
             config.storeThisTab = tabConfig.storeThisTab;
-            localStorage.setItem(
-                `video-roll-${config.url}`,
-                JSON.stringify(config)
-            );
+            setLocalStorage(config);
         }
 
         sessionStorage.setItem(
@@ -161,12 +146,10 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
  * @returns 
  */
 export function getStorageConfig(tabId: number) {
-    const config = JSON.parse(localStorage.getItem(
-        `video-roll-${window.location.href}`
-    ) as string);
+    const config = getLocalStorage();
 
     // store this tab
-    const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${tabId}`) as string);
+    const tabConfig = getSessionStorage(tabId);
 
     return { config, tabConfig };
 }
@@ -207,6 +190,7 @@ export function keyDownEvent(tabId: number, e: KeyboardEvent) {
 }
 
 export function initKeyboardEvent(tabId: number) {
+    console.log(tabId, KeyboardEventCache);
     if (!KeyboardEventCache) {
         KeyboardEventCache = keyDownEvent.bind(null, tabId);
     }

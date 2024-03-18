@@ -259,12 +259,12 @@ function useComponents() {
                     children: [
                         {
                             type: 'container',
-                            title: "Pitch",
-                            showTitle: true,
                             col: 24,
+                            title: "Playback Rate",
+                            showTitle: true,
                             children: [{
                                 type: 'component',
-                                component: defineAsyncComponent(() => import("../components/Pitch"))
+                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
                             }]
                         },
                     ]
@@ -278,12 +278,12 @@ function useComponents() {
                     children: [
                         {
                             type: 'container',
-                            col: 24,
-                            title: "Playback Rate",
+                            title: "Pitch",
                             showTitle: true,
+                            col: 24,
                             children: [{
                                 type: 'component',
-                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
+                                component: defineAsyncComponent(() => import("../components/Pitch"))
                             }]
                         },
                     ]
