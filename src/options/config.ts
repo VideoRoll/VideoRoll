@@ -7,7 +7,7 @@ export const OPTIONS_MENU = [
     },
     {
         title: 'Shortcuts',
-        component: defineAsyncComponent(() => import('./components/General'))
+        component: defineAsyncComponent(() => import('./components/Shortcuts'))
     },
     {
         title: 'Cache List',

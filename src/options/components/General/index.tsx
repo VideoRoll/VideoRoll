@@ -1,5 +1,4 @@
-import { defineComponent, ref, onMounted, provide, PropType } from "vue";
-import { ReloadOutline } from "@vicons/ionicons5";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
     name: "General",
@@ -9,15 +8,7 @@ export default defineComponent({
             <div class="options-general">
                 <van-form submit="onSubmit">
                     <van-cell-group inset>
-                        <van-field label-width="300"	input-align="right" name="switch" label="Whether to scale automatically when rotating" v-slots={{
-                            input: () => <van-switch v-model={autoScale.value} />
-                        }}>
-                        </van-field>
-                        <van-field input-align="right" name="switch" label="开关" v-slots={{
-                            input: () => <van-switch v-model={autoScale.value} />
-                        }}>
-                        </van-field>
-                        <van-field input-align="right" name="switch" label="开关" v-slots={{
+                        <van-field label-width="300" input-align="right" name="switch" label="Automatically changes video size when rotated" v-slots={{
                             input: () => <van-switch v-model={autoScale.value} />
                         }}>
                         </van-field>
