@@ -11,7 +11,7 @@ export const OPTIONS_MENU = [
     },
     {
         title: 'Cache List',
-        component: defineAsyncComponent(() => import('./components/General'))
+        component: defineAsyncComponent(() => import('./components/CacheList'))
     },
     {
         title: 'Contact',

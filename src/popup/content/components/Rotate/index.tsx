@@ -26,7 +26,10 @@ export default defineComponent({
                     <div
                         class={`rotate-${item.type}-${item.iconDeg} rotate-btn`}
                         key={item.type}
-                        onClick={() => update("deg", item.deg)}
+                        onClick={() => {
+                            console.log(rollConfig, 'deg')
+                            update("deg", item.deg)
+                        }}
                     >
                         <ChevronBackOutline />
                     </div>

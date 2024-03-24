@@ -246,7 +246,11 @@ export default class VideoRoll {
             // if a video's readyState is empty, ignore it. 
             if (!this.isRealVideoPlayer(dom as HTMLVideoElement)) continue;
 
-            const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);
+            let scaleNum: [number, number] = [1, 1];
+
+            if (rollConfig.isAutoChangeSize) {
+                scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);   
+            }
 
             this.rollConfig.scale.values = scaleNum;
             this.documents.forEach((doc) => {
@@ -261,7 +265,10 @@ export default class VideoRoll {
             dom.classList.add("video-roll-transition");
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
+
         }
+
+        console.log(rollConfig, 'videoRoll')
 
         return this;
     }
@@ -597,9 +604,11 @@ export default class VideoRoll {
             document.exitPictureInPicture();
             return;
         } 
-        
-        if (pictureInPicture && document.pictureInPictureEnabled && this.realVideoPlayer.player) {
-            this.realVideoPlayer.player.requestPictureInPicture();
-        }
+
+        try {
+            if (pictureInPicture && document.pictureInPictureEnabled && this.realVideoPlayer.player) {
+                this.realVideoPlayer.player.requestPictureInPicture();
+            }
+        } catch(err) { console.debug(err); }   
     }
 }

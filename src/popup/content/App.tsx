@@ -26,9 +26,8 @@ export default defineComponent({
         // current website config
         const rollConfig = useConfig();
 
-        const update = updateRollConfig.bind(null, rollConfig);
         provide("rollConfig", rollConfig);
-        provide("update", update);
+        provide("update", updateRollConfig.bind(null, rollConfig));
         provide("onOpenSetting", onOpenSetting);
 
         watch(() => tabId.value, (value: number) => {
@@ -36,7 +35,7 @@ export default defineComponent({
             const config = getSessionStorage(value);
 
             Object.keys(config).forEach((key) => {
-                if (key in rollConfig) {
+                if (key in rollConfig && key !== 'tabId') {
                     rollConfig[key] = config[key];
                 }
             });
@@ -48,8 +47,8 @@ export default defineComponent({
         onMounted(async () => {
             const queryOptions = { active: true, currentWindow: true };
             const [tab] = await browser.tabs.query(queryOptions);
-            tabId.value = tab.id as number;
 
+            tabId.value = tab.id as number;
             initRollConfig(rollConfig, tab);
 
             // add style

@@ -48,6 +48,7 @@ const defaultConfig = {
     storeThisTab: true,
     store: false,
     isInit: false,
+    isAutoChangeSize: true,
     videoSelector: { defaultDom: 'video' }
 } as IRollConfig;
 
