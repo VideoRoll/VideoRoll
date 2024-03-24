@@ -87,6 +87,7 @@ export interface IRollConfig {
     store: boolean;
     isInit: boolean;
     videoSelector: VideoSelector;
+    isAutoChangeSize: boolean;
     [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 

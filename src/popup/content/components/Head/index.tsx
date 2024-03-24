@@ -28,7 +28,7 @@ export default defineComponent({
         }
 
         const toHome = () => {
-            createURL('https://gomi.site/VideoRoll');
+            createURL('https://videoroll.gomi.site');
         };
 
         const toFeedBack = () => {

@@ -16,16 +16,14 @@ export default defineComponent({
         }
         return () => (
             <van-config-provider theme="dark">
-                <div>
-                    <Header></Header>
-                    <main>
-                        <Navbar active={active.value} onChange={onChange}></Navbar>
-                        <Panel v-slots={{
-                            content: () => h(OPTIONS_MENU[active.value].component)
-                        }}>
-                        </Panel>
-                    </main>
-                </div>
+                <Header></Header>
+                <main>
+                    <Navbar active={active.value} onChange={onChange}></Navbar>
+                    <Panel v-slots={{
+                        content: () => h(OPTIONS_MENU[active.value].component)
+                    }}>
+                    </Panel>
+                </main>
             </van-config-provider>
 
         );
