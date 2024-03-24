@@ -36,6 +36,7 @@ function sendMessage(rollConfig: IRollConfig, extra = {}, send = (res: any) => {
 function updateRollConfig(rollConfig: IRollConfig, key: RollKey, value: RollValue) {
     if (key in rollConfig) {
         rollConfig[key] = value;
+        console.log(rollConfig, '--rollConfig.tabId');
         sendMessage(rollConfig);
     }
 }

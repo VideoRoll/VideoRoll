@@ -24,6 +24,9 @@
         "start": "pnpm run dev",
         "precommit": "pnpm run test"
     },
+    "alias": {
+        "src": "./src"
+    },
     "source": [
         "src/options/index.html",
         "src/popup/index.html",

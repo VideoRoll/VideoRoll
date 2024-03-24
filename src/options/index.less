@@ -12,6 +12,9 @@ body {
     width: 100%;
     height: 100%;
 
+    display: flex;
+    flex-direction: column;
+
     background-color: var(--background-color);
 
     .options-header {
@@ -22,9 +25,13 @@ body {
         background-color: #26262a;
     }
 
+    .options-inside-header {
+        padding-bottom: 10px;
+    }
     main {
         padding: 100px 200px;
         display: flex;
+        flex: 1;
     }
     .video-roll-logo-text {
         height: 25px;

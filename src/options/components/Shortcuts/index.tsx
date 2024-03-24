@@ -14,7 +14,6 @@ export default defineComponent({
                     <p class="options-title-1"> 270deg: CTRL + ← </p>
                     <p class="options-title-1"> 0deg: CTRL + ↑ </p>
                 </div>
-
             </div>
         );
     }

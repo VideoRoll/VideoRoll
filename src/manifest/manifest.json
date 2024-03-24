@@ -42,7 +42,8 @@
     ],
     "homepage_url": "https://gomi.site/VideoRoll",
     "permissions": [
+        "tabs",
         "activeTab",
-        "tabCapture"
+        "storage"
     ]
 }
