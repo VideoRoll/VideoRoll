@@ -25,6 +25,9 @@ import Popup from "vant/es/popup/index.mjs";
 import Form from "vant/es/form/index.mjs";
 import Field from "vant/es/field/index.mjs";
 import CellGroup from "vant/es/cell-group/index.mjs";
+import Loading from "vant/es/loading/index.mjs";
+import Cell from "vant/es/cell/index.mjs";
+import Icon from "vant/es/icon/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -45,6 +48,9 @@ import "vant/es/popup/style/index.mjs";
 import "vant/es/form/style/index.mjs";
 import "vant/es/field/style/index.mjs";
 import "vant/es/cell-group/style/index.mjs";
+import "vant/es/loading/style/index.mjs";
+import "vant/es/cell/style/index.mjs";
+import "vant/es/icon/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -66,4 +72,7 @@ createApp(App)
     .use(Form)
     .use(Field)
     .use(CellGroup)
+    .use(Loading)
+    .use(Cell)
+    .use(Icon)
     .mount("#options-root");

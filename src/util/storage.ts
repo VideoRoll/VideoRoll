@@ -6,17 +6,18 @@ export function getSessionStorage(tabId: number) {
 
     if (!data) {
         data = getDefaultConfig();
-        data.tabId = tabId;
         setSessionStorage(data);
     }
-
+    
+    data.tabId = tabId;
     return data;
 }
 
-export function getLocalStorage(url?: string) {
-    return JSON.parse(localStorage.getItem(
-        `video-roll-${url ?? window.location.href}`
-    ) as string);
+export async function getLocalStorage(url?: string): Promise<any> {
+    const key = `video-roll-${url ?? window.location.href}`;
+    return chrome.storage.sync.get(key).then((res) => {
+        return res?.[key];
+    });
 }
 
 export function setSessionStorage(config: IRollConfig, newConfig?: IRollConfig) {
@@ -29,8 +30,11 @@ export function setSessionStorage(config: IRollConfig, newConfig?: IRollConfig) 
 }
 
 export function setLocalStorage(config: IRollConfig) {
-    localStorage.setItem(
-        `video-roll-${config.url}`,
-        JSON.stringify(config)
-    );
+    chrome.storage.sync.set({
+        [`video-roll-${config.url}`]: config 
+    });
+}
+
+export function removeLocalStorage(key: string) {
+    chrome.storage.sync.remove(key);
 }

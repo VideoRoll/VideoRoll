@@ -1,8 +1,7 @@
 import VideoRoll from "./VideoRoll";
 import { ActionType, IRollConfig } from '../types/type.d';
 import { KEY_CODE } from "../types/type.d";
-import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage } from "../util/storage";
-import { getDefaultConfig } from "../popup/content/use/useConfig";
+import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage, removeLocalStorage } from "../util/storage";
 
 let KeyboardEventCache: Function | null = null;
 
@@ -25,7 +24,7 @@ async function getTabBadge(): Promise<string> {
             setTimeout(() => {
                 resolve(getTabBadge());
             }, TIME);
-        });   
+        });
     }
     return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
 }
@@ -37,12 +36,29 @@ function resetTimes() {
     times = 0;
 }
 
+function hasConfig(config: any) {
+    if (typeof config !== 'object') return false;
+
+    return Reflect.ownKeys(config).length > 0;
+}
+
+async function getChromStore(key: string, defaultValue: any) {
+    return chrome.storage.sync.get(key).then((res) => {
+        return res?.[key] ?? defaultValue;
+    });
+}
+
 /**
  * update rollConfig
  * @param rollConfig
  */
-export function updateConfig(rollConfig: IRollConfig) {
+export async function updateConfig(rollConfig: IRollConfig) {
     rollConfig.isInit = false;
+    console.log('before updateConfig')
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+    
+    console.log('after updateConfig')
+    rollConfig.isAutoChangeSize = isAutoChangeSize;
 
     VideoRoll.updateVideo(rollConfig).updateAudio();
 
@@ -51,9 +67,7 @@ export function updateConfig(rollConfig: IRollConfig) {
     if (config.store) {
         setLocalStorage(rollConfig);
     } else {
-        localStorage.removeItem(
-            `video-roll-${rollConfig.url}`
-        );
+        removeLocalStorage(`video-roll-${rollConfig.url}`);
     }
 
     setSessionStorage(rollConfig, config);
@@ -63,24 +77,16 @@ export function updateConfig(rollConfig: IRollConfig) {
  * fired when open popup
  * @param rollConfig
  */
-export function updateOnMounted(rollConfig: IRollConfig) {
+export async function updateOnMounted(rollConfig: IRollConfig) {
+    let config = await getLocalStorage(rollConfig.url);
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+    rollConfig.isAutoChangeSize = isAutoChangeSize;
     // set session storage
-    let config = getLocalStorage(rollConfig.url);
-
-    if (!config) {
+    if (!hasConfig(config)) {
         config = getSessionStorage(rollConfig.tabId);
     }
 
-    if (!config) {
-        config = rollConfig;
-        setSessionStorage(config);
-
-        if (rollConfig.store) {
-            setLocalStorage(rollConfig);
-        }
-    }
-
-    config = Object.assign(config, { videoNumber: rollConfig.videoNumber })
+    config = Object.assign(config, { videoNumber: rollConfig.videoNumber, isAutoChangeSize, tabId: rollConfig.tabId })
 
     VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
@@ -100,24 +106,29 @@ export async function updateBadge(options: any) {
     resetTimes();
     const text = await getTabBadge();
 
-    const { config, tabConfig } = getStorageConfig(tabId);
+    const { config, tabConfig } = await getStorageConfig(tabId);
+
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+
+    const hasConf = hasConfig(config);
 
     if (tabConfig) {
+        tabConfig.isAutoChangeSize = isAutoChangeSize;
         if (!tabConfig.storeThisTab) {
             sessionStorage.removeItem(`video-roll-${tabId}`);
             tabConfig.store = false;
             VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         } else {
             tabConfig.url = window.location.href;
-            if (!config) tabConfig.store = false;
+            if (!hasConf) tabConfig.store = false;
             sessionStorage.setItem(`video-roll-${tabId}`, JSON.stringify(tabConfig));
             VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         }
     }
 
-    if (config) {
+    if (hasConf) {
         config.isInit = true;
-
+        config.isAutoChangeSize = isAutoChangeSize;
         if (tabConfig?.storeThisTab) {
             config.storeThisTab = tabConfig.storeThisTab;
             setLocalStorage(config);
@@ -129,7 +140,6 @@ export async function updateBadge(options: any) {
         );
 
         VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updateAudio();
-
     }
 
     return Promise.resolve({ text });
@@ -145,8 +155,12 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
  * @param tabId
  * @returns 
  */
-export function getStorageConfig(tabId: number) {
-    const config = getLocalStorage();
+export async function getStorageConfig(tabId: number) {
+    const config = await getLocalStorage();
+
+    if (hasConfig(config)) {
+        config.tabId = tabId;
+    }
 
     // store this tab
     const tabConfig = getSessionStorage(tabId);
@@ -158,9 +172,10 @@ export function isCtrlOrCommand(e: KeyboardEvent) {
     return e.ctrlKey || (navigator.platform.indexOf('Mac') === 0 && e.metaKey);
 }
 
-export function keyDownEvent(tabId: number, e: KeyboardEvent) {
-    const { config, tabConfig } = getStorageConfig(tabId);
-    if (!config && !tabConfig) return;
+export async function keyDownEvent(tabId: number, e: KeyboardEvent) {
+    const { config, tabConfig } = await getStorageConfig(tabId);
+
+    if (!hasConfig(config) && !tabConfig) return;
 
     if (isCtrlOrCommand(e)) {
         let newConfig = tabConfig || config;
@@ -190,7 +205,6 @@ export function keyDownEvent(tabId: number, e: KeyboardEvent) {
 }
 
 export function initKeyboardEvent(tabId: number) {
-    console.log(tabId, KeyboardEventCache);
     if (!KeyboardEventCache) {
         KeyboardEventCache = keyDownEvent.bind(null, tabId);
     }
