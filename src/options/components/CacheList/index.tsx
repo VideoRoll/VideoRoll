@@ -5,6 +5,7 @@ import './index.less';
 export default defineComponent({
     name: "CacheList",
     setup(props) {
+
         const list = ref<any>([]);
 
         const loadList = () => {
@@ -14,13 +15,18 @@ export default defineComponent({
                     const data = res[key];
                     if (key.startsWith("video-roll") && 'deg' in data) {
                         list.value.push({
-                            url: data.url,
-                            data
-                        })
+                              url: data.url,
+                              data
+                         })
                     }
                 })
             })
         }
+
+        const autoScale = ref(true);
+        const loading = ref(false);
+        const list = ref<any>([]);
+
         onMounted(() => {
             loadList();
         })
@@ -37,6 +43,12 @@ export default defineComponent({
         const clear = () => {
             chrome.storage.sync.remove(list.value.map((item: any) => `video-roll-${item.url}`));
             loadList();
+        })
+
+        const onChange = (value: boolean) => {
+            chrome.storage.sync.set({
+                isAutoChangeSize: value
+            });
         }
 
         return () => (
@@ -53,7 +65,6 @@ export default defineComponent({
                         </van-cell>)
                     }
                 </div>
-
             </div>
         );
     }

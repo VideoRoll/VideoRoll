@@ -54,6 +54,11 @@ async function getChromStore(key: string, defaultValue: any) {
  */
 export async function updateConfig(rollConfig: IRollConfig) {
     rollConfig.isInit = false;
+    console.log('before updateConfig')
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+    
+    console.log('after updateConfig')
+    rollConfig.isAutoChangeSize = isAutoChangeSize;
 
     const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
 
