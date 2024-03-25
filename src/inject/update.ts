@@ -60,6 +60,10 @@ export async function updateConfig(rollConfig: IRollConfig) {
     console.log('after updateConfig')
     rollConfig.isAutoChangeSize = isAutoChangeSize;
 
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+
+    rollConfig.isAutoChangeSize = isAutoChangeSize;
+
     VideoRoll.updateVideo(rollConfig).updateAudio();
 
     const config = VideoRoll.getRollConfig();
