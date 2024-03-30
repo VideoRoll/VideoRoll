@@ -5,4 +5,3 @@
  */
 export * from './useConfig';
 export * from './useDegBtn';
-export * from './useComponents';

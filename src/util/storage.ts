@@ -1,4 +1,4 @@
-import { getDefaultConfig } from "../popup/content/use";
+import { getDefaultConfig } from "../use";
 import { IRollConfig } from "../types/type";
 
 export function getSessionStorage(tabId: number) {

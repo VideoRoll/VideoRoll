@@ -1,5 +1,6 @@
 import { defineComponent, onMounted, ref } from "vue";
-import { createURL } from "src/popup/content/utils";
+import { createURL } from 'src/util';
+import { showConfirmDialog } from 'vant';
 import './index.less';
 
 export default defineComponent({
@@ -35,8 +36,14 @@ export default defineComponent({
         }
 
         const clear = () => {
-            chrome.storage.sync.remove(list.value.map((item: any) => `video-roll-${item.url}`));
-            loadList();
+            showConfirmDialog({
+                message: 'Are you sure you want to clear cache list?',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then(() => {
+                chrome.storage.sync.remove(list.value.map((item: any) => `video-roll-${item.url}`));
+                loadList();
+            });
         }
 
         return () => (

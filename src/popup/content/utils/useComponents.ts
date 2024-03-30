@@ -5,11 +5,7 @@
  */
 import { shallowReactive } from 'vue';
 import {
-    defineComponent,
-    ref,
     defineAsyncComponent,
-    resolveComponent,
-    h,
 } from "vue";
 
 interface IConfig {
@@ -47,7 +43,7 @@ interface ITabConfig extends IConfig {
     children: IRowConfig[]
 }
 
-function useComponents() {
+export default function useComponents() {
     const components = shallowReactive<ITabConfig[]>([
         {
             type: 'tab',
@@ -295,4 +291,4 @@ function useComponents() {
     return components;
 }
 
-export { useComponents, ITabConfig, ISwiperConfig, IRowConfig, IComponentConfig, IContainerConfig, IConfig }
+export { ITabConfig, ISwiperConfig, IRowConfig, IComponentConfig, IContainerConfig, IConfig }

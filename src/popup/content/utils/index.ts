@@ -82,11 +82,4 @@ function initRollConfig(rollConfig: IRollConfig, tab: any): void {
     }
 };
 
-function createURL(url: string) {
-    chrome.tabs.create({
-        active: true,
-        url
-    });
-}
-
-export { initRollConfig, updateRollConfig, createURL, reloadPage }
+export { initRollConfig, updateRollConfig, reloadPage }

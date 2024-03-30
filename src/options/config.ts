@@ -15,9 +15,9 @@ export const OPTIONS_MENU = [
     },
     {
         title: 'Contact',
-        component: defineAsyncComponent(() => import('./components/General'))
+        component: defineAsyncComponent(() => import('./components/Contact'))
     },
     {
-        title: 'About',
-        component: defineAsyncComponent(() => import('./components/General'))
+        title: 'Donate',
+        component: defineAsyncComponent(() => import('./components/Donate'))
     }];

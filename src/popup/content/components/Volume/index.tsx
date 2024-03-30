@@ -7,7 +7,7 @@
 import { defineComponent, inject, watch } from "vue";
 import { PulseOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type";
-import { getDefaultConfig } from '../../use';
+import { getDefaultConfig } from '../../../../use';
 import "./index.less";
 import debounce from "../../utils/debounce";
 

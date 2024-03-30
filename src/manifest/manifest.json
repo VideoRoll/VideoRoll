@@ -40,7 +40,7 @@
             ]
         }
     ],
-    "homepage_url": "https://gomi.site/VideoRoll",
+    "homepage_url": "https://videoroll.gomi.site",
     "permissions": [
         "tabs",
         "activeTab",

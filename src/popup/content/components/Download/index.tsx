@@ -1,13 +1,14 @@
 /*
- * @description: store Component
+ * @description: download Component
  * @Author: Gouxinyu
  * @Date: 2022-09-19 22:53:23
  */
 import { defineComponent, inject, ref, shallowReactive } from "vue";
 import { ArrowDownOutline } from "@vicons/ionicons5";
-import Clipboard  from "clipboard";
+import Clipboard from "clipboard";
 import { showNotify } from 'vant';
 import "./index.less";
+import { createURL } from 'src/util';
 
 export default defineComponent({
     name: "Download",
@@ -33,13 +34,18 @@ export default defineComponent({
         ]);
 
         const onSelect = (action: any) => {
-            // const clipboard = new Clipboard('');
-            showNotify({
-                type: 'success',
-                message: '已复制当前视频地址',
-                duration: 1000,
-                onClose: () => {
-                    window.open(action.url, '__blank');
+            chrome.tabs.query({ active: true }, (res) => {
+                if (Array.isArray(res)) {
+                    const url = res[0].url ?? '';
+                    Clipboard.copy(url);
+                    showNotify({
+                        type: 'success',
+                        message: 'copied successfully',
+                        duration: 600,
+                        onClose: () => {
+                            createURL(action.url);
+                        }
+                    });
                 }
             });
         }

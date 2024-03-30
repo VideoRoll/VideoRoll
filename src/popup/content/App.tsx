@@ -3,7 +3,7 @@ import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
-import { useConfig } from "./use";
+import { useConfig } from "../../use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
 import { clone, getSessionStorage } from "../../util";
 import { ActionType } from "../../types/type.d";

@@ -5,7 +5,7 @@
  */
 
 import { defineComponent, inject } from "vue";
-import { useConfig, useDegBtn } from "../../use";
+import { useConfig, useDegBtn } from "../../../../use";
 import {
     ChevronBackOutline,
 } from "@vicons/ionicons5";

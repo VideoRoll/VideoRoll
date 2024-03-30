@@ -6,7 +6,7 @@
 
 import { defineComponent, inject } from "vue";
 import { Home, LogoGithub, LogoUsd, SettingsSharp, StarHalfSharp } from "@vicons/ionicons5";
-import { createURL } from '../../utils';
+import { createURL } from 'src/util';
 import "./index.less";
 
 export default defineComponent({
@@ -24,7 +24,6 @@ export default defineComponent({
               } else {
                 createURL(chrome.runtime.getURL('options.html'));
               }
-            // createURL('https://afdian.net/a/gomi_gxy/plan');
         }
 
         const toHome = () => {

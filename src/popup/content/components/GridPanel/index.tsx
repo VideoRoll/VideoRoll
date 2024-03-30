@@ -8,13 +8,10 @@ import {
     defineComponent,
     ref,
     provide,
-    defineAsyncComponent,
-    resolveComponent,
     h,
     VueElement,
 } from "vue";
-import type { SwipeInstance } from 'vant';
-import { useComponents } from "../../use";
+import useComponents from "../../utils/useComponents";
 import render from '../../utils/render';
 import './index.less';
 

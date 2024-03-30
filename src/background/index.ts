@@ -3,7 +3,7 @@
  * @Author: Gouxinyu
  * @Date: 2022-04-23 23:37:22
  */
-import { createURL } from '../popup/content/utils';
+import { createURL } from 'src/util';
 import { ActionType } from '../types/type.d';
 import { sendTabMessage, setBadge, getBrowser } from '../util';
 
@@ -14,13 +14,13 @@ chrome.runtime.onInstalled.addListener((params: any) => {
 
     switch(reason) {
         case 'install':
-            createURL('https://videoroll.netlify.app/');
+            createURL('https://videoroll.gomi.site');
             break;
         case 'update':
-            createURL('https://videoroll.netlify.app/');
+            createURL('https://videoroll.gomi.site');
             break;
         case 'uninstall':
-            createURL('https://videoroll.netlify.app/');
+            createURL('https://videoroll.gomi.site');
             break;
         default:
             break;
