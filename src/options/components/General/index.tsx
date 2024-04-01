@@ -1,4 +1,5 @@
 import { defineComponent, onMounted, ref } from "vue";
+import browser from "webextension-polyfill";
 
 import './index.less'
 
@@ -9,14 +10,14 @@ export default defineComponent({
         const loading = ref(false);
         onMounted(() => {
             loading.value = true;
-            chrome.storage.sync.get('isAutoChangeSize').then((res) => {
+            browser.storage.sync.get('isAutoChangeSize').then((res) => {
                 autoScale.value = res?.['isAutoChangeSize'] ?? true;
                 loading.value = false;
             });
         })
 
         const onChange = (value: boolean) => {
-            chrome.storage.sync.set({
+            browser.storage.sync.set({
                 isAutoChangeSize: value
             });
         }

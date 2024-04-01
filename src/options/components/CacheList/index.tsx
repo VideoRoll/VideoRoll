@@ -1,6 +1,8 @@
 import { defineComponent, onMounted, ref } from "vue";
 import { createURL } from 'src/util';
+import browser from "webextension-polyfill";
 import { showConfirmDialog } from 'vant';
+
 import './index.less';
 
 export default defineComponent({
@@ -10,7 +12,7 @@ export default defineComponent({
 
         const loadList = () => {
             list.value.length = 0;
-            chrome.storage.sync.get().then((res) => {
+            browser.storage.sync.get().then((res) => {
                 Object.keys(res).forEach((key) => {
                     const data = res[key];
                     if (key.startsWith("video-roll") && 'deg' in data) {
@@ -31,7 +33,7 @@ export default defineComponent({
         }
 
         const remove = (value: boolean) => {
-            chrome.storage.sync.remove(`video-roll-${value}`);
+            browser.storage.sync.remove(`video-roll-${value}`);
             loadList();
         }
 
@@ -41,7 +43,7 @@ export default defineComponent({
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'No'
             }).then(() => {
-                chrome.storage.sync.remove(list.value.map((item: any) => `video-roll-${item.url}`));
+                browser.storage.sync.remove(list.value.map((item: any) => `video-roll-${item.url}`));
                 loadList();
             });
         }

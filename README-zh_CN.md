@@ -15,19 +15,19 @@ Video Roll
 
 <div align="center">
 
-[![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://badgen.net/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://img.shields.io/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
 [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
 [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons") |
-[Home Page](https://gomi.site/VideoRoll "Home Page")
+[Home Page](https://videoroll.gomi.site "Home Page")
 
 [English](README.md) | 简体中文
 </div>
 
 ### ✨ 介绍
 
-Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻转、调节音调、专注和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left/B。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
+Video Roll 是一个帮助你旋转、缩放、移动、下载、调整比例、镜像翻转、调节音调、音量、倍速、专注和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left/B。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
 
 ---
 
@@ -42,7 +42,10 @@ Video Roll 是一个帮助你旋转、缩放、移动、调整比例、镜像翻
 -   ✅ 支持自定义缩放
 -   ✅ 支持移动视频位置
 -   ✅ 支持自定义比例调整
+-   ✅ 支持下载视频（Youtube/Bilibili/MP3）
 -   ✅ 支持调节视频音调
+-   ✅ 支持调节视频音量，突破最大音量
+-   ✅ 支持调节视频倍速
 -   ✅ 专注模式
 -   ✅ 支持设置滤镜效果
 -   ✅ 记忆系统（保存当前网站的配置，下次进入网页直接生效）

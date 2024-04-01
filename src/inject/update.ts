@@ -1,4 +1,5 @@
 import VideoRoll from "./VideoRoll";
+import browser from "webextension-polyfill";
 import { ActionType, IRollConfig } from '../types/type.d';
 import { KEY_CODE } from "../types/type.d";
 import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage, removeLocalStorage } from "../util/storage";
@@ -43,7 +44,7 @@ function hasConfig(config: any) {
 }
 
 async function getChromStore(key: string, defaultValue: any) {
-    return chrome.storage.sync.get(key).then((res) => {
+    return browser.storage.sync.get(key).then((res) => {
         return res?.[key] ?? defaultValue;
     });
 }
