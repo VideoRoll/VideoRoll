@@ -16,7 +16,7 @@ Video Roll
 
 <div align="center">
 
-[![Chrome Web Store](https://badgen.net/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://badgen.net/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://img.shields.io/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
 [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
@@ -28,7 +28,7 @@ English | [简体中文](README-zh_CN.md)
 
 ### ✨ Describe
 
-Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, flip, tune, focus and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left/B.We provide an excellent memory system to help the next time you enter the website to take effect directly.
+Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, download, flip, tune, volume++, playback, focus and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left/B.We provide an excellent memory system to help the next time you enter the website to take effect directly.
 
 ---
 
@@ -41,8 +41,11 @@ Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, 
 -   ✅Zoom
 -   ✅Reposition
 -   ✅Stretch
+-   ✅Download(Youtube/Bilibili/MP3)
 -   ✅Rotate 0/90/180/270deg
 -   ✅Tune(Pitch)
+-   ✅Volume
+-   ✅Playback
 -   ✅Focus
 -   ✅Filter
 -   ✅Download video guide
