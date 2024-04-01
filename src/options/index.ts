@@ -4,7 +4,7 @@ import '@vant/touch-emulator';
 import 'vant/lib/index.css'
 import './index.less';
 
-import App from "./App";
+import App from "./app";
 
 import ConfigProvider from "vant/es/config-provider/index.mjs";
 import RadioGroup from "vant/es/radio-group/index.mjs";
