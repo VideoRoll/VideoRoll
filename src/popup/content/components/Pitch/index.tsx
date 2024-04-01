@@ -4,10 +4,10 @@
  * @Date: 2022-09-19 22:53:23
  */
 
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, watch } from "vue";
 import { PulseOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type";
-import { getDefaultConfig } from '../../use';
+import { getDefaultConfig } from '../../../../use';
 import "./index.less";
 
 export default defineComponent({
@@ -22,7 +22,6 @@ export default defineComponent({
         };
 
         const setPitchOn = () => {
-            rollConfig.pitch.on = !rollConfig.pitch.on;
             if (!rollConfig.pitch.on) rollConfig.pitch.value = 0;
             update("pitch", rollConfig.pitch);
         };
@@ -30,9 +29,10 @@ export default defineComponent({
         return () => (
             <>
                 <div class="video-roll-long-box">
-                    <div class={`video-roll-switch ${rollConfig.pitch.on ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={setPitchOn}>
+                    <van-switch v-model={rollConfig.pitch.on} size="15px" onChange={setPitchOn}></van-switch>
+                    {/* <div class={`video-roll-switch ${rollConfig.pitch.on ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={setPitchOn}>
                         <PulseOutline class="video-roll-icon"></PulseOutline>
-                    </div>
+                    </div> */}
                     <div class="video-roll-pitch">
                         <van-slider
                             v-model={rollConfig.pitch.value}

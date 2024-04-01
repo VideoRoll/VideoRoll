@@ -6,7 +6,6 @@
 
 import { defineComponent, inject, computed, shallowReactive } from "vue";
 import { ColorPaletteOutline } from "@vicons/ionicons5";
-import { defaultFilterConfig } from '../../use/useConfig'
 import type { IRollConfig, IFilter } from "../../../../types/type.d";
 import "./index.less";
 

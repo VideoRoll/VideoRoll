@@ -4,15 +4,17 @@
  * @Date: 2022-05-31 23:27:36
  */
 import WEBSITE from "../website";
-import Jungle from "./jungle";
+import Audiohacker from "audio-hacker";
 import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer } from '../types/type.d';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
 
-    static audioCtx: AudioContext | null;
+    static audioCtx: AudioContext | null = null;
 
-    static audioController: Jungle[] = [];
+    static audioController: Audiohacker[] = [];
+
+    static volumeController: any[] = [];
 
     static videoElements: VideoElement[] = [];
 
@@ -202,6 +204,7 @@ export default class VideoRoll {
      * clear all cache
      */
     static clearVideoElements() {
+        this.videoElements.length = 0;
         this.videoElements = [];
     }
 
@@ -235,7 +238,7 @@ export default class VideoRoll {
         rollConfig: IRollConfig
     ) {
         this.setRollConfig(rollConfig);
-        const { deg, flip, scale, zoom, move, filter, focus } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, focus, pictureInPicture } = rollConfig;
 
         for (const target of this.videoElements) {
             const dom = (target as VideoObject).shadowElement ?? target;
@@ -243,7 +246,11 @@ export default class VideoRoll {
             // if a video's readyState is empty, ignore it. 
             if (!this.isRealVideoPlayer(dom as HTMLVideoElement)) continue;
 
-            const scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);
+            let scaleNum: [number, number] = [1, 1];
+
+            if (rollConfig.isAutoChangeSize) {
+                scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);   
+            }
 
             this.rollConfig.scale.values = scaleNum;
             this.documents.forEach((doc) => {
@@ -251,14 +258,28 @@ export default class VideoRoll {
 
                 this.videoElements.forEach((video) => {
                     this.updateFocus(doc, video as HTMLVideoElement, focus.on);
+                    this.togglePictureInPicture(pictureInPicture);
                 });
             });
 
             dom.classList.add("video-roll-transition");
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
+
         }
 
+        console.log(rollConfig, 'videoRoll')
+
+        return this;
+    }
+
+    /**
+     * update audio
+     */
+    static async updateAudio() {
+        await this.updatePitch();
+        await this.updateVolume();
+        this.updatePlaybackRate();
         return this;
     }
 
@@ -481,14 +502,12 @@ export default class VideoRoll {
         }
     }
 
-    static setPitchController(audioCtx: AudioContext) {
+    static createAudiohacker() {
+        if (!this.audioCtx) return;
+
         for (const dom of this.videoElements) {
-            const node = audioCtx.createMediaElementSource(dom as HTMLMediaElement);
-            this.audioController.push(new Jungle(audioCtx));
-            this.audioController.forEach((v) => {
-                v.output.connect(audioCtx.destination);
-                node.connect(v.input);
-            });
+            const node = this.audioCtx.createMediaElementSource(dom as HTMLMediaElement);
+            this.audioController.push(new Audiohacker(this.audioCtx, node));
         }
     }
 
@@ -505,11 +524,11 @@ export default class VideoRoll {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
                 })
-                return;
+                return this;
             };
 
             if (!on && !this.audioCtx) {
-                return;
+                return this;
             }
 
             if (!this.audioCtx) {
@@ -517,10 +536,10 @@ export default class VideoRoll {
                 const { audioCtx } = this;
 
                 if (audioCtx.state !== 'running') {
-                    await audioCtx.resume();   
+                    await audioCtx.resume();
                 }
 
-                this.setPitchController(audioCtx);
+                this.createAudiohacker();
             }
 
             if (this.audioController.length && on) {
@@ -531,5 +550,65 @@ export default class VideoRoll {
         } catch (err) {
             console.debug(err);
         }
+
+        return this;
+    }
+
+    /**
+     * update volume
+     * @returns 
+     */
+    static async updateVolume() {
+        const volume = this.rollConfig.volume;
+
+        try {
+            if (volume !== 1 && !this.audioCtx) {
+                this.audioCtx = new AudioContext();
+                const { audioCtx } = this;
+
+                if (audioCtx.state !== 'running') {
+                    await audioCtx.resume();
+                }
+                this.createAudiohacker();
+                return;
+            }
+            
+            if (this.audioController.length) {
+                this.audioController.forEach((v) => {
+                    v.setVolume(volume);
+                });
+                return;
+            }
+        } catch (err) {
+            console.debug(err);
+        }
+    }
+
+    static updatePlaybackRate() {
+        const playbackRate = this.rollConfig.playbackRate;
+
+        try {
+            for (const dom of this.videoElements) {
+                (dom as HTMLMediaElement).playbackRate = playbackRate;
+            }
+        } catch (err) {
+            console.debug(err);
+        }
+    }
+
+    /**
+     * HTMLVideoElement.requestPictureInPicture()
+     */
+    static togglePictureInPicture(pictureInPicture: boolean) {
+        if (!pictureInPicture && document.pictureInPictureElement) {
+            document.exitPictureInPicture();
+            return;
+        } 
+
+        try {
+            if (pictureInPicture && document.pictureInPictureEnabled && this.realVideoPlayer.player) {
+                this.realVideoPlayer.player.requestPictureInPicture();
+            }
+        } catch(err) { console.debug(err); }   
     }
 }

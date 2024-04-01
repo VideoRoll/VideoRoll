@@ -7,7 +7,6 @@
 import { defineComponent, inject } from "vue";
 import { ExpandOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
-import { getDefaultConfig } from '../../use';
 import "./index.less";
 
 export default defineComponent({
@@ -25,7 +24,8 @@ export default defineComponent({
             <>
                 <div class="video-roll-long-box">
                     <div class={`video-roll-switch ${rollConfig.zoom !== 1 ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={() => setZoomNum(1)}>
-                        <ExpandOutline class="video-roll-icon"></ExpandOutline>
+                        {/* <ExpandOutline class="video-roll-icon"></ExpandOutline> */}
+                        reset
                     </div>
                     <div class="video-roll-zoom">
                         <van-slider

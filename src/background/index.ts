@@ -3,10 +3,29 @@
  * @Author: Gouxinyu
  * @Date: 2022-04-23 23:37:22
  */
+import { createURL } from 'src/util';
 import { ActionType } from '../types/type.d';
 import { sendTabMessage, setBadge, getBrowser } from '../util';
 
 let currentTabId: number | undefined;
+
+chrome.runtime.onInstalled.addListener((params: any) => {
+    const reason = params.reason;
+
+    switch(reason) {
+        case 'install':
+            createURL('https://videoroll.gomi.site');
+            break;
+        case 'update':
+            createURL('https://videoroll.gomi.site');
+            break;
+        case 'uninstall':
+            createURL('https://videoroll.gomi.site');
+            break;
+        default:
+            break;
+    }
+});
 
 (getBrowser('action') as typeof chrome.action).setBadgeBackgroundColor({ color: "#a494c6" });
 

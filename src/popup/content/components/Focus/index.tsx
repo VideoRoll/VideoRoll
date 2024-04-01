@@ -3,7 +3,6 @@
  * @Author: Gouxinyu
  * @Date: 2022-09-19 22:53:23
  */
-<ion-icon name="eye-outline"></ion-icon>
 import { defineComponent, inject } from "vue";
 import { EyeOutline, EyeOffOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";

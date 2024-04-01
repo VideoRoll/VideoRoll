@@ -16,6 +16,7 @@ import { sendRuntimeMessage } from "../util";
     chrome.runtime.onMessage.addListener(async (data, b, send) => {
         const { rollConfig, tabId, type } = data;
 
+        console.log('recive message', tabId);
         try {
             switch (type) {
                 case ActionType.GET_BADGE: {

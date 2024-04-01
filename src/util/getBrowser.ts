@@ -1,10 +1,10 @@
-type Browser = typeof chrome;
-type API_KEYS = keyof Browser;
-type API_VAKUES = Browser[API_KEYS];
+type browser = typeof chrome;
+type API_KEYS = keyof browser;
+type API_VAKUES = browser[API_KEYS];
 
 interface IBrowserAPI {
     [key: string]: {
-        [key: string]: keyof Browser;
+        [key: string]: keyof browser;
     }
 }
 

@@ -1,6 +1,6 @@
 :root {
     --van-primary-color: #a494c6 !important;
-    --van-sidebar-width: 70px !important;
+    --van-sidebar-width: 100px !important;
     --van-sidebar-padding: 12.5px var(--van-padding-sm) !important;
     --van-sidebar-background: #1f1f1f97 !important;
     --van-sidebar-selected-background: #5d5d6045 !important;
@@ -39,54 +39,22 @@ body {
         margin-top: 0 !important;
     }
 
-    .van-swipe__indicators {
-        bottom: 0;
-    }
-
-    .van-swipe__indicator {
-        width: 12px;
-        height: 12px;
-        background-image: var(--video-roll-background-active);
-        cursor: pointer;
-
-        &:hover {
-            background-image: var(--video-roll-background-active);
-        }
-    }
-
     .video-roll-headBar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 10px 0;
-
-        .reload-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 20px;
-            height: 20px;
-            color: #fff;
-            border-radius: 50%;
-            cursor: pointer;
-
-            .video-roll-icon {
-                width: 15px;
-                height: 15px;
-            }
-
-            &:hover {
-                filter: contrast(200%);
-            }
-
-            background-image: var(--video-roll-background-active);
-        }
     }
 
     .video-roll-content {
         box-sizing: border-box;
-        border-bottom: 1px solid var(--van-divider-border-color);
-        padding-bottom: 15px;
+        min-height: 425px;
+        // padding-bottom: 15px;
+    }
+
+    .popover-size {
+        width: 100%;
+        height: 100%;
     }
 
     .custom-button {
@@ -107,12 +75,12 @@ body {
     .video-roll-switch {
         color: #fff;
         cursor: pointer;
-        border-radius: 50%;
+        border-radius: 15px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 25px;
-        height: 25px;
+        width: 40px;
+        height: 20px;
         box-shadow: 2px 2px 4px #5d5f626c, -2px -2px 4px #5d5f626c;
 
         .video-roll-icon {
@@ -204,6 +172,10 @@ body {
 
     main {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 455px;
     }
 
     .video-roll-setting {
@@ -228,5 +200,9 @@ body {
         }
 
         background-image: var(--video-roll-background-active);
+    }
+
+    .van-tabs__content {
+        padding-top: 5px;
     }
 }

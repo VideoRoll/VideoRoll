@@ -36,6 +36,7 @@ function sendMessage(rollConfig: IRollConfig, extra = {}, send = (res: any) => {
 function updateRollConfig(rollConfig: IRollConfig, key: RollKey, value: RollValue) {
     if (key in rollConfig) {
         rollConfig[key] = value;
+        console.log(rollConfig, '--rollConfig.tabId');
         sendMessage(rollConfig);
     }
 }
@@ -81,11 +82,4 @@ function initRollConfig(rollConfig: IRollConfig, tab: any): void {
     }
 };
 
-function createURL(url: string) {
-    chrome.tabs.create({
-        active: true,
-        url
-    });
-}
-
-export { initRollConfig, updateRollConfig, createURL, reloadPage }
+export { initRollConfig, updateRollConfig, reloadPage }

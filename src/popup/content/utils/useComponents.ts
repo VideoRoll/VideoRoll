@@ -5,11 +5,7 @@
  */
 import { shallowReactive } from 'vue';
 import {
-    defineComponent,
-    ref,
     defineAsyncComponent,
-    resolveComponent,
-    h,
 } from "vue";
 
 interface IConfig {
@@ -42,10 +38,16 @@ interface ISwiperConfig extends IConfig {
     children: IRowConfig[]
 }
 
-function useComponents() {
-    const components = shallowReactive<ISwiperConfig[]>([
+interface ITabConfig extends IConfig {
+    type: 'tab';
+    children: IRowConfig[]
+}
+
+export default function useComponents() {
+    const components = shallowReactive<ITabConfig[]>([
         {
-            type: 'swiper',
+            type: 'tab',
+            title: 'Video',
             children: [{
                 type: 'row',
                 style: {
@@ -66,7 +68,7 @@ function useComponents() {
                     {
                         type: "container",
                         col: 8,
-                        title: 'Cache Site',
+                        title: 'Pic In Pic',
                         showTitle: true,
                         style: {
                             flexDirection: "column",
@@ -77,35 +79,38 @@ function useComponents() {
                             {
                                 type: 'row',
                                 style: {
-                                    marginBottom: '30px'
+                                    height: '45px'
                                 },
                                 children: [
                                     {
                                         type: 'container',
-                                        title: 'Focus',
+                                        title: 'Download',
                                         showTitle: true,
                                         col: 24,
                                         children: [
                                             {
                                                 type: 'component',
-                                                component: defineAsyncComponent(() => import("../components/Focus"))
+                                                component: defineAsyncComponent(() => import("../components/Download"))
                                             }
                                         ]
-                                    },
+                                    }
                                 ]
                             },
                             {
                                 type: 'row',
+                                style: {
+                                    height: '45px'
+                                },
                                 children: [
                                     {
                                         type: 'container',
-                                        title: 'Store',
+                                        title: 'Pic In Pic',
                                         showTitle: false,
                                         col: 24,
                                         children: [
                                             {
                                                 type: 'component',
-                                                component: defineAsyncComponent(() => import("../components/Store"))
+                                                component: defineAsyncComponent(() => import("../components/PictureInPicture"))
                                             }
                                         ]
                                     }
@@ -163,15 +168,39 @@ function useComponents() {
                 children: [
                     {
                         type: 'container',
-                        col: 24,
-                        title: "Zoom",
+                        title: 'Focus',
                         showTitle: true,
+                        col: 8,
+                        children: [
+                            {
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Focus"))
+                            }
+                        ]
+                    },
+                    {
+                        type: 'container',
+                        title: "Filter",
+                        showTitle: true,
+                        col: 8,
                         children: [{
                             type: 'component',
-                            component: defineAsyncComponent(() => import("../components/Zoom"))
+                            component: defineAsyncComponent(() => import("../components/Filter"))
                         }]
                     },
-                ]
+                    {
+                        type: 'container',
+                        title: 'Cache Site',
+                        showTitle: true,
+                        col: 8,
+                        children: [
+                            {
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Store"))
+                            }
+                        ]
+                    }
+                ],
             },
             {
                 type: 'row',
@@ -182,43 +211,84 @@ function useComponents() {
                 children: [
                     {
                         type: 'container',
-                        title: "Pitch",
-                        showTitle: true,
                         col: 24,
+                        title: "Zoom",
+                        showTitle: true,
                         children: [{
                             type: 'component',
-                            component: defineAsyncComponent(() => import("../components/Pitch"))
+                            component: defineAsyncComponent(() => import("../components/Zoom"))
                         }]
                     },
                 ]
-            }]
+            }
+            ]
         },
         {
-            type: 'swiper',
+            type: 'tab',
+            title: 'Audio',
             children: [
-            {
-                type: 'row',
-                style: {
-                    margin: '30px 0',
-                    height: '40px'
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            title: "Volume",
+                            showTitle: true,
+                            col: 24,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Volume"))
+                            }]
+                        },
+                    ]
                 },
-                children: [
-                    {
-                        type: 'container',
-                        title: "Filter",
-                        showTitle: true,
-                        col: 8,
-                        children: [{
-                            type: 'component',
-                            component: defineAsyncComponent(() => import("../components/Filter"))
-                        }]
-                    }
-                ],
-            }]
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            col: 24,
+                            title: "Playback Rate",
+                            showTitle: true,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
+                            }]
+                        },
+                    ]
+                },
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            title: "Pitch",
+                            showTitle: true,
+                            col: 24,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Pitch"))
+                            }]
+                        },
+                    ]
+                }
+            ]
         }
     ]);
 
     return components;
 }
 
-export { useComponents, ISwiperConfig, IRowConfig, IComponentConfig, IContainerConfig, IConfig }
+export { ITabConfig, ISwiperConfig, IRowConfig, IComponentConfig, IContainerConfig, IConfig }

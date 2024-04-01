@@ -1,28 +1,34 @@
 {
     "name": "video-roll",
-    "version": "1.1.5",
-    "description": "A web extension that can help you rotate, zoom, move, scale, flip, tune, focus and filter a video",
+    "version": "1.1.6",
+    "description": "Rotate, zoom, reposition, stretch, flip, tune, focus and filter videos",
     "author": "Gomi",
     "scripts": {
         "test": "jest",
         "watch:inject": "parcel watch src/inject/injected.ts",
         "watch:background": "parcel watch src/background/background.ts",
         "preview": "parcel src/popup/index.html",
-        "dev:parcel": "parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts --no-cache",
+        "dev:parcel": "parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts src/options/index.html --no-cache",
         "dev:chromium": "pnpm run clean && pnpm run copy:static && cross-env BROWSER=\"chromium\" pnpm run build:manifest && pnpm run dev:parcel",
         "dev:firefox": "pnpm run clean && pnpm run copy:static && cross-env BROWSER=\"firefox\" pnpm run build:manifest && pnpm run dev:parcel",
         "build:popup": "parcel build src/popup/index.html --dist-dir dist/popup/ --no-source-maps --no-content-hash",
         "build:inject": "parcel build src/inject/index.ts --dist-dir dist/inject --no-source-maps --no-content-hash",
         "build:background": "parcel build src/background/index.ts --dist-dir dist/background --no-source-maps --no-content-hash",
+        "build:options": "parcel build src/options/index.html --dist-dir dist/options --no-source-maps --no-content-hash",
         "build:manifest": "node scripts/generateManifest.js",
-        "build": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background && pnpm run build:zip",
+        "build": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background && pnpm run build:options && pnpm run build:zip",
+        "build:report": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background --reporter @parcel/reporter-bundle-analyzer",
         "copy:static": "copyfiles -u 1 src/icons/* dist",
         "build:zip": "node scripts/build.js",
         "clean": "rimraf dist && rimraf chromiumExt.zip && rimraf firefoxExt.zip",
         "start": "pnpm run dev",
         "precommit": "pnpm run test"
     },
+    "alias": {
+        "src": "./src"
+    },
     "source": [
+        "src/options/index.html",
         "src/popup/index.html",
         "src/inject/index.ts",
         "src/background/index.ts"
@@ -50,9 +56,10 @@
     "dependencies": {
         "@vant/touch-emulator": "^1.4.0",
         "@vicons/ionicons5": "^0.11.0",
-        "vant": "4.6.2",
+        "audio-hacker": "^1.0.5",
+        "clipboard": "^2.0.11",
+        "vant": "4.8.5",
         "vue": "^3.2.41",
-        "vue-grid-layout": "^2.4.0",
         "webextension-polyfill": "^0.10.0"
     },
     "devDependencies": {
@@ -82,7 +89,7 @@
         "jest-environment-jsdom": "^29.0.3",
         "less": "^4.1.2",
         "parcel": "^2.8.3",
-        "parcel-namer-hashless": "^1.0.5",
+        "parcel-namer-hashless": "^1.0.6",
         "process": "^0.11.10",
         "ts-jest": "^29.0.2",
         "ts-node": "^10.9.1",

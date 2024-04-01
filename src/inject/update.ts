@@ -1,6 +1,8 @@
 import VideoRoll from "./VideoRoll";
+import browser from "webextension-polyfill";
 import { ActionType, IRollConfig } from '../types/type.d';
 import { KEY_CODE } from "../types/type.d";
+import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage, removeLocalStorage } from "../util/storage";
 
 let KeyboardEventCache: Function | null = null;
 
@@ -23,75 +25,70 @@ async function getTabBadge(): Promise<string> {
             setTimeout(() => {
                 resolve(getTabBadge());
             }, TIME);
-        });   
+        });
     }
     return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
 }
 
+/**
+ * reset time
+ */
 function resetTimes() {
     times = 0;
+}
+
+function hasConfig(config: any) {
+    if (typeof config !== 'object') return false;
+
+    return Reflect.ownKeys(config).length > 0;
+}
+
+async function getChromStore(key: string, defaultValue: any) {
+    return browser.storage.sync.get(key).then((res) => {
+        return res?.[key] ?? defaultValue;
+    });
 }
 
 /**
  * update rollConfig
  * @param rollConfig
  */
-export function updateConfig(rollConfig: IRollConfig) {
+export async function updateConfig(rollConfig: IRollConfig) {
     rollConfig.isInit = false;
 
-    VideoRoll.updateVideo(rollConfig).updatePitch();
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+
+    rollConfig.isAutoChangeSize = isAutoChangeSize;
+
+    VideoRoll.updateVideo(rollConfig).updateAudio();
 
     const config = VideoRoll.getRollConfig();
 
     if (config.store) {
-        localStorage.setItem(
-            `video-roll-${rollConfig.url}`,
-            JSON.stringify(config)
-        );
+        setLocalStorage(rollConfig);
     } else {
-        localStorage.removeItem(
-            `video-roll-${rollConfig.url}`
-        );
+        removeLocalStorage(`video-roll-${rollConfig.url}`);
     }
 
-    sessionStorage.setItem(
-        `video-roll-${rollConfig.tabId}`,
-        JSON.stringify(config)
-    );
+    setSessionStorage(rollConfig, config);
 }
 
 /**
  * fired when open popup
  * @param rollConfig
  */
-export function updateOnMounted(rollConfig: IRollConfig) {
+export async function updateOnMounted(rollConfig: IRollConfig) {
+    let config = await getLocalStorage(rollConfig.url);
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+    rollConfig.isAutoChangeSize = isAutoChangeSize;
     // set session storage
-    let config = JSON.parse(localStorage.getItem(
-        `video-roll-${rollConfig.url}`
-    ) as string);
-
-    if (!config) {
-        config = JSON.parse(sessionStorage.getItem(`video-roll-${rollConfig.tabId}`) as string);
+    if (!hasConfig(config)) {
+        config = getSessionStorage(rollConfig.tabId);
     }
 
-    if (!config) {
-        config = rollConfig;
-        sessionStorage.setItem(
-            `video-roll-${config.tabId}`,
-            JSON.stringify(config)
-        );
+    config = Object.assign(config, { videoNumber: rollConfig.videoNumber, isAutoChangeSize, tabId: rollConfig.tabId })
 
-        if (rollConfig.store) {
-            localStorage.setItem(
-                `video-roll-${config.url}`,
-                JSON.stringify(config)
-            );
-        }
-    }
-
-    config = Object.assign(config, { videoNumber: rollConfig.videoNumber })
-
-    VideoRoll.setRollConfig(config).addStyleClass().updatePitch();
+    VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
     chrome.runtime.sendMessage(
         { rollConfig: config, type: ActionType.UPDATE_STORAGE },
@@ -109,30 +106,32 @@ export async function updateBadge(options: any) {
     resetTimes();
     const text = await getTabBadge();
 
-    const { config, tabConfig } = getStorageConfig(tabId);
+    const { config, tabConfig } = await getStorageConfig(tabId);
+
+    const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
+
+    const hasConf = hasConfig(config);
 
     if (tabConfig) {
+        tabConfig.isAutoChangeSize = isAutoChangeSize;
         if (!tabConfig.storeThisTab) {
             sessionStorage.removeItem(`video-roll-${tabId}`);
             tabConfig.store = false;
-            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
+            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         } else {
             tabConfig.url = window.location.href;
-            if (!config) tabConfig.store = false;
+            if (!hasConf) tabConfig.store = false;
             sessionStorage.setItem(`video-roll-${tabId}`, JSON.stringify(tabConfig));
-            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updatePitch();
+            VideoRoll.setRollConfig(tabConfig).addStyleClass(true).updateAudio();
         }
     }
 
-    if (config) {
+    if (hasConf) {
         config.isInit = true;
-
+        config.isAutoChangeSize = isAutoChangeSize;
         if (tabConfig?.storeThisTab) {
             config.storeThisTab = tabConfig.storeThisTab;
-            localStorage.setItem(
-                `video-roll-${config.url}`,
-                JSON.stringify(config)
-            );
+            setLocalStorage(config);
         }
 
         sessionStorage.setItem(
@@ -140,8 +139,7 @@ export async function updateBadge(options: any) {
             JSON.stringify(config)
         );
 
-        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updatePitch();
-
+        VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updateAudio();
     }
 
     return Promise.resolve({ text });
@@ -157,13 +155,15 @@ export function updateStorage(rollConfig: IRollConfig, send: Function) {
  * @param tabId
  * @returns 
  */
-export function getStorageConfig(tabId: number) {
-    const config = JSON.parse(localStorage.getItem(
-        `video-roll-${window.location.href}`
-    ) as string);
+export async function getStorageConfig(tabId: number) {
+    const config = await getLocalStorage();
+
+    if (hasConfig(config)) {
+        config.tabId = tabId;
+    }
 
     // store this tab
-    const tabConfig = JSON.parse(sessionStorage.getItem(`video-roll-${tabId}`) as string);
+    const tabConfig = getSessionStorage(tabId);
 
     return { config, tabConfig };
 }
@@ -172,9 +172,10 @@ export function isCtrlOrCommand(e: KeyboardEvent) {
     return e.ctrlKey || (navigator.platform.indexOf('Mac') === 0 && e.metaKey);
 }
 
-export function keyDownEvent(tabId: number, e: KeyboardEvent) {
-    const { config, tabConfig } = getStorageConfig(tabId);
-    if (!config && !tabConfig) return;
+export async function keyDownEvent(tabId: number, e: KeyboardEvent) {
+    const { config, tabConfig } = await getStorageConfig(tabId);
+
+    if (!hasConfig(config) && !tabConfig) return;
 
     if (isCtrlOrCommand(e)) {
         let newConfig = tabConfig || config;

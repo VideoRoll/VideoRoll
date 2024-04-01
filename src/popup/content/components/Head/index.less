@@ -17,13 +17,24 @@
 
         &:hover {
             color: #a494c6;
+            svg {
+                fill: #a494c6 !important;
+            }
         }
 
+        svg {
+            fill: #f6f6f6;
+        }
+        
         .logo-usd {
             display: flex;
             width: 15px;
             height: 15px;
         }
+    }
+
+    .video-roll-feedback {
+        display: flex;
     }
 }
 
@@ -31,6 +42,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     .video-roll-logo-img {
         width: 20px;
@@ -42,4 +57,8 @@
         width: 100%;
         height: 10px;
     }
+}
+
+.van-tabs__nav {
+    background-color: transparent !important;
 }

@@ -75,15 +75,19 @@ export interface IRollConfig {
     flip: Flip;
     scale: IScale;
     pitch: Pitch;
+    volume: number;
     zoom: Zoom;
+    playbackRate: number;
     focus: Focus;
     move: IMove;
     deg: Deg;
     filter: IFilter;
+    pictureInPicture: boolean;
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;
     videoSelector: VideoSelector;
+    isAutoChangeSize: boolean;
     [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 

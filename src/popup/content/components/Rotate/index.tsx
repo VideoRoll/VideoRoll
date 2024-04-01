@@ -5,7 +5,7 @@
  */
 
 import { defineComponent, inject } from "vue";
-import { useConfig, useDegBtn } from "../../use";
+import { useConfig, useDegBtn } from "../../../../use";
 import {
     ChevronBackOutline,
 } from "@vicons/ionicons5";
@@ -26,7 +26,10 @@ export default defineComponent({
                     <div
                         class={`rotate-${item.type}-${item.iconDeg} rotate-btn`}
                         key={item.type}
-                        onClick={() => update("deg", item.deg)}
+                        onClick={() => {
+                            console.log(rollConfig, 'deg')
+                            update("deg", item.deg)
+                        }}
                     >
                         <ChevronBackOutline />
                     </div>

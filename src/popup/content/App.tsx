@@ -1,13 +1,11 @@
-import { defineComponent, ref, onMounted, provide, Transition } from "vue";
-import { RefreshOutline } from "@vicons/ionicons5";
+import { defineComponent, ref, onMounted, provide, watch } from "vue";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
-import Info from './components/Info';
-import { useConfig } from "./use";
+import { useConfig } from "../../use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
-import { clone } from "../../util";
+import { clone, getSessionStorage } from "../../util";
 import { ActionType } from "../../types/type.d";
 
 import "./index.less";
@@ -16,6 +14,7 @@ export default defineComponent({
     name: "App",
     setup() {
         const isShow = ref(false);
+        const tabId = ref(0);
 
         /**
          * open settings panel
@@ -27,14 +26,20 @@ export default defineComponent({
         // current website config
         const rollConfig = useConfig();
 
-        const update = updateRollConfig.bind(null, rollConfig);
         provide("rollConfig", rollConfig);
-        provide("update", update);
+        provide("update", updateRollConfig.bind(null, rollConfig));
         provide("onOpenSetting", onOpenSetting);
 
-        const onReload = () => {
-            reloadPage(rollConfig.tabId);
-        }
+        watch(() => tabId.value, (value: number) => {
+            if (!value) return;
+            const config = getSessionStorage(value);
+
+            Object.keys(config).forEach((key) => {
+                if (key in rollConfig && key !== 'tabId') {
+                    rollConfig[key] = config[key];
+                }
+            });
+        })
         /**
          * 当打开时就获取当前网站的视频信息
          * 添加样式
@@ -43,6 +48,7 @@ export default defineComponent({
             const queryOptions = { active: true, currentWindow: true };
             const [tab] = await browser.tabs.query(queryOptions);
 
+            tabId.value = tab.id as number;
             initRollConfig(rollConfig, tab);
 
             // add style
@@ -57,9 +63,8 @@ export default defineComponent({
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config, text } = a;
-                switch(type) {
+                switch (type) {
                     case ActionType.UPDATE_STORAGE:
-                        console.log(config, '---config');
                         Object.keys(config).forEach((key) => {
                             if (key in rollConfig) {
                                 rollConfig[key] = config[key];
@@ -81,22 +86,10 @@ export default defineComponent({
             <div>
                 <Head isShow={isShow.value}></Head>
                 <main>
-                    <div class="video-roll-headBar">
-                        <Info></Info>
-                        <div title="reload page" class="reload-btn" onClick={onReload}>
-                            <RefreshOutline class="video-roll-icon"></RefreshOutline>
-                        </div>
-                    </div>
-                   
                     <div class="video-roll-content">
                         <GridPanel></GridPanel>
                     </div>
                     <Footer></Footer>
-                    {/* <Transition name="van-fade">
-                        <div class="video-roll-setting" v-show={isShow.value}>
-                            <SettingPanel />
-                        </div>
-                    </Transition> */}
                 </main>
             </div>
         );

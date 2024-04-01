@@ -21,7 +21,7 @@ Video Roll
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
 [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
 [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons") |
-[Home Page](https://gomi.site/VideoRoll "Home Page")
+[Home Page](https://videoroll.gomi.site "Home Page")
 
 English | [简体中文](README-zh_CN.md)
 </div>
@@ -45,6 +45,7 @@ Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, 
 -   ✅Tune(Pitch)
 -   ✅Focus
 -   ✅Filter
+-   ✅Download video guide
 -   ✅Memory system(You can save all the configuration of the current website so that it will take effect directly next time)
 -   ✅Support shortcut key
 -   ✅Support same-origin iframe

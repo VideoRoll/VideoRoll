@@ -14,8 +14,12 @@
         "default_popup": "popup/index.html"
     },
     "background": {
-        "scripts": ["background/index.js"],
+        "scripts": [
+            "background/index.js"
+        ],
         "persistent": true
     },
-    "web_accessible_resources": ["inject/index.js"]
+    "web_accessible_resources": [
+        "inject/index.js"
+    ]
 }
