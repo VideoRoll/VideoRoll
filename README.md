@@ -41,7 +41,7 @@ Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, 
 -   ✅Zoom
 -   ✅Reposition
 -   ✅Stretch
--   ✅Download(Youtube/Bilibili/MP3)
+-   ✅Download
 -   ✅Rotate 0/90/180/270deg
 -   ✅Tune(Pitch)
 -   ✅Volume

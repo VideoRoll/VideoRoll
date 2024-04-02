@@ -18,18 +18,13 @@ export default defineComponent({
         const actions = shallowReactive([
             {
                 icon: 'video',
-                text: 'ssyoutube',
-                url: 'https://ssyoutube.com'
+                text: 'savevideo',
+                url: 'https://www.savethevideo.com/home'
             },
             {
                 icon: 'live',
                 text: 'zhouql.vip',
                 url: 'https://zhouql.vip/bilibili'
-            },
-            {
-                icon: 'audio',
-                text: 'savemp3',
-                url: 'https://savemp3.net'
             }
         ]);
 
