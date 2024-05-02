@@ -1632,7 +1632,7 @@ packages:
       '@parcel/diagnostic': 2.8.3
       '@parcel/fs': 2.8.3(@parcel/core@2.8.3)
       '@parcel/logger': 2.8.3
-      '@parcel/types': 2.8.3(@parcel/core@2.8.3)
+      '@parcel/types': 2.8.3
       '@parcel/utils': 2.8.3
       '@parcel/workers': 2.8.3(@parcel/core@2.8.3)
       semver: 5.7.1

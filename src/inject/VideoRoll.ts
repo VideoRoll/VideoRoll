@@ -268,8 +268,6 @@ export default class VideoRoll {
 
         }
 
-        console.log(rollConfig, 'videoRoll')
-
         return this;
     }
 
