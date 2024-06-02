@@ -1,6 +1,6 @@
 {
     "name": "video-roll",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "description": "Rotate, zoom, reposition, stretch, flip, tune, focus and filter videos",
     "author": "Gomi",
     "scripts": {

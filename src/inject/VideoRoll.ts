@@ -229,6 +229,13 @@ export default class VideoRoll {
         return true;
     }
 
+    static removeAbsoluteStyle(video: HTMLVideoElement) {
+        const style = getComputedStyle(video);
+        if (style.position === 'absolute') {
+            video.classList.add("video-roll-remove-absolute");
+        }
+    }
+
     /**
      * set video rotate deg
      * @param rollConfig
@@ -266,6 +273,7 @@ export default class VideoRoll {
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
 
+            this.removeAbsoluteStyle(dom as HTMLVideoElement)
         }
 
         return this;
@@ -337,9 +345,10 @@ export default class VideoRoll {
     static isExistStyle(doc: Document) {
         const degScale = doc.getElementById("video-roll-deg-scale");
         const transition = doc.getElementById("video-roll-transition");
+        const removeAbsoluteStyle = doc.getElementById("video-roll-remove-absolute");
         const root = document.getElementById("video-roll-root");
 
-        return degScale && transition && root ? [degScale, transition, root] : null;
+        return degScale && transition && root && removeAbsoluteStyle ? [degScale, transition, root, removeAbsoluteStyle] : null;
     }
 
     /**
@@ -400,6 +409,7 @@ export default class VideoRoll {
 
             const degScale = doc.createElement("style");
             const transition = doc.createElement("style");
+            const removeAbsoluteStyle = doc.createElement("style");
 
             degScale.innerHTML = `
                 .video-roll-deg-scale {}
@@ -409,17 +419,25 @@ export default class VideoRoll {
                 transition: all 0.5s ease !important;
             }`;
 
+            removeAbsoluteStyle.innerHTML = `.video-roll-remove-absolute {
+                left: unset !important;
+                top: unset !important;
+            }`
+
             degScale.setAttribute("id", "video-roll-deg-scale");
             transition.setAttribute("id", "video-roll-transition");
+            removeAbsoluteStyle.setAttribute("id", "video-roll-remove-absolute");
 
             degScale.setAttribute("type", "text/css");
             transition.setAttribute("type", "text/css");
+            removeAbsoluteStyle.setAttribute("type", "text/css");
 
             const head = doc.getElementsByTagName("head")[0];
 
             if (head) {
                 head.appendChild(degScale);
                 head.appendChild(transition);
+                head.appendChild(removeAbsoluteStyle);
             }
 
             this.addMaskElement();
