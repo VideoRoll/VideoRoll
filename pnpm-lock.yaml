@@ -2380,18 +2380,6 @@ packages:
       - '@parcel/core'
     dev: true
 
-  /@parcel/types@2.8.3:
-    resolution: {integrity: sha512-FECA1FB7+0UpITKU0D6TgGBpGxYpVSMNEENZbSJxFSajNy3wrko+zwBKQmFOLOiPcEtnGikxNs+jkFWbPlUAtw==}
-    dependencies:
-      '@parcel/cache': 2.8.3(@parcel/core@2.11.0)
-      '@parcel/diagnostic': 2.8.3
-      '@parcel/fs': 2.8.3(@parcel/core@2.11.0)
-      '@parcel/package-manager': 2.8.3(@parcel/core@2.11.0)
-      '@parcel/source-map': 2.1.1
-      '@parcel/workers': 2.8.3(@parcel/core@2.11.0)
-      utility-types: 3.10.0
-    dev: true
-
   /@parcel/types@2.8.3(@parcel/core@2.11.0):
     resolution: {integrity: sha512-FECA1FB7+0UpITKU0D6TgGBpGxYpVSMNEENZbSJxFSajNy3wrko+zwBKQmFOLOiPcEtnGikxNs+jkFWbPlUAtw==}
     dependencies:
@@ -2629,7 +2617,7 @@ packages:
       '@parcel/core': 2.11.0
       '@parcel/diagnostic': 2.8.3
       '@parcel/logger': 2.8.3
-      '@parcel/types': 2.8.3
+      '@parcel/types': 2.8.3(@parcel/core@2.11.0)
       '@parcel/utils': 2.8.3
       chrome-trace-event: 1.0.3
       nullthrows: 1.1.1
@@ -2644,7 +2632,7 @@ packages:
       '@parcel/core': 2.8.3
       '@parcel/diagnostic': 2.8.3
       '@parcel/logger': 2.8.3
-      '@parcel/types': 2.8.3
+      '@parcel/types': 2.8.3(@parcel/core@2.11.0)
       '@parcel/utils': 2.8.3
       chrome-trace-event: 1.0.3
       nullthrows: 1.1.1

@@ -22,11 +22,13 @@
             "es2021",
             "dom"
         ],
+        "typeRoots": ["./node_modules/@types"],
         "types": [
             "chrome",
             "jest",
             "node",
-            "webextension-polyfill"
+            "webextension-polyfill",
+            "light-ruler/declaration"
         ]
     },
     "isolatedModules": true,

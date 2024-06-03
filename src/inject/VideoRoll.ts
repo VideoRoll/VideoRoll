@@ -26,6 +26,8 @@ export default class VideoRoll {
 
     static rootElement: HTMLElement | undefined;
 
+    static observer: MutationObserver;
+
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
         return this;
@@ -143,6 +145,16 @@ export default class VideoRoll {
         return this;
     }
 
+    static updateVideoNumbers(videoSelector: VideoSelector) {
+        if (!this.documents.length) return;
+
+        this.documents.forEach((doc) => {
+            this.setVideoBySelector(videoSelector, doc);
+        });
+
+        return this;
+    }
+
     /**
      * set videoElements
      * @param videoSelector 
@@ -229,6 +241,13 @@ export default class VideoRoll {
         return true;
     }
 
+    static removeAbsoluteStyle(video: HTMLVideoElement) {
+        const style = getComputedStyle(video);
+        if (style.position === 'absolute') {
+            video.classList.add("video-roll-remove-absolute");
+        }
+    }
+
     /**
      * set video rotate deg
      * @param rollConfig
@@ -249,7 +268,7 @@ export default class VideoRoll {
             let scaleNum: [number, number] = [1, 1];
 
             if (rollConfig.isAutoChangeSize) {
-                scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);   
+                scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);
             }
 
             this.rollConfig.scale.values = scaleNum;
@@ -266,9 +285,8 @@ export default class VideoRoll {
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
 
+            this.removeAbsoluteStyle(dom as HTMLVideoElement)
         }
-
-        console.log(rollConfig, 'videoRoll')
 
         return this;
     }
@@ -339,9 +357,10 @@ export default class VideoRoll {
     static isExistStyle(doc: Document) {
         const degScale = doc.getElementById("video-roll-deg-scale");
         const transition = doc.getElementById("video-roll-transition");
+        const removeAbsoluteStyle = doc.getElementById("video-roll-remove-absolute");
         const root = document.getElementById("video-roll-root");
 
-        return degScale && transition && root ? [degScale, transition, root] : null;
+        return degScale && transition && root && removeAbsoluteStyle ? [degScale, transition, root, removeAbsoluteStyle] : null;
     }
 
     /**
@@ -402,6 +421,7 @@ export default class VideoRoll {
 
             const degScale = doc.createElement("style");
             const transition = doc.createElement("style");
+            const removeAbsoluteStyle = doc.createElement("style");
 
             degScale.innerHTML = `
                 .video-roll-deg-scale {}
@@ -411,17 +431,25 @@ export default class VideoRoll {
                 transition: all 0.5s ease !important;
             }`;
 
+            removeAbsoluteStyle.innerHTML = `.video-roll-remove-absolute {
+                left: unset !important;
+                top: unset !important;
+            }`
+
             degScale.setAttribute("id", "video-roll-deg-scale");
             transition.setAttribute("id", "video-roll-transition");
+            removeAbsoluteStyle.setAttribute("id", "video-roll-remove-absolute");
 
             degScale.setAttribute("type", "text/css");
             transition.setAttribute("type", "text/css");
+            removeAbsoluteStyle.setAttribute("type", "text/css");
 
             const head = doc.getElementsByTagName("head")[0];
 
             if (head) {
                 head.appendChild(degScale);
                 head.appendChild(transition);
+                head.appendChild(removeAbsoluteStyle);
             }
 
             this.addMaskElement();
@@ -572,7 +600,7 @@ export default class VideoRoll {
                 this.createAudiohacker();
                 return;
             }
-            
+
             if (this.audioController.length) {
                 this.audioController.forEach((v) => {
                     v.setVolume(volume);
@@ -603,12 +631,36 @@ export default class VideoRoll {
         if (!pictureInPicture && document.pictureInPictureElement) {
             document.exitPictureInPicture();
             return;
-        } 
+        }
 
         try {
             if (pictureInPicture && document.pictureInPictureEnabled && this.realVideoPlayer.player) {
                 this.realVideoPlayer.player.requestPictureInPicture();
             }
-        } catch(err) { console.debug(err); }   
+        } catch (err) { console.debug(err); }
+    }
+
+    /**
+     * update video number
+     * @param callback 
+     */
+    static observeVideo(callback: Function) {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+
+        const elementToObserve = document.querySelector("body") as Node;
+
+        this.observer = new MutationObserver(() => {
+            const oldVideoNumbers = this.videoNumbers;
+            const videoSelector = this.getVideoSelector(this.getHostName())
+            this.updateDocuments().updateVideoNumbers(videoSelector);
+            if (this.videoNumbers !== oldVideoNumbers) {
+                this.updateVideoElements(videoSelector);
+                callback(String(this.videoNumbers))
+            }
+        });
+
+        this.observer.observe(elementToObserve, { subtree: true, childList: true });
     }
 }
