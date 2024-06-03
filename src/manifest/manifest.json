@@ -1,6 +1,6 @@
 {
     "name": "Video Roll - All-in-One Video Enhancements",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "manifest_version": 3,
     "description": "Rotate, zoom, reposition, stretch, flip, download, playback, tune, volume and more. 旋转、缩放、移动、下载、调整比例、镜像翻转、调节音调、音量、倍速、专注、滤镜视频",
     "content_scripts": [

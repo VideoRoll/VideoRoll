@@ -22,7 +22,7 @@
             "es2021",
             "dom"
         ],
-        "typeRoots": ["node_modules/light-ruler/declaration/index.d.ts"],
+        "typeRoots": ["./node_modules/@types"],
         "types": [
             "chrome",
             "jest",

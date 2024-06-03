@@ -22,11 +22,12 @@ import { sendRuntimeMessage } from "../util";
                 case ActionType.GET_BADGE: {
                     updateBadge({
                         tabId,
-                        rollConfig
-                    }).then((res) => {
-                        videoNumber = Number(res?.text);
-                        sendRuntimeMessage(tabId, { ...res, type: ActionType.UPDATE_BADGE })
-                    });
+                        rollConfig,
+                        callback: (text: string) => {
+                            videoNumber = Number(text);
+                            sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE })
+                        }
+                    })
                     break;
                 }
                 // when popup onMounted, set init flip value to background,

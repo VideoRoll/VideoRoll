@@ -26,6 +26,8 @@ export default class VideoRoll {
 
     static rootElement: HTMLElement | undefined;
 
+    static observer: MutationObserver;
+
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
         return this;
@@ -135,6 +137,16 @@ export default class VideoRoll {
         this.clearVideoElements();
         this.clearRootElement();
         this.clearRealVideoPlayer();
+
+        this.documents.forEach((doc) => {
+            this.setVideoBySelector(videoSelector, doc);
+        });
+
+        return this;
+    }
+
+    static updateVideoNumbers(videoSelector: VideoSelector) {
+        if (!this.documents.length) return;
 
         this.documents.forEach((doc) => {
             this.setVideoBySelector(videoSelector, doc);
@@ -256,7 +268,7 @@ export default class VideoRoll {
             let scaleNum: [number, number] = [1, 1];
 
             if (rollConfig.isAutoChangeSize) {
-                scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);   
+                scaleNum = this.rollConfig.isInit || scale.mode === 'custom' ? scale.values : this.getScaleNumber(target, deg);
             }
 
             this.rollConfig.scale.values = scaleNum;
@@ -588,7 +600,7 @@ export default class VideoRoll {
                 this.createAudiohacker();
                 return;
             }
-            
+
             if (this.audioController.length) {
                 this.audioController.forEach((v) => {
                     v.setVolume(volume);
@@ -619,12 +631,36 @@ export default class VideoRoll {
         if (!pictureInPicture && document.pictureInPictureElement) {
             document.exitPictureInPicture();
             return;
-        } 
+        }
 
         try {
             if (pictureInPicture && document.pictureInPictureEnabled && this.realVideoPlayer.player) {
                 this.realVideoPlayer.player.requestPictureInPicture();
             }
-        } catch(err) { console.debug(err); }   
+        } catch (err) { console.debug(err); }
+    }
+
+    /**
+     * update video number
+     * @param callback 
+     */
+    static observeVideo(callback: Function) {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+
+        const elementToObserve = document.querySelector("body") as Node;
+
+        this.observer = new MutationObserver(() => {
+            const oldVideoNumbers = this.videoNumbers;
+            const videoSelector = this.getVideoSelector(this.getHostName())
+            this.updateDocuments().updateVideoNumbers(videoSelector);
+            if (this.videoNumbers !== oldVideoNumbers) {
+                this.updateVideoElements(videoSelector);
+                callback(String(this.videoNumbers))
+            }
+        });
+
+        this.observer.observe(elementToObserve, { subtree: true, childList: true });
     }
 }

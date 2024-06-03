@@ -6,7 +6,7 @@ import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage,
 
 let KeyboardEventCache: Function | null = null;
 
-const MAX_TIMES = 5;
+const MAX_TIMES = 50;
 const TIME = 230;
 
 let times = 0;
@@ -15,19 +15,20 @@ let times = 0;
  * get badge text
  * @returns
  */
-async function getTabBadge(): Promise<string> {
-    const videoSelector = VideoRoll.getVideoSelector(VideoRoll.getHostName())
-    VideoRoll.updateDocuments().updateVideoElements(videoSelector);
+async function getTabBadge(callback: Function) {
+    VideoRoll.observeVideo(callback);
+    // const videoSelector = VideoRoll.getVideoSelector(VideoRoll.getHostName())
+    // VideoRoll.updateDocuments().updateVideoElements(videoSelector);
 
-    if (times < MAX_TIMES) {
-        times++;
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(getTabBadge());
-            }, TIME);
-        });
-    }
-    return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
+    // if (times < MAX_TIMES && VideoRoll.videoNumbers === 0) {
+    //     times++;
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             resolve(getTabBadge());
+    //         }, TIME);
+    //     });
+    // }
+    // return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
 }
 
 /**
@@ -101,10 +102,9 @@ export async function updateOnMounted(rollConfig: IRollConfig) {
  * @param options
  */
 export async function updateBadge(options: any) {
-    const { tabId, rollConfig } = options;
+    const { tabId, rollConfig, callback } = options;
 
-    resetTimes();
-    const text = await getTabBadge();
+    getTabBadge(callback);
 
     const { config, tabConfig } = await getStorageConfig(tabId);
 
@@ -141,8 +141,6 @@ export async function updateBadge(options: any) {
 
         VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updateAudio();
     }
-
-    return Promise.resolve({ text });
 }
 
 export function updateStorage(rollConfig: IRollConfig, send: Function) {
