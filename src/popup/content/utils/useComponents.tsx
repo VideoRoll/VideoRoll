@@ -7,10 +7,11 @@ import { shallowReactive } from 'vue';
 import {
     defineAsyncComponent,
 } from "vue";
+import { VideocamOutline, VolumeMediumOutline } from '@vicons/ionicons5';
 
 interface IConfig {
     type: string;
-    title?: string;
+    title?: JSX.Element | string;
     style?: Object;
     children?: any[];
 }
@@ -47,7 +48,7 @@ export default function useComponents() {
     const components = shallowReactive<ITabConfig[]>([
         {
             type: 'tab',
-            title: 'Video',
+            title: <div class="tab-title"><VideocamOutline class="tab-icon" /><span class="tab-title-text">Video</span></div>,
             children: [{
                 type: 'row',
                 style: {
@@ -220,12 +221,31 @@ export default function useComponents() {
                         }]
                     },
                 ]
+            },
+            {
+                type: 'row',
+                style: {
+                    margin: '30px 0',
+                    height: '40px'
+                },
+                children: [
+                    {
+                        type: 'container',
+                        col: 24,
+                        title: "Zoom",
+                        showTitle: true,
+                        children: [{
+                            type: 'component',
+                            component: defineAsyncComponent(() => import("../components/Zoom"))
+                        }]
+                    },
+                ]
             }
             ]
         },
         {
             type: 'tab',
-            title: 'Audio',
+            title: <div class="tab-title"><VolumeMediumOutline class="tab-icon" /><span class="tab-title-text">Audio</span></div>,
             children: [
                 {
                     type: 'row',
