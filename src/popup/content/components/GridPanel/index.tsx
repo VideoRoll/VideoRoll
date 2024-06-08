@@ -36,7 +36,7 @@ export default defineComponent({
         return () => (
             <div class="video-roll-setting-panel">
                 <van-config-provider theme="dark">
-                    <van-tabs sticky animated>
+                    <van-tabs sticky animated offset-top="40">
                         {
                             render(components)
                         }

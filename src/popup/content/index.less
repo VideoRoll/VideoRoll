@@ -5,6 +5,7 @@
     --van-sidebar-background: #1f1f1f97 !important;
     --van-sidebar-selected-background: #5d5d6045 !important;
     --video-roll-background-active: linear-gradient(135deg, #CE9FFC 10%, #7367F0 100%);
+    --video-roll-primary-background-color: rgb(24, 24, 28);
 }
 
 body {
@@ -33,7 +34,7 @@ body {
 #app {
     width: 300px;
     height: 500px;
-    background-color: rgb(24, 24, 28);
+    background-color: var(--video-roll-primary-background-color);
 
     .van-row:first-of-type {
         margin-top: 0 !important;
@@ -49,6 +50,7 @@ body {
     .video-roll-content {
         box-sizing: border-box;
         min-height: 425px;
+        overflow-y: auto;
         // padding-bottom: 15px;
     }
 
@@ -204,5 +206,21 @@ body {
 
     .van-tabs__content {
         padding-top: 5px;
+    }
+
+    .tab-title-text {
+        font-size: 12px;
+    }
+
+    .tab-title {
+        width: 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tab-icon {
+        width: 15px;
+        height: 15px;
     }
 }
