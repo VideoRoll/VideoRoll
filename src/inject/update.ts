@@ -6,36 +6,12 @@ import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage,
 
 let KeyboardEventCache: Function | null = null;
 
-const MAX_TIMES = 50;
-const TIME = 230;
-
-let times = 0;
-
 /**
  * get badge text
  * @returns
  */
 async function getTabBadge(callback: Function) {
     VideoRoll.observeVideo(callback);
-    // const videoSelector = VideoRoll.getVideoSelector(VideoRoll.getHostName())
-    // VideoRoll.updateDocuments().updateVideoElements(videoSelector);
-
-    // if (times < MAX_TIMES && VideoRoll.videoNumbers === 0) {
-    //     times++;
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             resolve(getTabBadge());
-    //         }, TIME);
-    //     });
-    // }
-    // return Promise.resolve(VideoRoll.videoNumbers > 0 ? String(VideoRoll.videoNumbers) : '');
-}
-
-/**
- * reset time
- */
-function resetTimes() {
-    times = 0;
 }
 
 function hasConfig(config: any) {

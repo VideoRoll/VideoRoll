@@ -73,6 +73,7 @@ export default defineComponent({
                         break;
                     case ActionType.UPDATE_BADGE:
                         rollConfig.videoNumber = Number(text);
+                        rollConfig.videoList = config.videoList
                         break;
                     default:
                         break;

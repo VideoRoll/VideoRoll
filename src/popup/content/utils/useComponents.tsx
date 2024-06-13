@@ -7,12 +7,14 @@ import { shallowReactive } from 'vue';
 import {
     defineAsyncComponent,
 } from "vue";
-import { VideocamOutline, VolumeMediumOutline } from '@vicons/ionicons5';
+import { VideocamOutline, VolumeMediumOutline, ListOutline, EllipsisHorizontalCircleOutline } from '@vicons/ionicons5';
 
 interface IConfig {
     type: string;
     title?: JSX.Element | string;
+    merge?: boolean;
     style?: Object;
+    class?: string;
     children?: any[];
 }
 
@@ -41,7 +43,7 @@ interface ISwiperConfig extends IConfig {
 
 interface ITabConfig extends IConfig {
     type: 'tab';
-    children: IRowConfig[]
+    children: IRowConfig[] | IComponentConfig[]
 }
 
 export default function useComponents() {
@@ -125,39 +127,41 @@ export default function useComponents() {
                 type: 'row',
                 style: {
                     margin: '30px 0',
-                    height: '40px'
+                    height: '120px'
                 },
                 children: [
                     {
                         type: 'container',
+                        merge: true,
+                        class: 'video-roll-container-merge',
                         title: "Repostion",
                         showTitle: true,
-                        col: 8,
+                        col: 24,
                         children: [{
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Repostion"))
                         }]
                     },
-                    {
-                        type: 'container',
-                        col: 8,
-                        title: "Stretch",
-                        showTitle: true,
-                        children: [{
-                            type: 'component',
-                            component: defineAsyncComponent(() => import("../components/Stretch"))
-                        }]
-                    },
-                    {
-                        type: 'container',
-                        col: 8,
-                        title: "Flip",
-                        showTitle: true,
-                        children: [{
-                            type: 'component',
-                            component: defineAsyncComponent(() => import("../components/Flip"))
-                        }]
-                    },
+                    // {
+                    //     type: 'container',
+                    //     col: 8,
+                    //     title: "Stretch",
+                    //     showTitle: true,
+                    //     children: [{
+                    //         type: 'component',
+                    //         component: defineAsyncComponent(() => import("../components/Stretch"))
+                    //     }]
+                    // },
+                    // {
+                    //     type: 'container',
+                    //     col: 8,
+                    //     title: "Flip",
+                    //     showTitle: true,
+                    //     children: [{
+                    //         type: 'component',
+                    //         component: defineAsyncComponent(() => import("../components/Flip"))
+                    //     }]
+                    // },
                 ],
             },
             {
@@ -171,7 +175,7 @@ export default function useComponents() {
                         type: 'container',
                         title: 'Focus',
                         showTitle: true,
-                        col: 8,
+                        col: 6,
                         children: [
                             {
                                 type: 'component',
@@ -183,7 +187,7 @@ export default function useComponents() {
                         type: 'container',
                         title: "Filter",
                         showTitle: true,
-                        col: 8,
+                        col: 6,
                         children: [{
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Filter"))
@@ -193,7 +197,7 @@ export default function useComponents() {
                         type: 'container',
                         title: 'Cache Site',
                         showTitle: true,
-                        col: 8,
+                        col: 6,
                         children: [
                             {
                                 type: 'component',
@@ -246,6 +250,79 @@ export default function useComponents() {
         {
             type: 'tab',
             title: <div class="tab-title"><VolumeMediumOutline class="tab-icon" /><span class="tab-title-text">Audio</span></div>,
+            children: [
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            title: "Volume",
+                            showTitle: true,
+                            col: 24,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Volume"))
+                            }]
+                        },
+                    ]
+                },
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            col: 24,
+                            title: "Playback Rate",
+                            showTitle: true,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
+                            }]
+                        },
+                    ]
+                },
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            title: "Pitch",
+                            showTitle: true,
+                            col: 24,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Pitch"))
+                            }]
+                        },
+                    ]
+                }
+            ]
+        },
+        {
+            type: 'tab',
+            title: <div class="tab-title"><ListOutline class="tab-icon" /><span class="tab-title-text">list</span></div>,
+            children: [
+                {
+                    type: 'component',
+                    component: defineAsyncComponent(() => import("../components/VideoList"))
+                }
+            ]
+        },
+        {
+            type: 'tab',
+            title: <div class="tab-title"><EllipsisHorizontalCircleOutline class="tab-icon" /><span class="tab-title-text">more</span></div>,
             children: [
                 {
                     type: 'row',

@@ -30,18 +30,16 @@ export default defineComponent({
             <>
                 <div class="video-roll-long-box">
                     <van-switch v-model={rollConfig.pitch.on} size="15px" onChange={setPitchOn}></van-switch>
-                    {/* <div class={`video-roll-switch ${rollConfig.pitch.on ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={setPitchOn}>
-                        <PulseOutline class="video-roll-icon"></PulseOutline>
-                    </div> */}
                     <div class="video-roll-pitch">
                         <van-slider
+                            class="video-roll-nobackground-slider"
                             v-model={rollConfig.pitch.value}
                             min={-1}
                             max={1}
                             step={0.01}
                             bar-height="4px"
                             disabled={!rollConfig.pitch.on}
-                            onUpdate:modelValue={setPitch}
+                            onUpdate:odelValue={setPitch}
                             v-slots={{
                                 button: () => (
                                     <div class="custom-button">
