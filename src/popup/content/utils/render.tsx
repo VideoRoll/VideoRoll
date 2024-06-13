@@ -25,7 +25,7 @@ export default function render(children: IRowConfig[] | IContainerConfig[] | ICo
             case 'container':
                 return <van-col span={item.col}>
                     {
-                        item.children ? <div class="video-roll-container" style={{...item.style}}>{
+                        item.children ? <div class={item.class ?? 'video-roll-container'} style={{...item.style}}>{
                             render(item.children)
                         }</div> : null
                     }{

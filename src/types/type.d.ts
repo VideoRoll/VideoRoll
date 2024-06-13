@@ -35,6 +35,12 @@ export interface IMove {
     y: number;
 }
 
+export type VideoListItem = {
+    check?: boolean;
+    dataVideoId?: string;
+    name?: string;
+}
+
 export type Pitch = {
     on: boolean;
     value: number;
@@ -88,7 +94,8 @@ export interface IRollConfig {
     isInit: boolean;
     videoSelector: VideoSelector;
     isAutoChangeSize: boolean;
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
+    videoList: VideoListItem[];
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector | VideoListItem[]
 }
 
 export type VideoSelector = {

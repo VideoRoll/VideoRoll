@@ -215,12 +215,29 @@ body {
     .tab-title {
         width: 52px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
     }
 
     .tab-icon {
         width: 15px;
         height: 15px;
+        margin-right: 5px;
+    }
+
+    .merge-row {
+        background-color: transparent !important;
+        border: 1px solid var(--van-sidebar-selected-background);
+        border-radius: 10px;
+    }
+
+    .video-roll-nobackground-slider {
+        .van-slider__bar {
+            background: none !important;
+        }
+    }
+
+    .van-slider {
+        height: 6px !important;
     }
 }

@@ -23,9 +23,9 @@ import { sendRuntimeMessage } from "../util";
                     updateBadge({
                         tabId,
                         rollConfig,
-                        callback: (text: string) => {
+                        callback: ({ text, config }: { text: string, config: any}) => {
                             videoNumber = Number(text);
-                            sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE })
+                            sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, rollConfig: config})
                         }
                     })
                     break;

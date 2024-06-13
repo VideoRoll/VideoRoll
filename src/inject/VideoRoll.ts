@@ -6,6 +6,7 @@
 import WEBSITE from "../website";
 import Audiohacker from "audio-hacker";
 import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer } from '../types/type.d';
+import { nanoid } from "nanoid";
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -134,7 +135,6 @@ export default class VideoRoll {
     static updateVideoElements(videoSelector: VideoSelector) {
         if (!this.documents.length) return;
 
-        this.clearVideoElements();
         this.clearRootElement();
         this.clearRealVideoPlayer();
 
@@ -177,11 +177,16 @@ export default class VideoRoll {
 
         if (defaultDom) {
             const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
+            const videos = Array.from(defaultElements);
             if (defaultElements) {
-                this.videoElements.push(...Array.from(defaultElements).map((v, i) => {
-                    // @ts-ignore
-                    v.parentDocument = doc;
+                this.videoElements = this.videoElements.filter((v) => videos.find((x) => x === v));
 
+                this.videoElements.push(...videos.filter((v) => !this.videoElements.find((x) => x === v)).map((v, i) => {
+                    // @ts-ignore
+
+                    v.parentDocument = doc;
+                    v.dataset.videoRollId = nanoid();
+                
                     if (i === 0) {
                         this.setRealVideoPlayer(v);
                     } else if (this.isRealVideoPlayer(v)) {
@@ -649,18 +654,33 @@ export default class VideoRoll {
             this.observer.disconnect();
         }
 
-        const elementToObserve = document.querySelector("body") as Node;
+        try {
+            const elementToObserve = document.querySelector("body") as Node;
 
-        this.observer = new MutationObserver(() => {
-            const oldVideoNumbers = this.videoNumbers;
-            const videoSelector = this.getVideoSelector(this.getHostName())
-            this.updateDocuments().updateVideoNumbers(videoSelector);
-            if (this.videoNumbers !== oldVideoNumbers) {
-                this.updateVideoElements(videoSelector);
-                callback(String(this.videoNumbers))
-            }
-        });
+            this.observer = new MutationObserver(() => {
+                const oldVideoNumbers = this.videoNumbers;
+                const videoSelector = this.getVideoSelector(this.getHostName())
+                this.updateDocuments().updateVideoNumbers(videoSelector);
+                if (this.videoNumbers !== oldVideoNumbers) {
+                    this.updateVideoElements(videoSelector);
+                    this.rollConfig.videoList = this.videoElements.map((v) => {
+                        return {
+                            check: true,
+                            dataVideoId: (v as HTMLVideoElement).dataset.videoRollId,
+                            name: (v as HTMLVideoElement).dataset.videoRollId
+                        }
+                    })
+                    callback({
+                        text: String(this.videoNumbers),
+                        config: this.rollConfig,
+                    })
+                }
+            });
 
-        this.observer.observe(elementToObserve, { subtree: true, childList: true });
+            this.observer.observe(elementToObserve, { subtree: true, childList: true });
+        } catch(err) {
+            console.debug(err);
+        }
+        
     }
 }
