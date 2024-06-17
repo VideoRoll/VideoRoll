@@ -5,7 +5,7 @@ export default function render(children: IRowConfig[] | IContainerConfig[] | ICo
     return children.map((item) => {
         switch (item.type) {
             case 'tab':
-                return <van-tab v-slots={{ title: item.title }}>
+                return <van-tab v-slots={{ title: () => item.title }}>
                     {
                         render(item.children)
                     }
