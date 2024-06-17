@@ -677,7 +677,7 @@ export default class VideoRoll {
                 }
             });
 
-            this.observer.observe(elementToObserve, { subtree: true, childList: true });
+            this.observer.observe(elementToObserve, { childList: true });
         } catch(err) {
             console.debug(err);
         }
