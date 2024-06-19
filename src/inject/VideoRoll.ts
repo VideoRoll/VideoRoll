@@ -135,6 +135,7 @@ export default class VideoRoll {
     static updateVideoElements(videoSelector: VideoSelector) {
         if (!this.documents.length) return;
 
+        this.clearVideoElements();
         this.clearRootElement();
         this.clearRealVideoPlayer();
 
@@ -179,11 +180,8 @@ export default class VideoRoll {
             const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
             const videos = Array.from(defaultElements);
             if (defaultElements) {
-                this.videoElements = this.videoElements.filter((v) => videos.find((x) => x === v));
-
-                this.videoElements.push(...videos.filter((v) => !this.videoElements.find((x) => x === v)).map((v, i) => {
+                this.videoElements.push(...videos.map((v, i) => {
                     // @ts-ignore
-
                     v.parentDocument = doc;
                     v.dataset.videoRollId = nanoid();
                 
@@ -246,13 +244,6 @@ export default class VideoRoll {
         return true;
     }
 
-    static removeAbsoluteStyle(video: HTMLVideoElement) {
-        const style = getComputedStyle(video);
-        if (style.position === 'absolute') {
-            video.classList.add("video-roll-remove-absolute");
-        }
-    }
-
     /**
      * set video rotate deg
      * @param rollConfig
@@ -289,8 +280,6 @@ export default class VideoRoll {
             dom.classList.add("video-roll-transition");
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
-
-            this.removeAbsoluteStyle(dom as HTMLVideoElement)
         }
 
         return this;
@@ -362,10 +351,9 @@ export default class VideoRoll {
     static isExistStyle(doc: Document) {
         const degScale = doc.getElementById("video-roll-deg-scale");
         const transition = doc.getElementById("video-roll-transition");
-        const removeAbsoluteStyle = doc.getElementById("video-roll-remove-absolute");
         const root = document.getElementById("video-roll-root");
 
-        return degScale && transition && root && removeAbsoluteStyle ? [degScale, transition, root, removeAbsoluteStyle] : null;
+        return degScale && transition && root ? [degScale, transition, root] : null;
     }
 
     /**
@@ -426,7 +414,6 @@ export default class VideoRoll {
 
             const degScale = doc.createElement("style");
             const transition = doc.createElement("style");
-            const removeAbsoluteStyle = doc.createElement("style");
 
             degScale.innerHTML = `
                 .video-roll-deg-scale {}
@@ -436,25 +423,17 @@ export default class VideoRoll {
                 transition: all 0.5s ease !important;
             }`;
 
-            removeAbsoluteStyle.innerHTML = `.video-roll-remove-absolute {
-                left: unset !important;
-                top: unset !important;
-            }`
-
             degScale.setAttribute("id", "video-roll-deg-scale");
             transition.setAttribute("id", "video-roll-transition");
-            removeAbsoluteStyle.setAttribute("id", "video-roll-remove-absolute");
 
             degScale.setAttribute("type", "text/css");
             transition.setAttribute("type", "text/css");
-            removeAbsoluteStyle.setAttribute("type", "text/css");
 
             const head = doc.getElementsByTagName("head")[0];
 
             if (head) {
                 head.appendChild(degScale);
                 head.appendChild(transition);
-                head.appendChild(removeAbsoluteStyle);
             }
 
             this.addMaskElement();
@@ -659,6 +638,7 @@ export default class VideoRoll {
 
             this.observer = new MutationObserver(() => {
                 const oldVideoNumbers = this.videoNumbers;
+                console.log(oldVideoNumbers, '--oldVideoNumbers');
                 const videoSelector = this.getVideoSelector(this.getHostName())
                 this.updateDocuments().updateVideoNumbers(videoSelector);
                 if (this.videoNumbers !== oldVideoNumbers) {
@@ -677,7 +657,7 @@ export default class VideoRoll {
                 }
             });
 
-            this.observer.observe(elementToObserve, { childList: true });
+            this.observer.observe(elementToObserve, { childList: true, subtree: true });
         } catch(err) {
             console.debug(err);
         }
