@@ -25,6 +25,7 @@ import { sendRuntimeMessage } from "../util";
                         rollConfig,
                         callback: ({ text, config }: { text: string, config: any}) => {
                             videoNumber = Number(text);
+                            console.log(text, '--text');
                             sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, rollConfig: config})
                         }
                     })
