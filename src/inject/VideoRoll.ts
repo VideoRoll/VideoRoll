@@ -184,7 +184,7 @@ export default class VideoRoll {
                     // @ts-ignore
                     v.parentDocument = doc;
                     v.dataset.videoRollId = nanoid();
-                
+
                     if (i === 0) {
                         this.setRealVideoPlayer(v);
                     } else if (this.isRealVideoPlayer(v)) {
@@ -624,6 +624,20 @@ export default class VideoRoll {
         } catch (err) { console.debug(err); }
     }
 
+    static useVideoChanged(callback: Function) {
+        const oldVideoNumbers = this.videoNumbers;
+        const videoSelector = this.getVideoSelector(this.getHostName())
+        this.updateDocuments().updateVideoNumbers(videoSelector);
+        const changed = this.videoNumbers !== oldVideoNumbers;
+        if (changed) {
+            this.updateVideoElements(videoSelector);
+            callback({
+                text: String(this.videoNumbers),
+                config: this.rollConfig,
+            })
+        }
+    }
+
     /**
      * update video number
      * @param callback 
@@ -633,34 +647,30 @@ export default class VideoRoll {
             this.observer.disconnect();
         }
 
+        this.useVideoChanged(callback);
+
         try {
             const elementToObserve = document.querySelector("body") as Node;
 
             this.observer = new MutationObserver(() => {
-                const oldVideoNumbers = this.videoNumbers;
-                console.log(oldVideoNumbers, '--oldVideoNumbers');
-                const videoSelector = this.getVideoSelector(this.getHostName())
-                this.updateDocuments().updateVideoNumbers(videoSelector);
-                if (this.videoNumbers !== oldVideoNumbers) {
-                    this.updateVideoElements(videoSelector);
-                    this.rollConfig.videoList = this.videoElements.map((v) => {
-                        return {
-                            check: true,
-                            dataVideoId: (v as HTMLVideoElement).dataset.videoRollId,
-                            name: (v as HTMLVideoElement).dataset.videoRollId
-                        }
-                    })
-                    callback({
-                        text: String(this.videoNumbers),
-                        config: this.rollConfig,
-                    })
-                }
+                this.useVideoChanged(callback);
+                // if (changed) {
+                //     this.updateVideoElements(videoSelector);
+                //     // this.rollConfig.videoList = this.videoElements.map((v) => {
+                //     //     return {
+                //     //         check: true,
+                //     //         dataVideoId: (v as HTMLVideoElement).dataset.videoRollId,
+                //     //         name: (v as HTMLVideoElement).dataset.videoRollId
+                //     //     }
+                //     // })
+                    
+                // }
             });
 
-            this.observer.observe(elementToObserve, { childList: true, subtree: true });
-        } catch(err) {
+            this.observer.observe(elementToObserve, { childList: true });
+        } catch (err) {
             console.debug(err);
         }
-        
+
     }
 }
