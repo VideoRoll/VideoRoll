@@ -15,6 +15,7 @@ export default defineComponent({
     setup() {
         const isShow = ref(false);
         const tabId = ref(0);
+        const videoList = ref([]);
 
         /**
          * open settings panel
@@ -29,6 +30,7 @@ export default defineComponent({
         provide("rollConfig", rollConfig);
         provide("update", updateRollConfig.bind(null, rollConfig));
         provide("onOpenSetting", onOpenSetting);
+        provide("videoList", videoList);
 
         watch(() => tabId.value, (value: number) => {
             if (!value) return;
@@ -62,7 +64,7 @@ export default defineComponent({
             )
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
-                const { type, rollConfig: config, text } = a;
+                const { type, rollConfig: config, text, videoList: list } = a;
                 switch (type) {
                     case ActionType.UPDATE_STORAGE:
                         Object.keys(config).forEach((key) => {
@@ -73,7 +75,10 @@ export default defineComponent({
                         break;
                     case ActionType.UPDATE_BADGE:
                         rollConfig.videoNumber = Number(text);
-                        rollConfig.videoList = config.videoList
+                        videoList.value = list;
+                        break;
+                    case ActionType.UPDATE_VIDEO_LIST:
+                        videoList.value = list;
                         break;
                     default:
                         break;

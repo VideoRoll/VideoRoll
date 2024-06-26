@@ -5,7 +5,7 @@
  */
 import WEBSITE from "../website";
 import Audiohacker from "audio-hacker";
-import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer } from '../types/type.d';
+import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer, VideoListItem } from '../types/type.d';
 import { nanoid } from "nanoid";
 
 export default class VideoRoll {
@@ -22,6 +22,8 @@ export default class VideoRoll {
     static documents: Document[] = [];
 
     static videoNumbers: number = 0;
+
+    static videoList: VideoListItem[] = [];
 
     static realVideoPlayer: IRealVideoPlayer = { width: 0, height: 0, player: null };
 
@@ -170,7 +172,7 @@ export default class VideoRoll {
             const wrapElement = doc.querySelector(wrapDom);
             // if it is shadow element(whitch hides its content), we can't get videoWidth and videoHeight, so we need use wrapDom
             if (shadowElement && wrapElement) {
-                this.videoElements.push({ shadowElement, wrapElement } as VideoElement);
+                this.videoElements.push({ shadowElement, wrapElement, dataset: { videoRollId: nanoid() } } as VideoElement);
                 this.setVideoNumbers();
                 return;
             }
@@ -631,9 +633,17 @@ export default class VideoRoll {
         const changed = this.videoNumbers !== oldVideoNumbers;
         if (changed) {
             this.updateVideoElements(videoSelector);
+
+            this.videoList = this.videoElements.map((v: VideoElement, index) => {
+                return {
+                    name: `视频 ${index + 1}`,
+                    id: v.dataset.videoRollId
+                }
+            });
+
             callback({
                 text: String(this.videoNumbers),
-                config: this.rollConfig,
+                videoList: this.videoList
             })
         }
     }
@@ -654,17 +664,6 @@ export default class VideoRoll {
 
             this.observer = new MutationObserver(() => {
                 this.useVideoChanged(callback);
-                // if (changed) {
-                //     this.updateVideoElements(videoSelector);
-                //     // this.rollConfig.videoList = this.videoElements.map((v) => {
-                //     //     return {
-                //     //         check: true,
-                //     //         dataVideoId: (v as HTMLVideoElement).dataset.videoRollId,
-                //     //         name: (v as HTMLVideoElement).dataset.videoRollId
-                //     //     }
-                //     // })
-                    
-                // }
             });
 
             this.observer.observe(elementToObserve, { childList: true });
