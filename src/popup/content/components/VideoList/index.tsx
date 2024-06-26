@@ -6,7 +6,7 @@
 
 import { defineComponent, inject } from "vue";
 import { ExpandOutline } from "@vicons/ionicons5";
-import type { IRollConfig } from "../../../../types/type.d";
+import type { IRollConfig, VideoListItem } from "../../../../types/type.d";
 import "./index.less";
 import VideoRoll from "src/inject/VideoRoll";
 
@@ -14,20 +14,13 @@ export default defineComponent({
     name: "VideoList",
     setup() {
         const update = inject("update") as Function;
-        const rollConfig = inject("rollConfig") as IRollConfig;
+        const videoList = inject("videoList") as any;
 
-        const setPlaybackRateNum = (value: number) => {
-            rollConfig.playbackRate = value;
-            update("playbackRate", value);
-        };
-
+        console.log(videoList, 'videoList');
         return () => (
-            <>
-                <div>
-                    {rollConfig.videoList.map((v) => v.name)}
-                    <div></div>
-                </div>
-            </>
+            <div>
+                {videoList.value.map((v) => <div class="video-name">{v.name}</div>)}
+            </div>
         );
     },
 });

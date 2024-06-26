@@ -19,7 +19,8 @@ export enum ActionType {
     UPDATE_BADGE,
     UPDATE_CONFIG,
     INIT_SHORT_CUT_KEY,
-    GET_BADGE
+    GET_BADGE,
+    UPDATE_VIDEO_LIST
 }
 
 export enum FlipType {
@@ -37,7 +38,7 @@ export interface IMove {
 
 export type VideoListItem = {
     check?: boolean;
-    dataVideoId?: string;
+    id?: string;
     name?: string;
 }
 
@@ -94,8 +95,7 @@ export interface IRollConfig {
     isInit: boolean;
     videoSelector: VideoSelector;
     isAutoChangeSize: boolean;
-    videoList: VideoListItem[];
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector | VideoListItem[]
+    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 
 export type VideoSelector = {
@@ -104,7 +104,7 @@ export type VideoSelector = {
     wrapDom?: string
 }
 
-export type VideoObject = { shadowElement: HTMLElement,  wrapElement: HTMLElement };
+export type VideoObject = { shadowElement: HTMLElement,  wrapElement: HTMLElement, dataset: any };
 
 export type VideoElement = VideoObject | HTMLVideoElement;
 

@@ -3,6 +3,7 @@ import browser from "webextension-polyfill";
 import { ActionType, IRollConfig } from '../types/type.d';
 import { KEY_CODE } from "../types/type.d";
 import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage, removeLocalStorage } from "../util/storage";
+import { sendRuntimeMessage } from "src/util";
 
 let KeyboardEventCache: Function | null = null;
 
@@ -54,7 +55,7 @@ export async function updateConfig(rollConfig: IRollConfig) {
  * fired when open popup
  * @param rollConfig
  */
-export async function updateOnMounted(rollConfig: IRollConfig) {
+export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
     let config = await getLocalStorage(rollConfig.url);
     const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
     rollConfig.isAutoChangeSize = isAutoChangeSize;
@@ -67,10 +68,8 @@ export async function updateOnMounted(rollConfig: IRollConfig) {
 
     VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
-    chrome.runtime.sendMessage(
-        { rollConfig: config, type: ActionType.UPDATE_STORAGE },
-        (res) => { console.debug(res); }
-    );
+    sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE })
+    sendRuntimeMessage(tabId, { videoList: VideoRoll.videoList, type: ActionType.UPDATE_VIDEO_LIST })
 }
 
 /**
