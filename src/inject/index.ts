@@ -3,9 +3,8 @@
  * @Author: Gouxinyu
  * @Date: 2022-01-11 23:49:59
  */
-import browser from 'webextension-polyfill';
 import { ActionType, VideoListItem } from '../types/type.d';
-import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent } from "./update";
+import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent, onHoverVideoElement, updateVideoCheck } from "./update";
 import { sendRuntimeMessage } from "../util";
 
 (function () {
@@ -14,7 +13,7 @@ import { sendRuntimeMessage } from "../util";
      * get message from popup or backgound
      */
     chrome.runtime.onMessage.addListener(async (data, b, send) => {
-        const { rollConfig, tabId, type } = data;
+        const { rollConfig, tabId, type, id, isIn, ids } = data;
 
         try {
             switch (type) {
@@ -22,7 +21,7 @@ import { sendRuntimeMessage } from "../util";
                     updateBadge({
                         tabId,
                         rollConfig,
-                        callback: ({ text, videoList }: { text: string, videoList: VideoListItem[]}) => {
+                        callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
                             videoNumber = Number(text);
                             sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList })
                         }
@@ -45,6 +44,14 @@ import { sendRuntimeMessage } from "../util";
                 case ActionType.INIT_SHORT_CUT_KEY:
                     initKeyboardEvent(tabId);
                     break;
+                case ActionType.ON_HOVER_VIDEO: {
+                    onHoverVideoElement(id, isIn);
+                    break;
+                }
+                case ActionType.UPDATE_VIDEO_CHECK: {
+                    updateVideoCheck(ids);
+                    break;
+                }
                 default:
                     return;
             }

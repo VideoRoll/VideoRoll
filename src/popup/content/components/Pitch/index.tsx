@@ -39,7 +39,7 @@ export default defineComponent({
                             step={0.01}
                             bar-height="4px"
                             disabled={!rollConfig.pitch.on}
-                            onUpdate:odelValue={setPitch}
+                            onUpdate:modelValue={setPitch}
                             v-slots={{
                                 button: () => (
                                     <div class="custom-button">

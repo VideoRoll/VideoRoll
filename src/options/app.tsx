@@ -25,7 +25,6 @@ export default defineComponent({
                     </Panel>
                 </main>
             </van-config-provider>
-
         );
     }
 });

@@ -20,7 +20,9 @@ export enum ActionType {
     UPDATE_CONFIG,
     INIT_SHORT_CUT_KEY,
     GET_BADGE,
-    UPDATE_VIDEO_LIST
+    UPDATE_VIDEO_LIST,
+    ON_HOVER_VIDEO,
+    UPDATE_VIDEO_CHECK
 }
 
 export enum FlipType {
@@ -37,9 +39,11 @@ export interface IMove {
 }
 
 export type VideoListItem = {
-    check?: boolean;
+    checked?: boolean;
     id?: string;
     name?: string;
+    visible?: boolean;
+    visibleObserver?: IntersectionObserver
 }
 
 export type Pitch = {
