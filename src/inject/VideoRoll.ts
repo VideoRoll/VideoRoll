@@ -7,6 +7,7 @@ import WEBSITE from "../website";
 import Audiohacker from "audio-hacker";
 import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer, VideoListItem } from '../types/type.d';
 import { nanoid } from "nanoid";
+import { isVisible } from "src/util";
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -17,7 +18,7 @@ export default class VideoRoll {
 
     static volumeController: any[] = [];
 
-    static videoElements: VideoElement[] = [];
+    static videoElements: Set<HTMLVideoElement> = new Set();
 
     static documents: Document[] = [];
 
@@ -120,13 +121,13 @@ export default class VideoRoll {
         const iframes = document.querySelectorAll("iframe") ?? [];
         const iframeEls: HTMLIFrameElement[] = Array.from(iframes).filter((v) => v.contentDocument);
 
-        this.documents = [document, ...iframeEls.map((v) => {
+        this.documents = [document, ...(iframeEls.map((v) => {
             if (v.contentDocument) {
                 // @ts-ignore
                 v.contentDocument.iframeElement = v;
             }
             return v.contentDocument as Document;
-        })];
+        }).filter((v) => v.querySelectorAll('video').length > 0))];
 
         return this;
     }
@@ -137,25 +138,51 @@ export default class VideoRoll {
     static updateVideoElements(videoSelector: VideoSelector) {
         if (!this.documents.length) return;
 
-        this.clearVideoElements();
+        // this.clearVideoElements();
         this.clearRootElement();
         this.clearRealVideoPlayer();
 
-        this.documents.forEach((doc) => {
-            this.setVideoBySelector(videoSelector, doc);
-        });
+        const videos = this.getAllVideosBySelector(videoSelector, this.documents);
 
+        this.setVideo(videos);
         return this;
     }
 
     static updateVideoNumbers(videoSelector: VideoSelector) {
         if (!this.documents.length) return;
 
-        this.documents.forEach((doc) => {
-            this.setVideoBySelector(videoSelector, doc);
-        });
+        const videos = this.getAllVideosBySelector(videoSelector, this.documents);
 
+        this.setVideo(videos);
         return this;
+    }
+
+    static getAllVideosBySelector(videoSelector: VideoSelector, docs: Document[] | HTMLIFrameElement[]): HTMLVideoElement[] {
+        const { defaultDom } = videoSelector;
+        const videos: HTMLVideoElement[] = [];
+        if (defaultDom) {
+            docs.forEach((doc) => {
+                const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
+                const elements = Array.from(defaultElements);
+
+                for (const video of elements) {
+                    // @ts-ignore
+                    video.parentDocument = doc;
+
+                    if (video.dataset.rollId) {
+                        continue;
+                    };
+
+                    video.setAttribute("data-roll-id", `${nanoid()}`);
+                    video.setAttribute("data-roll-check", "true");
+                    video.setAttribute("data-roll-visible", `${isVisible(video)}`);
+                }
+
+                videos.push(...elements);
+            })
+        }
+
+        return videos;
     }
 
     /**
@@ -164,45 +191,38 @@ export default class VideoRoll {
      * @param doc 
      * @returns 
      */
-    static setVideoBySelector(videoSelector: VideoSelector, doc: Document | HTMLIFrameElement) {
-        const { shadowDom, defaultDom, wrapDom } = videoSelector;
-
-        if (shadowDom && wrapDom) {
-            const shadowElement = doc.querySelector(shadowDom);
-            const wrapElement = doc.querySelector(wrapDom);
-            // if it is shadow element(whitch hides its content), we can't get videoWidth and videoHeight, so we need use wrapDom
-            if (shadowElement && wrapElement) {
-                this.videoElements.push({ shadowElement, wrapElement, dataset: { videoRollId: nanoid() } } as VideoElement);
-                this.setVideoNumbers();
-                return;
+    static setVideo(videos: HTMLVideoElement[]) {
+        this.videoElements.forEach((item) => {
+            // @ts-ignore
+            if (!videos.some((v) => v === item)) {
+                const data = this.videoList.find((v) => v.id === item.dataset.rollId);
+                if (data) {
+                    data.visibleObserver?.disconnect()
+                }
+    
+                this.videoElements.delete(item);
             }
-        }
+        })
 
-        if (defaultDom) {
-            const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
-            const videos = Array.from(defaultElements);
-            if (defaultElements) {
-                this.videoElements.push(...videos.map((v, i) => {
-                    // @ts-ignore
-                    v.parentDocument = doc;
-                    v.dataset.videoRollId = nanoid();
+        for (let i = 0; i < videos.length; i++) {
+            const video = videos[i];
 
-                    if (i === 0) {
-                        this.setRealVideoPlayer(v);
-                    } else if (this.isRealVideoPlayer(v)) {
-                        this.setRealVideoPlayer(v);
-                    }
-
-                    return v;
-                }));
+            if (i === 0) {
+                this.setRealVideoPlayer(video);
+            } else if (this.isRealVideoPlayer(video)) {
+                this.setRealVideoPlayer(video);
             }
+
+            if (this.videoElements.has(video)) continue;
+
+            this.videoElements.add(video);
         }
 
         this.setVideoNumbers();
     }
 
     static setVideoNumbers(): void {
-        this.videoNumbers = this.videoElements.length;
+        this.videoNumbers = this.videoElements.size;
     }
 
     static setRootElement(element: HTMLElement) {
@@ -221,8 +241,7 @@ export default class VideoRoll {
      * clear all cache
      */
     static clearVideoElements() {
-        this.videoElements.length = 0;
-        this.videoElements = [];
+        this.videoElements.clear();
     }
 
     static clearRootElement() {
@@ -257,8 +276,17 @@ export default class VideoRoll {
         this.setRollConfig(rollConfig);
         const { deg, flip, scale, zoom, move, filter, focus, pictureInPicture } = rollConfig;
 
-        for (const target of this.videoElements) {
-            const dom = (target as VideoObject).shadowElement ?? target;
+        const videos = this.videoElements.values();
+        for (const target of videos) {
+            if (target.dataset.rollCheck === 'false') {
+                console.log(target, 'updateVideoCheck');
+                target.classList.remove("video-roll-transition");
+                target.classList.remove("video-roll-deg-scale");
+                target.setAttribute("data-roll", "false");
+                continue;
+            };
+
+            const dom = target;
 
             // if a video's readyState is empty, ignore it. 
             if (!this.isRealVideoPlayer(dom as HTMLVideoElement)) continue;
@@ -271,6 +299,7 @@ export default class VideoRoll {
 
             this.rollConfig.scale.values = scaleNum;
             this.documents.forEach((doc) => {
+                if (!this.isExistStyle(doc)) return;
                 this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter, focus }, doc);
 
                 this.videoElements.forEach((video) => {
@@ -344,6 +373,8 @@ export default class VideoRoll {
             background-color: rgba(0, 0, 0, 0.8);
         }
         `;
+
+        return this;
     }
 
     /**
@@ -416,6 +447,7 @@ export default class VideoRoll {
 
             const degScale = doc.createElement("style");
             const transition = doc.createElement("style");
+            const highlight = doc.createElement("style");
 
             degScale.innerHTML = `
                 .video-roll-deg-scale {}
@@ -425,18 +457,30 @@ export default class VideoRoll {
                 transition: all 0.5s ease !important;
             }`;
 
+            highlight.innerHTML = `
+                .video-roll-highlight {
+                    filter: hue-rotate(270deg) blur(20px);
+                }
+            `
+
             degScale.setAttribute("id", "video-roll-deg-scale");
             transition.setAttribute("id", "video-roll-transition");
+            highlight.setAttribute("id", "video-roll-highlight");
 
             degScale.setAttribute("type", "text/css");
             transition.setAttribute("type", "text/css");
+            highlight.setAttribute("type", "text/css");
+            // highlight.setAttribute("style", "background: red; position: absolute; z-index: 9999; display: none;");
 
             const head = doc.getElementsByTagName("head")[0];
 
             if (head) {
                 head.appendChild(degScale);
                 head.appendChild(transition);
+                head.appendChild(highlight);
             }
+
+            // doc.body.appendChild(highlight);
 
             this.addMaskElement();
         });
@@ -517,12 +561,13 @@ export default class VideoRoll {
     }
 
     static createAudiohacker() {
-        if (!this.audioCtx) return;
+        const audioCtx = this.audioCtx as AudioContext;
+        if (!audioCtx) return;
 
-        for (const dom of this.videoElements) {
-            const node = this.audioCtx.createMediaElementSource(dom as HTMLMediaElement);
-            this.audioController.push(new Audiohacker(this.audioCtx, node));
-        }
+        this.videoElements.forEach((video) => {
+            const node = audioCtx.createMediaElementSource(video as HTMLMediaElement);
+            this.audioController.push(new Audiohacker(audioCtx, node));
+        });
     }
 
     /**
@@ -556,6 +601,8 @@ export default class VideoRoll {
                 this.createAudiohacker();
             }
 
+            console.log(on, this.audioCtx, this.audioController);
+    
             if (this.audioController.length && on) {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
@@ -602,9 +649,9 @@ export default class VideoRoll {
         const playbackRate = this.rollConfig.playbackRate;
 
         try {
-            for (const dom of this.videoElements) {
-                (dom as HTMLMediaElement).playbackRate = playbackRate;
-            }
+            this.videoElements.forEach((video) => {
+                (video as HTMLMediaElement).playbackRate = playbackRate;
+            })
         } catch (err) {
             console.debug(err);
         }
@@ -626,6 +673,42 @@ export default class VideoRoll {
         } catch (err) { console.debug(err); }
     }
 
+    static getVideoVisibleObserver(video: HTMLVideoElement, item: any, callback: Function) {
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            if (entries[0].intersectionRatio <= 0) {
+                video.setAttribute('data-roll-visible', 'false');
+                item.visible = isVisible(video);
+
+                callback({
+                    text: String(this.videoNumbers),
+                    videoList: this.videoList.map((v) => ({
+                        name: v.name,
+                        id: v.id,
+                        visible: v.visible,
+                        checked: v.checked
+                    }))
+                })
+                return;
+            }
+
+            video.setAttribute('data-roll-visible', 'true');
+            item.visible = isVisible(video);
+            callback({
+                text: String(this.videoNumbers),
+                videoList: this.videoList.map((v) => ({
+                    name: v.name,
+                    id: v.id,
+                    visible: v.visible,
+                    checked: v.checked
+                }))
+            })
+        });
+
+        intersectionObserver.observe(video);
+
+        return intersectionObserver;
+    }
+
     static useVideoChanged(callback: Function) {
         const oldVideoNumbers = this.videoNumbers;
         const videoSelector = this.getVideoSelector(this.getHostName())
@@ -634,16 +717,28 @@ export default class VideoRoll {
         if (changed) {
             this.updateVideoElements(videoSelector);
 
-            this.videoList = this.videoElements.map((v: VideoElement, index) => {
-                return {
+            const videos = [...this.videoElements];
+            this.videoList = videos.map((v, index) => {
+                const item: any = {
                     name: `视频 ${index + 1}`,
-                    id: v.dataset.videoRollId
-                }
+                    id: v.dataset.rollId,
+                    visible: v.dataset.rollVisible === 'true' ? true : false,
+                    checked: v.dataset.rollCheck === 'true' ? true : false,
+                };
+
+                item.visibleObserver = this.getVideoVisibleObserver(v, item, callback)
+
+                return item
             });
 
             callback({
                 text: String(this.videoNumbers),
-                videoList: this.videoList
+                videoList: this.videoList.map((v) => ({
+                    name: v.name,
+                    id: v.id,
+                    visible: v.visible,
+                    checked: v.checked
+                }))
             })
         }
     }
@@ -671,5 +766,43 @@ export default class VideoRoll {
             console.debug(err);
         }
 
+        return this;
+    }
+
+    static updateVideoCheck(ids: any[]) {
+        this.videoElements.forEach((video: HTMLVideoElement) => {
+            if (ids.includes(video.dataset.rollId)) {
+                video.dataset.rollCheck = 'true';
+            } else {
+                video.dataset.rollCheck = 'false';
+            }
+        })
+
+        this.videoList = this.videoList.map((v: any, index) => {
+            if (ids.includes(v.id)) {
+                v.checked = true;
+            } else {
+                v.checked = false;
+            }
+
+            return v;
+        });
+
+        this.updateVideo(this.rollConfig);
+        return this;
+    }
+
+    static highlightVideoElement(id: string, isIn: boolean) {
+        const video = [...this.videoElements].find((v) => v.dataset.rollId === id);
+        if (video) {
+            if (isIn) {
+                video.scrollIntoView({ behavior: "smooth", block: "center" });
+                video.classList.add("video-roll-highlight");
+            } else {
+                video.classList.remove('video-roll-highlight');
+            }
+        }
+
+        return this;
     }
 }

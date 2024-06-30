@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
 import { useConfig } from "../../use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
-import { clone, getSessionStorage } from "../../util";
+import { clone, getSessionStorage, sendTabMessage } from "../../util";
 import { ActionType } from "../../types/type.d";
 
 import "./index.less";
@@ -23,6 +23,14 @@ export default defineComponent({
         const onOpenSetting = (e: Event) => {
             isShow.value = !isShow.value;
         };
+        
+        const onHoverVideo = (id: string, isIn: boolean) => {
+            sendTabMessage(rollConfig.tabId, { id, type: ActionType.ON_HOVER_VIDEO, isIn })
+        }
+
+        const updateVideoCheck = (ids: string[]) => {
+            sendTabMessage(rollConfig.tabId, { ids, type: ActionType.UPDATE_VIDEO_CHECK })
+        }
 
         // current website config
         const rollConfig = useConfig();
@@ -31,6 +39,8 @@ export default defineComponent({
         provide("update", updateRollConfig.bind(null, rollConfig));
         provide("onOpenSetting", onOpenSetting);
         provide("videoList", videoList);
+        provide("onHoverVideo", onHoverVideo)
+        provide("updateVideoCheck", updateVideoCheck)
 
         watch(() => tabId.value, (value: number) => {
             if (!value) return;
@@ -53,15 +63,7 @@ export default defineComponent({
             tabId.value = tab.id as number;
             initRollConfig(rollConfig, tab);
 
-            // add style
-            chrome.tabs.sendMessage(
-                rollConfig.tabId,
-                { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED },
-                {},
-                (res) => {
-                    console.debug(res);
-                }
-            )
+            sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED })
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config, text, videoList: list } = a;

@@ -184,3 +184,11 @@ export function initKeyboardEvent(tabId: number) {
     window.removeEventListener('keydown', KeyboardEventCache as EventListener);
     window.addEventListener('keydown', KeyboardEventCache as EventListener, { passive: true });
 }
+
+export function onHoverVideoElement(id: string, isIn: boolean) {
+    VideoRoll.highlightVideoElement(id, isIn);
+}
+
+export function updateVideoCheck(ids: string[]) {
+    VideoRoll.updateVideoCheck(ids);
+}
