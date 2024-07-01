@@ -5,7 +5,6 @@
  */
 
 import { defineComponent, inject } from "vue";
-import { ExpandOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
 import "./index.less";
 

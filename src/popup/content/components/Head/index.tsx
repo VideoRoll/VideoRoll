@@ -8,6 +8,7 @@ import { defineComponent, inject } from "vue";
 import { Home, LogoGithub, LogoUsd, SettingsSharp, StarHalfSharp } from "@vicons/ionicons5";
 import { createURL } from 'src/util';
 import "./index.less";
+import { IRollConfig } from "src/types/type";
 
 export default defineComponent({
     name: "Head",
@@ -15,6 +16,9 @@ export default defineComponent({
         isShow: Boolean
     },
     setup(props) {
+        const update = inject("update") as Function;
+        const rollConfig = inject("rollConfig") as IRollConfig;
+
         const toGithub = () => {
             createURL('https://github.com/gxy5202/VideoRoll');
         };
@@ -38,6 +42,11 @@ export default defineComponent({
             createURL('https://discord.gg/N5rSStFE');
         }
 
+        const updateEnable = (value: boolean) => {
+            rollConfig.enable = value;
+            update("enable", rollConfig.enable);
+        }
+
         return () => (
             <div class="video-roll-header">
                 <div class="video-roll-logo" onClick={toHome}>
@@ -48,6 +57,9 @@ export default defineComponent({
                 </div>
                 <div class="video-roll-head-right">
                     <van-space>
+                        <div class="video-roll-setting-btn" title="disable on this site">
+                            <van-switch v-model={rollConfig.enable} size="12px" onChange={updateEnable}></van-switch>
+                        </div>
                         <div class="video-roll-setting-btn" title="settings" onClick={toSettings}>
                             <SettingsSharp class="logo-usd"></SettingsSharp>
                         </div>

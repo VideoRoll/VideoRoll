@@ -89,65 +89,15 @@ export default defineComponent({
         }
 
         return () => (
-            <>
-                <div class="video-roll-container-title">Top - Bottom</div>
-                <div class="video-roll-container-merge-item">
-
-                    <div class="video-roll-long-box">
-                        <div class={`video-roll-switch ${rollConfig.move.x !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setMoveX(1)}>
-                            {/* <ExpandOutline class="video-roll-icon"></ExpandOutline> */}
-                            reset
-                        </div>
-                        <div class="video-roll-zoom">
-                            <van-slider
-                                class="video-roll-nobackground-slider"
-                                v-model={rollConfig.move.x}
-                                min={-100}
-                                max={100}
-                                step={1}
-                                bar-height="4px"
-                                onUpdate:modelValue={setMoveX}
-                                v-slots={{
-                                    button: () => (
-                                        <div class="custom-button">
-                                            {rollConfig.move.x}
-                                        </div>
-                                    ),
-                                }}
-                            ></van-slider>
-                        </div>
-                    </div>
+            <div title='Repostion' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
+                <div class="video-roll-icon-box">
+                    <span class="video-roll-label">
+                        <MoveOutline
+                            class="video-roll-icon"
+                        ></MoveOutline>
+                    </span>
                 </div>
-
-                <div class="video-roll-container-title">Top - Bottom</div>
-                <div class="video-roll-container-merge-item">
-                    <div class="video-roll-long-box">
-                        <div class={`video-roll-switch ${rollConfig.move.y !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setMoveY(1)}>
-                            {/* <ExpandOutline class="video-roll-icon"></ExpandOutline> */}
-                            reset
-                        </div>
-                        <div class="video-roll-zoom">
-                            <van-slider
-                                class="video-roll-nobackground-slider"
-                                v-model={rollConfig.move.y}
-                                min={-100}
-                                max={100}
-                                step={1}
-                                bar-height="4px"
-                                onUpdate:modelValue={setMoveY}
-                                v-slots={{
-                                    button: () => (
-                                        <div class="custom-button">
-                                            {rollConfig.move.y}
-                                        </div>
-                                    ),
-                                }}
-                            ></van-slider>
-                        </div>
-                    </div>
-                </div>
-            </>
-
+            </div>
         );
     },
 });
