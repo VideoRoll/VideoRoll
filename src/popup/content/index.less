@@ -33,7 +33,15 @@ body {
 
 #app {
     width: 300px;
-    height: 500px;
+
+    .video-roll-wrapper {
+        height: 500px;
+    }
+
+    .video-roll-wrapper-empty {
+        height: 200px;
+    }
+
     background-color: var(--video-roll-primary-background-color);
 
     .van-row:first-of-type {
@@ -52,6 +60,11 @@ body {
         min-height: 425px;
         overflow-y: auto;
         // padding-bottom: 15px;
+    }
+
+    .video-roll-content-empty {
+        box-sizing: border-box;
+        height: 100%;
     }
 
     .popover-size {
@@ -172,12 +185,16 @@ body {
         padding: 0 10px;
     }
 
-    main {
+    .video-roll-main {
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 455px;
+    }
+
+    .video-roll-main-empty {
+        height: calc(100% - 70px);
     }
 
     .video-roll-setting {
@@ -239,5 +256,20 @@ body {
 
     .van-slider {
         height: 6px !important;
+    }
+
+    .logo-empty {
+        width: 50px;
+        height: 50px;
+        color: var(--van-sidebar-selected-background);
+    }
+
+    .empty-box {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--van-sidebar-selected-background);
+        font-size: 20px;
     }
 }

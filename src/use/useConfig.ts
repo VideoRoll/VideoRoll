@@ -49,6 +49,7 @@ const defaultConfig = {
     store: false,
     isInit: false,
     isAutoChangeSize: true,
+    enable: true,
     videoSelector: { defaultDom: 'video' }
 } as IRollConfig;
 

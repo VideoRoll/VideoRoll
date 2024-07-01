@@ -7,6 +7,7 @@ import { useConfig } from "../../use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
 import { clone, getSessionStorage, sendTabMessage } from "../../util";
 import { ActionType } from "../../types/type.d";
+import { Close } from "@vicons/ionicons5";
 
 import "./index.less";
 
@@ -32,6 +33,10 @@ export default defineComponent({
             sendTabMessage(rollConfig.tabId, { ids, type: ActionType.UPDATE_VIDEO_CHECK })
         }
 
+        const updateEnable = () => {
+
+        }
+
         // current website config
         const rollConfig = useConfig();
 
@@ -40,6 +45,7 @@ export default defineComponent({
         provide("onOpenSetting", onOpenSetting);
         provide("videoList", videoList);
         provide("onHoverVideo", onHoverVideo)
+        provide("updateVideoCheck", updateVideoCheck)
         provide("updateVideoCheck", updateVideoCheck)
 
         watch(() => tabId.value, (value: number) => {
@@ -91,11 +97,16 @@ export default defineComponent({
         });
 
         return () => (
-            <div>
+            <div class={rollConfig.enable ? "video-roll-wrapper" : "video-roll-wrapper-empty"}>
                 <Head isShow={isShow.value}></Head>
-                <main>
-                    <div class="video-roll-content">
-                        <GridPanel></GridPanel>
+                <main class={rollConfig.enable ? "video-roll-main" : "video-roll-main-empty"}>
+                    <div class={rollConfig.enable ? "video-roll-content" : "video-roll-content-empty"}>
+                        {
+                            rollConfig.enable ? <GridPanel></GridPanel> : <div class="empty-box">
+                                <Close class="logo-empty"/>
+                                <div>disabled on this site</div>
+                            </div>
+                        }
                     </div>
                     <Footer></Footer>
                 </main>

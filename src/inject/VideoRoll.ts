@@ -326,6 +326,16 @@ export default class VideoRoll {
         return this;
     }
 
+    static resetAudio() {
+        this.audioController.forEach((v) => {
+            v.setPitchOffset(0);
+            v.setVolume(1);
+        })
+        this.videoElements.forEach((video) => {
+            (video as HTMLMediaElement).playbackRate = 1;
+        })
+    }
+
     static getFilterStyle(filter: IFilter) {
         let filterStyle = '';
 
@@ -601,8 +611,6 @@ export default class VideoRoll {
                 this.createAudiohacker();
             }
 
-            console.log(on, this.audioCtx, this.audioController);
-    
             if (this.audioController.length && on) {
                 this.audioController.forEach((v) => {
                     v.setPitchOffset(value);
@@ -804,5 +812,26 @@ export default class VideoRoll {
         }
 
         return this;
+    }
+
+    static removeStyle(target: HTMLElement) {
+        target.classList.remove("video-roll-highlight");
+        target.classList.remove("video-roll-deg-scale");
+        target.classList.remove("video-roll-transition");
+    }
+
+    static disableAll() {
+        this.videoElements.forEach((v) => {
+            this.removeStyle(v);
+        });
+        this.resetAudio();
+
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+
+        // this.videoList.forEach((v) => {
+        //     v.visibleObserver?.disconnect()
+        // })
     }
 }

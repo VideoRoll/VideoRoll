@@ -127,41 +127,39 @@ export default function useComponents() {
                 type: 'row',
                 style: {
                     margin: '30px 0',
-                    height: '120px'
+                    height: '40px'
                 },
                 children: [
                     {
                         type: 'container',
-                        merge: true,
-                        class: 'video-roll-container-merge',
                         title: "Repostion",
                         showTitle: true,
-                        col: 24,
+                        col: 8,
                         children: [{
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Repostion"))
                         }]
                     },
-                    // {
-                    //     type: 'container',
-                    //     col: 8,
-                    //     title: "Stretch",
-                    //     showTitle: true,
-                    //     children: [{
-                    //         type: 'component',
-                    //         component: defineAsyncComponent(() => import("../components/Stretch"))
-                    //     }]
-                    // },
-                    // {
-                    //     type: 'container',
-                    //     col: 8,
-                    //     title: "Flip",
-                    //     showTitle: true,
-                    //     children: [{
-                    //         type: 'component',
-                    //         component: defineAsyncComponent(() => import("../components/Flip"))
-                    //     }]
-                    // },
+                    {
+                        type: 'container',
+                        col: 8,
+                        title: "Stretch",
+                        showTitle: true,
+                        children: [{
+                            type: 'component',
+                            component: defineAsyncComponent(() => import("../components/Stretch"))
+                        }]
+                    },
+                    {
+                        type: 'container',
+                        col: 8,
+                        title: "Flip",
+                        showTitle: true,
+                        children: [{
+                            type: 'component',
+                            component: defineAsyncComponent(() => import("../components/Flip"))
+                        }]
+                    },
                 ],
             },
             {
@@ -175,7 +173,7 @@ export default function useComponents() {
                         type: 'container',
                         title: 'Focus',
                         showTitle: true,
-                        col: 6,
+                        col: 8,
                         children: [
                             {
                                 type: 'component',
@@ -187,7 +185,7 @@ export default function useComponents() {
                         type: 'container',
                         title: "Filter",
                         showTitle: true,
-                        col: 6,
+                        col: 8,
                         children: [{
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Filter"))
@@ -197,7 +195,7 @@ export default function useComponents() {
                         type: 'container',
                         title: 'Cache Site',
                         showTitle: true,
-                        col: 6,
+                        col: 8,
                         children: [
                             {
                                 type: 'component',
@@ -235,12 +233,50 @@ export default function useComponents() {
                 children: [
                     {
                         type: 'container',
+                        title: "Volume",
+                        showTitle: true,
                         col: 24,
-                        title: "Zoom",
+                        children: [{
+                            type: 'component',
+                            component: defineAsyncComponent(() => import("../components/Volume"))
+                        }]
+                    },
+                ]
+            },
+            {
+                type: 'row',
+                style: {
+                    margin: '30px 0',
+                    height: '40px'
+                },
+                children: [
+                    {
+                        type: 'container',
+                        col: 24,
+                        title: "Playback Rate",
                         showTitle: true,
                         children: [{
                             type: 'component',
-                            component: defineAsyncComponent(() => import("../components/Zoom"))
+                            component: defineAsyncComponent(() => import("../components/PlaybackRate"))
+                        }]
+                    },
+                ]
+            },
+            {
+                type: 'row',
+                style: {
+                    margin: '30px 0',
+                    height: '40px'
+                },
+                children: [
+                    {
+                        type: 'container',
+                        title: "Pitch",
+                        showTitle: true,
+                        col: 24,
+                        children: [{
+                            type: 'component',
+                            component: defineAsyncComponent(() => import("../components/Pitch"))
                         }]
                     },
                 ]
@@ -249,70 +285,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <div class="tab-title"><VolumeMediumOutline class="tab-icon" /><span class="tab-title-text">Audio</span></div>,
-            children: [
-                {
-                    type: 'row',
-                    style: {
-                        margin: '30px 0',
-                        height: '40px'
-                    },
-                    children: [
-                        {
-                            type: 'container',
-                            title: "Volume",
-                            showTitle: true,
-                            col: 24,
-                            children: [{
-                                type: 'component',
-                                component: defineAsyncComponent(() => import("../components/Volume"))
-                            }]
-                        },
-                    ]
-                },
-                {
-                    type: 'row',
-                    style: {
-                        margin: '30px 0',
-                        height: '40px'
-                    },
-                    children: [
-                        {
-                            type: 'container',
-                            col: 24,
-                            title: "Playback Rate",
-                            showTitle: true,
-                            children: [{
-                                type: 'component',
-                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
-                            }]
-                        },
-                    ]
-                },
-                {
-                    type: 'row',
-                    style: {
-                        margin: '30px 0',
-                        height: '40px'
-                    },
-                    children: [
-                        {
-                            type: 'container',
-                            title: "Pitch",
-                            showTitle: true,
-                            col: 24,
-                            children: [{
-                                type: 'component',
-                                component: defineAsyncComponent(() => import("../components/Pitch"))
-                            }]
-                        },
-                    ]
-                }
-            ]
-        },
-        {
-            type: 'tab',
-            title: <div class="tab-title"><ListOutline class="tab-icon" /><span class="tab-title-text">list</span></div>,
+            title: <div class="tab-title"><ListOutline class="tab-icon" /><span class="tab-title-text">List</span></div>,
             children: [
                 {
                     type: 'component',

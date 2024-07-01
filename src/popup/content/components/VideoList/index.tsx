@@ -5,10 +5,7 @@
  */
 
 import { defineComponent, inject, ref, watch } from "vue";
-import { ExpandOutline } from "@vicons/ionicons5";
-import type { IRollConfig, VideoListItem } from "../../../../types/type.d";
 import "./index.less";
-import VideoRoll from "src/inject/VideoRoll";
 
 export default defineComponent({
     name: "VideoList",
