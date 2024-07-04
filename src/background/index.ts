@@ -34,8 +34,6 @@ chrome.runtime.onInstalled.addListener((params: any) => {
  * and update badge; 
  */
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status !== 'complete') return;
-
     currentTabId = tabId;
 
     sendTabMessage(tabId, { type: ActionType.GET_BADGE }, (response: any) => {
