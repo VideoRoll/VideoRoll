@@ -199,7 +199,7 @@ export default class VideoRoll {
                 if (data) {
                     data.visibleObserver?.disconnect()
                 }
-    
+
                 this.videoElements.delete(item);
             }
         })
@@ -718,37 +718,32 @@ export default class VideoRoll {
     }
 
     static useVideoChanged(callback: Function) {
-        const oldVideoNumbers = this.videoNumbers;
         const videoSelector = this.getVideoSelector(this.getHostName())
-        this.updateDocuments().updateVideoNumbers(videoSelector);
-        const changed = this.videoNumbers !== oldVideoNumbers;
-        if (changed) {
-            this.updateVideoElements(videoSelector);
+        this.updateDocuments().updateVideoElements(videoSelector);
+        console.log('updateVideoElements')
+        const videos = [...this.videoElements];
+        this.videoList = videos.map((v, index) => {
+            const item: any = {
+                name: `视频 ${index + 1}`,
+                id: v.dataset.rollId,
+                visible: v.dataset.rollVisible === 'true' ? true : false,
+                checked: v.dataset.rollCheck === 'true' ? true : false,
+            };
 
-            const videos = [...this.videoElements];
-            this.videoList = videos.map((v, index) => {
-                const item: any = {
-                    name: `视频 ${index + 1}`,
-                    id: v.dataset.rollId,
-                    visible: v.dataset.rollVisible === 'true' ? true : false,
-                    checked: v.dataset.rollCheck === 'true' ? true : false,
-                };
+            item.visibleObserver = this.getVideoVisibleObserver(v, item, callback)
 
-                item.visibleObserver = this.getVideoVisibleObserver(v, item, callback)
+            return item
+        });
 
-                return item
-            });
-
-            callback({
-                text: String(this.videoNumbers),
-                videoList: this.videoList.map((v) => ({
-                    name: v.name,
-                    id: v.id,
-                    visible: v.visible,
-                    checked: v.checked
-                }))
-            })
-        }
+        callback({
+            text: String(this.videoNumbers),
+            videoList: this.videoList.map((v) => ({
+                name: v.name,
+                id: v.id,
+                visible: v.visible,
+                checked: v.checked
+            }))
+        })
     }
 
     /**
@@ -764,12 +759,13 @@ export default class VideoRoll {
 
         try {
             const elementToObserve = document.querySelector("body") as Node;
-
+            if (!elementToObserve) return this;
+    
             this.observer = new MutationObserver(() => {
                 this.useVideoChanged(callback);
             });
 
-            this.observer.observe(elementToObserve, { childList: true });
+            this.observer.observe(elementToObserve, { childList: true, subtree: true });
         } catch (err) {
             console.debug(err);
         }
