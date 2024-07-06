@@ -43,7 +43,9 @@ export type VideoListItem = {
     id?: string;
     name?: string;
     visible?: boolean;
-    visibleObserver?: IntersectionObserver
+    visibleObserver?: IntersectionObserver;
+    duration?: number;
+    src?: string
 }
 
 export type Pitch = {
