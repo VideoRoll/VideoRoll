@@ -8,6 +8,7 @@ import Audiohacker from "audio-hacker";
 import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer, VideoListItem } from '../types/type.d';
 import { nanoid } from "nanoid";
 import { isVisible } from "src/util";
+import debounce from "src/util/debounce";
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -761,9 +762,9 @@ export default class VideoRoll {
             const elementToObserve = document.querySelector("body") as Node;
             if (!elementToObserve) return this;
     
-            this.observer = new MutationObserver(() => {
+            this.observer = new MutationObserver(debounce(() => {
                 this.useVideoChanged(callback);
-            });
+            }, 300));
 
             this.observer.observe(elementToObserve, { childList: true, subtree: true });
         } catch (err) {
