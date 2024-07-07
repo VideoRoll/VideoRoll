@@ -6,6 +6,7 @@
 import { ActionType, VideoListItem } from '../types/type.d';
 import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent, onHoverVideoElement, updateVideoCheck } from "./update";
 import { sendRuntimeMessage } from "../util";
+import VideoRoll from './VideoRoll';
 
 (function () {
     let videoNumber: number = 0;
@@ -61,4 +62,6 @@ import { sendRuntimeMessage } from "../util";
             console.debug(err);
         }
     });
+
+    VideoRoll.observeResponse();
 })();
