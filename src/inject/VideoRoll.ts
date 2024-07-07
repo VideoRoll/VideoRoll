@@ -9,6 +9,8 @@ import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSe
 import { nanoid } from "nanoid";
 import { isVisible } from "src/util";
 import debounce from "src/util/debounce";
+import { getName } from "./utils/getName";
+import { observeResponse } from "./utils/download";
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -32,6 +34,8 @@ export default class VideoRoll {
     static rootElement: HTMLElement | undefined;
 
     static observer: MutationObserver;
+
+    static responseObserver: any;
 
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
@@ -718,12 +722,35 @@ export default class VideoRoll {
         return intersectionObserver;
     }
 
+    static getVideoInfo(video: HTMLVideoElement) {
+        if (video.duration && video.src && video.src.startsWith("http")) {
+            const src = video.src;
+            const duration = `${Math.ceil(video.duration * 10 / 60) / 10} mins`;
+            const url = new URL(src);
+            const name = getName(url);
+
+        }
+    }
+
+    static observeResponse() {
+        if (this.responseObserver) return;
+
+        this.responseObserver = true;
+        observeResponse();
+    }
+
+    static async download({ url, content }) {
+        
+
+    }
+
     static useVideoChanged(callback: Function) {
         const videoSelector = this.getVideoSelector(this.getHostName())
         this.updateDocuments().updateVideoElements(videoSelector);
         console.log('updateVideoElements')
         const videos = [...this.videoElements];
         this.videoList = videos.map((v, index) => {
+            
             const item: any = {
                 name: `视频 ${index + 1}`,
                 id: v.dataset.rollId,
@@ -761,7 +788,8 @@ export default class VideoRoll {
         try {
             const elementToObserve = document.querySelector("body") as Node;
             if (!elementToObserve) return this;
-    
+            
+            this.observeResponse();
             this.observer = new MutationObserver(debounce(() => {
                 this.useVideoChanged(callback);
             }, 300));
