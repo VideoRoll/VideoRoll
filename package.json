@@ -58,7 +58,6 @@
         "@vicons/ionicons5": "^0.11.0",
         "audio-hacker": "^1.0.5",
         "clipboard": "^2.0.11",
-        "m3u8-parser": "^7.1.0",
         "nanoid": "^5.0.7",
         "vant": "4.8.5",
         "vue": "^3.2.41",
