@@ -19,6 +19,7 @@ import Loading from "vant/es/loading/index.mjs";
 import Cell from "vant/es/cell/index.mjs";
 import Icon from "vant/es/icon/index.mjs";
 import Dialog from "vant/es/dialog/index.mjs";
+import Overlay from "vant/es/overlay/index.mjs";
 
 import "vant/es/config-provider/style/index.mjs";
 import "vant/es/radio-group/style/index.mjs";
@@ -33,6 +34,7 @@ import "vant/es/loading/style/index.mjs";
 import "vant/es/cell/style/index.mjs";
 import "vant/es/icon/style/index.mjs";
 import "vant/es/dialog/style/index.mjs";
+import "vant/es/overlay/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -48,4 +50,5 @@ createApp(App)
     .use(Cell)
     .use(Icon)
     .use(Dialog)
+    .use(Overlay)
     .mount("#options-root");
