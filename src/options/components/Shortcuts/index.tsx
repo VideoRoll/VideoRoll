@@ -1,40 +1,63 @@
-import { defineComponent, ref, onMounted, provide, PropType } from "vue";
+import { defineComponent, ref, onMounted, provide, PropType, onUnmounted } from "vue";
 import { ReloadOutline } from "@vicons/ionicons5";
+import hotkeys from 'hotkeys-js';
+import './index.less'
+import { getkeyCodeMap } from "src/util/getKeycodeMap";
 
 export default defineComponent({
-    name: "Shortcuts",
-    setup(props) {
-        const value = ref('');
+	name: "Shortcuts",
+	setup(props) {
+		const shortcuts = ref('');
+		const isShowSettingInput = ref(false);
 
-        const formatter = (val) => {
-            return 'ctrl'
-        }
-        return () => (
-            <div class="options-general">
-                <van-form submit="onSubmit">
-                    <van-cell-group inset>
-                    <van-field
-                        v-model={value}
-                        label="文本"
-                        readonly
-                        formatter={formatter}
-                        placeholder="在输入时执行格式化"
-                    />
-                        {/* <van-field label-width="300" input-align="right" name="switch" label="Automatically changes video size when rotated" v-slots={{
-                            input: () => <van-switch v-model={autoScale.value} onChange={onChange} />
-                        }}>
-                        </van-field> */}
-                    </van-cell-group>
-                </van-form>
+		const formatter = (val) => {
+			return 'ctrl'
+		}
 
-                <div class="options-content">
-                    <span class="options-title">🤣 Now only support rotate function</span>
-                    <p class="options-title-1"> 90deg: CTRL + → </p>
-                    <p class="options-title-1"> 180deg: CTRL + ↓ </p>
-                    <p class="options-title-1"> 270deg: CTRL + ← </p>
-                    <p class="options-title-1"> 0deg: CTRL + ↑ </p>
-                </div>
-            </div>
-        );
-    }
+		const updateShowSettingInput = (val) => {
+			isShowSettingInput.value = val;
+		}
+
+		onMounted(() => {
+			hotkeys('*', function (event, handler) {
+				event.preventDefault();
+
+				console.log(event, handler)
+				if (!isShowSettingInput.value) return;
+
+
+				const keys = handler.keys.map((key) => getkeyCodeMap()[key]).join('+');
+				shortcuts.value = keys;
+			});
+
+		});
+
+		onUnmounted(() => {
+			hotkeys.unbind('*')
+		})
+
+		return () => (
+			<div class="options-general">
+				<van-overlay show={isShowSettingInput.value} onClick={() => updateShowSettingInput(false)}>
+					<div>Press</div>
+					<div class="shortcuts-input" onClick={(e) => e.stopPropagation()}>
+						{shortcuts.value}
+					</div>
+				</van-overlay>
+				<div class="options-content">
+					<van-form submit="onSubmit">
+						<van-cell-group inset>
+							<van-field
+								v-model={shortcuts.value}
+								label="rotate 90"
+								readonly
+								placeholder="Click to update"
+								onClick={() => updateShowSettingInput(true)}
+							/>
+						</van-cell-group>
+					</van-form>
+				</div>
+			</div>
+		);
+	}
 });

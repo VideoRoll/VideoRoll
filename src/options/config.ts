@@ -20,4 +20,5 @@ export const OPTIONS_MENU = [
     {
         title: 'Donate',
         component: defineAsyncComponent(() => import('./components/Donate'))
-    }];
+    }
+];
