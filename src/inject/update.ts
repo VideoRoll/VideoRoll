@@ -1,11 +1,10 @@
 import VideoRoll from "./VideoRoll";
 import browser from "webextension-polyfill";
 import { ActionType, IRollConfig } from '../types/type.d';
-import { KEY_CODE } from "../types/type.d";
 import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage, removeLocalStorage } from "../util/storage";
 import { sendRuntimeMessage } from "src/util";
-
-let KeyboardEventCache: Function | null = null;
+import hotkeys from "hotkeys-js";
+import { shortcutsMap } from "src/use/useShortcuts";
 
 /**
  * get badge text
@@ -145,44 +144,36 @@ export function isCtrlOrCommand(e: KeyboardEvent) {
     return e.ctrlKey || (navigator.platform.indexOf('Mac') === 0 && e.metaKey);
 }
 
-export async function keyDownEvent(tabId: number, e: KeyboardEvent) {
+export async function keyDownEvent(tabId: number, res, handler) {
     const { config, tabConfig } = await getStorageConfig(tabId);
 
     if (!hasConfig(config) && !tabConfig) return;
+    const keys = Object.keys(shortcutsMap);
 
-    if (isCtrlOrCommand(e)) {
-        let newConfig = tabConfig || config;
-
-        const { code } = e;
-        switch (code) {
-            case KEY_CODE.UP:
-                newConfig.deg = 0;
-                break;
-            case KEY_CODE.DOWN:
-                newConfig.deg = 180;
-                break;
-            case KEY_CODE.RIGHT:
-                newConfig.deg = 90;
-                break;
-            case KEY_CODE.LEFT:
-                newConfig.deg = 270;
-                break;
-            case KEY_CODE.B:
-                newConfig.focus.on = !newConfig.focus.on;
-                break;
-            default:
-                return;
+    let newConfig = tabConfig || config;
+    for(const key of keys) {
+        const item = shortcutsMap[key];
+        const resItem = res[key];
+        if (JSON.stringify(resItem.shortcuts?.code) === JSON.stringify(handler.keys)) {
+            const data = item.handler(newConfig[item.key])
+            newConfig[item.key] = data;
+            updateConfig(newConfig);
+            return;
         }
-        updateConfig(newConfig);
     }
 }
 
 export function initKeyboardEvent(tabId: number) {
-    if (!KeyboardEventCache) {
-        KeyboardEventCache = keyDownEvent.bind(null, tabId);
-    }
-    window.removeEventListener('keydown', KeyboardEventCache as EventListener);
-    window.addEventListener('keydown', KeyboardEventCache as EventListener, { passive: true });
+    browser.storage.sync.get('shortcuts').then((res) => {
+        const map = res?.['shortcuts'] ?? {};
+        return map
+    }).then((res) => {
+        hotkeys.unbind('*');
+
+        hotkeys('*', function (event, handler) {
+            keyDownEvent(tabId, res, handler)
+        });
+    })
 }
 
 export function onHoverVideoElement(id: string, isIn: boolean) {

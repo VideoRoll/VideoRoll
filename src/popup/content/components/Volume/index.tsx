@@ -4,12 +4,9 @@
  * @Date: 2022-09-19 22:53:23
  */
 
-import { defineComponent, inject, watch } from "vue";
-import { PulseOutline } from "@vicons/ionicons5";
+import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type";
-import { getDefaultConfig } from '../../../../use';
 import "./index.less";
-import debounce from "../../utils/debounce";
 
 export default defineComponent({
     name: "Volume",
