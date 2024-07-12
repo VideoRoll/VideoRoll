@@ -62,6 +62,4 @@ import VideoRoll from './VideoRoll';
             console.debug(err);
         }
     });
-
-    VideoRoll.observeResponse();
 })();

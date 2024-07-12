@@ -1,35 +1,57 @@
 import { defineComponent, ref, onMounted, provide, PropType, onUnmounted } from "vue";
-import { ReloadOutline } from "@vicons/ionicons5";
+import browser from "webextension-polyfill";
 import hotkeys from 'hotkeys-js';
 import './index.less'
 import { getkeyCodeMap } from "src/util/getKeycodeMap";
+import { useShortcuts } from "src/use/useShortcuts";
 
 export default defineComponent({
 	name: "Shortcuts",
 	setup(props) {
+		const currentId = ref('');
 		const shortcuts = ref('');
 		const isShowSettingInput = ref(false);
+		const shortcutsMap = useShortcuts() as any;
 
-		const formatter = (val) => {
-			return 'ctrl'
-		}
-
-		const updateShowSettingInput = (val) => {
+		const updateShowSettingInput = (val: boolean) => {
 			isShowSettingInput.value = val;
 		}
 
-		onMounted(() => {
+		const updateCurrentId = (val: string) => {
+			currentId.value = val;
+			shortcuts.value = shortcutsMap.value[val].shortcuts.key;
+			updateShowSettingInput(true);
+		}
+
+		const loadList = async () => {
+			browser.storage.sync.get('shortcuts').then((res) => {
+				const map = res?.['shortcuts'] ?? {};
+				Object.keys(shortcutsMap.value).forEach((key: string) => {
+					if (map[key]) {
+						shortcutsMap.value[key].shortcuts = map[key].shortcuts;
+					}
+				})
+            });
+		}
+
+		onMounted(async () => {
+			loadList();
 			hotkeys('*', function (event, handler) {
 				event.preventDefault();
 
-				console.log(event, handler)
 				if (!isShowSettingInput.value) return;
-
 
 				const keys = handler.keys.map((key) => getkeyCodeMap()[key]).join('+');
 				shortcuts.value = keys;
+				console.log(handler)
+				shortcutsMap.value[currentId.value].shortcuts = {
+					key: keys,
+					code: handler.keys
+				}
+				browser.storage.sync.set({
+					shortcuts: JSON.parse(JSON.stringify(shortcutsMap.value))
+				});
 			});
-
 		});
 
 		onUnmounted(() => {
@@ -39,24 +61,27 @@ export default defineComponent({
 		return () => (
 			<div class="options-general">
 				<van-overlay show={isShowSettingInput.value} onClick={() => updateShowSettingInput(false)}>
-					<div>Press</div>
+					<div class>Press</div>
 					<div class="shortcuts-input" onClick={(e) => e.stopPropagation()}>
 						{shortcuts.value}
 					</div>
 				</van-overlay>
-				<div class="options-content">
-					<van-form submit="onSubmit">
+				<van-form submit="onSubmit">
 						<van-cell-group inset>
-							<van-field
-								v-model={shortcuts.value}
-								label="rotate 90"
-								readonly
-								placeholder="Click to update"
-								onClick={() => updateShowSettingInput(true)}
-							/>
+							{
+								Object.keys(shortcutsMap.value).map((key: string) => {
+									return <van-field
+										v-model={shortcutsMap.value[key].shortcuts.key}
+										label={key}
+										readonly
+										placeholder="Click to update"
+										onClick={() => updateCurrentId(key)}
+									/>
+								})
+							}
+
 						</van-cell-group>
 					</van-form>
-				</div>
 			</div>
 		);
 	}
