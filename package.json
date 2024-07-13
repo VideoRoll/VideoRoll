@@ -8,7 +8,7 @@
         "watch:inject": "parcel watch src/inject/injected.ts",
         "watch:background": "parcel watch src/background/background.ts",
         "preview": "parcel src/popup/index.html",
-        "dev:parcel": "parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts src/options/index.html --no-cache",
+        "dev:parcel": "parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts src/options/index.html --no-cache -p 3306",
         "dev:chromium": "pnpm run clean && pnpm run copy:static && cross-env BROWSER=\"chromium\" pnpm run build:manifest && pnpm run dev:parcel",
         "dev:firefox": "pnpm run clean && pnpm run copy:static && cross-env BROWSER=\"firefox\" pnpm run build:manifest && pnpm run dev:parcel",
         "build:popup": "parcel build src/popup/index.html --dist-dir dist/popup/ --no-source-maps --no-content-hash",
