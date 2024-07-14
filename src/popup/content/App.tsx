@@ -108,8 +108,8 @@ export default defineComponent({
                             </div>
                         }
                     </div>
-                    <Footer></Footer>
                 </main>
+                <Footer></Footer>
             </div>
         );
     }
