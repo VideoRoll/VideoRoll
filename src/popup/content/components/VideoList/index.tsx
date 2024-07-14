@@ -24,19 +24,36 @@ export default defineComponent({
             updateVideoCheck(ids);
         }
 
-        watch(() => videoList, (value) => {
+        const onError = function() {
+            this.src = <VideocamOutline />
+        }
+
+        watch(() => videoList.value, (value) => {
             checked.value = getCheckedVideo(value);
         }, { deep: true });
 
         return () => (
             <div>
                 <van-checkbox-group v-model={checked.value} onChange={onChange}>
-                    {videoList.value.map((v) =>
+                    {videoList.value.map((v: any) =>
                         <div class="video-item" onMouseleave={() => onHoverVideo(v.id, false)} onMouseenter={() => onHoverVideo(v.id, true)}>
                             <van-checkbox name={v.id} key={v.id} iconSize={15}>
-                                <div class="video-name">
-                                    <span>{v.name}</span>
-                                    {v.visible ? <van-tag type="success">visible</van-tag> : <van-tag type="warning">invisible</van-tag>}
+                                <div class="video-item-box">
+                                    <div class="video-poster-box">
+                                        <img class="video-poster" src={v.posterUrl} onError={onError}></img>
+                                    </div>
+                                    <div class="video-info">
+                                        <div class="video-info-name">
+                                            {v.name}
+                                        </div>
+                                        <div class="video-tags">
+                                            <van-tag plain type="primary">{v.duration} mins</van-tag>
+                                            {
+                                                v.isReal ? <van-tag type="primary">{v.isReal}</van-tag> : null
+                                            }
+                                            {v.visible ? <van-tag type="success">visible</van-tag> : <van-tag type="warning">invisible</van-tag>}
+                                        </div>
+                                    </div>
                                 </div>
                             </van-checkbox>
                         </div>

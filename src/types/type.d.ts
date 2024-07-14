@@ -46,6 +46,8 @@ export type VideoListItem = {
     visibleObserver?: IntersectionObserver;
     duration?: number;
     src?: string
+    posterUrl?: string;
+    isReal?: boolean;
 }
 
 export type Pitch = {

@@ -34,10 +34,6 @@ body {
 #app {
     width: 300px;
 
-    .video-roll-wrapper {
-        height: 500px;
-    }
-
     .video-roll-wrapper-empty {
         height: 200px;
     }
@@ -46,6 +42,18 @@ body {
 
     .van-row:first-of-type {
         margin-top: 0 !important;
+    }
+
+    .van-tabs.van-tabs--line {
+        height: 100%;
+
+        .van-tabs__content {
+            height: calc(100% - 50px);
+        }
+
+        .van-swipe {
+            overflow-y: auto;
+        }
     }
 
     .video-roll-headBar {
@@ -57,9 +65,13 @@ body {
 
     .video-roll-content {
         box-sizing: border-box;
-        min-height: 425px;
-        overflow-y: auto;
+        height: 100%;
+        // overflow-y: auto;
         // padding-bottom: 15px;
+
+        .video-roll-setting-panel, .van-config-provider {
+            height: 100%;
+        }
     }
 
     .video-roll-content-empty {
@@ -190,7 +202,7 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 455px;
+        height: 425px;
     }
 
     .video-roll-main-empty {

@@ -10,7 +10,6 @@ import { nanoid } from "nanoid";
 import { isVisible } from "src/util";
 import debounce from "src/util/debounce";
 import { getName } from "./utils/getName";
-import { observeResponse } from "./utils/download";
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -198,10 +197,10 @@ export default class VideoRoll {
         this.videoElements.forEach((item) => {
             // @ts-ignore
             if (!videos.some((v) => v === item)) {
-                const data = this.videoList.find((v) => v.id === item.dataset.rollId);
-                if (data) {
-                    data.visibleObserver?.disconnect()
-                }
+                // const data = this.videoList.find((v) => v.id === item.dataset.rollId);
+                // if (data) {
+                //     data.visibleObserver?.disconnect()
+                // }
 
                 this.videoElements.delete(item);
             }
@@ -483,7 +482,6 @@ export default class VideoRoll {
             degScale.setAttribute("type", "text/css");
             transition.setAttribute("type", "text/css");
             highlight.setAttribute("type", "text/css");
-            // highlight.setAttribute("style", "background: red; position: absolute; z-index: 9999; display: none;");
 
             const head = doc.getElementsByTagName("head")[0];
 
@@ -492,8 +490,6 @@ export default class VideoRoll {
                 head.appendChild(transition);
                 head.appendChild(highlight);
             }
-
-            // doc.body.appendChild(highlight);
 
             this.addMaskElement();
         });
@@ -509,6 +505,8 @@ export default class VideoRoll {
      * add mask element(for focus mode)
      */
     static addMaskElement() {
+        if (!document.body) return;
+
         const root = document.createElement("style");
         root.innerHTML = '.video-roll-root {}';
         root.setAttribute("id", "video-roll-root");
@@ -696,7 +694,10 @@ export default class VideoRoll {
                         name: v.name,
                         id: v.id,
                         visible: v.visible,
-                        checked: v.checked
+                        checked: v.checked,
+                        posterUrl: v.posterUrl,
+                        duration: v.duration,
+                        isReal: v.isReal
                     }))
                 })
                 return;
@@ -710,7 +711,10 @@ export default class VideoRoll {
                     name: v.name,
                     id: v.id,
                     visible: v.visible,
-                    checked: v.checked
+                    checked: v.checked,
+                    posterUrl: v.posterUrl,
+                    duration: v.duration,
+                    isReal: v.isReal
                 }))
             })
         });
@@ -720,13 +724,31 @@ export default class VideoRoll {
         return intersectionObserver;
     }
 
-    static getVideoInfo(video: HTMLVideoElement) {
-        if (video.duration && video.src && video.src.startsWith("http")) {
-            const src = video.src;
-            const duration = `${Math.ceil(video.duration * 10 / 60) / 10} mins`;
+    static getVideoInfo(video: HTMLVideoElement, index: number) {
+        const src = video.src;
+        const time = Math.ceil(video.duration * 10 / 60) / 10;
+        const duration = isNaN(time) ? 0 : time;
+        let dataURL = '';
+        let name = `视频 ${index + 1}`;
+        try {
             const url = new URL(src);
-            const name = getName(url);
+            name = getName(url);
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
 
+            context?.drawImage(video, 0, 0, canvas.width, canvas.height);
+            // 获取canvas内容作为图像
+            dataURL = canvas.toDataURL('image/png');
+        } catch (err) {
+            console.debug(err);
+        }
+        
+        const isReal = String(this.realVideoPlayer.player === video);
+        return {
+            posterUrl: dataURL,
+            duration,
+            name,
+            isReal
         }
     }
 
@@ -736,15 +758,15 @@ export default class VideoRoll {
         console.log('updateVideoElements')
         const videos = [...this.videoElements];
         this.videoList = videos.map((v, index) => {
-            
+            const info = this.getVideoInfo(v, index);
             const item: any = {
-                name: `视频 ${index + 1}`,
                 id: v.dataset.rollId,
                 visible: v.dataset.rollVisible === 'true' ? true : false,
                 checked: v.dataset.rollCheck === 'true' ? true : false,
+                ...info
             };
 
-            item.visibleObserver = this.getVideoVisibleObserver(v, item, callback)
+            // item.visibleObserver = this.getVideoVisibleObserver(v, item, callback)
 
             return item
         });
@@ -755,7 +777,10 @@ export default class VideoRoll {
                 name: v.name,
                 id: v.id,
                 visible: v.visible,
-                checked: v.checked
+                checked: v.checked,
+                posterUrl: v.posterUrl,
+                duration: v.duration,
+                isReal: v.isReal
             }))
         })
     }

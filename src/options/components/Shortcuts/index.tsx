@@ -43,7 +43,7 @@ export default defineComponent({
 
 				const keys = handler.keys.map((key) => getkeyCodeMap()[key]).join('+');
 				shortcuts.value = keys;
-				console.log(handler)
+
 				shortcutsMap.value[currentId.value].shortcuts = {
 					key: keys,
 					code: handler.keys
