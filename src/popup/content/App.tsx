@@ -33,8 +33,8 @@ export default defineComponent({
             sendTabMessage(rollConfig.tabId, { ids, type: ActionType.UPDATE_VIDEO_CHECK })
         }
 
-        const updateEnable = () => {
-
+        const updateEnable = (value: boolean) => {
+            rollConfig.enable = value;
         }
 
         // current website config
@@ -46,7 +46,7 @@ export default defineComponent({
         provide("videoList", videoList);
         provide("onHoverVideo", onHoverVideo)
         provide("updateVideoCheck", updateVideoCheck)
-        provide("updateVideoCheck", updateVideoCheck)
+        provide("updateEnable", updateEnable)
 
         watch(() => tabId.value, (value: number) => {
             if (!value) return;

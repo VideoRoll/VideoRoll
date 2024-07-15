@@ -22,7 +22,8 @@ export enum ActionType {
     GET_BADGE,
     UPDATE_VIDEO_LIST,
     ON_HOVER_VIDEO,
-    UPDATE_VIDEO_CHECK
+    UPDATE_VIDEO_CHECK,
+    UPDATE_ENABLE
 }
 
 export enum FlipType {
