@@ -165,8 +165,8 @@ export default class VideoRoll {
         if (defaultDom) {
             docs.forEach((doc) => {
                 const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
-                const elements = Array.from(defaultElements);
-
+                const elements = Array.from(defaultElements).filter((element) => element.src);
+                
                 for (const video of elements) {
                     // @ts-ignore
                     video.parentDocument = doc;
@@ -755,7 +755,7 @@ export default class VideoRoll {
     static useVideoChanged(callback: Function) {
         const videoSelector = this.getVideoSelector(this.getHostName())
         this.updateDocuments().updateVideoElements(videoSelector);
-        console.log('updateVideoElements')
+
         const videos = [...this.videoElements];
         this.videoList = videos.map((v, index) => {
             const info = this.getVideoInfo(v, index);
@@ -804,7 +804,7 @@ export default class VideoRoll {
                 this.useVideoChanged(callback);
             }, 300));
 
-            this.observer.observe(elementToObserve, { childList: true, subtree: true });
+            this.observer.observe(elementToObserve, { childList: true, subtree: true, attributes: true });
         } catch (err) {
             console.debug(err);
         }
@@ -829,12 +829,7 @@ export default class VideoRoll {
     static highlightVideoElement(id: string, isIn: boolean) {
         const video = [...this.videoElements].find((v) => v.dataset.rollId === id);
         if (video) {
-            if (isIn) {
-                video.scrollIntoView({ behavior: "smooth", block: "center" });
-                video.classList.add("video-roll-highlight");
-            } else {
-                video.classList.remove('video-roll-highlight');
-            }
+            isIn ? video.classList.add("video-roll-highlight") : video.classList.remove('video-roll-highlight');
         }
 
         return this;
@@ -846,7 +841,7 @@ export default class VideoRoll {
         target.classList.remove("video-roll-transition");
     }
 
-    static disableAll() {
+    static stop() {
         this.videoElements.forEach((v) => {
             this.removeStyle(v);
         });
@@ -855,9 +850,11 @@ export default class VideoRoll {
         if (this.observer) {
             this.observer.disconnect();
         }
+    }
 
-        // this.videoList.forEach((v) => {
-        //     v.visibleObserver?.disconnect()
-        // })
+    static restart() {
+        this.videoElements.forEach((v) => {
+            this.removeStyle(v);
+        });
     }
 }

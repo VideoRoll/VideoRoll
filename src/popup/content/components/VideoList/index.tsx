@@ -49,9 +49,8 @@ export default defineComponent({
                                         <div class="video-tags">
                                             <van-tag plain type="primary">{v.duration} mins</van-tag>
                                             {
-                                                v.isReal ? <van-tag type="primary">{v.isReal}</van-tag> : null
+                                                v.isReal ? <van-tag type="success">main</van-tag> : null
                                             }
-                                            {v.visible ? <van-tag type="success">visible</van-tag> : <van-tag type="warning">invisible</van-tag>}
                                         </div>
                                     </div>
                                 </div>

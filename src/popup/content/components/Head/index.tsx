@@ -16,7 +16,7 @@ export default defineComponent({
         isShow: Boolean
     },
     setup(props) {
-        const update = inject("update") as Function;
+        const updateEnable = inject("updateEnable") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
 
         const toGithub = () => {
@@ -42,9 +42,9 @@ export default defineComponent({
             createURL('https://discord.gg/N5rSStFE');
         }
 
-        const updateEnable = (value: boolean) => {
+        const update = (value: boolean) => {
             rollConfig.enable = value;
-            update("enable", rollConfig.enable);
+            updateEnable(rollConfig.enable);
         }
 
         return () => (
@@ -58,7 +58,7 @@ export default defineComponent({
                 <div class="video-roll-head-right">
                     <van-space>
                         <div class="video-roll-setting-btn" title="disable on this site">
-                            <van-switch v-model={rollConfig.enable} size="12px" onChange={updateEnable}></van-switch>
+                            <van-switch v-model={rollConfig.enable} size="12px" onChange={update}></van-switch>
                         </div>
                         <div class="video-roll-setting-btn" title="settings" onClick={toSettings}>
                             <SettingsSharp class="logo-usd"></SettingsSharp>

@@ -39,7 +39,7 @@ import VideoRoll from './VideoRoll';
                     updateStorage({ ...rollConfig, videoNumber }, send);
                     return;
                 case ActionType.UPDATE_CONFIG: {
-                    updateConfig({ ...rollConfig, videoNumber });
+                    updateConfig(tabId, { ...rollConfig, videoNumber });
                     break;
                 }
                 case ActionType.INIT_SHORT_CUT_KEY:

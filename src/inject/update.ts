@@ -1,6 +1,6 @@
 import VideoRoll from "./VideoRoll";
 import browser from "webextension-polyfill";
-import { ActionType, IRollConfig } from '../types/type.d';
+import { ActionType, IRollConfig, VideoListItem } from '../types/type.d';
 import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage, removeLocalStorage } from "../util/storage";
 import { sendRuntimeMessage } from "src/util";
 import hotkeys from "hotkeys-js";
@@ -30,7 +30,11 @@ async function getChromStore(key: string, defaultValue: any) {
  * update rollConfig
  * @param rollConfig
  */
-export async function updateConfig(rollConfig: IRollConfig) {
+export async function updateConfig(tabId: number, rollConfig: IRollConfig) {
+    updateDisable(tabId, rollConfig);
+
+    if (!rollConfig.enable) return;
+
     rollConfig.isInit = false;
 
     const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
@@ -55,6 +59,10 @@ export async function updateConfig(rollConfig: IRollConfig) {
  * @param rollConfig
  */
 export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
+    updateDisable(tabId, rollConfig);
+
+    if (!rollConfig.enable) return;
+    
     let config = await getLocalStorage(rollConfig.url);
     const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
     rollConfig.isAutoChangeSize = isAutoChangeSize;
@@ -152,12 +160,12 @@ export async function keyDownEvent(tabId: number, res, handler) {
 
     let newConfig = tabConfig || config;
     for(const key of keys) {
-        const item = shortcutsMap[key];
+        const item = (shortcutsMap as any)[key];
         const resItem = res[key];
         if (JSON.stringify(resItem.shortcuts?.code) === JSON.stringify(handler.keys)) {
             const data = item.handler(newConfig[item.key])
             newConfig[item.key] = data;
-            updateConfig(newConfig);
+            updateConfig(tabId, newConfig);
             return;
         }
     }
@@ -182,4 +190,18 @@ export function onHoverVideoElement(id: string, isIn: boolean) {
 
 export function updateVideoCheck(ids: string[]) {
     VideoRoll.updateVideoCheck(ids);
+}
+
+export function updateDisable(tabId: number, rollConfig: IRollConfig) {
+    if (rollConfig.enable === true) {
+        VideoRoll.stop();
+    } else {
+        updateBadge({
+            tabId,
+            rollConfig,
+            callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
+                sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList })
+            }
+        })
+    }
 }
