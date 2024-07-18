@@ -159,13 +159,21 @@ export default class VideoRoll {
         return this;
     }
 
+    static getSourceElementSrc(video: HTMLVideoElement) {
+        if (!video.src) {
+            const src = video.querySelector('source')?.src ?? '';
+            return src;
+        }
+        return video.src;
+    }
+
     static getAllVideosBySelector(videoSelector: VideoSelector, docs: Document[] | HTMLIFrameElement[]): HTMLVideoElement[] {
         const { defaultDom } = videoSelector;
         const videos: HTMLVideoElement[] = [];
         if (defaultDom) {
             docs.forEach((doc) => {
                 const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
-                const elements = Array.from(defaultElements).filter((element) => element.src);
+                const elements = Array.from(defaultElements).filter((element) => this.getSourceElementSrc(element));
                 
                 for (const video of elements) {
                     // @ts-ignore
@@ -197,11 +205,6 @@ export default class VideoRoll {
         this.videoElements.forEach((item) => {
             // @ts-ignore
             if (!videos.some((v) => v === item)) {
-                // const data = this.videoList.find((v) => v.id === item.dataset.rollId);
-                // if (data) {
-                //     data.visibleObserver?.disconnect()
-                // }
-
                 this.videoElements.delete(item);
             }
         })
@@ -264,6 +267,8 @@ export default class VideoRoll {
 
         if (isSmaller && player.readyState === 0) return false;
 
+        if (isSmaller) return false;
+
         return true;
     }
 
@@ -281,17 +286,12 @@ export default class VideoRoll {
         const videos = this.videoElements.values();
         for (const target of videos) {
             if (target.dataset.rollCheck === 'false') {
-                console.log(target, 'updateVideoCheck');
-                target.classList.remove("video-roll-transition");
                 target.classList.remove("video-roll-deg-scale");
                 target.setAttribute("data-roll", "false");
                 continue;
             };
 
             const dom = target;
-
-            // if a video's readyState is empty, ignore it. 
-            if (!this.isRealVideoPlayer(dom as HTMLVideoElement)) continue;
 
             let scaleNum: [number, number] = [1, 1];
 
@@ -310,7 +310,6 @@ export default class VideoRoll {
                 });
             });
 
-            dom.classList.add("video-roll-transition");
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
         }
@@ -395,10 +394,9 @@ export default class VideoRoll {
      */
     static isExistStyle(doc: Document) {
         const degScale = doc.getElementById("video-roll-deg-scale");
-        const transition = doc.getElementById("video-roll-transition");
         const root = document.getElementById("video-roll-root");
 
-        return degScale && transition && root ? [degScale, transition, root] : null;
+        return degScale && root ? [degScale, root] : null;
     }
 
     /**
@@ -458,37 +456,20 @@ export default class VideoRoll {
             }
 
             const degScale = doc.createElement("style");
-            const transition = doc.createElement("style");
-            const highlight = doc.createElement("style");
 
             degScale.innerHTML = `
                 .video-roll-deg-scale {}
             `;
 
-            transition.innerHTML = `.video-roll-transition {
-                transition: all 0.5s ease !important;
-            }`;
-
-            highlight.innerHTML = `
-                .video-roll-highlight {
-                    filter: hue-rotate(270deg) blur(20px);
-                }
-            `
 
             degScale.setAttribute("id", "video-roll-deg-scale");
-            transition.setAttribute("id", "video-roll-transition");
-            highlight.setAttribute("id", "video-roll-highlight");
 
             degScale.setAttribute("type", "text/css");
-            transition.setAttribute("type", "text/css");
-            highlight.setAttribute("type", "text/css");
 
             const head = doc.getElementsByTagName("head")[0];
 
             if (head) {
                 head.appendChild(degScale);
-                head.appendChild(transition);
-                head.appendChild(highlight);
             }
 
             this.addMaskElement();
@@ -682,6 +663,18 @@ export default class VideoRoll {
         } catch (err) { console.debug(err); }
     }
 
+    static buildVideoList() {
+        return this.videoList.map((v) => ({
+            name: v.name,
+            id: v.id,
+            visible: v.visible,
+            checked: v.checked,
+            posterUrl: v.posterUrl,
+            duration: v.duration,
+            isReal: v.isReal
+        }))
+    }
+
     static getVideoVisibleObserver(video: HTMLVideoElement, item: any, callback: Function) {
         const intersectionObserver = new IntersectionObserver((entries) => {
             if (entries[0].intersectionRatio <= 0) {
@@ -690,15 +683,7 @@ export default class VideoRoll {
 
                 callback({
                     text: String(this.videoNumbers),
-                    videoList: this.videoList.map((v) => ({
-                        name: v.name,
-                        id: v.id,
-                        visible: v.visible,
-                        checked: v.checked,
-                        posterUrl: v.posterUrl,
-                        duration: v.duration,
-                        isReal: v.isReal
-                    }))
+                    videoList: this.buildVideoList()
                 })
                 return;
             }
@@ -707,15 +692,7 @@ export default class VideoRoll {
             item.visible = isVisible(video);
             callback({
                 text: String(this.videoNumbers),
-                videoList: this.videoList.map((v) => ({
-                    name: v.name,
-                    id: v.id,
-                    visible: v.visible,
-                    checked: v.checked,
-                    posterUrl: v.posterUrl,
-                    duration: v.duration,
-                    isReal: v.isReal
-                }))
+                videoList: this.buildVideoList()
             })
         });
 
@@ -725,13 +702,15 @@ export default class VideoRoll {
     }
 
     static getVideoInfo(video: HTMLVideoElement, index: number) {
-        const src = video.src;
+        const src = this.getSourceElementSrc(video);
         const time = Math.ceil(video.duration * 10 / 60) / 10;
         const duration = isNaN(time) ? 0 : time;
+        video.setAttribute('crossorigin', 'anonymous');
         let dataURL = '';
         let name = `视频 ${index + 1}`;
         try {
             const url = new URL(src);
+
             name = getName(url);
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
@@ -743,7 +722,7 @@ export default class VideoRoll {
             console.debug(err);
         }
         
-        const isReal = String(this.realVideoPlayer.player === video);
+        const isReal = this.realVideoPlayer.player === video;
         return {
             posterUrl: dataURL,
             duration,
@@ -771,17 +750,10 @@ export default class VideoRoll {
             return item
         });
 
+        console.log(this.videoList)
         callback({
             text: String(this.videoNumbers),
-            videoList: this.videoList.map((v) => ({
-                name: v.name,
-                id: v.id,
-                visible: v.visible,
-                checked: v.checked,
-                posterUrl: v.posterUrl,
-                duration: v.duration,
-                isReal: v.isReal
-            }))
+            videoList: this.buildVideoList()
         })
     }
 
@@ -813,9 +785,24 @@ export default class VideoRoll {
     }
 
     static updateVideoCheck(ids: any[]) {
-        this.videoElements.forEach((video: HTMLVideoElement) => {
-            video.dataset.rollCheck = ids.includes(video.dataset.rollId) ? 'true' : 'false';
-        })
+        const currentIds: string[] = [];
+        const videos = this.videoElements.values();
+        for (const target of videos) {
+            currentIds.push(target.dataset.rollId as string);
+        }
+
+        const elements = Array.from(this.videoElements);
+        this.videoList.forEach(v => {
+            const video = elements.find(x => x.dataset.rollId === v.id);
+            if (video) {
+                video.dataset.rollCheck = ids.includes(video.dataset.rollId) ? 'true' : 'false';
+            }
+        });
+
+
+        // this.videoElements.forEach((video: HTMLVideoElement) => {
+        //     video.dataset.rollCheck = ids.includes(video.dataset.rollId) ? 'true' : 'false';
+        // })
 
         this.videoList = this.videoList.map((v: any, index) => {
             v.checked = ids.includes(v.id);
@@ -826,19 +813,9 @@ export default class VideoRoll {
         return this;
     }
 
-    static highlightVideoElement(id: string, isIn: boolean) {
-        const video = [...this.videoElements].find((v) => v.dataset.rollId === id);
-        if (video) {
-            isIn ? video.classList.add("video-roll-highlight") : video.classList.remove('video-roll-highlight');
-        }
-
-        return this;
-    }
-
     static removeStyle(target: HTMLElement) {
         target.classList.remove("video-roll-highlight");
         target.classList.remove("video-roll-deg-scale");
-        target.classList.remove("video-roll-transition");
     }
 
     static stop() {

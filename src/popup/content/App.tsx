@@ -35,6 +35,7 @@ export default defineComponent({
 
         const updateEnable = (value: boolean) => {
             rollConfig.enable = value;
+            sendTabMessage(rollConfig.tabId, { enable: value, type: ActionType.UPDATE_ENABLE })
         }
 
         // current website config
