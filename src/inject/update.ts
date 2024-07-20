@@ -185,7 +185,7 @@ export function initKeyboardEvent(tabId: number) {
 }
 
 export function onHoverVideoElement(id: string, isIn: boolean) {
-    VideoRoll.highlightVideoElement(id, isIn);
+
 }
 
 export function updateVideoCheck(ids: string[]) {
