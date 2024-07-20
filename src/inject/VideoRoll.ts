@@ -174,18 +174,16 @@ export default class VideoRoll {
             docs.forEach((doc) => {
                 const defaultElements: NodeListOf<HTMLVideoElement> = doc.querySelectorAll(defaultDom);
                 const elements = Array.from(defaultElements).filter((element) => this.getSourceElementSrc(element));
-                
-                for (const video of elements) {
-                    // @ts-ignore
-                    video.parentDocument = doc;
 
+                for (const video of elements) {
                     if (video.dataset.rollId) {
                         continue;
                     };
 
+                    // @ts-ignore
+                    video.parentDocument = doc;
                     video.setAttribute("data-roll-id", `${nanoid()}`);
                     video.setAttribute("data-roll-check", "true");
-                    video.setAttribute("data-roll-visible", `${isVisible(video)}`);
                 }
 
                 videos.push(...elements);
@@ -266,6 +264,8 @@ export default class VideoRoll {
         if ('readyState' in player && player.readyState === 0) return false;
 
         if (isSmaller && player.readyState === 0) return false;
+
+        if (player.loop && isSmaller) return false;
 
         if (isSmaller) return false;
 
@@ -721,7 +721,7 @@ export default class VideoRoll {
         } catch (err) {
             console.debug(err);
         }
-        
+
         const isReal = this.realVideoPlayer.player === video;
         return {
             posterUrl: dataURL,
@@ -750,7 +750,6 @@ export default class VideoRoll {
             return item
         });
 
-        console.log(this.videoList)
         callback({
             text: String(this.videoNumbers),
             videoList: this.buildVideoList()
@@ -772,7 +771,7 @@ export default class VideoRoll {
             const elementToObserve = document.querySelector("body") as Node;
             if (!elementToObserve) return this;
 
-            this.observer = new MutationObserver(debounce(() => {
+            this.observer = new MutationObserver(debounce((mutationList: any) => {
                 this.useVideoChanged(callback);
             }, 300));
 
@@ -785,12 +784,6 @@ export default class VideoRoll {
     }
 
     static updateVideoCheck(ids: any[]) {
-        const currentIds: string[] = [];
-        const videos = this.videoElements.values();
-        for (const target of videos) {
-            currentIds.push(target.dataset.rollId as string);
-        }
-
         const elements = Array.from(this.videoElements);
         this.videoList.forEach(v => {
             const video = elements.find(x => x.dataset.rollId === v.id);
@@ -798,11 +791,6 @@ export default class VideoRoll {
                 video.dataset.rollCheck = ids.includes(video.dataset.rollId) ? 'true' : 'false';
             }
         });
-
-
-        // this.videoElements.forEach((video: HTMLVideoElement) => {
-        //     video.dataset.rollCheck = ids.includes(video.dataset.rollId) ? 'true' : 'false';
-        // })
 
         this.videoList = this.videoList.map((v: any, index) => {
             v.checked = ids.includes(v.id);

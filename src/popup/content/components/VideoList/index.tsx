@@ -14,11 +14,11 @@ export default defineComponent({
         const updateVideoCheck = inject("updateVideoCheck") as Function;
         const videoList = inject("videoList") as any;
 
-        const checked = ref(videoList.value.filter((v: any) => v.checked).map((v: any) => v.id));
-
         const getCheckedVideo = (list: any) => {
             return list.filter((v: any) => v.checked).map((v: any) => v.id);
         }
+    
+        const checked = ref(getCheckedVideo(videoList.value));
 
         const onChange = (ids: string[]) => {
             updateVideoCheck(ids);
