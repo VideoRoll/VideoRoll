@@ -1,4 +1,4 @@
-import { defineComponent, ref, onMounted, provide, watch } from "vue";
+import { defineComponent, ref, onMounted, provide, watch, onUnmounted } from "vue";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
@@ -70,8 +70,6 @@ export default defineComponent({
             tabId.value = tab.id as number;
             initRollConfig(rollConfig, tab);
 
-            sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED })
-
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config, text, videoList: list } = a;
                 switch (type) {
@@ -95,7 +93,14 @@ export default defineComponent({
 
                 c("update");
             });
+        
+            sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED })
         });
+
+        onUnmounted(() => {
+            videoList.value.length = 0;
+            videoList.value = [];
+        })
 
         return () => (
             <div class={rollConfig.enable ? "video-roll-wrapper" : "video-roll-wrapper-empty"}>

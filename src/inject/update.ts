@@ -76,6 +76,14 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
     VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
     sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE })
+    // updateBadge({
+    //     tabId,
+    //     rollConfig: config,
+    //     callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
+    //         sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList })
+    //     }
+    // })
+    
     sendRuntimeMessage(tabId, { videoList: VideoRoll.videoList, type: ActionType.UPDATE_VIDEO_LIST })
 }
 

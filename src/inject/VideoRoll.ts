@@ -176,12 +176,13 @@ export default class VideoRoll {
                 const elements = Array.from(defaultElements).filter((element) => this.getSourceElementSrc(element));
 
                 for (const video of elements) {
+                    // @ts-ignore
+                    video.parentDocument = doc;
+
                     if (video.dataset.rollId) {
                         continue;
                     };
-
-                    // @ts-ignore
-                    video.parentDocument = doc;
+                    
                     video.setAttribute("data-roll-id", `${nanoid()}`);
                     video.setAttribute("data-roll-check", "true");
                 }
@@ -710,10 +711,13 @@ export default class VideoRoll {
         let name = `视频 ${index + 1}`;
         try {
             const url = new URL(src);
-
             name = getName(url);
+            const rect = video.getBoundingClientRect();
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
+
+            canvas.width = rect.width;
+            canvas.height = rect.height;
 
             context?.drawImage(video, 0, 0, canvas.width, canvas.height);
             // 获取canvas内容作为图像
@@ -741,7 +745,7 @@ export default class VideoRoll {
             const item: any = {
                 id: v.dataset.rollId,
                 visible: v.dataset.rollVisible === 'true' ? true : false,
-                checked: v.dataset.rollCheck === 'true' ? true : false,
+                checked: v.dataset.rollCheck ?? v.dataset.rollCheck === 'true' ? true : false,
                 ...info
             };
 
@@ -749,7 +753,7 @@ export default class VideoRoll {
 
             return item
         });
-
+        console.log(JSON.stringify(this.videoList[0]?.id));
         callback({
             text: String(this.videoNumbers),
             videoList: this.buildVideoList()
@@ -796,6 +800,8 @@ export default class VideoRoll {
             v.checked = ids.includes(v.id);
             return v;
         });
+
+        console.log(this.videoList[0].checked, 'this.videoList')
 
         this.updateVideo(this.rollConfig);
         return this;
