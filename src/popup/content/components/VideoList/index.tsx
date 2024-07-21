@@ -27,7 +27,10 @@ export default defineComponent({
         const onError = function () { }
 
         watch(() => videoList.value, (value) => {
-            checked.value = getCheckedVideo(value);
+            console.log(value, '-----');
+            const list = getCheckedVideo(value);
+            if (JSON.stringify(list) === JSON.stringify(checked.value)) return;
+            checked.value = [...list];
         }, { deep: true });
 
         return () => (

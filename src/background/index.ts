@@ -46,9 +46,10 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
     currentTabId = tabId;
 
-    sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
+    sendTabMessage(tabId, { type: ActionType.GET_BADGE }, (response: any) => {
+        sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
+    });
 });
-
 
 /**
  * update
