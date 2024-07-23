@@ -36,7 +36,7 @@ chrome.runtime.onInstalled.addListener((params: any) => {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     currentTabId = tabId;
 
-    sendTabMessage(tabId, { type: ActionType.GET_BADGE }, (response: any) => {
+    sendTabMessage(tabId, { type: ActionType.GET_BADGE, tabId }, (response: any) => {
         sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
     });
 });
@@ -46,7 +46,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
     currentTabId = tabId;
 
-    sendTabMessage(tabId, { type: ActionType.GET_BADGE }, (response: any) => {
+    sendTabMessage(tabId, { type: ActionType.GET_BADGE, tabId }, (response: any) => {
         sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
     });
 });
@@ -61,7 +61,7 @@ chrome.runtime.onMessage.addListener((a, b, send) => {
 
     switch (type) {
         case ActionType.UPDATE_STORAGE:
-            sendTabMessage(currentTabId, { rollConfig, type: ActionType.UPDATE_STORAGE });
+            sendTabMessage(currentTabId, { rollConfig, type: ActionType.UPDATE_STORAGE, tabId });
             break;
         case ActionType.UPDATE_BADGE:
             setBadge(tabId, text);

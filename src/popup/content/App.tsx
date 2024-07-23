@@ -1,4 +1,4 @@
-import { defineComponent, ref, onMounted, provide, watch, onUnmounted } from "vue";
+import { defineComponent, ref, onMounted, provide, watch, onUnmounted, onBeforeMount } from "vue";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
@@ -72,6 +72,13 @@ export default defineComponent({
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
                 const { type, rollConfig: config, text, videoList: list } = a;
+
+                console.log(a.tabId, tabId.value);
+                if (a.tabId !== tabId.value) {
+                    c("not current tab");
+                    return;
+                }
+
                 switch (type) {
                     case ActionType.UPDATE_STORAGE:
                         Object.keys(config).forEach((key) => {
@@ -96,11 +103,6 @@ export default defineComponent({
         
             sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED })
         });
-
-        onUnmounted(() => {
-            videoList.value.length = 0;
-            videoList.value = [];
-        })
 
         return () => (
             <div class={rollConfig.enable ? "video-roll-wrapper" : "video-roll-wrapper-empty"}>

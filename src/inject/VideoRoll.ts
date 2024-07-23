@@ -765,21 +765,19 @@ export default class VideoRoll {
      * @param callback 
      */
     static observeVideo(callback: Function) {
-        if (this.observer) {
-            this.observer.disconnect();
-        }
-
         this.useVideoChanged(callback);
 
         try {
             const elementToObserve = document.querySelector("body") as Node;
             if (!elementToObserve) return this;
 
-            this.observer = new MutationObserver(debounce((mutationList: any) => {
-                this.useVideoChanged(callback);
-            }, 300));
-
-            this.observer.observe(elementToObserve, { childList: true, subtree: true, attributes: true });
+            if (!this.observer) {
+                this.observer = new MutationObserver(debounce((mutationList: any) => {
+                    this.useVideoChanged(callback);
+                }, 300));
+    
+                this.observer.observe(elementToObserve, { childList: true, subtree: true, attributes: true });
+            }
         } catch (err) {
             console.debug(err);
         }
