@@ -11,6 +11,7 @@ import { shortcutsMap } from "src/use/useShortcuts";
  * @returns
  */
 async function getTabBadge(callback: Function) {
+    console.log('getTabBadge')
     VideoRoll.observeVideo(callback);
 }
 
@@ -75,7 +76,7 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
 
     VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
-    sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE })
+    sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE, tabId })
     // updateBadge({
     //     tabId,
     //     rollConfig: config,
@@ -84,7 +85,7 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
     //     }
     // })
     
-    sendRuntimeMessage(tabId, { videoList: VideoRoll.videoList, type: ActionType.UPDATE_VIDEO_LIST })
+    sendRuntimeMessage(tabId, { videoList: VideoRoll.videoList, type: ActionType.UPDATE_VIDEO_LIST, tabId })
 }
 
 /**
@@ -208,7 +209,7 @@ export function updateDisable(tabId: number, rollConfig: IRollConfig) {
             tabId,
             rollConfig,
             callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
-                sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList })
+                sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList, tabId })
             }
         })
     }
