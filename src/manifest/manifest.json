@@ -33,7 +33,9 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "inject/index.js"
+                "inject/index.js",
+                "inject/capture.html",
+                "inject/capture.js"
             ],
             "matches": [
                 "https://*/*"

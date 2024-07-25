@@ -4,7 +4,7 @@
  * @Date: 2022-01-11 23:49:59
  */
 import { ActionType, VideoListItem } from '../types/type.d';
-import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent, onHoverVideoElement, updateVideoCheck } from "./update";
+import { updateConfig, updateOnMounted, updateStorage, updateBadge, initKeyboardEvent, onHoverVideoElement, updateVideoCheck, updateEnable, capture } from "./update";
 import { sendRuntimeMessage } from "../util";
 
 (function () {
@@ -50,6 +50,14 @@ import { sendRuntimeMessage } from "../util";
                 }
                 case ActionType.UPDATE_VIDEO_CHECK: {
                     updateVideoCheck(ids);
+                    break;
+                }
+                case ActionType.UPDATE_ENABLE: {
+                    updateEnable(tabId, { ...rollConfig, videoNumber });
+                    break;
+                }
+                case ActionType.CAPTURE: {
+                    capture(tabId, { ...rollConfig });
                     break;
                 }
                 default:

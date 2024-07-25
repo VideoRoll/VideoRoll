@@ -11,7 +11,6 @@ import { shortcutsMap } from "src/use/useShortcuts";
  * @returns
  */
 async function getTabBadge(callback: Function) {
-    console.log('getTabBadge')
     VideoRoll.observeVideo(callback);
 }
 
@@ -32,9 +31,7 @@ async function getChromStore(key: string, defaultValue: any) {
  * @param rollConfig
  */
 export async function updateConfig(tabId: number, rollConfig: IRollConfig) {
-    updateDisable(tabId, rollConfig);
-
-    if (!rollConfig.enable) return;
+    if (rollConfig.enable === false) return;
 
     rollConfig.isInit = false;
 
@@ -60,9 +57,7 @@ export async function updateConfig(tabId: number, rollConfig: IRollConfig) {
  * @param rollConfig
  */
 export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
-    updateDisable(tabId, rollConfig);
-
-    if (!rollConfig.enable) return;
+    if (rollConfig.enable === false) return;
     
     let config = await getLocalStorage(rollConfig.url);
     const isAutoChangeSize = await getChromStore('isAutoChangeSize', true);
@@ -77,14 +72,6 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
     VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
 
     sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE, tabId })
-    // updateBadge({
-    //     tabId,
-    //     rollConfig: config,
-    //     callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
-    //         sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList })
-    //     }
-    // })
-    
     sendRuntimeMessage(tabId, { videoList: VideoRoll.videoList, type: ActionType.UPDATE_VIDEO_LIST, tabId })
 }
 
@@ -105,6 +92,7 @@ export async function updateBadge(options: any) {
 
     if (tabConfig) {
         tabConfig.isAutoChangeSize = isAutoChangeSize;
+        tabConfig.document = { title: document.title };
         if (!tabConfig.storeThisTab) {
             sessionStorage.removeItem(`video-roll-${tabId}`);
             tabConfig.store = false;
@@ -120,6 +108,7 @@ export async function updateBadge(options: any) {
     if (hasConf) {
         config.isInit = true;
         config.isAutoChangeSize = isAutoChangeSize;
+        config.document = { title: document.title };
         if (tabConfig?.storeThisTab) {
             config.storeThisTab = tabConfig.storeThisTab;
             setLocalStorage(config);
@@ -161,7 +150,7 @@ export function isCtrlOrCommand(e: KeyboardEvent) {
     return e.ctrlKey || (navigator.platform.indexOf('Mac') === 0 && e.metaKey);
 }
 
-export async function keyDownEvent(tabId: number, res, handler) {
+export async function keyDownEvent(tabId: number, res: any, handler: any) {
     const { config, tabConfig } = await getStorageConfig(tabId);
 
     if (!hasConfig(config) && !tabConfig) return;
@@ -201,10 +190,10 @@ export function updateVideoCheck(ids: string[]) {
     VideoRoll.updateVideoCheck(ids);
 }
 
-export function updateDisable(tabId: number, rollConfig: IRollConfig) {
-    if (rollConfig.enable === true) {
+export function updateEnable(tabId: number, rollConfig: IRollConfig) {
+    if (rollConfig.enable === false) {
         VideoRoll.stop();
-    } else {
+    } else if (rollConfig.enable === true){
         updateBadge({
             tabId,
             rollConfig,
@@ -213,4 +202,10 @@ export function updateDisable(tabId: number, rollConfig: IRollConfig) {
             }
         })
     }
+}
+
+export function capture(tabId: number, rollConfig: IRollConfig) {
+    const url = VideoRoll.capture();
+    sendRuntimeMessage(tabId, { type: ActionType.CAPTURE, imgData: url })
+
 }

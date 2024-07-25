@@ -6,10 +6,12 @@
 
 import { defineComponent, inject, ref, watch } from "vue";
 import "./index.less";
+import { IRollConfig } from "src/types/type";
 
 export default defineComponent({
     name: "VideoList",
     setup() {
+        const rollConfig = inject("rollConfig") as IRollConfig;
         const onHoverVideo = inject("onHoverVideo") as Function;
         const updateVideoCheck = inject("updateVideoCheck") as Function;
         const videoList = inject("videoList") as any;
@@ -17,7 +19,7 @@ export default defineComponent({
         const getCheckedVideo = (list: any) => {
             return list.filter((v: any) => v.checked).map((v: any) => v.id);
         }
-    
+
         const checked = ref(getCheckedVideo(videoList.value));
 
         const onChange = (ids: string[]) => {
@@ -27,7 +29,6 @@ export default defineComponent({
         const onError = function () { }
 
         watch(() => videoList.value, (value) => {
-            console.log(value, '-----');
             const list = getCheckedVideo(value);
             if (JSON.stringify(list) === JSON.stringify(checked.value)) return;
             checked.value = [...list];
@@ -35,6 +36,12 @@ export default defineComponent({
 
         return () => (
             <div>
+                <van-notice-bar
+                    left-icon="tv-o"
+                    color="#1989fa"
+                    background="transparent"
+                    text={rollConfig.document?.title}
+                />
                 <van-checkbox-group v-model={checked.value} onChange={onChange}>
                     {videoList.value.length ? videoList.value.sort((a: any, b: any) => Number(b.isReal) - Number(a.isReal)).map((v: any) =>
                         <div class="video-item" onMouseleave={() => onHoverVideo(v.id, false)} onMouseenter={() => onHoverVideo(v.id, true)}>

@@ -37,6 +37,7 @@ import CheckboxGroup from "vant/es/checkbox-group/index.mjs";
 import CellGroup from "vant/es/cell-group/index.mjs";
 import Cell from "vant/es/cell/index.mjs";
 import Tag from "vant/es/tag/index.mjs";
+import NoticeBar from "vant/es/notice-bar/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -64,6 +65,7 @@ import "vant/es/checkbox-group/style/index.mjs";
 import "vant/es/cell-group/style/index.mjs";
 import "vant/es/cell/style/index.mjs";
 import "vant/es/tag/style/index.mjs";
+import "vant/es/notice-bar/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -92,4 +94,5 @@ createApp(App)
     .use(CellGroup)
     .use(Cell)
     .use(Tag)
+    .use(NoticeBar)
     .mount("#app");

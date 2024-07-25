@@ -50,6 +50,9 @@ const defaultConfig = {
     isInit: false,
     isAutoChangeSize: true,
     enable: true,
+    document: {
+        title: ''
+    },
     videoSelector: { defaultDom: 'video' }
 } as IRollConfig;
 

@@ -23,7 +23,8 @@ export enum ActionType {
     UPDATE_VIDEO_LIST,
     ON_HOVER_VIDEO,
     UPDATE_VIDEO_CHECK,
-    UPDATE_ENABLE
+    UPDATE_ENABLE,
+    CAPTURE
 }
 
 export enum FlipType {
@@ -79,6 +80,10 @@ export type Focus = {
     on: boolean;
 }
 
+export type Document = {
+    title?: string
+}
+
 export type RollKey = keyof IRollConfig;
 
 export type RollValue = IRollConfig[RollKey];
@@ -105,7 +110,8 @@ export interface IRollConfig {
     videoSelector: VideoSelector;
     isAutoChangeSize: boolean;
     enable: boolean;
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
+    document: Document
+    [key: string]: number | string | Document | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 
 export type VideoSelector = {
