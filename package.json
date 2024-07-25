@@ -18,7 +18,7 @@
         "build:manifest": "node scripts/generateManifest.js",
         "build": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background && pnpm run build:options && pnpm run build:zip",
         "build:report": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background --reporter @parcel/reporter-bundle-analyzer",
-        "copy:static": "copyfiles -u 1 src/icons/* dist",
+        "copy:static": "copyfiles -u 1 src/icons/* src/inject/capture.* dist",
         "build:zip": "node scripts/build.js",
         "clean": "rimraf dist && rimraf chromiumExt.zip && rimraf firefoxExt.zip",
         "start": "pnpm run dev",

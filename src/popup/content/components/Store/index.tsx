@@ -8,7 +8,6 @@ import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
 import { FileTrayOutline, FileTrayFullOutline } from "@vicons/ionicons5";
 
-<ion-icon name="file-tray-outline"></ion-icon>
 import "./index.less";
 
 export default defineComponent({

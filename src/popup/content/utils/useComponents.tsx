@@ -193,13 +193,13 @@ export default function useComponents() {
                     },
                     {
                         type: 'container',
-                        title: 'Cache Site',
+                        title: 'Screenshot',
                         showTitle: true,
                         col: 8,
                         children: [
                             {
                                 type: 'component',
-                                component: defineAsyncComponent(() => import("../components/Store"))
+                                component: defineAsyncComponent(() => import("../components/Capture"))
                             }
                         ]
                     }

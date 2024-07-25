@@ -35,7 +35,11 @@ export default defineComponent({
 
         const updateEnable = (value: boolean) => {
             rollConfig.enable = value;
-            sendTabMessage(rollConfig.tabId, { enable: value, type: ActionType.UPDATE_ENABLE })
+            sendTabMessage(rollConfig.tabId, { rollConfig, type: ActionType.UPDATE_ENABLE })
+        }
+
+        const capture = () => {
+            sendTabMessage(rollConfig.tabId, { rollConfig, type: ActionType.CAPTURE })
         }
 
         // current website config
@@ -48,6 +52,7 @@ export default defineComponent({
         provide("onHoverVideo", onHoverVideo)
         provide("updateVideoCheck", updateVideoCheck)
         provide("updateEnable", updateEnable)
+        provide("capture", capture)
 
         watch(() => tabId.value, (value: number) => {
             if (!value) return;
@@ -71,9 +76,8 @@ export default defineComponent({
             initRollConfig(rollConfig, tab);
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
-                const { type, rollConfig: config, text, videoList: list } = a;
+                const { type, rollConfig: config, text, videoList: list, imgData } = a;
 
-                console.log(a.tabId, tabId.value);
                 if (a.tabId !== tabId.value) {
                     c("not current tab");
                     return;
@@ -93,6 +97,10 @@ export default defineComponent({
                         break;
                     case ActionType.UPDATE_VIDEO_LIST:
                         videoList.value = list;
+                        break;
+                    case ActionType.CAPTURE:
+                        const newUrl = chrome.runtime.getURL('inject/capture.html?imgData=' + encodeURIComponent(imgData));
+                        chrome.tabs.create({ url: newUrl });
                         break;
                     default:
                         break;

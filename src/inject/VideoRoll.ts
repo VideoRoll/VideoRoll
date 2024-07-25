@@ -18,8 +18,6 @@ export default class VideoRoll {
 
     static audioController: Audiohacker[] = [];
 
-    static volumeController: any[] = [];
-
     static videoElements: Set<HTMLVideoElement> = new Set();
 
     static documents: Document[] = [];
@@ -48,6 +46,11 @@ export default class VideoRoll {
         const url = window.location.href;
         const urlReg = /^http(s)?:\/\/(.*?)\//;
         const hostName = urlReg.exec(url)?.[2] ?? '';
+
+        this.rollConfig.document = {
+            title: document.title
+        }
+
         return hostName;
     }
 
@@ -182,7 +185,7 @@ export default class VideoRoll {
                     if (video.dataset.rollId) {
                         continue;
                     };
-                    
+
                     video.setAttribute("data-roll-id", `${nanoid()}`);
                     video.setAttribute("data-roll-check", "true");
                 }
@@ -702,6 +705,19 @@ export default class VideoRoll {
         return intersectionObserver;
     }
 
+    static capture(video = this.realVideoPlayer.player) {
+        const rect = (video as HTMLVideoElement).getBoundingClientRect();
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        context?.drawImage((video as HTMLVideoElement), 0, 0, canvas.width, canvas.height);
+        // 获取canvas内容作为图像
+        return canvas.toDataURL('image/png');
+    }
+
     static getVideoInfo(video: HTMLVideoElement, index: number) {
         const src = this.getSourceElementSrc(video);
         const time = Math.ceil(video.duration * 10 / 60) / 10;
@@ -712,16 +728,7 @@ export default class VideoRoll {
         try {
             const url = new URL(src);
             name = getName(url);
-            const rect = video.getBoundingClientRect();
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-
-            context?.drawImage(video, 0, 0, canvas.width, canvas.height);
-            // 获取canvas内容作为图像
-            dataURL = canvas.toDataURL('image/png');
+            dataURL = this.capture(video);
         } catch (err) {
             console.debug(err);
         }
@@ -745,7 +752,7 @@ export default class VideoRoll {
             const item: any = {
                 id: v.dataset.rollId,
                 visible: v.dataset.rollVisible === 'true' ? true : false,
-                checked: v.dataset.rollCheck ?? v.dataset.rollCheck === 'true' ? true : false,
+                checked: v.dataset.rollCheck === 'true' ? true : false,
                 ...info
             };
 
@@ -753,7 +760,7 @@ export default class VideoRoll {
 
             return item
         });
-        console.log(JSON.stringify(this.videoList[0]?.id));
+
         callback({
             text: String(this.videoNumbers),
             videoList: this.buildVideoList()
@@ -775,7 +782,7 @@ export default class VideoRoll {
                 this.observer = new MutationObserver(debounce((mutationList: any) => {
                     this.useVideoChanged(callback);
                 }, 300));
-    
+
                 this.observer.observe(elementToObserve, { childList: true, subtree: true, attributes: true });
             }
         } catch (err) {
@@ -799,8 +806,6 @@ export default class VideoRoll {
             return v;
         });
 
-        console.log(this.videoList[0].checked, 'this.videoList')
-
         this.updateVideo(this.rollConfig);
         return this;
     }
@@ -818,12 +823,22 @@ export default class VideoRoll {
 
         if (this.observer) {
             this.observer.disconnect();
+            this.observer = null;
         }
+
+        if (this.rollConfig.pictureInPicture) {
+            this.togglePictureInPicture(false);
+        }
+
+        this.clearRealVideoPlayer();
+        this.clearRootElement();
+        this.clearVideoElements();
+        this.documents = [];
+        this.videoNumbers = 0;
+        this.videoList = [];
     }
 
     static restart() {
-        this.videoElements.forEach((v) => {
-            this.removeStyle(v);
-        });
+
     }
 }
