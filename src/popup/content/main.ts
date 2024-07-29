@@ -38,6 +38,8 @@ import CellGroup from "vant/es/cell-group/index.mjs";
 import Cell from "vant/es/cell/index.mjs";
 import Tag from "vant/es/tag/index.mjs";
 import NoticeBar from "vant/es/notice-bar/index.mjs";
+import Form from "vant/es/form/index.mjs";
+import Field from "vant/es/field/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -66,6 +68,8 @@ import "vant/es/cell-group/style/index.mjs";
 import "vant/es/cell/style/index.mjs";
 import "vant/es/tag/style/index.mjs";
 import "vant/es/notice-bar/style/index.mjs";
+import "vant/es/form/style/index.mjs";
+import "vant/es/field/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -95,4 +99,6 @@ createApp(App)
     .use(Cell)
     .use(Tag)
     .use(NoticeBar)
+    .use(Form)
+    .use(Field)
     .mount("#app");

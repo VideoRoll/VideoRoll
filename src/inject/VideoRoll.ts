@@ -5,7 +5,7 @@
  */
 import WEBSITE from "../website";
 import Audiohacker from "audio-hacker";
-import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, VideoObject, IRealVideoPlayer, VideoListItem } from '../types/type.d';
+import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, OriginElementPosition, IRealVideoPlayer, VideoListItem } from '../types/type.d';
 import { nanoid } from "nanoid";
 import { isVisible } from "src/util";
 import debounce from "src/util/debounce";
@@ -28,7 +28,7 @@ export default class VideoRoll {
 
     static realVideoPlayer: IRealVideoPlayer = { width: 0, height: 0, player: null };
 
-    static rootElement: HTMLElement | undefined;
+    static originElementPosition: OriginElementPosition | null;
 
     static observer: MutationObserver;
 
@@ -47,10 +47,6 @@ export default class VideoRoll {
         const urlReg = /^http(s)?:\/\/(.*?)\//;
         const hostName = urlReg.exec(url)?.[2] ?? '';
 
-        this.rollConfig.document = {
-            title: document.title
-        }
-
         return hostName;
     }
 
@@ -61,25 +57,13 @@ export default class VideoRoll {
      * @returns
      */
     static getScaleNumber(
-        target: VideoElement,
+        target: HTMLVideoElement,
         deg: number
     ): [number, number] {
-        let videoWidth = 0;
-        let videoHeight = 0;
-        let offsetWidth = 0;
-        let offsetHeight = 0;
-
-        if (typeof target === 'object' && 'wrapElement' in target && 'shadowElement' in target) {
-            offsetWidth = target.shadowElement.offsetWidth;
-            offsetHeight = target.shadowElement.offsetHeight;
-            videoWidth = offsetWidth;
-            videoHeight = offsetHeight;
-        } else {
-            offsetWidth = target.offsetWidth;
-            offsetHeight = target.offsetHeight;
-            videoWidth = target.videoWidth;
-            videoHeight = target.videoHeight;
-        }
+        const offsetWidth = target.offsetWidth ?? 0;
+        const offsetHeight = target.offsetHeight ?? 0;
+        const videoWidth = target.videoWidth ?? 0;
+        const videoHeight = target.videoHeight ?? 0;
 
         const isHorizonDeg = deg === 90 || deg === 270;
 
@@ -143,13 +127,19 @@ export default class VideoRoll {
     static updateVideoElements(videoSelector: VideoSelector) {
         if (!this.documents.length) return;
 
-        // this.clearVideoElements();
-        this.clearRootElement();
+        this.addMaskElement();
+        // this.clearOriginElementPosition();
         this.clearRealVideoPlayer();
 
         const videos = this.getAllVideosBySelector(videoSelector, this.documents);
 
         this.setVideo(videos);
+
+        const mask = document.getElementById('video-roll-root-mask');
+        if (!this.realVideoPlayer.player || this.realVideoPlayer.player?.parentElement === mask) return;
+        
+        const originElementPosition = this.findOriginElementPosition(this.realVideoPlayer.player as HTMLVideoElement);
+        this.setOriginElementPosition(originElementPosition);
         return this;
     }
 
@@ -232,8 +222,8 @@ export default class VideoRoll {
         this.videoNumbers = this.videoElements.size;
     }
 
-    static setRootElement(element: HTMLElement) {
-        this.rootElement = element;
+    static setOriginElementPosition(data: any) {
+        this.originElementPosition = data;
     }
 
     static setRealVideoPlayer(realPlayer: HTMLVideoElement) {
@@ -251,8 +241,8 @@ export default class VideoRoll {
         this.videoElements.clear();
     }
 
-    static clearRootElement() {
-        this.rootElement = void 0;
+    static clearOriginElementPosition() {
+        this.originElementPosition = null;
     }
 
     static clearRealVideoPlayer() {
@@ -304,19 +294,18 @@ export default class VideoRoll {
             }
 
             this.rollConfig.scale.values = scaleNum;
+            this.rollConfig.document = { title: document.title };
             this.documents.forEach((doc) => {
                 if (!this.isExistStyle(doc)) return;
                 this.replaceClass({ deg, flip, scale: scaleNum, zoom, move, filter, focus }, doc);
-
-                this.videoElements.forEach((video) => {
-                    this.updateFocus(doc, video as HTMLVideoElement, focus.on);
-                    this.togglePictureInPicture(pictureInPicture);
-                });
             });
 
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
         }
+
+        this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, focus.on);
+        this.togglePictureInPicture(pictureInPicture);
 
         return this;
     }
@@ -387,6 +376,17 @@ export default class VideoRoll {
             z-index: 20000 !important;
             background-color: rgba(0, 0, 0, 0.8);
         }
+        
+        .video-roll-focus {
+            width: ${this.originElementPosition?.style.width}px;
+            height: ${this.originElementPosition?.style.height}px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
         `;
 
         return this;
@@ -398,9 +398,8 @@ export default class VideoRoll {
      */
     static isExistStyle(doc: Document) {
         const degScale = doc.getElementById("video-roll-deg-scale");
-        const root = document.getElementById("video-roll-root");
 
-        return degScale && root ? [degScale, root] : null;
+        return degScale ?? null;
     }
 
     /**
@@ -450,7 +449,7 @@ export default class VideoRoll {
                 if (!isClear) return this;
 
                 if (!storeThisTab && !store) {
-                    styles[0].innerHTML = `
+                    styles.innerHTML = `
                     .video-roll-deg-scale {}
                 `;
                     return this;
@@ -464,7 +463,6 @@ export default class VideoRoll {
             degScale.innerHTML = `
                 .video-roll-deg-scale {}
             `;
-
 
             degScale.setAttribute("id", "video-roll-deg-scale");
 
@@ -492,14 +490,6 @@ export default class VideoRoll {
     static addMaskElement() {
         if (!document.body) return;
 
-        const root = document.createElement("style");
-        root.innerHTML = '.video-roll-root {}';
-        root.setAttribute("id", "video-roll-root");
-        root.setAttribute("type", "text/css");
-
-        const documentHead = document.getElementsByTagName("head")[0];
-        documentHead.appendChild(root);
-
         if (!document.getElementById('video-roll-root-mask')) {
             const mask = document.createElement("div");
             mask.setAttribute("id", "video-roll-root-mask");
@@ -513,14 +503,17 @@ export default class VideoRoll {
      * @param rect
      * @returns
      */
-    static findVideoRootElement(dom: HTMLElement, rect: [number, number]): HTMLElement {
-        const { parentElement } = dom;
-
-        if (parentElement && (parentElement.offsetWidth === rect[0] || parentElement.offsetHeight <= rect[1])) {
-            return this.findVideoRootElement(parentElement, rect);
+    static findOriginElementPosition(video: HTMLVideoElement): any {
+        const { parentElement, previousElementSibling, nextElementSibling } = video;
+        return {
+            parentElement,
+            previousElementSibling,
+            nextElementSibling,
+            style: {
+                width: video.offsetWidth,
+                height: video.offsetHeight
+            }
         }
-
-        return dom;
     }
 
     /**
@@ -530,30 +523,29 @@ export default class VideoRoll {
      * @param focus
      * @returns
      */
-    static updateFocus(doc: Document, video: HTMLVideoElement, focus: boolean): void {
-        if (!focus && !this.rootElement) return;
+    static updateFocus(video: HTMLVideoElement, focus: boolean) {
+        const mask = document.getElementById('video-roll-root-mask');
 
-        // @ts-ignore
-        if (video.parentDocument !== doc || !this.isRealVideoPlayer(video)) return;
+        if (!focus && this.originElementPosition && mask) {
+            const { parentElement, previousElementSibling, nextElementSibling } = this.originElementPosition;
+            if (video.parentElement === mask && parentElement) {
+                video.classList.remove('video-roll-focus');
+                if (nextElementSibling) {
+                    parentElement.insertBefore(video, nextElementSibling)
+                } else {
+                    parentElement.appendChild(video);
+                }
+            }
 
-        let rootDom;
-        if ('iframeElement' in doc) {
-            const iframe = doc.iframeElement as HTMLElement;
-            rootDom = this.rootElement ?? this.findVideoRootElement(iframe, [iframe.offsetWidth, iframe.offsetHeight]);
-        } else {
-            rootDom = this.rootElement ?? this.findVideoRootElement(video, [video.offsetWidth, video.offsetHeight]);
+            return this;
+        } 
+        
+        if (focus && this.originElementPosition && mask) {
+            mask.appendChild(video);
+            video.classList.add('video-roll-focus');
         }
 
-        this.setRootElement(rootDom);
-
-        rootDom.classList.add('video-roll-root');
-
-        const { offsetWidth, offsetHeight } = rootDom;
-        const rootStyle = document.getElementById("video-roll-root");
-
-        if (rootStyle) {
-            rootStyle.innerHTML = focus ? `.video-roll-root { position: fixed !important; top: 5% !important; z-index: 200001 !important; width: ${offsetWidth}px !important; height: ${offsetHeight}px !important; } body * { z-index: auto !important; } body { overflow: hidden !important; }` : '.video-roll-root {}';
-        }
+        return this;
     }
 
     static createAudiohacker() {
@@ -772,6 +764,8 @@ export default class VideoRoll {
      * @param callback 
      */
     static observeVideo(callback: Function) {
+        if (this.rollConfig?.enable === false) return this;
+    
         this.useVideoChanged(callback);
 
         try {
@@ -813,6 +807,8 @@ export default class VideoRoll {
     static removeStyle(target: HTMLElement) {
         target.classList.remove("video-roll-highlight");
         target.classList.remove("video-roll-deg-scale");
+
+        document.getElementById('video-roll-deg-scale')?.remove();
     }
 
     static stop() {
@@ -820,6 +816,12 @@ export default class VideoRoll {
             this.removeStyle(v);
         });
         this.resetAudio();
+
+        if (this.rollConfig.focus.on) {
+            this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, false);
+            const mask = document.getElementById('video-roll-root-mask') as HTMLElement;
+            mask?.remove();
+        }
 
         if (this.observer) {
             this.observer.disconnect();
@@ -831,7 +833,7 @@ export default class VideoRoll {
         }
 
         this.clearRealVideoPlayer();
-        this.clearRootElement();
+        this.clearOriginElementPosition();
         this.clearVideoElements();
         this.documents = [];
         this.videoNumbers = 0;

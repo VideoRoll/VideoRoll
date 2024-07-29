@@ -1,4 +1,4 @@
-import { IMove, IScale } from "src/types/type";
+import { IMove, IScale } from "src/types/type.d";
 import { ref } from "vue";
 
 export const shortcutsMap = {
@@ -25,7 +25,12 @@ export const shortcutsMap = {
     'Volume +': { key: 'volume', handler: (data: number) => { if (data + 0.01 <= 6) return data + 0.01; return data; }, shortcuts: { key: '', code: []} },
     'Volume -': { key: 'volume', handler: (data: number) => { if (data - 0.01 >= 0) return data - 0.01; return data; }, shortcuts: { key: '', code: []} },
     'PlaybackRate +': { key: 'playbackRate', handler: (data: number) => { if (data + 0.01 <= 4) return data + 0.01; return data; }, shortcuts: { key: '', code: []} },
-    'PlaybackRate -': { key: 'playbackRate', handler: (data: number) => { if (data - 0.01 >= 0) return data - 0.01; return data; }, shortcuts: { key: '', code: []} }
+    'PlaybackRate -': { key: 'playbackRate', handler: (data: number) => { if (data - 0.01 >= 0) return data - 0.01; return data; }, shortcuts: { key: '', code: []} },
+    'Screenshot': { key: 'capture', trigger: ({ VideoRoll }) => {
+        const url = VideoRoll.capture();
+        const newUrl = chrome.runtime.getURL('inject/capture.html?imgData=' + encodeURIComponent(url));
+        window.open(newUrl, '_blank');
+    }, shortcuts: { key: '', code: []} }
 };
 
 export function useShortcuts() {
