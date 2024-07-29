@@ -120,9 +120,17 @@ export type VideoSelector = {
     wrapDom?: string
 }
 
-export type VideoObject = { shadowElement: HTMLElement,  wrapElement: HTMLElement, dataset: any };
+export type OriginElementPosition = {
+    parentElement: HTMLElement
+    previousElementSibling: HTMLElement | null
+    nextElementSibling: HTMLElement | null
+    style: {
+        width?: number;
+        height?: number;
+    }
+};
 
-export type VideoElement = VideoObject | HTMLVideoElement;
+export type VideoElement = HTMLVideoElement;
 
 export interface IWebSite {
     [prop: string]: {

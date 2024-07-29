@@ -18,6 +18,7 @@ export default defineComponent({
     setup(props) {
         const updateEnable = inject("updateEnable") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
+        const update = inject("update") as Function;
 
         const toGithub = () => {
             createURL('https://github.com/gxy5202/VideoRoll');
@@ -42,8 +43,9 @@ export default defineComponent({
             createURL('https://discord.gg/N5rSStFE');
         }
 
-        const update = (value: boolean) => {
+        const setEnable = (value: boolean) => {
             rollConfig.enable = value;
+            update('enable', rollConfig.enable);
             updateEnable(rollConfig.enable);
         }
 
@@ -58,7 +60,7 @@ export default defineComponent({
                 <div class="video-roll-head-right">
                     <van-space>
                         <div class="video-roll-setting-btn" title="disable on this site">
-                            <van-switch v-model={rollConfig.enable} size="12px" onChange={update}></van-switch>
+                            <van-switch v-model={rollConfig.enable} size="12px" onChange={setEnable}></van-switch>
                         </div>
                         <div class="video-roll-setting-btn" title="settings" onClick={toSettings}>
                             <SettingsSharp class="logo-usd"></SettingsSharp>

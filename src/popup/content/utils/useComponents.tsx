@@ -31,9 +31,15 @@ interface IContainerConfig extends IConfig {
     children?: IComponentConfig[] | IRowConfig[]
 }
 
+interface IFragmentConfig extends IConfig {
+    type: 'fragment',
+    col?: number;
+    children?: IComponentConfig[] | IRowConfig[]
+}
+
 interface IRowConfig extends IConfig {
     type: 'row';
-    children: IContainerConfig[]
+    children: IContainerConfig[] | IFragmentConfig[]
 }
 
 interface ISwiperConfig extends IConfig {
@@ -132,7 +138,7 @@ export default function useComponents() {
                 children: [
                     {
                         type: 'container',
-                        title: "Repostion",
+                        title: "Reposition",
                         showTitle: true,
                         col: 8,
                         children: [{
@@ -215,6 +221,25 @@ export default function useComponents() {
                     {
                         type: 'container',
                         col: 24,
+                        title: "Speed",
+                        showTitle: true,
+                        children: [{
+                            type: 'component',
+                            component: defineAsyncComponent(() => import("../components/PlaybackRate"))
+                        }]
+                    },
+                ]
+            },
+            {
+                type: 'row',
+                style: {
+                    margin: '30px 0',
+                    height: '40px'
+                },
+                children: [
+                    {
+                        type: 'container',
+                        col: 24,
                         title: "Zoom",
                         showTitle: true,
                         children: [{
@@ -258,25 +283,6 @@ export default function useComponents() {
                     children: [
                         {
                             type: 'container',
-                            col: 24,
-                            title: "Playback Rate",
-                            showTitle: true,
-                            children: [{
-                                type: 'component',
-                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
-                            }]
-                        },
-                    ]
-                },
-                {
-                    type: 'row',
-                    style: {
-                        margin: '30px 0',
-                        height: '40px'
-                    },
-                    children: [
-                        {
-                            type: 'container',
                             title: "Pitch",
                             showTitle: true,
                             col: 24,
@@ -307,55 +313,15 @@ export default function useComponents() {
                     type: 'row',
                     style: {
                         margin: '30px 0',
-                        height: '40px'
+                        height: '100px'
                     },
                     children: [
                         {
-                            type: 'container',
-                            title: "Volume",
-                            showTitle: true,
+                            type: 'fragment',
                             col: 24,
                             children: [{
                                 type: 'component',
-                                component: defineAsyncComponent(() => import("../components/Volume"))
-                            }]
-                        },
-                    ]
-                },
-                {
-                    type: 'row',
-                    style: {
-                        margin: '30px 0',
-                        height: '40px'
-                    },
-                    children: [
-                        {
-                            type: 'container',
-                            col: 24,
-                            title: "Playback Rate",
-                            showTitle: true,
-                            children: [{
-                                type: 'component',
-                                component: defineAsyncComponent(() => import("../components/PlaybackRate"))
-                            }]
-                        },
-                    ]
-                },
-                {
-                    type: 'row',
-                    style: {
-                        margin: '30px 0',
-                        height: '40px'
-                    },
-                    children: [
-                        {
-                            type: 'container',
-                            title: "Pitch",
-                            showTitle: true,
-                            col: 24,
-                            children: [{
-                                type: 'component',
-                                component: defineAsyncComponent(() => import("../components/Pitch"))
+                                component: defineAsyncComponent(() => import("../components/More"))
                             }]
                         },
                     ]
@@ -367,4 +333,4 @@ export default function useComponents() {
     return components;
 }
 
-export { ITabConfig, ISwiperConfig, IRowConfig, IComponentConfig, IContainerConfig, IConfig }
+export { ITabConfig, ISwiperConfig, IRowConfig, IComponentConfig, IContainerConfig, IFragmentConfig, IConfig }

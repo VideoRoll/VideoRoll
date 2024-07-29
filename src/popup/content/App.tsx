@@ -33,8 +33,7 @@ export default defineComponent({
             sendTabMessage(rollConfig.tabId, { ids, type: ActionType.UPDATE_VIDEO_CHECK })
         }
 
-        const updateEnable = (value: boolean) => {
-            rollConfig.enable = value;
+        const updateEnable = () => {
             sendTabMessage(rollConfig.tabId, { rollConfig, type: ActionType.UPDATE_ENABLE })
         }
 

@@ -39,3 +39,13 @@ export function setLocalStorage(config: IRollConfig) {
 export function removeLocalStorage(key: string) {
     browser.storage.sync.remove(key);
 }
+
+export function setStorageByKey(config: IRollConfig) {
+    if (config.enable === false) {
+        browser.storage.sync.set({
+            [`video-roll-disabled-${config.url}`]: config 
+        });
+    } else {
+        browser.storage.sync.remove(`video-roll-disabled-${config.url}`);
+    }
+}
