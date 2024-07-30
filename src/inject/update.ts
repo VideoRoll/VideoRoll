@@ -53,8 +53,6 @@ export async function updateConfig(tabId: number, rollConfig: IRollConfig) {
  * @param rollConfig
  */
 export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
-    if (rollConfig.enable === false) return;
-    
     let config = await getLocalStorage(rollConfig.url);
 
     // set session storage
@@ -64,9 +62,9 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
 
     config = Object.assign(config, { videoNumber: rollConfig.videoNumber, tabId: rollConfig.tabId })
 
-    VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
-
     sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE, tabId })
+    if (config.enable === false) return;
+    VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
     sendRuntimeMessage(tabId, { videoList: VideoRoll.videoList, type: ActionType.UPDATE_VIDEO_LIST, tabId })
 }
 
@@ -76,6 +74,8 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
  */
 export async function updateBadge(options: any) {
     const { tabId, rollConfig, callback } = options;
+
+    getTabBadge(callback);
 
     const { config, tabConfig } = await getStorageConfig(tabId);
 
@@ -114,8 +114,6 @@ export async function updateBadge(options: any) {
 
         VideoRoll.setRollConfig(config).addStyleClass(true).updateVideo(rollConfig ?? config).updateAudio();
     }
-
-    getTabBadge(callback);
 }
 
 export function updateStorage(rollConfig: IRollConfig, send: Function) {
@@ -202,6 +200,7 @@ export function updateEnable(tabId: number, rollConfig: IRollConfig) {
             tabId,
             rollConfig,
             callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
+                // VideoRoll.addStyleClass().updateVideo(rollConfig).updateAudio();
                 sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList, tabId })
             }
         })

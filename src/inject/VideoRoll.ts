@@ -444,7 +444,7 @@ export default class VideoRoll {
 
         this.documents.forEach((doc) => {
             const styles = this.isExistStyle(doc);
-
+            console.log('styles', styles);
             if (styles) {
                 if (!isClear) return this;
 
@@ -471,6 +471,7 @@ export default class VideoRoll {
             const head = doc.getElementsByTagName("head")[0];
 
             if (head) {
+                console.log('degScale', degScale);
                 head.appendChild(degScale);
             }
 
