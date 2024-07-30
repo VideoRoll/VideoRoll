@@ -10,8 +10,12 @@ export const OPTIONS_MENU = [
         component: defineAsyncComponent(() => import('./components/Shortcuts'))
     },
     {
-        title: 'Cache List',
+        title: 'Cached Websites',
         component: defineAsyncComponent(() => import('./components/CacheList'))
+    },
+    {
+        title: 'Disabled Websites',
+        component: defineAsyncComponent(() => import('./components/DisabledList'))
     },
     {
         title: 'Contact',

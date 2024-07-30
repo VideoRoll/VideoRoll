@@ -6,7 +6,7 @@ import { showConfirmDialog } from 'vant';
 import './index.less';
 
 export default defineComponent({
-    name: "CacheList",
+    name: "DisableList",
     setup(props) {
         const list = ref<any>([]);
 
@@ -15,13 +15,15 @@ export default defineComponent({
             browser.storage.sync.get().then((res) => {
                 Object.keys(res).forEach((key) => {
                     const data = res[key];
-                    if (key.startsWith("video-roll") && !key.startsWith("video-roll-disabled") && 'deg' in data) {
+                    if (key.startsWith("video-roll-disabled")) {
                         list.value.push({
                             url: data.url,
                             data
                         })
                     }
                 })
+
+                console.log(list, 'list');
             })
         }
         onMounted(() => {
@@ -33,7 +35,7 @@ export default defineComponent({
         }
 
         const remove = (value: boolean) => {
-            browser.storage.sync.remove(`video-roll-${value}`);
+            browser.storage.sync.remove(`video-roll-disabled-${value}`);
             loadList();
         }
 
@@ -43,7 +45,7 @@ export default defineComponent({
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'No'
             }).then(() => {
-                browser.storage.sync.remove(list.value.map((item: any) => `video-roll-${item.url}`));
+                browser.storage.sync.remove(list.value.map((item: any) => `video-roll-disabled-${item.url}`));
                 loadList();
             });
         }
