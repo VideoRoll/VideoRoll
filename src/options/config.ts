@@ -1,28 +1,29 @@
 import { defineAsyncComponent } from "vue";
+import browser from 'webextension-polyfill';
 
 export const OPTIONS_MENU = [
     {
-        title: 'General',
+        title: browser.i18n.getMessage('options_general'),
         component: defineAsyncComponent(() => import('./components/General'))
     },
     {
-        title: 'Shortcuts',
+        title: browser.i18n.getMessage('options_shortcuts'),
         component: defineAsyncComponent(() => import('./components/Shortcuts'))
     },
     {
-        title: 'Cached Websites',
+        title: browser.i18n.getMessage('options_cache_list'),
         component: defineAsyncComponent(() => import('./components/CacheList'))
     },
     {
-        title: 'Disabled Websites',
+        title: browser.i18n.getMessage('options_disabled_list'),
         component: defineAsyncComponent(() => import('./components/DisabledList'))
     },
     {
-        title: 'Contact',
+        title: browser.i18n.getMessage('options_contact'),
         component: defineAsyncComponent(() => import('./components/Contact'))
     },
     {
-        title: 'Donate',
+        title: browser.i18n.getMessage('options_donate'),
         component: defineAsyncComponent(() => import('./components/Donate'))
     }
 ];

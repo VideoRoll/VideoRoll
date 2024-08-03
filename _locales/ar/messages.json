@@ -1,0 +1,158 @@
+{
+   "tabs_video": {
+      "message": "فيديو"
+   },
+   "tabs_audio": {
+      "message": "صوت"
+   },
+   "tabs_list": {
+      "message": "قائمة"
+   },
+   "tabs_more": {
+      "message": "المزيد"
+   },
+   "video_rotate": {
+      "message": "تدوير"
+   },
+   "video_download": {
+      "message": "تحميل"
+   },
+   "video_reposition": {
+      "message": "إعادة تموضع"
+   },
+   "video_stretch": {
+      "message": "تمديد"
+   },
+   "video_flip": {
+      "message": "انعكاس"
+   },
+   "video_focus": {
+      "message": "تركيز"
+   },
+   "video_filter": {
+      "message": "فلتر"
+   },
+   "video_screenshot": {
+      "message": "لقطة شاشة"
+   },
+   "video_speed": {
+      "message": "السرعة"
+   },
+   "video_zoom": {
+      "message": "تكبير"
+   },
+   "audio_volume": {
+      "message": "مستوى الصوت"
+   },
+   "audio_pitch": {
+      "message": "حدة الصوت"
+   },
+   "list_main": {
+      "message": "الرئيسية"
+   },
+   "more_save_preferences": {
+      "message": "حفظ التفضيلات الحالية"
+   },
+   "more_auto_resize": {
+      "message": "تغيير الحجم تلقائيًا عند التدوير"
+   },
+   "action_reset": {
+      "message": "إعادة ضبط"
+   },
+   "tips_disabled": {
+      "message": "معطل على هذا الموقع"
+   },
+   "tips_enabled": {
+      "message": "مفعل على هذا الموقع"
+   },
+   "options_general": {
+      "message": "عام"
+   },
+   "options_shortcuts": {
+      "message": "اختصارات"
+   },
+   "options_cache_list": {
+      "message": "قائمة الذاكرة المؤقتة"
+   },
+   "options_disabled_list": {
+      "message": "قائمة المعطل"
+   },
+   "options_contact": {
+      "message": "اتصال"
+   },
+   "options_donate": {
+      "message": "تبرع"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "تدوير لليسار"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "تدوير لليمين"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "تدوير 90 درجة"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "تدوير 180 درجة"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "تدوير 270 درجة"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "تدوير 0 درجة"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "انعكاس أفقي"
+   },
+   "options_shortcuts_vertically": {
+      "message": "انعكاس رأسي"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "إعادة ضبط الانعكاس"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "تكبير"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "تصغير"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "تمديد أفقي +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "تقليص أفقي -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "تمديد رأسي +"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "إعادة ضبط التمديد"
+   },
+   "options_shortcut_move_right": {
+      "message": "تحرك لليمين"
+   },
+   "options_shortcut_move_left": {
+      "message": "تحرك لليسار"
+   },
+   "options_shortcut_move_up": {
+      "message": "تحرك لأعلى"
+   },
+   "options_shortcut_move_down": {
+      "message": "تحرك لأسفل"
+   },
+   "options_shortcut_volume_p": {
+      "message": "رفع الصوت +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "خفض الصوت -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "زيادة السرعة +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "تقليل السرعة -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "لقطة شاشة"
+   }
+}

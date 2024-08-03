@@ -6,6 +6,7 @@
 
 import { defineComponent, inject, watch } from "vue";
 import type { IRollConfig } from "../../../../types/type";
+import browser from 'webextension-polyfill';
 import "./index.less";
 
 export default defineComponent({
@@ -27,11 +28,11 @@ export default defineComponent({
         return () => (
             <div class="more-box">
                 <div class="more-content">
-                    <div>Save current preferences</div>
+                    <div>{browser.i18n.getMessage('more_save_preferences')}</div>
                     <van-switch size={16} v-model={rollConfig.store} onChange={setStore} />
                 </div>
                 <div class="more-content">
-                    <div>Auto-resize when rotated</div>
+                    <div>{browser.i18n.getMessage('more_auto_resize')}</div>
                     <van-switch size={16} v-model={rollConfig.isAutoChangeSize} onChange={setAutomatically} />
                 </div>
             </div>

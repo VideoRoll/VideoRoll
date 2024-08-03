@@ -12,18 +12,16 @@ export default defineComponent({
 
         const loadList = () => {
             list.value.length = 0;
+            list.value = [];
             browser.storage.sync.get().then((res) => {
                 Object.keys(res).forEach((key) => {
                     const data = res[key];
-                    if (key.startsWith("video-roll-disabled")) {
+                    if (key.startsWith("video-roll-disabled") && typeof data === "string") {
                         list.value.push({
-                            url: data.url,
-                            data
+                            url: data
                         })
                     }
                 })
-
-                console.log(list, 'list');
             })
         }
         onMounted(() => {
@@ -35,13 +33,14 @@ export default defineComponent({
         }
 
         const remove = (value: boolean) => {
-            browser.storage.sync.remove(`video-roll-disabled-${value}`);
-            loadList();
+            browser.storage.sync.remove(`video-roll-disabled-${value}`).then(() => {
+                loadList();
+            });
         }
 
         const clear = () => {
             showConfirmDialog({
-                message: 'Are you sure you want to clear cache list?',
+                message: 'Are you sure you want to clear disabled list?',
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'No'
             }).then(() => {

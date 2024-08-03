@@ -5,6 +5,7 @@
  */
 
 import { defineComponent, inject, ref, watch } from "vue";
+import browser from "webextension-polyfill";
 import "./index.less";
 import { IRollConfig } from "src/types/type";
 
@@ -61,7 +62,7 @@ export default defineComponent({
                                         <div class="video-tags">
                                             <van-tag plain type="primary">{v.duration} mins</van-tag>
                                             {
-                                                v.isReal ? <van-tag type="success">main</van-tag> : null
+                                                v.isReal ? <van-tag type="success">{browser.i18n.getMessage('list_main')}</van-tag> : null
                                             }
                                         </div>
                                     </div>

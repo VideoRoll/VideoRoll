@@ -1,0 +1,158 @@
+{
+   "tabs_video": {
+      "message": "Video"
+   },
+   "tabs_audio": {
+      "message": "Audio"
+   },
+   "tabs_list": {
+      "message": "Liste"
+   },
+   "tabs_more": {
+      "message": "Mehr"
+   },
+   "video_rotate": {
+      "message": "Drehen"
+   },
+   "video_download": {
+      "message": "Herunterladen"
+   },
+   "video_reposition": {
+      "message": "Neu positionieren"
+   },
+   "video_stretch": {
+      "message": "Strecken"
+   },
+   "video_flip": {
+      "message": "Spiegeln"
+   },
+   "video_focus": {
+      "message": "Fokus"
+   },
+   "video_filter": {
+      "message": "Filter"
+   },
+   "video_screenshot": {
+      "message": "Bildschirmfoto"
+   },
+   "video_speed": {
+      "message": "Geschwindigkeit"
+   },
+   "video_zoom": {
+      "message": "Zoom"
+   },
+   "audio_volume": {
+      "message": "Lautstärke"
+   },
+   "audio_pitch": {
+      "message": "Tonhöhe"
+   },
+   "list_main": {
+      "message": "Haupt"
+   },
+   "more_save_preferences": {
+      "message": "Aktuelle Einstellungen speichern"
+   },
+   "more_auto_resize": {
+      "message": "Automatische Größenänderung beim Drehen"
+   },
+   "action_reset": {
+      "message": "Zurücksetzen"
+   },
+   "tips_disabled": {
+      "message": "auf dieser Seite deaktiviert"
+   },
+   "tips_enabled": {
+      "message": "auf dieser Seite aktiviert"
+   },
+   "options_general": {
+      "message": "Allgemein"
+   },
+   "options_shortcuts": {
+      "message": "Tastenkombinationen"
+   },
+   "options_cache_list": {
+      "message": "Cache-Liste"
+   },
+   "options_disabled_list": {
+      "message": "Deaktivierte Liste"
+   },
+   "options_contact": {
+      "message": "Kontakt"
+   },
+   "options_donate": {
+      "message": "Spenden"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "Nach links drehen"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "Nach rechts drehen"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "90 Grad drehen"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "180 Grad drehen"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "270 Grad drehen"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "0 Grad drehen"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "Horizontal spiegeln"
+   },
+   "options_shortcuts_vertically": {
+      "message": "Vertikal spiegeln"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "Spiegeln zurücksetzen"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "Vergrößern"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "Verkleinern"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "Horizontal strecken +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "Horizontal verkleinern -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "Vertikal strecken +"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "Strecken zurücksetzen"
+   },
+   "options_shortcut_move_right": {
+      "message": "Nach rechts bewegen"
+   },
+   "options_shortcut_move_left": {
+      "message": "Nach links bewegen"
+   },
+   "options_shortcut_move_up": {
+      "message": "Nach oben bewegen"
+   },
+   "options_shortcut_move_down": {
+      "message": "Nach unten bewegen"
+   },
+   "options_shortcut_volume_p": {
+      "message": "Lautstärke +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "Lautstärke -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "Geschwindigkeit +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "Geschwindigkeit -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "Bildschirmfoto"
+   }
+}

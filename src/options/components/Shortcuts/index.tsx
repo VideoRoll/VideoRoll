@@ -27,6 +27,7 @@ export default defineComponent({
 			browser.storage.sync.get('shortcuts').then((res) => {
 				const map = res?.['shortcuts'] ?? {};
 				Object.keys(shortcutsMap.value).forEach((key: string) => {
+					console.log(key, 'key');
 					if (map[key]) {
 						shortcutsMap.value[key].shortcuts = map[key].shortcuts;
 					}
@@ -72,9 +73,10 @@ export default defineComponent({
 								Object.keys(shortcutsMap.value).map((key: string) => {
 									return <van-field
 										v-model={shortcutsMap.value[key].shortcuts.key}
-										label={key}
+										label={`${shortcutsMap.value[key].title} : `}
 										readonly
 										placeholder="Click to update"
+										label-align="right"
 										onClick={() => updateCurrentId(key)}
 									/>
 								})
