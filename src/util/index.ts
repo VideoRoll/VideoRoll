@@ -6,4 +6,5 @@ export * from "./clone";
 export * from "./storage";
 export * from './createURL';
 export * from './isVisible';
+export * from './getDomain'
 

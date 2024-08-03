@@ -1,0 +1,170 @@
+{
+   "extension_name": {
+      "message": "Video Roll - All-in-One Video Enhancements"
+   },
+   "extension_des": {
+      "message": "An all-in-one video enhancement tool that includes video, audio, and shortcut operations, eliminating all obstacles to your video-watching experience"
+   },
+   "tabs_video": {
+      "message": "Video"
+   },
+   "tabs_audio": {
+      "message": "Audio"
+   },
+   "tabs_list": {
+      "message": "List"
+   },
+   "tabs_more": {
+      "message": "More"
+   },
+   "video_rotate": {
+      "message": "Rotate"
+   },
+   "video_pic_in_pic": {
+      "message": "Picture in Picture"
+   },
+   "video_download": {
+      "message": "Download"
+   },
+   "video_reposition": {
+      "message": "Reposition"
+   },
+   "video_stretch": {
+      "message": "Stretch"
+   },
+   "video_flip": {
+      "message": "Flip"
+   },
+   "video_focus": {
+      "message": "Focus"
+   },
+   "video_filter": {
+      "message": "Filter"
+   },
+   "video_screenshot": {
+      "message": "ScreenShot"
+   },
+   "video_speed": {
+      "message": "Speed"
+   },
+   "video_zoom": {
+      "message": "Zoom"
+   },
+   "audio_volume": {
+      "message": "Volume"
+   },
+   "audio_pitch": {
+      "message": "Pitch"
+   },
+   "list_main": {
+      "message": "main"
+   },
+   "more_save_preferences": {
+      "message": "Save current preferences"
+   },
+   "more_auto_resize": {
+      "message": "Auto-resize when rotated"
+   },
+   "action_reset": {
+      "message": "reset"
+   },
+   "tips_disabled": {
+      "message": "disabled on this site"
+   },
+   "tips_enabled": {
+      "message": "enabled on this site"
+   },
+   "options_general": {
+      "message": "General"
+   },
+   "options_shortcuts": {
+      "message": "Shortcuts"
+   },
+   "options_cache_list": {
+      "message": "Cache List"
+   },
+   "options_disabled_list": {
+      "message": "Disabled List"
+   },
+   "options_contact": {
+      "message": "Contact"
+   },
+   "options_donate": {
+      "message": "Donate"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "Rotate ⭮"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "Rotate ⭯"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "Rotate 90 deg"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "Rotate 180 deg"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "Rotate 270 deg"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "Rotate 0 deg"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "Flip Horizontally"
+   },
+   "options_shortcuts_vertically": {
+      "message": "Flip Vertically"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "Flip Rest"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "Zoom In"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "Zoom out"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "Stretch Horizontally +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "Stretch Horizontally -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "Stretch Vertically +"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "Stretch Vertically -"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "Stretch Reset"
+   },
+   "options_shortcut_move_right": {
+      "message": "Move Right"
+   },
+   "options_shortcut_move_left": {
+      "message": "Move Left"
+   },
+   "options_shortcut_move_up": {
+      "message": "Move Up"
+   },
+   "options_shortcut_move_down": {
+      "message": "Move Down"
+   },
+   "options_shortcut_volume_p": {
+      "message": "Volume +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "Volume -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "Speed +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "Speed -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "ScreenShot"
+   }
+}

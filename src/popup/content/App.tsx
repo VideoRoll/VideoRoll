@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
 import { useConfig } from "../../use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
-import { clone, getSessionStorage, sendTabMessage } from "../../util";
+import { clone, getDomain, getSessionStorage, sendTabMessage } from "../../util";
 import { ActionType } from "../../types/type.d";
 import { Close } from "@vicons/ionicons5";
 
@@ -119,7 +119,7 @@ export default defineComponent({
                         {
                             rollConfig.enable ? <GridPanel></GridPanel> : <div class="empty-box">
                                 <Close class="logo-empty"/>
-                                <div>disabled on this site</div>
+                                <div>{browser.i18n.getMessage('tips_disabled')}</div>
                             </div>
                         }
                     </div>

@@ -17,7 +17,7 @@ body {
 #options-root {
     width: 100%;
     height: 100%;
-
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 
@@ -39,17 +39,26 @@ body {
         padding-bottom: 10px;
     }
     main {
-        padding: 100px 200px;
+        // padding: 100px 200px;
+        height: calc(100% - 60px);
         display: flex;
         flex: 1;
+
+        .van-config-provider {
+            height: 100%;
+        }
     }
     .video-roll-logo-text {
         height: 25px;
     }
 
     .options-panel, .options-content {
-        padding: 0px 10px;
+        padding: 30px 10px;
         color: #ffffff;
+    }
+
+    .van-cell-group, .van-cell {
+        background-color: #26262a;
     }
 
     .options-title {

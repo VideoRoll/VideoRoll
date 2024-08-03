@@ -1,0 +1,158 @@
+{
+   "tabs_video": {
+      "message": "ビデオ"
+   },
+   "tabs_audio": {
+      "message": "オーディオ"
+   },
+   "tabs_list": {
+      "message": "リスト"
+   },
+   "tabs_more": {
+      "message": "もっと"
+   },
+   "video_rotate": {
+      "message": "回転"
+   },
+   "video_download": {
+      "message": "ダウンロード"
+   },
+   "video_reposition": {
+      "message": "再配置"
+   },
+   "video_stretch": {
+      "message": "伸ばす"
+   },
+   "video_flip": {
+      "message": "反転"
+   },
+   "video_focus": {
+      "message": "フォーカス"
+   },
+   "video_filter": {
+      "message": "フィルター"
+   },
+   "video_screenshot": {
+      "message": "スクリーンショット"
+   },
+   "video_speed": {
+      "message": "速度"
+   },
+   "video_zoom": {
+      "message": "ズーム"
+   },
+   "audio_volume": {
+      "message": "音量"
+   },
+   "audio_pitch": {
+      "message": "ピッチ"
+   },
+   "list_main": {
+      "message": "メイン"
+   },
+   "more_save_preferences": {
+      "message": "現在の設定を保存"
+   },
+   "more_auto_resize": {
+      "message": "回転時に自動サイズ変更"
+   },
+   "action_reset": {
+      "message": "リセット"
+   },
+   "tips_disabled": {
+      "message": "このサイトで無効"
+   },
+   "tips_enabled": {
+      "message": "このサイトで有効"
+   },
+   "options_general": {
+      "message": "一般"
+   },
+   "options_shortcuts": {
+      "message": "ショートカット"
+   },
+   "options_cache_list": {
+      "message": "キャッシュリスト"
+   },
+   "options_disabled_list": {
+      "message": "無効リスト"
+   },
+   "options_contact": {
+      "message": "連絡先"
+   },
+   "options_donate": {
+      "message": "寄付"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "左に回転"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "右に回転"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "90度回転"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "180度回転"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "270度回転"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "0度回転"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "水平反転"
+   },
+   "options_shortcuts_vertically": {
+      "message": "垂直反転"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "反転リセット"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "ズームイン"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "ズームアウト"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "水平に伸ばす +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "水平に縮める -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "垂直に伸ばす +"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "伸縮リセット"
+   },
+   "options_shortcut_move_right": {
+      "message": "右に移動"
+   },
+   "options_shortcut_move_left": {
+      "message": "左に移動"
+   },
+   "options_shortcut_move_up": {
+      "message": "上に移動"
+   },
+   "options_shortcut_move_down": {
+      "message": "下に移動"
+   },
+   "options_shortcut_volume_p": {
+      "message": "音量 +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "音量 -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "速度 +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "速度 -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "スクリーンショット"
+   }
+}

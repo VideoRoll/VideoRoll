@@ -1,0 +1,158 @@
+{
+   "tabs_video": {
+      "message": "Vidéo"
+   },
+   "tabs_audio": {
+      "message": "Audio"
+   },
+   "tabs_list": {
+      "message": "Liste"
+   },
+   "tabs_more": {
+      "message": "Plus"
+   },
+   "video_rotate": {
+      "message": "Pivoter"
+   },
+   "video_download": {
+      "message": "Télécharger"
+   },
+   "video_reposition": {
+      "message": "Repositionner"
+   },
+   "video_stretch": {
+      "message": "Étirer"
+   },
+   "video_flip": {
+      "message": "Retourner"
+   },
+   "video_focus": {
+      "message": "Mettre au point"
+   },
+   "video_filter": {
+      "message": "Filtre"
+   },
+   "video_screenshot": {
+      "message": "Capture d'écran"
+   },
+   "video_speed": {
+      "message": "Vitesse"
+   },
+   "video_zoom": {
+      "message": "Zoom"
+   },
+   "audio_volume": {
+      "message": "Volume"
+   },
+   "audio_pitch": {
+      "message": "Tonalité"
+   },
+   "list_main": {
+      "message": "Principal"
+   },
+   "more_save_preferences": {
+      "message": "Enregistrer les préférences actuelles"
+   },
+   "more_auto_resize": {
+      "message": "Redimensionner automatiquement lors de la rotation"
+   },
+   "action_reset": {
+      "message": "Réinitialiser"
+   },
+   "tips_disabled": {
+      "message": "désactivé sur ce site"
+   },
+   "tips_enabled": {
+      "message": "activé sur ce site"
+   },
+   "options_general": {
+      "message": "Général"
+   },
+   "options_shortcuts": {
+      "message": "Raccourcis"
+   },
+   "options_cache_list": {
+      "message": "Liste de cache"
+   },
+   "options_disabled_list": {
+      "message": "Liste désactivée"
+   },
+   "options_contact": {
+      "message": "Contact"
+   },
+   "options_donate": {
+      "message": "Faire un don"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "Pivoter à gauche"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "Pivoter à droite"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "Pivoter de 90 degrés"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "Pivoter de 180 degrés"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "Pivoter de 270 degrés"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "Pivoter de 0 degré"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "Retourner horizontalement"
+   },
+   "options_shortcuts_vertically": {
+      "message": "Retourner verticalement"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "Réinitialiser le retournement"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "Agrandir"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "Réduire"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "Étirer horizontalement +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "Réduire horizontalement -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "Étirer verticalement +"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "Réinitialiser l'étirement"
+   },
+   "options_shortcut_move_right": {
+      "message": "Déplacer à droite"
+   },
+   "options_shortcut_move_left": {
+      "message": "Déplacer à gauche"
+   },
+   "options_shortcut_move_up": {
+      "message": "Déplacer en haut"
+   },
+   "options_shortcut_move_down": {
+      "message": "Déplacer en bas"
+   },
+   "options_shortcut_volume_p": {
+      "message": "Volume +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "Volume -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "Vitesse +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "Vitesse -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "Capture d'écran"
+   }
+}

@@ -2,7 +2,7 @@ import VideoRoll from "./VideoRoll";
 import browser from "webextension-polyfill";
 import { ActionType, IRollConfig, VideoListItem } from '../types/type.d';
 import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage, removeLocalStorage, setStorageByKey } from "../util/storage";
-import { sendRuntimeMessage } from "src/util";
+import { getDomain, sendRuntimeMessage } from "src/util";
 import hotkeys from "hotkeys-js";
 import { shortcutsMap } from "src/use/useShortcuts";
 
@@ -60,7 +60,10 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
         config = getSessionStorage(rollConfig.tabId);
     }
 
-    config = Object.assign(config, { videoNumber: rollConfig.videoNumber, tabId: rollConfig.tabId })
+    const domain = getDomain(rollConfig.url);
+    const key = `video-roll-disabled-${domain}`;
+    const data = await browser.storage.sync.get(`video-roll-disabled-${domain}`)
+    config = Object.assign(config, { videoNumber: rollConfig.videoNumber, tabId: rollConfig.tabId, enable: data[key] ? false : true })
 
     sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE, tabId })
     if (config.enable === false) return;
@@ -88,6 +91,16 @@ export async function updateBadge(options: any) {
             tabConfig.store = false;
         } else {
             tabConfig.url = window.location.href;
+            const domain = getDomain(tabConfig.url);
+            const key = `video-roll-disabled-${domain}`;
+            const data = await browser.storage.sync.get(key)
+            if (data[key]) {
+                tabConfig.enable = false;
+                if (rollConfig) {
+                    rollConfig.enable = false;
+                }
+            }
+
             if (!hasConf) tabConfig.store = false;
             sessionStorage.setItem(`video-roll-${tabId}`, JSON.stringify(tabConfig));
         }
@@ -100,6 +113,12 @@ export async function updateBadge(options: any) {
     if (hasConf) {
         config.isInit = true;
         config.document = { title: document.title };
+
+        const domain = getDomain(config.url);
+        const key = `video-roll-disabled-${domain}`;
+        const data = await browser.storage.sync.get(key)
+        if (data[key]) config.enable = false;
+
         if (tabConfig?.storeThisTab) {
             config.storeThisTab = tabConfig.storeThisTab;
             setLocalStorage(config);
@@ -146,7 +165,7 @@ export async function keyDownEvent(tabId: number, res: any, handler: any) {
     const keys = Object.keys(shortcutsMap);
 
     let newConfig = tabConfig || config;
-    for(const key of keys) {
+    for (const key of keys) {
         const item = (shortcutsMap as any)[key];
         const resItem = res[key];
         if (JSON.stringify(resItem.shortcuts?.code) === JSON.stringify(handler.keys)) {
@@ -157,7 +176,7 @@ export async function keyDownEvent(tabId: number, res: any, handler: any) {
                 });
                 return;
             }
-            
+
             const data = item.handler(newConfig[item.key])
             newConfig[item.key] = data;
             updateConfig(tabId, newConfig);
@@ -188,24 +207,25 @@ export function updateVideoCheck(ids: string[]) {
 }
 
 export function updateEnable(tabId: number, rollConfig: IRollConfig) {
-    setStorageByKey(rollConfig)
-    const oldConfig = getSessionStorage(tabId);
-    setSessionStorage(oldConfig, rollConfig);
+    setStorageByKey(rollConfig).then(() => {
+        const oldConfig = getSessionStorage(tabId);
+        setSessionStorage(oldConfig, rollConfig);
 
-    if (rollConfig.enable === false) {
-        VideoRoll.stop();
-        hotkeys.unbind('*');
-    } else if (rollConfig.enable === true){
-        updateBadge({
-            tabId,
-            rollConfig,
-            callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
-                // VideoRoll.addStyleClass().updateVideo(rollConfig).updateAudio();
-                sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList, tabId })
-            }
-        })
-        initKeyboardEvent(tabId);
-    }
+        if (rollConfig.enable === false) {
+            VideoRoll.stop();
+            hotkeys.unbind('*');
+        } else if (rollConfig.enable === true) {
+            updateBadge({
+                tabId,
+                rollConfig,
+                callback: ({ text, videoList }: { text: string, videoList: VideoListItem[] }) => {
+                    // VideoRoll.addStyleClass().updateVideo(rollConfig).updateAudio();
+                    sendRuntimeMessage(tabId, { text, type: ActionType.UPDATE_BADGE, videoList, tabId })
+                }
+            })
+            initKeyboardEvent(tabId);
+        }
+    })
 }
 
 export function capture(tabId: number, rollConfig: IRollConfig) {

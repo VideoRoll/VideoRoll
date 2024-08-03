@@ -1,6 +1,7 @@
 import { getDefaultConfig } from "../use";
 import { IRollConfig } from "../types/type";
 import browser from "webextension-polyfill";
+import { getDomain } from "./getDomain";
 
 export function getSessionStorage(tabId: number) {
     let data = JSON.parse(sessionStorage.getItem(`video-roll-${tabId}`) as string);
@@ -41,11 +42,13 @@ export function removeLocalStorage(key: string) {
 }
 
 export function setStorageByKey(config: IRollConfig) {
+    const domain = getDomain(config.url);
     if (config.enable === false) {
-        browser.storage.sync.set({
-            [`video-roll-disabled-${config.url}`]: config 
+        console.log(domain, 'domain');
+        return browser.storage.sync.set({
+            [`video-roll-disabled-${domain}`]: domain
         });
-    } else {
-        browser.storage.sync.remove(`video-roll-disabled-${config.url}`);
     }
+
+    return browser.storage.sync.remove(`video-roll-disabled-${domain}`);
 }

@@ -1,0 +1,158 @@
+{
+   "tabs_video": {
+      "message": "비디오"
+   },
+   "tabs_audio": {
+      "message": "오디오"
+   },
+   "tabs_list": {
+      "message": "목록"
+   },
+   "tabs_more": {
+      "message": "더보기"
+   },
+   "video_rotate": {
+      "message": "회전"
+   },
+   "video_download": {
+      "message": "다운로드"
+   },
+   "video_reposition": {
+      "message": "재배치"
+   },
+   "video_stretch": {
+      "message": "확장"
+   },
+   "video_flip": {
+      "message": "뒤집기"
+   },
+   "video_focus": {
+      "message": "초점"
+   },
+   "video_filter": {
+      "message": "필터"
+   },
+   "video_screenshot": {
+      "message": "스크린샷"
+   },
+   "video_speed": {
+      "message": "속도"
+   },
+   "video_zoom": {
+      "message": "확대/축소"
+   },
+   "audio_volume": {
+      "message": "볼륨"
+   },
+   "audio_pitch": {
+      "message": "피치"
+   },
+   "list_main": {
+      "message": "메인"
+   },
+   "more_save_preferences": {
+      "message": "현재 환경 설정 저장"
+   },
+   "more_auto_resize": {
+      "message": "회전 시 자동 크기 조정"
+   },
+   "action_reset": {
+      "message": "재설정"
+   },
+   "tips_disabled": {
+      "message": "이 사이트에서 비활성화됨"
+   },
+   "tips_enabled": {
+      "message": "이 사이트에서 활성화됨"
+   },
+   "options_general": {
+      "message": "일반"
+   },
+   "options_shortcuts": {
+      "message": "단축키"
+   },
+   "options_cache_list": {
+      "message": "캐시 목록"
+   },
+   "options_disabled_list": {
+      "message": "비활성화된 목록"
+   },
+   "options_contact": {
+      "message": "연락처"
+   },
+   "options_donate": {
+      "message": "기부"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "왼쪽으로 회전"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "오른쪽으로 회전"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "90도 회전"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "180도 회전"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "270도 회전"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "0도 회전"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "수평 뒤집기"
+   },
+   "options_shortcuts_vertically": {
+      "message": "수직 뒤집기"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "뒤집기 초기화"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "확대"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "축소"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "수평 확장 +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "수평 확장 -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "수직 확장 +"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "확장 초기화"
+   },
+   "options_shortcut_move_right": {
+      "message": "오른쪽으로 이동"
+   },
+   "options_shortcut_move_left": {
+      "message": "왼쪽으로 이동"
+   },
+   "options_shortcut_move_up": {
+      "message": "위로 이동"
+   },
+   "options_shortcut_move_down": {
+      "message": "아래로 이동"
+   },
+   "options_shortcut_volume_p": {
+      "message": "볼륨 +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "볼륨 -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "속도 +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "속도 -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "스크린샷"
+   }
+}

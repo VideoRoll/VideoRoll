@@ -8,6 +8,7 @@ import {
     defineAsyncComponent,
 } from "vue";
 import { VideocamOutline, VolumeMediumOutline, ListOutline, EllipsisHorizontalCircleOutline } from '@vicons/ionicons5';
+import browser from 'webextension-polyfill';
 
 interface IConfig {
     type: string;
@@ -56,7 +57,7 @@ export default function useComponents() {
     const components = shallowReactive<ITabConfig[]>([
         {
             type: 'tab',
-            title: <div class="tab-title"><VideocamOutline class="tab-icon" /><span class="tab-title-text">Video</span></div>,
+            title: <div class="tab-title"><VideocamOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_video')}</span></div>,
             children: [{
                 type: 'row',
                 style: {
@@ -67,7 +68,7 @@ export default function useComponents() {
                     {
                         type: 'container',
                         col: 16,
-                        title: "Rotate",
+                        title: browser.i18n.getMessage('video_rotate'),
                         showTitle: true,
                         children: [{
                             type: 'component',
@@ -93,7 +94,7 @@ export default function useComponents() {
                                 children: [
                                     {
                                         type: 'container',
-                                        title: 'Download',
+                                        title: browser.i18n.getMessage('video_download'),
                                         showTitle: true,
                                         col: 24,
                                         children: [
@@ -138,7 +139,7 @@ export default function useComponents() {
                 children: [
                     {
                         type: 'container',
-                        title: "Reposition",
+                        title: browser.i18n.getMessage('video_reposition'),
                         showTitle: true,
                         col: 8,
                         children: [{
@@ -149,7 +150,7 @@ export default function useComponents() {
                     {
                         type: 'container',
                         col: 8,
-                        title: "Stretch",
+                        title: browser.i18n.getMessage('video_stretch'),
                         showTitle: true,
                         children: [{
                             type: 'component',
@@ -159,7 +160,7 @@ export default function useComponents() {
                     {
                         type: 'container',
                         col: 8,
-                        title: "Flip",
+                        title: browser.i18n.getMessage('video_flip'),
                         showTitle: true,
                         children: [{
                             type: 'component',
@@ -177,7 +178,7 @@ export default function useComponents() {
                 children: [
                     {
                         type: 'container',
-                        title: 'Focus',
+                        title: browser.i18n.getMessage('video_focus'),
                         showTitle: true,
                         col: 8,
                         children: [
@@ -189,7 +190,7 @@ export default function useComponents() {
                     },
                     {
                         type: 'container',
-                        title: "Filter",
+                        title: browser.i18n.getMessage('video_filter'),
                         showTitle: true,
                         col: 8,
                         children: [{
@@ -199,7 +200,7 @@ export default function useComponents() {
                     },
                     {
                         type: 'container',
-                        title: 'Screenshot',
+                        title: browser.i18n.getMessage('video_screenshot'),
                         showTitle: true,
                         col: 8,
                         children: [
@@ -221,7 +222,7 @@ export default function useComponents() {
                     {
                         type: 'container',
                         col: 24,
-                        title: "Speed",
+                        title: browser.i18n.getMessage('video_speed'),
                         showTitle: true,
                         children: [{
                             type: 'component',
@@ -240,7 +241,7 @@ export default function useComponents() {
                     {
                         type: 'container',
                         col: 24,
-                        title: "Zoom",
+                        title: browser.i18n.getMessage('video_zoom'),
                         showTitle: true,
                         children: [{
                             type: 'component',
@@ -253,7 +254,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <div class="tab-title"><VolumeMediumOutline class="tab-icon" /><span class="tab-title-text">Audio</span></div>,
+            title: <div class="tab-title"><VolumeMediumOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_audio')}</span></div>,
             children: [
                 {
                     type: 'row',
@@ -264,7 +265,7 @@ export default function useComponents() {
                     children: [
                         {
                             type: 'container',
-                            title: "Volume",
+                            title: browser.i18n.getMessage('audio_volume'),
                             showTitle: true,
                             col: 24,
                             children: [{
@@ -283,7 +284,7 @@ export default function useComponents() {
                     children: [
                         {
                             type: 'container',
-                            title: "Pitch",
+                            title: browser.i18n.getMessage('audio_pitch'),
                             showTitle: true,
                             col: 24,
                             children: [{
@@ -297,7 +298,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <div class="tab-title"><ListOutline class="tab-icon" /><span class="tab-title-text">List</span></div>,
+            title: <div class="tab-title"><ListOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_list')}</span></div>,
             children: [
                 {
                     type: 'component',
@@ -307,7 +308,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <div class="tab-title"><EllipsisHorizontalCircleOutline class="tab-icon" /><span class="tab-title-text">more</span></div>,
+            title: <div class="tab-title"><EllipsisHorizontalCircleOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_more')}</span></div>,
             children: [
                 {
                     type: 'row',

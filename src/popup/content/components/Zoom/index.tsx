@@ -6,6 +6,7 @@
 
 import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
+import browser from "webextension-polyfill";
 import "./index.less";
 
 export default defineComponent({
@@ -23,8 +24,7 @@ export default defineComponent({
             <>
                 <div class="video-roll-long-box">
                     <div class={`video-roll-switch ${rollConfig.zoom !== 1 ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={() => setZoomNum(1)}>
-                        {/* <ExpandOutline class="video-roll-icon"></ExpandOutline> */}
-                        reset
+                        {browser.i18n.getMessage('action_reset')}
                     </div>
                     <div class="video-roll-zoom">
                         <van-slider

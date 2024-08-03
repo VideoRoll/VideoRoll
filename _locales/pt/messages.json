@@ -1,0 +1,158 @@
+{
+   "tabs_video": {
+      "message": "Vídeo"
+   },
+   "tabs_audio": {
+      "message": "Áudio"
+   },
+   "tabs_list": {
+      "message": "Lista"
+   },
+   "tabs_more": {
+      "message": "Mais"
+   },
+   "video_rotate": {
+      "message": "Girar"
+   },
+   "video_download": {
+      "message": "Baixar"
+   },
+   "video_reposition": {
+      "message": "Reposicionar"
+   },
+   "video_stretch": {
+      "message": "Esticar"
+   },
+   "video_flip": {
+      "message": "Virar"
+   },
+   "video_focus": {
+      "message": "Focar"
+   },
+   "video_filter": {
+      "message": "Filtro"
+   },
+   "video_screenshot": {
+      "message": "Captura de tela"
+   },
+   "video_speed": {
+      "message": "Velocidade"
+   },
+   "video_zoom": {
+      "message": "Zoom"
+   },
+   "audio_volume": {
+      "message": "Volume"
+   },
+   "audio_pitch": {
+      "message": "Tom"
+   },
+   "list_main": {
+      "message": "Principal"
+   },
+   "more_save_preferences": {
+      "message": "Salvar preferências atuais"
+   },
+   "more_auto_resize": {
+      "message": "Redimensionar automaticamente ao girar"
+   },
+   "action_reset": {
+      "message": "Redefinir"
+   },
+   "tips_disabled": {
+      "message": "desativado neste site"
+   },
+   "tips_enabled": {
+      "message": "ativado neste site"
+   },
+   "options_general": {
+      "message": "Geral"
+   },
+   "options_shortcuts": {
+      "message": "Atalhos"
+   },
+   "options_cache_list": {
+      "message": "Lista de cache"
+   },
+   "options_disabled_list": {
+      "message": "Lista desativada"
+   },
+   "options_contact": {
+      "message": "Contato"
+   },
+   "options_donate": {
+      "message": "Doar"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "Girar à esquerda"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "Girar à direita"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "Girar 90 graus"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "Girar 180 graus"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "Girar 270 graus"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "Girar 0 graus"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "Virar horizontalmente"
+   },
+   "options_shortcuts_vertically": {
+      "message": "Virar verticalmente"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "Redefinir virar"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "Aumentar zoom"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "Diminuir zoom"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "Esticar horizontalmente +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "Diminuir horizontalmente -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "Esticar verticalmente +"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "Redefinir esticar"
+   },
+   "options_shortcut_move_right": {
+      "message": "Mover para a direita"
+   },
+   "options_shortcut_move_left": {
+      "message": "Mover para a esquerda"
+   },
+   "options_shortcut_move_up": {
+      "message": "Mover para cima"
+   },
+   "options_shortcut_move_down": {
+      "message": "Mover para baixo"
+   },
+   "options_shortcut_volume_p": {
+      "message": "Volume +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "Volume -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "Velocidade +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "Velocidade -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "Captura de tela"
+   }
+}

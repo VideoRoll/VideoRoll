@@ -1,0 +1,161 @@
+{
+   "tabs_video": {
+      "message": "视频"
+   },
+   "tabs_audio": {
+      "message": "音频"
+   },
+   "tabs_list": {
+      "message": "列表"
+   },
+   "tabs_more": {
+      "message": "更多"
+   },
+   "video_rotate": {
+      "message": "旋转"
+   },
+   "video_download": {
+      "message": "下载"
+   },
+   "video_reposition": {
+      "message": "重新定位"
+   },
+   "video_stretch": {
+      "message": "拉伸"
+   },
+   "video_flip": {
+      "message": "翻转"
+   },
+   "video_focus": {
+      "message": "聚焦"
+   },
+   "video_filter": {
+      "message": "滤镜"
+   },
+   "video_screenshot": {
+      "message": "截图"
+   },
+   "video_speed": {
+      "message": "速度"
+   },
+   "video_zoom": {
+      "message": "缩放"
+   },
+   "audio_volume": {
+      "message": "音量"
+   },
+   "audio_pitch": {
+      "message": "音高"
+   },
+   "list_main": {
+      "message": "主要"
+   },
+   "more_save_preferences": {
+      "message": "保存当前设置"
+   },
+   "more_auto_resize": {
+      "message": "旋转时自动调整大小"
+   },
+   "action_reset": {
+      "message": "重置"
+   },
+   "tips_disabled": {
+      "message": "在此网站上禁用"
+   },
+   "tips_enabled": {
+      "message": "在此网站上启用"
+   },
+   "options_general": {
+      "message": "常规"
+   },
+   "options_shortcuts": {
+      "message": "快捷键"
+   },
+   "options_cache_list": {
+      "message": "缓存列表"
+   },
+   "options_disabled_list": {
+      "message": "禁用列表"
+   },
+   "options_contact": {
+      "message": "联系"
+   },
+   "options_donate": {
+      "message": "捐赠"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "向左旋转"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "向右旋转"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "旋转90度"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "旋转180度"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "旋转270度"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "旋转0度"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "水平翻转"
+   },
+   "options_shortcuts_vertically": {
+      "message": "垂直翻转"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "翻转重置"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "放大"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "缩小"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "水平拉伸+"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "水平拉伸-"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "垂直拉伸+"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "垂直拉伸-"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "拉伸重置"
+   },
+   "options_shortcut_move_right": {
+      "message": "向右移动"
+   },
+   "options_shortcut_move_left": {
+      "message": "向左移动"
+   },
+   "options_shortcut_move_up": {
+      "message": "向上移动"
+   },
+   "options_shortcut_move_down": {
+      "message": "向下移动"
+   },
+   "options_shortcut_volume_p": {
+      "message": "音量+"
+   },
+   "options_shortcut_volume_r": {
+      "message": "音量-"
+   },
+   "options_shortcut_speed_p": {
+      "message": "速度+"
+   },
+   "options_shortcut_speed_r": {
+      "message": "速度-"
+   },
+   "options_shortcut_screenshot": {
+      "message": "截图"
+   }
+}
