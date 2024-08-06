@@ -282,6 +282,7 @@ export default class VideoRoll {
             if (target.dataset.rollCheck === 'false') {
                 target.classList.remove("video-roll-deg-scale");
                 target.setAttribute("data-roll", "false");
+                this.toggleLoop(target, false);
                 continue;
             };
 
@@ -302,6 +303,8 @@ export default class VideoRoll {
 
             dom.classList.add("video-roll-deg-scale");
             dom.setAttribute("data-roll", "true");
+
+            this.toggleLoop(dom, rollConfig.loop);
         }
 
         this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, focus.on);
@@ -317,7 +320,20 @@ export default class VideoRoll {
         await this.updatePitch();
         await this.updateVolume();
         this.updatePlaybackRate();
+        this.toggleMuted();
         return this;
+    }
+
+    static toggleMuted() {
+        const muted = this.rollConfig.muted;
+
+        try {
+            this.videoElements.forEach((video) => {
+                (video as HTMLVideoElement).muted = muted;
+            })
+        } catch (err) {
+            console.debug(err);
+        }
     }
 
     static resetAudio() {
@@ -658,6 +674,10 @@ export default class VideoRoll {
                 this.realVideoPlayer.player.requestPictureInPicture();
             }
         } catch (err) { console.debug(err); }
+    }
+
+    static toggleLoop(video: HTMLVideoElement, loop: boolean) {
+        video.loop = loop;
     }
 
     static buildVideoList() {

@@ -4,8 +4,9 @@
  * @Date: 2022-09-19 22:53:23
  */
 
-import { defineComponent, inject, ref } from "vue";
+import { defineComponent, inject, onMounted, ref, shallowRef } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
+import { EllipsisVertical } from "@vicons/ionicons5";
 import browser from "webextension-polyfill";
 import "./index.less";
 
@@ -14,7 +15,9 @@ export default defineComponent({
     setup() {
         const update = inject("update") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
-        const selections = ref([
+        const selected = ref('');
+        const isShow = ref(false);
+        const selections = shallowRef([
             {
                 title: '0.25x',
                 selected: false,
@@ -46,55 +49,62 @@ export default defineComponent({
                 value: 16
             }
         ]);
-        const setPlaybackRateNum = (value: number) => {
+
+        onMounted(() => {
+            const item = selections.value.find((v) => v.value === rollConfig.playbackRate);
+            if (item) {
+                selected.value = item.title;
+            }
+        })
+
+        const setPlaybackRateNum = (item: any) => {
+            rollConfig.playbackRate = item.value;
+            selected.value = item.title
+            update("playbackRate", item.value);
+        };
+
+        const setPlaybackRateValue = (value: number) => {
             rollConfig.playbackRate = value;
+            const item = selections.value.find((v) => v.value === value);
+            selected.value = item ? item.title : '';
             update("playbackRate", value);
         };
 
 
         return () => (
-            <>
-                <div class="video-roll-long-box">
-                    <div class="speed-item">0.25x</div>
-                    <div class="speed-item">0.5x</div>
-                    <div class="speed-item">1x</div>
-                    <div class="speed-item">2.0x</div>
-                    <div class="speed-item">4.0x</div>
-                    <div class="speed-item">16.0x</div>
-                    <div class="speed-item">16.0x</div>
-                    <van-popover placement="bottom-end" theme="dark" class="popover-size" v-model={isShow} actions={actions} onSelect={onSelect} v-slots={{
-                        reference: () => (
-                            <div title='Download' class='video-roll-download video-roll-item video-roll-off'>
-                                <div class="video-roll-icon-box">
-                                    <span class="video-roll-label">
-                                        <ArrowDownOutline class="video-roll-icon"></ArrowDownOutline>
-                                    </span>
-                                </div>
-                            </div>
-                        ),
-                    }}>
-                    </van-popover>
-                    {/* <div class="speed-item"></div> */}
-                    {/* <div class={`video-roll-switch ${rollConfig.playbackRate !== 1 ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={() => setPlaybackRateNum(1)}>
-                        {browser.i18n.getMessage('action_reset')}
+            <div class="video-roll-long-box">
+                {
+                    selections.value.map((item) => <div class={`speed-item ${selected.value === item.title ? 'video-roll-switch-on' : ''}`} onClick={() => setPlaybackRateNum(item)}>{item.title}</div>)
+                }
+                <van-popover placement="top-end" theme="dark" class="popover-size" v-model={isShow} v-slots={{
+                    reference: () => (
+                        <span class="video-roll-label">
+                            <EllipsisVertical class="video-roll-icon"></EllipsisVertical>
+                        </span>
+                    ),
+                }}>
+                    <div class="video-roll-long-box">
+                        <div class={`video-roll-switch ${rollConfig.playbackRate !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setPlaybackRateValue(1)}>
+                            {browser.i18n.getMessage('action_reset')}
+                        </div>
+                        <div class="video-roll-zoom">
+                            <van-slider
+                                v-model={rollConfig.playbackRate}
+                                min={0}
+                                max={16}
+                                step={0.01}
+                                bar-height="6px"
+                                onUpdate:modelValue={setPlaybackRateValue}
+                                v-slots={{
+                                    button: () => (
+                                        <div class="custom-button">{rollConfig.playbackRate}</div>
+                                    ),
+                                }}
+                            ></van-slider>
+                        </div>
                     </div>
-                    <div class="video-roll-zoom">
-                        <van-slider
-                            v-model={rollConfig.playbackRate}
-                            min={0}
-                            max={4}
-                            step={0.01}
-                            bar-height="4px"
-                            onUpdate:modelValue={setPlaybackRateNum}
-                            v-slots={{
-                                button: () => (
-                                    <div class="custom-button">{rollConfig.playbackRate}</div>
-                                ),
-                            }}
-                        ></van-slider>
-                    </div> */}
-                </div>
-            </>
+                </van-popover>
+            </div>
         );
     },
 });
