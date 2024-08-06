@@ -49,6 +49,8 @@ const defaultConfig = {
     store: false,
     isInit: false,
     isAutoChangeSize: true,
+    loop: false,
+    muted: false,
     enable: true,
     document: {
         title: ''

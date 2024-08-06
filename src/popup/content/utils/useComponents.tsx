@@ -100,7 +100,7 @@ export default function useComponents() {
                                         children: [
                                             {
                                                 type: 'component',
-                                                component: defineAsyncComponent(() => import("../components/Download"))
+                                                component: defineAsyncComponent(() => import("../components/Loop"))
                                             }
                                         ]
                                     }
@@ -256,6 +256,25 @@ export default function useComponents() {
             type: 'tab',
             title: <div class="tab-title"><VolumeMediumOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_audio')}</span></div>,
             children: [
+                {
+                    type: 'row',
+                    style: {
+                        margin: '30px 0',
+                        height: '40px'
+                    },
+                    children: [
+                        {
+                            type: 'container',
+                            title: browser.i18n.getMessage('audio_volume'),
+                            showTitle: true,
+                            col: 24,
+                            children: [{
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Mute"))
+                            }]
+                        },
+                    ]
+                },
                 {
                     type: 'row',
                     style: {

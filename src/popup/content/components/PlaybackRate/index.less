@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
+    width: 34px;
     height: 25px;
     border-radius: 5px;
     border: 1px solid #59595b;
@@ -31,3 +31,87 @@
         background-image: var(--video-roll-background-active)
     }
 }
+
+.video-roll-long-box .van-popover__wrapper {
+    width: 20px !important;
+    
+    .video-roll-label {
+        cursor: pointer;
+    }
+}
+
+.van-popover__content {
+    .video-roll-long-box {
+        width: 240px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 14px;
+    }
+
+    .video-roll-resetBtn {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 20px;
+        margin: auto;
+        width: 60px;
+        border: none;
+
+        &:hover {
+            filter: contrast(200%);
+        }
+
+        background-image: var(--video-roll-background-active);
+    }
+
+    .video-roll-switch {
+        color: #fff;
+        cursor: pointer;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 20px;
+        box-shadow: 2px 2px 4px #5d5f626c, -2px -2px 4px #5d5f626c;
+
+        .video-roll-icon {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .video-roll-switch-off {
+        background-color: rgba(155, 155, 155, 0.4);
+
+        &:hover {
+            background-image: var(--video-roll-background-active)
+        }
+    }
+
+    .video-roll-switch-on {
+        background-image: var(--video-roll-background-active);
+
+        &:hover {
+            filter: contrast(200%);
+        }
+    }
+
+    .custom-button {
+        width: 26px;
+        color: #fff;
+        font-size: 10px;
+        line-height: 18px;
+        text-align: center;
+        background-image: var(--video-roll-background-active);
+        border-radius: 100px;
+        user-select: none;
+
+        &:hover {
+            filter: contrast(200%);
+        }
+    }
+}
+

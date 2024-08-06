@@ -72,8 +72,3 @@ chrome.runtime.onMessage.addListener((a, b, send) => {
 
     send("update");
 });
-
-
-chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
-    console.log(info, '--info');
-  });

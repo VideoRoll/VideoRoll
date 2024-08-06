@@ -107,6 +107,8 @@ export interface IRollConfig {
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;
+    loop: boolean;
+    muted: boolean;
     videoSelector: VideoSelector;
     isAutoChangeSize: boolean;
     enable: boolean;
