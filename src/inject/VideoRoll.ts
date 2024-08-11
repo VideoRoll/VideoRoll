@@ -30,7 +30,7 @@ export default class VideoRoll {
 
     static originElementPosition: OriginElementPosition | null;
 
-    static observer: MutationObserver;
+    static observer: MutationObserver | null;
 
     static setRollConfig(rollConfig: IRollConfig) {
         this.rollConfig = rollConfig;
@@ -137,7 +137,7 @@ export default class VideoRoll {
 
         const mask = document.getElementById('video-roll-root-mask');
         if (!this.realVideoPlayer.player || this.realVideoPlayer.player?.parentElement === mask) return;
-        
+
         const originElementPosition = this.findOriginElementPosition(this.realVideoPlayer.player as HTMLVideoElement);
         this.setOriginElementPosition(originElementPosition);
         return this;
@@ -555,8 +555,8 @@ export default class VideoRoll {
             }
 
             return this;
-        } 
-        
+        }
+
         if (focus && this.originElementPosition && mask) {
             mask.appendChild(video);
             video.classList.add('video-roll-focus');
@@ -786,7 +786,7 @@ export default class VideoRoll {
      */
     static observeVideo(callback: Function) {
         if (this.rollConfig?.enable === false) return this;
-    
+
         this.useVideoChanged(callback);
 
         try {

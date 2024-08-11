@@ -4,7 +4,7 @@
  * @Date: 2022-09-19 22:53:23
  */
 import { defineComponent, inject } from "vue";
-import { EyeOutline, EyeOffOutline } from "@vicons/ionicons5";
+import { VolumeHighOutline, VolumeMuteOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
 import "./index.less";
 
@@ -23,9 +23,9 @@ export default defineComponent({
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         {
-                            rollConfig.muted ? <EyeOutline
+                            rollConfig.muted ? <VolumeMuteOutline
                             class="video-roll-icon"
-                        ></EyeOutline> : <EyeOffOutline class="video-roll-icon"></EyeOffOutline>
+                        ></VolumeMuteOutline> : <VolumeHighOutline class="video-roll-icon"></VolumeHighOutline>
                         }
                     </span>
                 </div>

@@ -50,18 +50,16 @@ export default defineComponent({
 
         return () => (
             <div class="options-general">
-                <div class="options-content">
-                    <div class="options-inside-header">
-                        <van-button type="primary" size="small" onClick={clear}>Clear All</van-button>
-                    </div>
-                    {
-                        list.value.map((item: any) => <van-cell key={item.url} v-slots={{
-                            title: () => <span title={item.url} class="cell-title" onClick={() => toUrl(item.url)}>{item.url}</span>
-                        }}>
-                            <van-icon name="close" class="close-icon" color="#ee0a24" onClick={() => remove(item.url)} />
-                        </van-cell>)
-                    }
+                <div class="options-inside-header">
+                    <van-button type="primary" size="small" onClick={clear}>Clear All</van-button>
                 </div>
+                {
+                    list.value.map((item: any) => <van-cell key={item.url} v-slots={{
+                        title: () => <span title={item.url} class="cell-title" onClick={() => toUrl(item.url)}>{item.url}</span>
+                    }}>
+                        <van-icon name="close" class="close-icon" color="#ee0a24" onClick={() => remove(item.url)} />
+                    </van-cell>)
+                }
 
             </div>
         );

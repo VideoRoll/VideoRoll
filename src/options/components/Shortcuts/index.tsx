@@ -62,16 +62,20 @@ export default defineComponent({
 		return () => (
 			<div class="options-general">
 				<van-overlay show={isShowSettingInput.value} onClick={() => updateShowSettingInput(false)}>
-					<div class>Press</div>
-					<div class="shortcuts-input" onClick={(e) => e.stopPropagation()}>
-						{shortcuts.value}
+					<div class="shortcuts-main">
+						<div class="tips">Press the keyboard to reset</div>
+						<div class="shortcuts-input" onClick={(e) => e.stopPropagation()}>
+							{shortcuts.value}
+						</div>
 					</div>
+					
 				</van-overlay>
 				<van-form submit="onSubmit">
 						<van-cell-group inset>
 							{
 								Object.keys(shortcutsMap.value).map((key: string) => {
 									return <van-field
+										class="shortcuts-input-body"
 										v-model={shortcutsMap.value[key].shortcuts.key}
 										label={`${shortcutsMap.value[key].title} : `}
 										readonly
