@@ -2,6 +2,7 @@ import { defineComponent, ref, onMounted, provide, Transition, h } from "vue";
 import { ReloadOutline } from "@vicons/ionicons5";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
+import AdPanel from "./components/AdPanel";
 
 import './index.less';
 import { OPTIONS_MENU } from "./config";
@@ -23,6 +24,7 @@ export default defineComponent({
                         content: () => h(OPTIONS_MENU[active.value].component)
                     }}>
                     </Panel>
+                    <AdPanel></AdPanel>
                 </main>
             </van-config-provider>
         );

@@ -2,12 +2,17 @@ import { defineComponent, onMounted, ref } from "vue";
 import browser from "webextension-polyfill";
 
 import './index.less'
+import { useGeneralConfig } from "src/options/use/useGeneralConfig";
+import render from "src/options/utils/render";
+import "vue3-colorpicker/style.css";
 
 export default defineComponent({
     name: "General",
     setup(props) {
         const autoScale = ref(true);
         const loading = ref(false);
+
+        const config = useGeneralConfig();
         onMounted(() => {
             loading.value = true;
             browser.storage.sync.get('isAutoChangeSize').then((res) => {
@@ -26,12 +31,7 @@ export default defineComponent({
             <div class="options-general">
                 <van-form submit="onSubmit">
                     {
-                        loading.value ? <van-loading /> : <van-cell-group inset>
-                            <van-field label-width="300" input-align="right" name="switch" label="Automatically changes video size when rotated" v-slots={{
-                                input: () => <van-switch v-model={autoScale.value} onChange={onChange} />
-                            }}>
-                            </van-field>
-                        </van-cell-group>
+                        render(config)
                     }
                 </van-form>
             </div>

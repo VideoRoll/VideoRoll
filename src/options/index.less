@@ -21,6 +21,12 @@ body {
     display: flex;
     flex-direction: column;
 
+    .van-config-provider {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
     background-color: var(--background-color);
 
     .options-header {
@@ -39,13 +45,23 @@ body {
         padding-bottom: 10px;
     }
     main {
-        // padding: 100px 200px;
-        height: calc(100% - 60px);
+        height: 100%;
         display: flex;
         flex: 1;
-
+        overflow-y: auto;
         .van-config-provider {
             height: 100%;
+        }
+
+        .options-panel {
+            flex: 1;
+            padding-right: 200px;
+            padding-left: 200px;
+            padding-bottom: 50px;
+        }
+
+        .ad-panel {
+            width: 400px;
         }
     }
     .video-roll-logo-text {

@@ -27,7 +27,7 @@ export default defineComponent({
 
         return () => (
             <div class="options-general">
-                <div class="options-content options-content-h">
+                <div class="options-content-h">
                     <div class="options-donate-item" onClick={toAfdian}>
                         <img class="options-donate-img options-donate-afdian" src={afdian} />
                         <div><a href="https://afdian.net/a/gomi_gxy/plan" target="_blank">爱发电</a></div>

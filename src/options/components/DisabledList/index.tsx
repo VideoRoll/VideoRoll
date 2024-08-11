@@ -51,8 +51,7 @@ export default defineComponent({
 
         return () => (
             <div class="options-general">
-                <div class="options-content">
-                    <div class="options-inside-header">
+                <div class="options-inside-header">
                         <van-button type="primary" size="small" onClick={clear}>Clear All</van-button>
                     </div>
                     {
@@ -62,8 +61,6 @@ export default defineComponent({
                             <van-icon name="close" class="close-icon" color="#ee0a24" onClick={() => remove(item.url)} />
                         </van-cell>)
                     }
-                </div>
-
             </div>
         );
     }
