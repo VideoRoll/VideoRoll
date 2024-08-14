@@ -9,21 +9,24 @@ import "vue3-colorpicker/style.css";
 export default defineComponent({
     name: "General",
     setup(props) {
-        const autoScale = ref(true);
         const loading = ref(false);
 
         const config = useGeneralConfig();
         onMounted(() => {
             loading.value = true;
-            browser.storage.sync.get('isAutoChangeSize').then((res) => {
-                autoScale.value = res?.['isAutoChangeSize'] ?? true;
+            browser.storage.sync.get('generalConfig').then((res) => {
+                const data = res?.['generalConfig'];
+                if (data) {
+                    config.value = data;
+                }
+                
                 loading.value = false;
             });
         })
 
-        const onChange = (value: boolean) => {
+        const onChange = () => {
             browser.storage.sync.set({
-                isAutoChangeSize: value
+                gerneralConfig: JSON.parse(JSON.stringify(config.value))
             });
         }
 
@@ -31,7 +34,7 @@ export default defineComponent({
             <div class="options-general">
                 <van-form submit="onSubmit">
                     {
-                        render(config)
+                        render(config.value, onChange)
                     }
                 </van-form>
             </div>

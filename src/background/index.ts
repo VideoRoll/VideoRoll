@@ -6,13 +6,34 @@
 import { createURL } from 'src/util';
 import { ActionType } from '../types/type.d';
 import { sendTabMessage, setBadge, getBrowser } from '../util';
+import { shortcutsMap, useShortcuts } from 'src/use/useShortcuts';
+import { useGeneralConfig } from 'src/options/use/useGeneralConfig';
 
 let currentTabId: number | undefined;
+
+// 检查并设置默认值
+chrome.storage.sync.get(['shortcuts', 'generalConfig'], (result) => {
+    if (!result.shortcuts) {
+        // 如果没有找到存储的值，就使用默认值
+        const shortcutsMap = useShortcuts();
+        chrome.storage.sync.set({
+            shortcuts: JSON.parse(JSON.stringify(shortcutsMap.value))
+        });        
+    }
+
+    if (!result.generalConfig) {
+        // 如果没有找到存储的值，就使用默认值
+        const generalConfig = useGeneralConfig();
+        chrome.storage.sync.set({
+            generalConfig: JSON.parse(JSON.stringify(generalConfig))
+        });        
+    }
+});
 
 chrome.runtime.onInstalled.addListener((params: any) => {
     const reason = params.reason;
 
-    switch(reason) {
+    switch (reason) {
         case 'install':
             createURL('https://videoroll.gomi.site');
             break;
