@@ -74,7 +74,7 @@ export default defineComponent({
         return () => (
             <div class="video-roll-long-box">
                 {
-                    selections.value.map((item) => <div class={`speed-item ${selected.value === item.title ? 'video-roll-switch-on' : ''}`} onClick={() => setPlaybackRateNum(item)}>{item.title}</div>)
+                    selections.value.map((item) => <div class={`speed-item ${selected.value === item.title ? 'video-roll-switch-on video-roll-on' : ''}`} onClick={() => setPlaybackRateNum(item)}>{item.title}</div>)
                 }
                 <van-popover placement="top-end" theme="dark" class="popover-size" v-model={isShow} v-slots={{
                     reference: () => (

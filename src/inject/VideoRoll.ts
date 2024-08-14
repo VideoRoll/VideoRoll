@@ -87,7 +87,7 @@ export default class VideoRoll {
         // 3.若是横屏视频，处在横屏容器中
         if (isHorizonDeg && isHorizonVideo && isHorizonDom) {
             const value = offsetHeight / offsetWidth;
-            return [value, value];
+            return Number.isNaN(value) ? [1, 1] : [value, value];
         }
 
         if (!isHorizonDeg && isHorizonVideo && isHorizonDom) {
@@ -97,7 +97,7 @@ export default class VideoRoll {
         // 若是竖屏且容器为竖屏
         if (!isHorizonVideo && !isHorizonDom && isHorizonDeg) {
             const value = videoWidth / videoHeight;
-            return [value, value];
+            return Number.isNaN(value) ? [1, 1] : [value, value];
         }
 
         return [1, 1];
@@ -388,9 +388,9 @@ export default class VideoRoll {
             top: 0;
             width: 100%;
             height: 100%;
-            backdrop-filter: blur(10px);
+            backdrop-filter: ${focus.blur ? 'blur(10px)' : 'unset'};
             z-index: 20000 !important;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: ${focus.backgroundColor};
         }
         
         .video-roll-focus {
@@ -402,6 +402,7 @@ export default class VideoRoll {
             top: 0;
             bottom: 0;
             margin: auto;
+            border-raduis: ${focus.rounded ? '10px' : 'unset'}
         }
         `;
 
@@ -544,7 +545,7 @@ export default class VideoRoll {
         const mask = document.getElementById('video-roll-root-mask');
 
         if (!focus && this.originElementPosition && mask) {
-            const { parentElement, previousElementSibling, nextElementSibling } = this.originElementPosition;
+            const { parentElement, nextElementSibling } = this.originElementPosition;
             if (video.parentElement === mask && parentElement) {
                 video.classList.remove('video-roll-focus');
                 if (nextElementSibling) {

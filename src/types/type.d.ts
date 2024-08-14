@@ -78,6 +78,9 @@ export type Deg = number;
 
 export type Focus = {
     on: boolean;
+    backgroundColor: string,
+    blur: boolean,
+    rounded: boolean
 }
 
 export type Document = {
