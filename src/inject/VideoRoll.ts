@@ -548,6 +548,11 @@ export default class VideoRoll {
             const { parentElement, nextElementSibling } = this.originElementPosition;
             if (video.parentElement === mask && parentElement) {
                 video.classList.remove('video-roll-focus');
+                if (video.classList.contains('video-roll-no-controls')) {
+                    video.classList.remove('video-roll-no-controls');
+                    video.controls = false;
+                }
+                
                 if (nextElementSibling) {
                     parentElement.insertBefore(video, nextElementSibling)
                 } else {
@@ -561,6 +566,11 @@ export default class VideoRoll {
         if (focus && this.originElementPosition && mask) {
             mask.appendChild(video);
             video.classList.add('video-roll-focus');
+
+            if (!video.controls) {
+                video.classList.add('video-roll-no-controls');
+                video.controls = true;
+            }
         }
 
         return this;
