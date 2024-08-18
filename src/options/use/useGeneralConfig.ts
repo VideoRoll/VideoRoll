@@ -5,6 +5,7 @@ export function useGeneralConfig() {
         {
             type: 'group',
             title: 'Lights Off',
+            key: 'focus',
             config: [
                 {
                     type: 'color-picker',

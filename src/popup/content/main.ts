@@ -9,8 +9,16 @@ import { createApp } from "vue";
 import { Row } from 'vant';
 import '@vant/touch-emulator';
 import 'vant/lib/index.css'
+import FloatingVue from 'floating-vue'
+import 'floating-vue/dist/style.css'
 
 import App from "./App";
+
+import {
+    // Directives
+    vTooltip
+} from 'floating-vue'
+
 
 import ConfigProvider from "vant/es/config-provider/index.mjs";
 import Sidebar from "vant/es/sidebar/index.mjs";
@@ -40,6 +48,7 @@ import Tag from "vant/es/tag/index.mjs";
 import NoticeBar from "vant/es/notice-bar/index.mjs";
 import Form from "vant/es/form/index.mjs";
 import Field from "vant/es/field/index.mjs";
+import Empty  from "vant/es/empty/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -56,7 +65,7 @@ import "vant/es/col/style/index.mjs";
 import "vant/es/row/style/index.mjs";
 import "vant/es/swipe/style/index.mjs";
 import "vant/es/swipe-item/style/index.mjs";
-import "vant/es/popup/style/index.mjs"; 
+import "vant/es/popup/style/index.mjs";
 import "vant/es/popover/style/index.mjs";
 import "vant/es/notify/style/index.mjs";
 import "vant/es/tab/style/index.mjs";
@@ -70,6 +79,7 @@ import "vant/es/tag/style/index.mjs";
 import "vant/es/notice-bar/style/index.mjs";
 import "vant/es/form/style/index.mjs";
 import "vant/es/field/style/index.mjs";
+import "vant/es/empty/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -101,4 +111,6 @@ createApp(App)
     .use(NoticeBar)
     .use(Form)
     .use(Field)
+    .use(Empty)
+    .use(FloatingVue)
     .mount("#app");

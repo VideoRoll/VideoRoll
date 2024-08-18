@@ -118,8 +118,7 @@ export default defineComponent({
         }
 
         return () => (
-            
-            <div title='Stretch' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
+            <div v-tooltip='Filter' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
             <div class="video-roll-icon-box">
                 <span class="video-roll-label">
                     {

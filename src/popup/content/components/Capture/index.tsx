@@ -20,7 +20,7 @@ export default defineComponent({
         };
 
         return () => (
-            <div class={`video-roll-store video-roll-item video-roll-off`} onClick={capture}>
+            <div v-tooltip="Capture" class={`video-roll-store video-roll-item video-roll-off`} onClick={capture}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         {

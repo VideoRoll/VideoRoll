@@ -8,7 +8,7 @@ export const shortcutsMap = {
     'Rotate ⭯': { title: getMessage('options_shortcuts_rotate_right'), key: 'deg', handler: (data: number) => { if (data === 0 && data - 90 < 0) return 270; return data - 90; }, shortcuts: { key: '2', code: [50] } },
     'Screenshot': {
         title: getMessage('options_shortcut_screenshot'),
-        key: 'capture', trigger: ({ VideoRoll }) => {
+        key: 'capture', trigger: ({ VideoRoll }: any) => {
             const url = VideoRoll.capture();
             const newUrl = chrome.runtime.getURL('inject/capture.html?imgData=' + encodeURIComponent(url));
             window.open(newUrl, '_blank');

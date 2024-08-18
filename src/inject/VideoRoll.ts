@@ -307,7 +307,7 @@ export default class VideoRoll {
             this.toggleLoop(dom, rollConfig.loop);
         }
 
-        this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, focus.on);
+        this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, focus);
         this.togglePictureInPicture(pictureInPicture);
 
         return this;
@@ -376,33 +376,9 @@ export default class VideoRoll {
         const degScale = doc.getElementById("video-roll-deg-scale") as HTMLElement;
 
         const filterStyle = filter.mode === 'custom' ? this.getFilterStyle(filter) : filter.mode;
-
         degScale.innerHTML = `.video-roll-deg-scale { 
             transform: ${FlipType[flip]} rotate(${deg}deg) scale3d(${zoom}, ${zoom}, 1) scale(${scale[0]}, ${scale[1]}) translate(${move.x}%, ${-move.y}%) !important; 
             filter: ${filterStyle}; 
-        }
-        #video-roll-root-mask {
-            display: ${focus.on ? 'block' : 'none'};
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: ${focus.blur ? 'blur(10px)' : 'unset'};
-            z-index: 20000 !important;
-            background-color: ${focus.backgroundColor};
-        }
-        
-        .video-roll-focus {
-            width: ${this.originElementPosition?.style.width}px;
-            height: ${this.originElementPosition?.style.height}px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            border-raduis: ${focus.rounded ? '10px' : 'unset'}
         }
         `;
 
@@ -461,7 +437,7 @@ export default class VideoRoll {
 
         this.documents.forEach((doc) => {
             const styles = this.isExistStyle(doc);
-            console.log('styles', styles);
+
             if (styles) {
                 if (!isClear) return this;
 
@@ -476,20 +452,23 @@ export default class VideoRoll {
             }
 
             const degScale = doc.createElement("style");
-
             degScale.innerHTML = `
                 .video-roll-deg-scale {}
             `;
 
             degScale.setAttribute("id", "video-roll-deg-scale");
-
             degScale.setAttribute("type", "text/css");
+
+            const focusStyle = doc.createElement("style");
+            focusStyle.innerHTML = ``;
+            focusStyle.setAttribute("id", "video-roll-focus-style");
+            focusStyle.setAttribute("type", "text/css");
 
             const head = doc.getElementsByTagName("head")[0];
 
             if (head) {
-                console.log('degScale', degScale);
                 head.appendChild(degScale);
+                head.appendChild(focusStyle);
             }
 
             this.addMaskElement();
@@ -541,10 +520,37 @@ export default class VideoRoll {
      * @param focus
      * @returns
      */
-    static updateFocus(video: HTMLVideoElement, focus: boolean) {
+    static updateFocus(video: HTMLVideoElement, focus: Focus) {
         const mask = document.getElementById('video-roll-root-mask');
+        const focusStyle = document.getElementById('video-roll-focus-style') as HTMLStyleElement;
+        console.log(focus, '--focus');
+        if (focusStyle) {
+            focusStyle.innerHTML = `#video-roll-root-mask {
+                display: ${focus.on ? 'block' : 'none'};
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                backdrop-filter: ${focus.blur ? 'blur(10px)' : 'unset'};
+                z-index: 20000 !important;
+                background-color: ${focus.backgroundColor};
+            }
+            
+            .video-roll-focus {
+                width: ${this.originElementPosition?.style.width}px;
+                height: ${this.originElementPosition?.style.height}px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                border-radius: ${focus.rounded ? '10px' : 'unset'}
+            }`
+        }
 
-        if (!focus && this.originElementPosition && mask) {
+        if (!focus.on && this.originElementPosition && mask) {
             const { parentElement, nextElementSibling } = this.originElementPosition;
             if (video.parentElement === mask && parentElement) {
                 video.classList.remove('video-roll-focus');
@@ -552,7 +558,7 @@ export default class VideoRoll {
                     video.classList.remove('video-roll-no-controls');
                     video.controls = false;
                 }
-                
+
                 if (nextElementSibling) {
                     parentElement.insertBefore(video, nextElementSibling)
                 } else {
@@ -563,7 +569,7 @@ export default class VideoRoll {
             return this;
         }
 
-        if (focus && this.originElementPosition && mask) {
+        if (focus.on && this.originElementPosition && mask) {
             mask.appendChild(video);
             video.classList.add('video-roll-focus');
 
@@ -839,8 +845,10 @@ export default class VideoRoll {
     static removeStyle(target: HTMLElement) {
         target.classList.remove("video-roll-highlight");
         target.classList.remove("video-roll-deg-scale");
+        target.classList.remove("video-roll-focus");
 
         document.getElementById('video-roll-deg-scale')?.remove();
+        document.getElementById('video-roll-focus-style')?.remove();
     }
 
     static stop() {
@@ -850,7 +858,7 @@ export default class VideoRoll {
         this.resetAudio();
 
         if (this.rollConfig.focus.on) {
-            this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, false);
+            this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, { on: false } as Focus);
             const mask = document.getElementById('video-roll-root-mask') as HTMLElement;
             mask?.remove();
         }

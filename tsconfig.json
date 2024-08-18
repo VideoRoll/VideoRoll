@@ -27,7 +27,8 @@
             "chrome",
             "jest",
             "node",
-            "webextension-polyfill"
+            "webextension-polyfill",
+            "lodash-es"
         ]
     },
     "isolatedModules": true,

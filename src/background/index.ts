@@ -8,6 +8,7 @@ import { ActionType } from '../types/type.d';
 import { sendTabMessage, setBadge, getBrowser } from '../util';
 import { shortcutsMap, useShortcuts } from 'src/use/useShortcuts';
 import { useGeneralConfig } from 'src/options/use/useGeneralConfig';
+import { toRaw } from 'vue';
 
 let currentTabId: number | undefined;
 
@@ -25,7 +26,7 @@ chrome.storage.sync.get(['shortcuts', 'generalConfig'], (result) => {
         // 如果没有找到存储的值，就使用默认值
         const generalConfig = useGeneralConfig();
         chrome.storage.sync.set({
-            generalConfig: JSON.parse(JSON.stringify(generalConfig))
+            generalConfig: JSON.parse(JSON.stringify(generalConfig.value))
         });        
     }
 });
