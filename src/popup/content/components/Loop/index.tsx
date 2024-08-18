@@ -23,7 +23,7 @@ export default defineComponent({
         };
 
         return () => (
-            <div title='Loop' class={`video-roll-focus video-roll-item ${rollConfig.loop ? 'video-roll-on' : 'video-roll-off'}`} onClick={setLoop}>
+            <div v-tooltip='Loop' class={`video-roll-focus video-roll-item ${rollConfig.loop ? 'video-roll-on' : 'video-roll-off'}`} onClick={setLoop}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         <InfiniteOutline class="video-roll-icon"></InfiniteOutline>

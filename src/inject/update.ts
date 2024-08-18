@@ -5,6 +5,7 @@ import { getSessionStorage, getLocalStorage, setSessionStorage, setLocalStorage,
 import { getDomain, sendRuntimeMessage } from "src/util";
 import hotkeys from "hotkeys-js";
 import { shortcutsMap } from "src/use/useShortcuts";
+import { getGeneralConfig } from "./utils/getGeneralConfig";
 
 /**
  * get badge text
@@ -34,7 +35,8 @@ export async function updateConfig(tabId: number, rollConfig: IRollConfig) {
     if (rollConfig.enable === false) return;
 
     rollConfig.isInit = false;
-
+    rollConfig = await getGeneralConfig(rollConfig);
+    console.log(rollConfig, '--rollConfig');
     VideoRoll.updateVideo(rollConfig).updateAudio();
 
     const config = VideoRoll.getRollConfig();
@@ -63,7 +65,7 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
     const domain = getDomain(rollConfig.url);
     const key = `video-roll-disabled-${domain}`;
     const data = await browser.storage.sync.get(`video-roll-disabled-${domain}`)
-    // const generalConfig = await getGeneralConfig(rollConfig);
+
     config = Object.assign(config, { videoNumber: rollConfig.videoNumber, tabId: rollConfig.tabId, enable: data[key] ? false : true })
 
     sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE, tabId })
@@ -87,6 +89,7 @@ export async function updateBadge(options: any) {
 
     if (tabConfig) {
         tabConfig.document = { title: document.title };
+        await getGeneralConfig(tabConfig);
         if (!tabConfig.storeThisTab) {
             sessionStorage.removeItem(`video-roll-${tabId}`);
             tabConfig.store = false;
@@ -114,7 +117,7 @@ export async function updateBadge(options: any) {
     if (hasConf) {
         config.isInit = true;
         config.document = { title: document.title };
-
+        await getGeneralConfig(config);
         const domain = getDomain(config.url);
         const key = `video-roll-disabled-${domain}`;
         const data = await browser.storage.sync.get(key)

@@ -14,7 +14,7 @@ export default function render(config: any, onChange: Function) {
                 </div>
             case 'color-picker':
                 return <van-field label-width="300" input-align="right" name="switch" label={item.title} v-slots={{
-                    input: () => <ColorPicker theme="black" format="rgb" shape="circle" v-model:pureColor={item.value}/>
+                    input: () => <ColorPicker theme="black" format="rgb" shape="circle" v-model:pureColor={item.value} onUpdate:pureColor={onChange}/>
                 }}>
                 </van-field>
             case 'switch':

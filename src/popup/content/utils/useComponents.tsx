@@ -9,6 +9,7 @@ import {
 } from "vue";
 import { VideocamOutline, VolumeMediumOutline, ListOutline, EllipsisHorizontalCircleOutline } from '@vicons/ionicons5';
 import browser from 'webextension-polyfill';
+import { Tooltip } from 'floating-vue';
 
 interface IConfig {
     type: string;
@@ -57,7 +58,7 @@ export default function useComponents() {
     const components = shallowReactive<ITabConfig[]>([
         {
             type: 'tab',
-            title: <div class="tab-title"><VideocamOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_video')}</span></div>,
+            title: <Tooltip><div class="tab-title" v-tooltip="Video"><VideocamOutline class="tab-icon"/></div></Tooltip>,
             children: [{
                 type: 'row',
                 style: {
@@ -254,7 +255,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <div class="tab-title"><VolumeMediumOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_audio')}</span></div>,
+            title: <Tooltip><div class="tab-title" v-tooltip="Audio"><VolumeMediumOutline class="tab-icon" /></div></Tooltip>,
             children: [
                 {
                     type: 'row',
@@ -317,7 +318,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <div class="tab-title"><ListOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_list')}</span></div>,
+            title: <Tooltip><div class="tab-title" v-tooltip="Video List"><ListOutline class="tab-icon" /></div></Tooltip>,
             children: [
                 {
                     type: 'component',
@@ -327,7 +328,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <div class="tab-title"><EllipsisHorizontalCircleOutline class="tab-icon" /><span class="tab-title-text">{browser.i18n.getMessage('tabs_more')}</span></div>,
+            title: <Tooltip><div class="tab-title" v-tooltip="More Settings"><EllipsisHorizontalCircleOutline class="tab-icon" /></div></Tooltip>,
             children: [
                 {
                     type: 'row',

@@ -19,7 +19,7 @@ export default defineComponent({
             update("focus", rollConfig.focus);
         };
         return () => (
-            <div title='Focus mode' class={`video-roll-focus video-roll-item ${rollConfig.focus.on ? 'video-roll-on' : 'video-roll-off'}`} onClick={setFocus}>
+            <div v-tooltip='Lights off' class={`video-roll-focus video-roll-item ${rollConfig.focus.on ? 'video-roll-on' : 'video-roll-off'}`} onClick={setFocus}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         {

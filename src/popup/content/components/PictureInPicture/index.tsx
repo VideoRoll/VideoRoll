@@ -19,7 +19,7 @@ export default defineComponent({
             update("pictureInPicture", rollConfig.pictureInPicture);
         };
         return () => (
-            <div title='picture in picture' class={`video-roll-focus video-roll-item ${rollConfig.pictureInPicture ? 'video-roll-on' : 'video-roll-off'}`} onClick={setPictureInPicture}>
+            <div v-tooltip='picture in picture' class={`video-roll-focus video-roll-item ${rollConfig.pictureInPicture ? 'video-roll-on' : 'video-roll-off'}`} onClick={setPictureInPicture}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         <TvOutline

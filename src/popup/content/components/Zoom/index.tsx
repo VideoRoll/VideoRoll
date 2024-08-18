@@ -8,6 +8,7 @@ import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
 import browser from "webextension-polyfill";
 import "./index.less";
+import { ReloadOutline } from "@vicons/ionicons5";
 
 export default defineComponent({
     name: "Zoom",
@@ -23,8 +24,8 @@ export default defineComponent({
         return () => (
             <>
                 <div class="video-roll-long-box">
-                    <div class={`video-roll-switch ${rollConfig.zoom !== 1 ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={() => setZoomNum(1)}>
-                        {browser.i18n.getMessage('action_reset')}
+                    <div v-tooltip={browser.i18n.getMessage('action_reset')} class={`video-roll-switch ${rollConfig.zoom !== 1 ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={() => setZoomNum(1)}>
+                        <ReloadOutline class="reset-icon"></ReloadOutline>
                     </div>
                     <div class="video-roll-zoom">
                         <van-slider

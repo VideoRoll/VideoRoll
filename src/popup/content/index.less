@@ -29,6 +29,27 @@ body {
         background: transparent;
         background: rgba(200, 200, 200, 0.2);
     }
+
+    .video-roll-switch {
+        color: #fff;
+        cursor: pointer;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        box-shadow: 2px 2px 4px #5d5f626c, -2px -2px 4px #5d5f626c;
+
+        .video-roll-icon {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .reset-icon {
+        width: 15px;
+    }
 }
 
 #app {
@@ -95,23 +116,6 @@ body {
 
         &:hover {
             filter: contrast(200%);
-        }
-    }
-
-    .video-roll-switch {
-        color: #fff;
-        cursor: pointer;
-        border-radius: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 20px;
-        box-shadow: 2px 2px 4px #5d5f626c, -2px -2px 4px #5d5f626c;
-
-        .video-roll-icon {
-            width: 15px;
-            height: 15px;
         }
     }
 
@@ -248,9 +252,9 @@ body {
     }
 
     .tab-icon {
-        width: 15px;
-        height: 15px;
-        margin-right: 5px;
+        width: 20px;
+        height: 20px;
+        // margin-right: 5px;
     }
 
     .merge-row {

@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref, toRaw } from "vue";
 import browser from "webextension-polyfill";
 
 import './index.less'
@@ -14,9 +14,11 @@ export default defineComponent({
         const config = useGeneralConfig();
         onMounted(() => {
             loading.value = true;
+            // browser.storage.sync.remove('generalConfig');
             browser.storage.sync.get('generalConfig').then((res) => {
                 const data = res?.['generalConfig'];
                 if (data) {
+                    console.log(data, '--config')
                     config.value = data;
                 }
                 
@@ -26,7 +28,7 @@ export default defineComponent({
 
         const onChange = () => {
             browser.storage.sync.set({
-                gerneralConfig: JSON.parse(JSON.stringify(config.value))
+                generalConfig: JSON.parse(JSON.stringify(config.value))
             });
         }
 

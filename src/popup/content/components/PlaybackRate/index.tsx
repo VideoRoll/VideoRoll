@@ -6,7 +6,7 @@
 
 import { defineComponent, inject, onMounted, ref, shallowRef } from "vue";
 import type { IRollConfig } from "../../../../types/type.d";
-import { EllipsisVertical } from "@vicons/ionicons5";
+import { EllipsisVertical, ReloadOutline } from "@vicons/ionicons5";
 import browser from "webextension-polyfill";
 import "./index.less";
 
@@ -84,8 +84,8 @@ export default defineComponent({
                     ),
                 }}>
                     <div class="video-roll-long-box">
-                        <div class={`video-roll-switch ${rollConfig.playbackRate !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setPlaybackRateValue(1)}>
-                            {browser.i18n.getMessage('action_reset')}
+                        <div v-tooltip={browser.i18n.getMessage('action_reset')}class={`video-roll-switch ${rollConfig.playbackRate !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setPlaybackRateValue(1)}>
+                            <ReloadOutline class="reset-icon"></ReloadOutline>
                         </div>
                         <div class="video-roll-zoom">
                             <van-slider

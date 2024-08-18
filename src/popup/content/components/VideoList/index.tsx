@@ -69,7 +69,7 @@ export default defineComponent({
                                 </div>
                             </van-checkbox>
                         </div>
-                    ) : <div>no video</div>}
+                    ) : <div><van-empty description="未检测到视频" /></div>}
                 </van-checkbox-group>
             </div>
         );
