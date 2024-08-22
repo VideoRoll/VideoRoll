@@ -15,6 +15,7 @@ export const shortcutsMap = {
         }, shortcuts: { key: 'j', code: [74] }
     },
     'Muted': { title: getMessage('options_shortcut_volume_p'), key: 'muted', handler: (data: boolean) => { return !data }, shortcuts: { key: 'Alt+q', code: [18, 81] } },
+    'Focus': { title: getMessage('options_shortcut_volume_p'), key: 'focus', handler: (data: any) => { data.on = !data.on; return data }, shortcuts: { key: 'Alt+w', code: [18, 87] } },
     'Volume +': { title: getMessage('options_shortcut_volume_p'), key: 'volume', handler: (data: number) => { if (data + 1 <= 6) return data + 1; return data; }, shortcuts: { key: 'Alt+Equals', code: [18, 187] } },
     'Volume -': { title: getMessage('options_shortcut_volume_r'), key: 'volume', handler: (data: number) => { if (data - 0.1 >= 0) return data - 0.1; return data; }, shortcuts: { key: 'Alt+Dash', code: [18, 189] } },
     'PlaybackRate +': { title: getMessage('options_shortcut_speed_p'), key: 'playbackRate', handler: (data: number) => { if (data + 1 <= 16) return data + 1; return data; }, shortcuts: { key: 'Alt+ArrowRight', code: [18, 39] } },

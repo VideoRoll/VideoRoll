@@ -12,24 +12,27 @@ import { toRaw } from 'vue';
 
 let currentTabId: number | undefined;
 
-// 检查并设置默认值
-chrome.storage.sync.get(['shortcuts', 'generalConfig'], (result) => {
-    if (!result.shortcuts) {
-        // 如果没有找到存储的值，就使用默认值
-        const shortcutsMap = useShortcuts();
-        chrome.storage.sync.set({
-            shortcuts: JSON.parse(JSON.stringify(shortcutsMap.value))
-        });        
-    }
+function setupStorage() {
+    // 检查并设置默认值
+    chrome.storage.sync.get(['shortcuts', 'generalConfig'], (result) => {
+        if (!result.shortcuts) {
+            // 如果没有找到存储的值，就使用默认值
+            const shortcutsMap = useShortcuts();
+            chrome.storage.sync.set({
+                shortcuts: JSON.parse(JSON.stringify(shortcutsMap.value))
+            });
+        }
 
-    if (!result.generalConfig) {
-        // 如果没有找到存储的值，就使用默认值
-        const generalConfig = useGeneralConfig();
-        chrome.storage.sync.set({
-            generalConfig: JSON.parse(JSON.stringify(generalConfig.value))
-        });        
-    }
-});
+        if (!result.generalConfig) {
+            // 如果没有找到存储的值，就使用默认值
+            const generalConfig = useGeneralConfig();
+            chrome.storage.sync.set({
+                generalConfig: JSON.parse(JSON.stringify(generalConfig.value))
+            });
+        }
+    });
+}
+
 
 chrome.runtime.onInstalled.addListener((params: any) => {
     const reason = params.reason;
@@ -58,6 +61,7 @@ chrome.runtime.onInstalled.addListener((params: any) => {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     currentTabId = tabId;
 
+    setupStorage();
     sendTabMessage(tabId, { type: ActionType.GET_BADGE, tabId }, (response: any) => {
         sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
     });
@@ -68,6 +72,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
     currentTabId = tabId;
 
+    setupStorage();
     sendTabMessage(tabId, { type: ActionType.GET_BADGE, tabId }, (response: any) => {
         sendTabMessage(tabId, { type: ActionType.INIT_SHORT_CUT_KEY });
     });

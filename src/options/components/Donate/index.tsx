@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent } from "vue";
 import { createURL } from 'src/util';
 import './index.less';
 
@@ -7,7 +7,7 @@ export default defineComponent({
     setup(props) {
 
         const toAfdian = () => {
-            createURL('https://afdian.net/a/gomi_gxy/plan');
+            createURL('https://afdian.com/a/gomi_gxy/plan');
         }
 
         const afdian = new URL(

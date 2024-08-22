@@ -523,7 +523,7 @@ export default class VideoRoll {
     static updateFocus(video: HTMLVideoElement, focus: Focus) {
         const mask = document.getElementById('video-roll-root-mask');
         const focusStyle = document.getElementById('video-roll-focus-style') as HTMLStyleElement;
-        console.log(focus, '--focus');
+    
         if (focusStyle) {
             focusStyle.innerHTML = `#video-roll-root-mask {
                 display: ${focus.on ? 'block' : 'none'};
@@ -549,6 +549,8 @@ export default class VideoRoll {
                 border-radius: ${focus.rounded ? '10px' : 'unset'}
             }`
         }
+
+        if (!video) return this;
 
         if (!focus.on && this.originElementPosition && mask) {
             const { parentElement, nextElementSibling } = this.originElementPosition;
