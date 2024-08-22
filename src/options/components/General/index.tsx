@@ -18,10 +18,23 @@ export default defineComponent({
             browser.storage.sync.get('generalConfig').then((res) => {
                 const data = res?.['generalConfig'];
                 if (data) {
-                    console.log(data, '--config')
-                    config.value = data;
+                    const array2Map = new Map(data.map((item:any) => [item.key, item.config]));
+
+                    config.value.forEach(item1 => {
+                        const matchingConfig2 = array2Map.get(item1.key) as any[];
+
+                        if (matchingConfig2) {
+                            const configMap2 = new Map(matchingConfig2.map((configItem: any) => [configItem.key, configItem.value]));
+
+                            item1.config.forEach(configItem1 => {
+                                if (configMap2.has(configItem1.key)) {
+                                    configItem1.value = configMap2.get(configItem1.key);
+                                }
+                            });
+                        }
+                    });
                 }
-                
+
                 loading.value = false;
             });
         })

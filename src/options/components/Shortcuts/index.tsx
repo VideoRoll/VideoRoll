@@ -27,7 +27,6 @@ export default defineComponent({
 			browser.storage.sync.get('shortcuts').then((res) => {
 				const map = res?.['shortcuts'] ?? {};
 				Object.keys(shortcutsMap.value).forEach((key: string) => {
-					console.log(key, 'key');
 					if (map[key]) {
 						shortcutsMap.value[key].shortcuts = map[key].shortcuts;
 					}

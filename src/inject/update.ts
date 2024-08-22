@@ -36,7 +36,7 @@ export async function updateConfig(tabId: number, rollConfig: IRollConfig) {
 
     rollConfig.isInit = false;
     rollConfig = await getGeneralConfig(rollConfig);
-    console.log(rollConfig, '--rollConfig');
+
     VideoRoll.updateVideo(rollConfig).updateAudio();
 
     const config = VideoRoll.getRollConfig();

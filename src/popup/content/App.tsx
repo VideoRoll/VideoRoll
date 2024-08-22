@@ -113,7 +113,7 @@ export default defineComponent({
 
         return () => (
             <div class={rollConfig.enable ? "video-roll-wrapper" : "video-roll-wrapper-empty"}>
-                <Head isShow={isShow.value}></Head>
+                <Head class="video-roll-wrapper-head" isShow={isShow.value}></Head>
                 <main class={rollConfig.enable ? "video-roll-main" : "video-roll-main-empty"}>
                     <div class={rollConfig.enable ? "video-roll-content" : "video-roll-content-empty"}>
                         {
