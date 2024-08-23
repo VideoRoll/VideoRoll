@@ -6,6 +6,7 @@
 import { defineComponent, inject } from "vue";
 import { EyeOutline, EyeOffOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
+import browser from 'webextension-polyfill'
 import "./index.less";
 
 export default defineComponent({
@@ -19,7 +20,7 @@ export default defineComponent({
             update("focus", rollConfig.focus);
         };
         return () => (
-            <div v-tooltip='Lights off' class={`video-roll-focus video-roll-item ${rollConfig.focus.on ? 'video-roll-on' : 'video-roll-off'}`} onClick={setFocus}>
+            <div v-tooltip={browser.i18n.getMessage('video_focus')} class={`video-roll-focus video-roll-item ${rollConfig.focus.on ? 'video-roll-on' : 'video-roll-off'}`} onClick={setFocus}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         {

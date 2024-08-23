@@ -1,4 +1,10 @@
 {
+   "extension_name": {
+      "message": "Video Roll - Une boîte à outils tout-en-un pour les vidéos en ligne"
+   },
+   "extension_des": {
+      "message": "Une boîte à outils pour améliorer votre expérience de visionnage de vidéos en ligne avec des fonctionnalités telles que la rotation, le zoom, la vitesse, le mode PiP, la capture d'écran, la concentration en mode sombre, la lecture en boucle, le dépassement de la limite de volume, la modification de la tonalité, et bien plus encore, avec des raccourcis personnalisés faciles à configurer."
+   },
    "tabs_video": {
       "message": "Vidéo"
    },
@@ -6,16 +12,46 @@
       "message": "Audio"
    },
    "tabs_list": {
-      "message": "Liste"
+      "message": "Liste des vidéos"
    },
    "tabs_more": {
-      "message": "Plus"
+      "message": "Plus de paramètres"
    },
    "video_rotate": {
-      "message": "Pivoter"
+      "message": "Rotation"
+   },
+   "video_loop": {
+      "message": "Lecture en boucle"
+   },
+   "video_pic": {
+      "message": "Image dans l'image"
    },
    "video_download": {
       "message": "Télécharger"
+   },
+   "video_left": {
+      "message": "Gauche"
+   },
+   "video_right": {
+      "message": "Droite"
+   },
+   "video_up": {
+      "message": "Haut"
+   },
+   "video_down": {
+      "message": "Bas"
+   },
+   "video_unset": {
+      "message": "Non défini"
+   },
+   "video_custom": {
+      "message": "Personnalisé"
+   },
+   "video_horizental": {
+      "message": "Horizontal"
+   },
+   "video_vertical": {
+      "message": "Vertical"
    },
    "video_reposition": {
       "message": "Repositionner"
@@ -27,7 +63,7 @@
       "message": "Retourner"
    },
    "video_focus": {
-      "message": "Mettre au point"
+      "message": "Mode sombre"
    },
    "video_filter": {
       "message": "Filtre"
@@ -41,6 +77,9 @@
    "video_zoom": {
       "message": "Zoom"
    },
+   "audio_muted": {
+      "message": "Muet"
+   },
    "audio_volume": {
       "message": "Volume"
    },
@@ -48,22 +87,49 @@
       "message": "Tonalité"
    },
    "list_main": {
-      "message": "Principal"
+      "message": "Vidéo principale"
    },
    "more_save_preferences": {
-      "message": "Enregistrer les préférences actuelles"
+      "message": "Sauvegarder les paramètres actuels"
    },
    "more_auto_resize": {
-      "message": "Redimensionner automatiquement lors de la rotation"
+      "message": "Redimensionnement automatique lors de la rotation"
    },
    "action_reset": {
       "message": "Réinitialiser"
    },
    "tips_disabled": {
-      "message": "désactivé sur ce site"
+      "message": "Désactivé sur ce site"
    },
    "tips_enabled": {
-      "message": "activé sur ce site"
+      "message": "Activé sur ce site"
+   },
+   "tips_setting": {
+      "message": "Paramètres"
+   },
+   "tips_rating": {
+      "message": "Évaluation 5 étoiles"
+   },
+   "tips_donate": {
+      "message": "Offrez-moi un café"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "Tout effacer"
+   },
+   "tips_empty": {
+      "message": "Aucune vidéo détectée"
+   },
+   "tips_feedback": {
+      "message": "Retour d'information"
    },
    "options_general": {
       "message": "Général"
@@ -75,7 +141,7 @@
       "message": "Liste de cache"
    },
    "options_disabled_list": {
-      "message": "Liste désactivée"
+      "message": "Liste de désactivation"
    },
    "options_contact": {
       "message": "Contact"
@@ -84,22 +150,22 @@
       "message": "Faire un don"
    },
    "options_shortcuts_rotate_left": {
-      "message": "Pivoter à gauche"
+      "message": "Rotation à gauche"
    },
    "options_shortcuts_rotate_right": {
-      "message": "Pivoter à droite"
+      "message": "Rotation à droite"
    },
    "options_shortcuts_rotate_90": {
-      "message": "Pivoter de 90 degrés"
+      "message": "Rotation 90 degrés"
    },
    "options_shortcuts_rotate_180": {
-      "message": "Pivoter de 180 degrés"
+      "message": "Rotation 180 degrés"
    },
    "options_shortcuts_rotate_270": {
-      "message": "Pivoter de 270 degrés"
+      "message": "Rotation 270 degrés"
    },
    "options_shortcuts_rotate_0": {
-      "message": "Pivoter de 0 degré"
+      "message": "Rotation 0 degré"
    },
    "options_shortcuts_flip_horizontally": {
       "message": "Retourner horizontalement"
@@ -111,19 +177,22 @@
       "message": "Réinitialiser le retournement"
    },
    "options_shortcuts_zoomin": {
-      "message": "Agrandir"
+      "message": "Zoomer"
    },
    "options_shortcuts_zoomout": {
-      "message": "Réduire"
+      "message": "Dézoomer"
    },
    "options_shortcut_stretch_horizontally_p": {
       "message": "Étirer horizontalement +"
    },
    "options_shortcut_stretch_horizontally_r": {
-      "message": "Réduire horizontalement -"
+      "message": "Étirer horizontalement -"
    },
    "options_shortcut_stretch_vertically_p": {
       "message": "Étirer verticalement +"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "Étirer verticalement -"
    },
    "options_shortcut_stretch_reset": {
       "message": "Réinitialiser l'étirement"
@@ -135,10 +204,10 @@
       "message": "Déplacer à gauche"
    },
    "options_shortcut_move_up": {
-      "message": "Déplacer en haut"
+      "message": "Déplacer vers le haut"
    },
    "options_shortcut_move_down": {
-      "message": "Déplacer en bas"
+      "message": "Déplacer vers le bas"
    },
    "options_shortcut_volume_p": {
       "message": "Volume +"
@@ -154,5 +223,29 @@
    },
    "options_shortcut_screenshot": {
       "message": "Capture d'écran"
+   },
+   "options_shortcut_focus": {
+      "message": "Mode sombre"
+   },
+   "options_general_focus": {
+      "message": "Mode sombre"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "Couleur de fond"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "Flou d'arrière-plan"
+   },
+   "options_general_focus_rounded": {
+      "message": "Coins arrondis pour la vidéo"
+   },
+   "options_ad": {
+      "message": "Collaboration publicitaire"
+   },
+   "tips_mail": {
+      "message": "Contact par email : gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "Groupe WeChat"
    }
 }

@@ -5,10 +5,8 @@
  */
 import { defineComponent, inject, ref, shallowReactive } from "vue";
 import { InfiniteOutline } from "@vicons/ionicons5";
-import Clipboard from "clipboard";
-import { showNotify } from 'vant';
 import "./index.less";
-import { createURL } from 'src/util';
+import browser from 'webextension-polyfill'
 import { IRollConfig } from "src/types/type";
 
 export default defineComponent({
@@ -23,7 +21,7 @@ export default defineComponent({
         };
 
         return () => (
-            <div v-tooltip='Loop' class={`video-roll-focus video-roll-item ${rollConfig.loop ? 'video-roll-on' : 'video-roll-off'}`} onClick={setLoop}>
+            <div v-tooltip={browser.i18n.getMessage('video_loop')} class={`video-roll-focus video-roll-item ${rollConfig.loop ? 'video-roll-on' : 'video-roll-off'}`} onClick={setLoop}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         <InfiniteOutline class="video-roll-icon"></InfiniteOutline>

@@ -1,6 +1,5 @@
-import { defineComponent, useSlots, ref, onMounted, provide, Transition, h } from "vue";
-import { ReloadOutline } from "@vicons/ionicons5";
-import { OPTIONS_MENU } from "../../config";
+import { defineComponent, h } from "vue";
+
 
 import './index.less';
 
