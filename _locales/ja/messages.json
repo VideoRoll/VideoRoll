@@ -1,4 +1,10 @@
 {
+   "extension_name": {
+      "message": "ビデオロール - オールインワンのウェブビデオツールボックス"
+   },
+   "extension_des": {
+      "message": "ビデオ向上ツール: 回転、ズーム、速度、PiP、スクショ、集中モード、ループ、音量解除、ショートカット。"
+   },
    "tabs_video": {
       "message": "ビデオ"
    },
@@ -6,28 +12,58 @@
       "message": "オーディオ"
    },
    "tabs_list": {
-      "message": "リスト"
+      "message": "ビデオリスト"
    },
    "tabs_more": {
-      "message": "もっと"
+      "message": "その他の設定"
    },
    "video_rotate": {
       "message": "回転"
    },
+   "video_loop": {
+      "message": "ループ再生"
+   },
+   "video_pic": {
+      "message": "ピクチャーインピクチャー"
+   },
    "video_download": {
       "message": "ダウンロード"
+   },
+   "video_left": {
+      "message": "左"
+   },
+   "video_right": {
+      "message": "右"
+   },
+   "video_up": {
+      "message": "上"
+   },
+   "video_down": {
+      "message": "下"
+   },
+   "video_unset": {
+      "message": "未設定"
+   },
+   "video_custom": {
+      "message": "カスタム"
+   },
+   "video_horizental": {
+      "message": "水平"
+   },
+   "video_vertical": {
+      "message": "垂直"
    },
    "video_reposition": {
       "message": "再配置"
    },
    "video_stretch": {
-      "message": "伸ばす"
+      "message": "ストレッチ"
    },
    "video_flip": {
       "message": "反転"
    },
    "video_focus": {
-      "message": "フォーカス"
+      "message": "集中モード"
    },
    "video_filter": {
       "message": "フィルター"
@@ -41,6 +77,9 @@
    "video_zoom": {
       "message": "ズーム"
    },
+   "audio_muted": {
+      "message": "ミュート"
+   },
    "audio_volume": {
       "message": "音量"
    },
@@ -48,22 +87,49 @@
       "message": "ピッチ"
    },
    "list_main": {
-      "message": "メイン"
+      "message": "メインビデオ"
    },
    "more_save_preferences": {
       "message": "現在の設定を保存"
    },
    "more_auto_resize": {
-      "message": "回転時に自動サイズ変更"
+      "message": "回転時に自動サイズ調整"
    },
    "action_reset": {
       "message": "リセット"
    },
    "tips_disabled": {
-      "message": "このサイトで無効"
+      "message": "このサイトで無効化"
    },
    "tips_enabled": {
-      "message": "このサイトで有効"
+      "message": "このサイトで有効化"
+   },
+   "tips_setting": {
+      "message": "設定"
+   },
+   "tips_rating": {
+      "message": "五つ星評価"
+   },
+   "tips_donate": {
+      "message": "コーヒーをご馳走して"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "すべてクリア"
+   },
+   "tips_empty": {
+      "message": "ビデオが検出されませんでした"
+   },
+   "tips_feedback": {
+      "message": "フィードバック"
    },
    "options_general": {
       "message": "一般"
@@ -84,10 +150,10 @@
       "message": "寄付"
    },
    "options_shortcuts_rotate_left": {
-      "message": "左に回転"
+      "message": "左回転"
    },
    "options_shortcuts_rotate_right": {
-      "message": "右に回転"
+      "message": "右回転"
    },
    "options_shortcuts_rotate_90": {
       "message": "90度回転"
@@ -117,16 +183,19 @@
       "message": "ズームアウト"
    },
    "options_shortcut_stretch_horizontally_p": {
-      "message": "水平に伸ばす +"
+      "message": "水平ストレッチ+"
    },
    "options_shortcut_stretch_horizontally_r": {
-      "message": "水平に縮める -"
+      "message": "水平ストレッチ-"
    },
    "options_shortcut_stretch_vertically_p": {
-      "message": "垂直に伸ばす +"
+      "message": "垂直ストレッチ+"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "垂直ストレッチ-"
    },
    "options_shortcut_stretch_reset": {
-      "message": "伸縮リセット"
+      "message": "ストレッチリセット"
    },
    "options_shortcut_move_right": {
       "message": "右に移動"
@@ -141,18 +210,42 @@
       "message": "下に移動"
    },
    "options_shortcut_volume_p": {
-      "message": "音量 +"
+      "message": "音量+"
    },
    "options_shortcut_volume_r": {
-      "message": "音量 -"
+      "message": "音量-"
    },
    "options_shortcut_speed_p": {
-      "message": "速度 +"
+      "message": "速度+"
    },
    "options_shortcut_speed_r": {
-      "message": "速度 -"
+      "message": "速度-"
    },
    "options_shortcut_screenshot": {
       "message": "スクリーンショット"
+   },
+   "options_shortcut_focus": {
+      "message": "集中モード"
+   },
+   "options_general_focus": {
+      "message": "集中モード"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "背景色"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "背景のぼかし"
+   },
+   "options_general_focus_rounded": {
+      "message": "ビデオの角を丸くする"
+   },
+   "options_ad": {
+      "message": "広告提携"
+   },
+   "tips_mail": {
+      "message": "メール連絡先: gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "WeChatグループ"
    }
 }

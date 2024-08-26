@@ -7,6 +7,7 @@
 import { defineComponent, inject, computed } from "vue";
 import { CropOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type";
+import browser from 'webextension-polyfill'
 import "./index.less";
 
 export default defineComponent({
@@ -48,8 +49,8 @@ export default defineComponent({
                         direction="horizontal"
                         onChange={setScaleMode}
                     >
-                        <van-radio name="auto">Auto</van-radio>
-                        <van-radio name="custom">Custom</van-radio>
+                        <van-radio name="auto">{browser.i18n.getMessage('video_unset')}</van-radio>
+                        <van-radio name="custom">{browser.i18n.getMessage('video_custom')}</van-radio>
                     </van-radio-group>
                     <div class="video-roll-scale-custom">
                         <div class="video-roll-scale-slider">
@@ -60,7 +61,7 @@ export default defineComponent({
                                         : "enable-label"
                                 }
                             >
-                                X
+                                {browser.i18n.getMessage('video_horizental')}
                             </van-divider>
                             <van-slider
                                 v-model={scale.values[0]}
@@ -88,7 +89,7 @@ export default defineComponent({
                                         : "enable-label"
                                 }
                             >
-                                Y
+                                {browser.i18n.getMessage('video_vertical')}
                             </van-divider>
                             <van-slider
                                 v-model={scale.values[1]}
@@ -119,7 +120,7 @@ export default defineComponent({
         }
 
         return () => (
-            <div v-tooltip='Stretch' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
+            <div v-tooltip={browser.i18n.getMessage('video_stretch')} class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         {

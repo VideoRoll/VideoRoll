@@ -51,7 +51,7 @@ export default defineComponent({
         return () => (
             <div class="options-general">
                 <div class="options-inside-header">
-                    <van-button type="primary" size="small" onClick={clear}>Clear All</van-button>
+                    <van-button type="primary" size="small" onClick={clear}>{browser.i18n.getMessage('tips_clearAll')}</van-button>
                 </div>
                 {
                     list.value.map((item: any) => <van-cell key={item.url} v-slots={{

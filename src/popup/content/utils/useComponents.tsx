@@ -58,7 +58,7 @@ export default function useComponents() {
     const components = shallowReactive<ITabConfig[]>([
         {
             type: 'tab',
-            title: <Tooltip><div class="tab-title" v-tooltip="Video"><VideocamOutline class="tab-icon"/></div></Tooltip>,
+            title: <Tooltip><div class="tab-title" v-tooltip={browser.i18n.getMessage('tabs_video')}><VideocamOutline class="tab-icon"/></div></Tooltip>,
             children: [{
                 type: 'row',
                 style: {
@@ -79,7 +79,7 @@ export default function useComponents() {
                     {
                         type: "container",
                         col: 8,
-                        title: 'Pic In Pic',
+                        title: browser.i18n.getMessage('video_pic'),
                         showTitle: true,
                         style: {
                             flexDirection: "column",
@@ -95,7 +95,7 @@ export default function useComponents() {
                                 children: [
                                     {
                                         type: 'container',
-                                        title: browser.i18n.getMessage('video_download'),
+                                        title: browser.i18n.getMessage('video_loop'),
                                         showTitle: true,
                                         col: 24,
                                         children: [
@@ -115,7 +115,7 @@ export default function useComponents() {
                                 children: [
                                     {
                                         type: 'container',
-                                        title: 'Pic In Pic',
+                                        title: browser.i18n.getMessage('video_pic'),
                                         showTitle: false,
                                         col: 24,
                                         children: [
@@ -255,7 +255,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <Tooltip><div class="tab-title" v-tooltip="Audio"><VolumeMediumOutline class="tab-icon" /></div></Tooltip>,
+            title: <Tooltip><div class="tab-title" v-tooltip={browser.i18n.getMessage('tabs_audio')}><VolumeMediumOutline class="tab-icon" /></div></Tooltip>,
             children: [
                 {
                     type: 'row',
@@ -266,7 +266,7 @@ export default function useComponents() {
                     children: [
                         {
                             type: 'container',
-                            title: browser.i18n.getMessage('audio_volume'),
+                            title: browser.i18n.getMessage('audio_muted'),
                             showTitle: true,
                             col: 24,
                             children: [{
@@ -318,7 +318,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <Tooltip><div class="tab-title" v-tooltip="Video List"><ListOutline class="tab-icon" /></div></Tooltip>,
+            title: <Tooltip><div class="tab-title" v-tooltip={browser.i18n.getMessage('tabs_list')}><ListOutline class="tab-icon" /></div></Tooltip>,
             children: [
                 {
                     type: 'component',
@@ -328,7 +328,7 @@ export default function useComponents() {
         },
         {
             type: 'tab',
-            title: <Tooltip><div class="tab-title" v-tooltip="More Settings"><EllipsisHorizontalCircleOutline class="tab-icon" /></div></Tooltip>,
+            title: <Tooltip><div class="tab-title" v-tooltip={browser.i18n.getMessage('tabs_more')}><EllipsisHorizontalCircleOutline class="tab-icon" /></div></Tooltip>,
             children: [
                 {
                     type: 'row',

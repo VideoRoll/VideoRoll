@@ -3,7 +3,7 @@
       "message": "Video Roll - All-in-One Video Enhancements"
    },
    "extension_des": {
-      "message": "An all-in-one video enhancement tool that includes video, audio, and shortcut operations, eliminating all obstacles to your video-watching experience"
+      "message": "Easily enhance your video watching experience. Rotate, zoom, reposition, stretch, flip, screenshot, speed, pitch, volume and more."
    },
    "tabs_video": {
       "message": "Video"
@@ -12,19 +12,46 @@
       "message": "Audio"
    },
    "tabs_list": {
-      "message": "List"
+      "message": "Video List"
    },
    "tabs_more": {
-      "message": "More"
+      "message": "More Settings"
    },
    "video_rotate": {
       "message": "Rotate"
    },
-   "video_pic_in_pic": {
-      "message": "Picture in Picture"
+   "video_loop": {
+      "message": "Loop Playback"
+   },
+   "video_pic": {
+      "message": "Pic in Pic"
    },
    "video_download": {
       "message": "Download"
+   },
+   "video_left": {
+      "message": "Left"
+   },
+   "video_right": {
+      "message": "Right"
+   },
+   "video_up": {
+      "message": "Up"
+   },
+   "video_down": {
+      "message": "Down"
+   },
+   "video_unset": {
+      "message": "Unset"
+   },
+   "video_custom": {
+      "message": "Custom"
+   },
+   "video_horizental": {
+      "message": "Horizontal"
+   },
+   "video_vertical": {
+      "message": "Vertical"
    },
    "video_reposition": {
       "message": "Reposition"
@@ -36,19 +63,22 @@
       "message": "Flip"
    },
    "video_focus": {
-      "message": "Focus"
+      "message": "Focus Mode"
    },
    "video_filter": {
       "message": "Filter"
    },
    "video_screenshot": {
-      "message": "ScreenShot"
+      "message": "Screenshot"
    },
    "video_speed": {
       "message": "Speed"
    },
    "video_zoom": {
       "message": "Zoom"
+   },
+   "audio_muted": {
+      "message": "Muted"
    },
    "audio_volume": {
       "message": "Volume"
@@ -57,7 +87,7 @@
       "message": "Pitch"
    },
    "list_main": {
-      "message": "main"
+      "message": "Main Video"
    },
    "more_save_preferences": {
       "message": "Save current preferences"
@@ -66,13 +96,40 @@
       "message": "Auto-resize when rotated"
    },
    "action_reset": {
-      "message": "reset"
+      "message": "Reset"
    },
    "tips_disabled": {
-      "message": "disabled on this site"
+      "message": "Disabled on this Site"
    },
    "tips_enabled": {
-      "message": "enabled on this site"
+      "message": "Enabled on this Site"
+   },
+   "tips_setting": {
+      "message": "Settings"
+   },
+   "tips_rating": {
+      "message": "Five Star Rating"
+   },
+   "tips_donate": {
+      "message": "Buy Me a Coffee"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "Clear All"
+   },
+   "tips_empty": {
+      "message": "No Video Detected"
+   },
+   "tips_feedback": {
+      "message": "Feedback"
    },
    "options_general": {
       "message": "General"
@@ -93,22 +150,22 @@
       "message": "Donate"
    },
    "options_shortcuts_rotate_left": {
-      "message": "Rotate ⭮"
+      "message": "Rotate Left"
    },
    "options_shortcuts_rotate_right": {
-      "message": "Rotate ⭯"
+      "message": "Rotate Right"
    },
    "options_shortcuts_rotate_90": {
-      "message": "Rotate 90 deg"
+      "message": "Rotate 90 Degrees"
    },
    "options_shortcuts_rotate_180": {
-      "message": "Rotate 180 deg"
+      "message": "Rotate 180 Degrees"
    },
    "options_shortcuts_rotate_270": {
-      "message": "Rotate 270 deg"
+      "message": "Rotate 270 Degrees"
    },
    "options_shortcuts_rotate_0": {
-      "message": "Rotate 0 deg"
+      "message": "Rotate 0 Degrees"
    },
    "options_shortcuts_flip_horizontally": {
       "message": "Flip Horizontally"
@@ -117,13 +174,13 @@
       "message": "Flip Vertically"
    },
    "options_shortcuts_flip_reset": {
-      "message": "Flip Rest"
+      "message": "Reset Flip"
    },
    "options_shortcuts_zoomin": {
       "message": "Zoom In"
    },
    "options_shortcuts_zoomout": {
-      "message": "Zoom out"
+      "message": "Zoom Out"
    },
    "options_shortcut_stretch_horizontally_p": {
       "message": "Stretch Horizontally +"
@@ -138,7 +195,7 @@
       "message": "Stretch Vertically -"
    },
    "options_shortcut_stretch_reset": {
-      "message": "Stretch Reset"
+      "message": "Reset Stretch"
    },
    "options_shortcut_move_right": {
       "message": "Move Right"
@@ -165,6 +222,30 @@
       "message": "Speed -"
    },
    "options_shortcut_screenshot": {
-      "message": "ScreenShot"
+      "message": "Screenshot"
+   },
+   "options_shortcut_focus": {
+      "message": "Focus Mode"
+   },
+   "options_general_focus": {
+      "message": "Focus Mode"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "Background Color"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "Background Blur"
+   },
+   "options_general_focus_rounded": {
+      "message": "Video Rounded Corners"
+   },
+   "options_ad": {
+      "message": "Ad Cooperation"
+   },
+   "tips_mail": {
+      "message": "Contact Email: gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "WeChat Group"
    }
 }

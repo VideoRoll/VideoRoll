@@ -8,6 +8,7 @@ import { defineComponent, inject, computed } from "vue";
 import { MoveOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type";
 import { getDefaultConfig } from '../../../../use';
+import browser from 'webextension-polyfill'
 import "./index.less";
 
 export default defineComponent({
@@ -39,7 +40,7 @@ export default defineComponent({
             <>
                 <div class="video-roll-move">
                     <div class="move-box">
-                        <van-divider class="move-label">Left - Right</van-divider>
+                        <van-divider class="move-label">{browser.i18n.getMessage('video_left')} - {browser.i18n.getMessage('video_right')}</van-divider>
                         <div class="move-slider">
                             <van-slider
                                 v-model={rollConfig.move.x}
@@ -59,7 +60,7 @@ export default defineComponent({
                         </div>
                     </div>
                     <div class="move-box">
-                        <van-divider class="move-label">Bottom - Top</van-divider>
+                        <van-divider class="move-label">{browser.i18n.getMessage('video_down')} - {browser.i18n.getMessage('video_up')}</van-divider>
                         <div class="move-slider">
                             <van-slider
                                 v-model={rollConfig.move.y}
@@ -79,7 +80,7 @@ export default defineComponent({
                         </div>
                     </div>
                 </div>
-                <van-button class="video-roll-resetBtn" size="mini" icon="replay" type="primary" onClick={reset}>reset</van-button>
+                <van-button class="video-roll-resetBtn" size="mini" icon="replay" type="primary" onClick={reset}>{browser.i18n.getMessage('action_reset')}</van-button>
             </>
         )
 
@@ -89,7 +90,7 @@ export default defineComponent({
         }
 
         return () => (
-            <div v-tooltip='Repostion' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
+            <div v-tooltip={browser.i18n.getMessage('video_reposition')} class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         <MoveOutline

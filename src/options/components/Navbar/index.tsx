@@ -1,5 +1,4 @@
-import { defineComponent, ref, onMounted, provide, PropType } from "vue";
-import { ReloadOutline } from "@vicons/ionicons5";
+import { defineComponent } from "vue";
 import { OPTIONS_MENU } from "../../config";
 
 import './index.less';

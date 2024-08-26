@@ -5,7 +5,7 @@
  */
 
 import { defineComponent } from "vue";
-import { createURL } from 'src/util';
+import browser from 'webextension-polyfill'
 import "./index.less";
 
 export default defineComponent({
@@ -13,7 +13,7 @@ export default defineComponent({
     setup() {
         return () => (
             <div class="video-roll-footer">
-                <p><a href="https://videoroll.gomi.site/#donate" target="_blank" class="text-link">Pay what you like</a> - made by <a href="https://gomi.site" target="_blank" class="text-link">Gomi</a></p>
+                <p><a href="https://videoroll.gomi.site/#donate" target="_blank" class="text-link">{browser.i18n.getMessage('tips_donate')}</a> - made by <a href="https://gomi.site" target="_blank" class="text-link">Gomi</a></p>
             </div>
         );
     }

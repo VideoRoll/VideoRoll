@@ -19,6 +19,12 @@
         ],
         "persistent": true
     },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{98dc310a-d8a9-4fbd-9c15-587f1e9c0799}",
+            "strict_min_version": "42.0"
+        }
+    },
     "web_accessible_resources": [
         "inject/index.js"
     ]

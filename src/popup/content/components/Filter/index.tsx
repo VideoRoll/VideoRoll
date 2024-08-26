@@ -7,6 +7,7 @@
 import { defineComponent, inject, computed, shallowReactive } from "vue";
 import { ColorPaletteOutline } from "@vicons/ionicons5";
 import type { IRollConfig, IFilter } from "../../../../types/type.d";
+import browser from 'webextension-polyfill'
 import "./index.less";
 
 export default defineComponent({
@@ -74,8 +75,8 @@ export default defineComponent({
                     direction="horizontal"
                     onChange={setFilterMode}
                 >
-                    <van-radio name="unset">Unset</van-radio>
-                    <van-radio name="custom">Custom</van-radio>
+                    <van-radio name="unset">{browser.i18n.getMessage('video_unset')}</van-radio>
+                    <van-radio name="custom">{browser.i18n.getMessage('video_custom')}</van-radio>
                 </van-radio-group>
                 <div class="video-roll-filter-custom">
                     {filterConfigs.map((item) => (
@@ -118,7 +119,7 @@ export default defineComponent({
         }
 
         return () => (
-            <div v-tooltip='Filter' class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
+            <div v-tooltip={browser.i18n.getMessage('video_filter')} class={`video-roll-focus video-roll-item ${!isDefault.value ? 'video-roll-on' : 'video-roll-off'}`} onClick={showPopup}>
             <div class="video-roll-icon-box">
                 <span class="video-roll-label">
                     {

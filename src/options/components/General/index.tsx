@@ -14,7 +14,6 @@ export default defineComponent({
         const config = useGeneralConfig();
         onMounted(() => {
             loading.value = true;
-            // browser.storage.sync.remove('generalConfig');
             browser.storage.sync.get('generalConfig').then((res) => {
                 const data = res?.['generalConfig'];
                 if (data) {
