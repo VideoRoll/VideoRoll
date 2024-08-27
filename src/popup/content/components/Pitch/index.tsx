@@ -5,9 +5,7 @@
  */
 
 import { defineComponent, inject, watch } from "vue";
-import { PulseOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type";
-import { getDefaultConfig } from '../../../../use';
 import "./index.less";
 
 export default defineComponent({
@@ -30,11 +28,9 @@ export default defineComponent({
             <>
                 <div class="video-roll-long-box">
                     <van-switch v-model={rollConfig.pitch.on} size="15px" onChange={setPitchOn}></van-switch>
-                    {/* <div class={`video-roll-switch ${rollConfig.pitch.on ? 'video-roll-switch-on':'video-roll-switch-off'}`} onClick={setPitchOn}>
-                        <PulseOutline class="video-roll-icon"></PulseOutline>
-                    </div> */}
                     <div class="video-roll-pitch">
                         <van-slider
+                            class="video-roll-nobackground-slider"
                             v-model={rollConfig.pitch.value}
                             min={-1}
                             max={1}

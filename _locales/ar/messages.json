@@ -1,0 +1,251 @@
+{
+   "extension_name": {
+      "message": "فيديو رول - صندوق أدوات متعدد الوظائف لمقاطع الفيديو على الويب"
+   },
+   "extension_des": {
+      "message": "تحسين مشاهدة الفيديو: تدوير، تكبير، تسريع، نافذة عائمة، اختصارات سهلة"
+   },
+   "tabs_video": {
+      "message": "فيديو"
+   },
+   "tabs_audio": {
+      "message": "صوت"
+   },
+   "tabs_list": {
+      "message": "قائمة الفيديو"
+   },
+   "tabs_more": {
+      "message": "إعدادات أخرى"
+   },
+   "video_rotate": {
+      "message": "تدوير"
+   },
+   "video_loop": {
+      "message": "تشغيل متكرر"
+   },
+   "video_pic": {
+      "message": "صورة داخل صورة"
+   },
+   "video_download": {
+      "message": "تحميل"
+   },
+   "video_left": {
+      "message": "يسار"
+   },
+   "video_right": {
+      "message": "يمين"
+   },
+   "video_up": {
+      "message": "أعلى"
+   },
+   "video_down": {
+      "message": "أسفل"
+   },
+   "video_unset": {
+      "message": "غير مضبوط"
+   },
+   "video_custom": {
+      "message": "مخصص"
+   },
+   "video_horizental": {
+      "message": "أفقي"
+   },
+   "video_vertical": {
+      "message": "عمودي"
+   },
+   "video_reposition": {
+      "message": "إعادة تحديد الموقع"
+   },
+   "video_stretch": {
+      "message": "تمدد"
+   },
+   "video_flip": {
+      "message": "قلب"
+   },
+   "video_focus": {
+      "message": "تركيز مع إطفاء الأنوار"
+   },
+   "video_filter": {
+      "message": "فلتر"
+   },
+   "video_screenshot": {
+      "message": "التقاط شاشة"
+   },
+   "video_speed": {
+      "message": "السرعة"
+   },
+   "video_zoom": {
+      "message": "تكبير"
+   },
+   "audio_muted": {
+      "message": "كتم الصوت"
+   },
+   "audio_volume": {
+      "message": "الحجم"
+   },
+   "audio_pitch": {
+      "message": "درجة الصوت"
+   },
+   "list_main": {
+      "message": "الفيديو الرئيسي"
+   },
+   "more_save_preferences": {
+      "message": "حفظ الإعدادات الحالية"
+   },
+   "more_auto_resize": {
+      "message": "تغيير الحجم تلقائياً عند التدوير"
+   },
+   "action_reset": {
+      "message": "إعادة تعيين"
+   },
+   "tips_disabled": {
+      "message": "معطل على هذا الموقع"
+   },
+   "tips_enabled": {
+      "message": "مفعل على هذا الموقع"
+   },
+   "tips_setting": {
+      "message": "الإعدادات"
+   },
+   "tips_rating": {
+      "message": "تقييم بخمس نجوم"
+   },
+   "tips_donate": {
+      "message": "ادعمني بكوب قهوة"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "مسح الكل"
+   },
+   "tips_empty": {
+      "message": "لم يتم اكتشاف أي فيديو"
+   },
+   "tips_feedback": {
+      "message": "التعليقات"
+   },
+   "options_general": {
+      "message": "عام"
+   },
+   "options_shortcuts": {
+      "message": "الاختصارات"
+   },
+   "options_cache_list": {
+      "message": "قائمة التخزين المؤقت"
+   },
+   "options_disabled_list": {
+      "message": "قائمة التعطيل"
+   },
+   "options_contact": {
+      "message": "الاتصال"
+   },
+   "options_donate": {
+      "message": "تبرع"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "تدوير لليسار"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "تدوير لليمين"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "تدوير 90 درجة"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "تدوير 180 درجة"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "تدوير 270 درجة"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "تدوير 0 درجة"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "قلب أفقي"
+   },
+   "options_shortcuts_vertically": {
+      "message": "قلب عمودي"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "إعادة تعيين القلب"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "تكبير"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "تصغير"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "تمدد أفقي +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "تمدد أفقي -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "تمدد عمودي +"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "تمدد عمودي -"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "إعادة تعيين التمدد"
+   },
+   "options_shortcut_move_right": {
+      "message": "تحريك لليمين"
+   },
+   "options_shortcut_move_left": {
+      "message": "تحريك لليسار"
+   },
+   "options_shortcut_move_up": {
+      "message": "تحريك لأعلى"
+   },
+   "options_shortcut_move_down": {
+      "message": "تحريك لأسفل"
+   },
+   "options_shortcut_volume_p": {
+      "message": "حجم الصوت +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "حجم الصوت -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "السرعة +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "السرعة -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "التقاط شاشة"
+   },
+   "options_shortcut_focus": {
+      "message": "التركيز مع إطفاء الأنوار"
+   },
+   "options_general_focus": {
+      "message": "التركيز مع إطفاء الأنوار"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "لون الخلفية"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "تأثير الضبابية"
+   },
+   "options_general_focus_rounded": {
+      "message": "حواف دائرية للفيديو"
+   },
+   "options_ad": {
+      "message": "التعاون الإعلاني"
+   },
+   "tips_mail": {
+      "message": "الاتصال عبر البريد الإلكتروني: gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "مجموعة WeChat"
+   }
+}

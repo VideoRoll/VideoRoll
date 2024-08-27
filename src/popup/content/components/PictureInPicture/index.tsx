@@ -6,6 +6,7 @@
 import { defineComponent, inject } from "vue";
 import { TvOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
+import browser from 'webextension-polyfill'
 import "./index.less";
 
 export default defineComponent({
@@ -19,7 +20,7 @@ export default defineComponent({
             update("pictureInPicture", rollConfig.pictureInPicture);
         };
         return () => (
-            <div title='picture in picture' class={`video-roll-focus video-roll-item ${rollConfig.pictureInPicture ? 'video-roll-on' : 'video-roll-off'}`} onClick={setPictureInPicture}>
+            <div v-tooltip={browser.i18n.getMessage('video_pic')} class={`video-roll-focus video-roll-item ${rollConfig.pictureInPicture ? 'video-roll-on' : 'video-roll-off'}`} onClick={setPictureInPicture}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         <TvOutline

@@ -33,7 +33,10 @@ const defaultConfig = {
     },
     playbackRate: 1,
     focus: {
-        on: false
+        on: false,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        blur: false,
+        rounded: false
     },
     pitch: {
         on: false,
@@ -49,6 +52,12 @@ const defaultConfig = {
     store: false,
     isInit: false,
     isAutoChangeSize: true,
+    loop: false,
+    muted: false,
+    enable: true,
+    document: {
+        title: ''
+    },
     videoSelector: { defaultDom: 'video' }
 } as IRollConfig;
 
@@ -58,7 +67,6 @@ function getDefaultConfig() {
 
 function useConfig(): IRollConfig {
     const rollConfig = reactive<IRollConfig>(getDefaultConfig());
-
     return rollConfig;
 }
 

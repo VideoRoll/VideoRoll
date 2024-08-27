@@ -19,7 +19,12 @@ export enum ActionType {
     UPDATE_BADGE,
     UPDATE_CONFIG,
     INIT_SHORT_CUT_KEY,
-    GET_BADGE
+    GET_BADGE,
+    UPDATE_VIDEO_LIST,
+    ON_HOVER_VIDEO,
+    UPDATE_VIDEO_CHECK,
+    UPDATE_ENABLE,
+    CAPTURE
 }
 
 export enum FlipType {
@@ -33,6 +38,18 @@ export type Flip = 'unset' | 'horizontal' | 'vertical'
 export interface IMove {
     x: number;
     y: number;
+}
+
+export type VideoListItem = {
+    checked?: boolean;
+    id?: string;
+    name?: string;
+    visible?: boolean;
+    visibleObserver?: IntersectionObserver;
+    duration?: number;
+    src?: string
+    posterUrl?: string;
+    isReal?: boolean;
 }
 
 export type Pitch = {
@@ -61,6 +78,13 @@ export type Deg = number;
 
 export type Focus = {
     on: boolean;
+    backgroundColor: string,
+    blur: boolean,
+    rounded: boolean
+}
+
+export type Document = {
+    title?: string
 }
 
 export type RollKey = keyof IRollConfig;
@@ -86,9 +110,13 @@ export interface IRollConfig {
     storeThisTab: boolean;
     store: boolean;
     isInit: boolean;
+    loop: boolean;
+    muted: boolean;
     videoSelector: VideoSelector;
     isAutoChangeSize: boolean;
-    [key: string]: number | string | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
+    enable: boolean;
+    document: Document
+    [key: string]: number | string | Document | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 
 export type VideoSelector = {
@@ -97,9 +125,17 @@ export type VideoSelector = {
     wrapDom?: string
 }
 
-export type VideoObject = { shadowElement: HTMLElement,  wrapElement: HTMLElement };
+export type OriginElementPosition = {
+    parentElement: HTMLElement
+    previousElementSibling: HTMLElement | null
+    nextElementSibling: HTMLElement | null
+    style: {
+        width?: number;
+        height?: number;
+    }
+};
 
-export type VideoElement = VideoObject | HTMLVideoElement;
+export type VideoElement = HTMLVideoElement;
 
 export interface IWebSite {
     [prop: string]: {

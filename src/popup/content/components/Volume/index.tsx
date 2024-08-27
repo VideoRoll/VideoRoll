@@ -4,12 +4,11 @@
  * @Date: 2022-09-19 22:53:23
  */
 
-import { defineComponent, inject, watch } from "vue";
-import { PulseOutline } from "@vicons/ionicons5";
+import { defineComponent, inject } from "vue";
 import type { IRollConfig } from "../../../../types/type";
-import { getDefaultConfig } from '../../../../use';
+import { ReloadOutline} from '@vicons/ionicons5'
+import browser from "webextension-polyfill";
 import "./index.less";
-import debounce from "../../utils/debounce";
 
 export default defineComponent({
     name: "Volume",
@@ -25,8 +24,8 @@ export default defineComponent({
         return () => (
             <>
                 <div class="video-roll-long-box">
-                    <div class={`video-roll-switch ${rollConfig.volume !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setVolume(1)}>
-                        reset
+                    <div v-tooltip={browser.i18n.getMessage('action_reset')} class={`video-roll-switch ${rollConfig.volume !== 1 ? 'video-roll-switch-on' : 'video-roll-switch-off'}`} onClick={() => setVolume(1)}>
+                        <ReloadOutline class="reset-icon"></ReloadOutline>
                     </div>
                     <div class="video-roll-pitch">
                         <van-slider

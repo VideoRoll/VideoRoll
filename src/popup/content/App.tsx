@@ -1,12 +1,13 @@
-import { defineComponent, ref, onMounted, provide, watch } from "vue";
+import { defineComponent, ref, onMounted, provide, watch, onUnmounted, onBeforeMount } from "vue";
 import browser from "webextension-polyfill";
 import Head from "./components/Head";
 import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
 import { useConfig } from "../../use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
-import { clone, getSessionStorage } from "../../util";
+import { clone, getDomain, getSessionStorage, sendTabMessage } from "../../util";
 import { ActionType } from "../../types/type.d";
+import { Close } from "@vicons/ionicons5";
 
 import "./index.less";
 
@@ -15,6 +16,7 @@ export default defineComponent({
     setup() {
         const isShow = ref(false);
         const tabId = ref(0);
+        const videoList = ref([]);
 
         /**
          * open settings panel
@@ -22,6 +24,22 @@ export default defineComponent({
         const onOpenSetting = (e: Event) => {
             isShow.value = !isShow.value;
         };
+        
+        const onHoverVideo = (id: string, isIn: boolean) => {
+            sendTabMessage(rollConfig.tabId, { id, type: ActionType.ON_HOVER_VIDEO, isIn })
+        }
+
+        const updateVideoCheck = (ids: string[]) => {
+            sendTabMessage(rollConfig.tabId, { ids, type: ActionType.UPDATE_VIDEO_CHECK })
+        }
+
+        const updateEnable = () => {
+            sendTabMessage(rollConfig.tabId, { rollConfig, type: ActionType.UPDATE_ENABLE })
+        }
+
+        const capture = () => {
+            sendTabMessage(rollConfig.tabId, { rollConfig, type: ActionType.CAPTURE })
+        }
 
         // current website config
         const rollConfig = useConfig();
@@ -29,6 +47,11 @@ export default defineComponent({
         provide("rollConfig", rollConfig);
         provide("update", updateRollConfig.bind(null, rollConfig));
         provide("onOpenSetting", onOpenSetting);
+        provide("videoList", videoList);
+        provide("onHoverVideo", onHoverVideo)
+        provide("updateVideoCheck", updateVideoCheck)
+        provide("updateEnable", updateEnable)
+        provide("capture", capture)
 
         watch(() => tabId.value, (value: number) => {
             if (!value) return;
@@ -51,18 +74,14 @@ export default defineComponent({
             tabId.value = tab.id as number;
             initRollConfig(rollConfig, tab);
 
-            // add style
-            chrome.tabs.sendMessage(
-                rollConfig.tabId,
-                { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED },
-                {},
-                (res) => {
-                    console.debug(res);
-                }
-            )
-
             chrome.runtime.onMessage.addListener((a, b, c) => {
-                const { type, rollConfig: config, text } = a;
+                const { type, rollConfig: config, text, videoList: list, imgData } = a;
+
+                if (a.tabId !== tabId.value) {
+                    c("not current tab");
+                    return;
+                }
+
                 switch (type) {
                     case ActionType.UPDATE_STORAGE:
                         Object.keys(config).forEach((key) => {
@@ -73,6 +92,14 @@ export default defineComponent({
                         break;
                     case ActionType.UPDATE_BADGE:
                         rollConfig.videoNumber = Number(text);
+                        videoList.value = list;
+                        break;
+                    case ActionType.UPDATE_VIDEO_LIST:
+                        videoList.value = list;
+                        break;
+                    case ActionType.CAPTURE:
+                        const newUrl = chrome.runtime.getURL('inject/capture.html?imgData=' + encodeURIComponent(imgData));
+                        chrome.tabs.create({ url: newUrl });
                         break;
                     default:
                         break;
@@ -80,17 +107,24 @@ export default defineComponent({
 
                 c("update");
             });
+        
+            sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED })
         });
 
         return () => (
-            <div>
-                <Head isShow={isShow.value}></Head>
-                <main>
-                    <div class="video-roll-content">
-                        <GridPanel></GridPanel>
+            <div class={rollConfig.enable ? "video-roll-wrapper" : "video-roll-wrapper-empty"}>
+                <Head class="video-roll-wrapper-head" isShow={isShow.value}></Head>
+                <main class={rollConfig.enable ? "video-roll-main" : "video-roll-main-empty"}>
+                    <div class={rollConfig.enable ? "video-roll-content" : "video-roll-content-empty"}>
+                        {
+                            rollConfig.enable ? <GridPanel></GridPanel> : <div class="empty-box">
+                                <Close class="logo-empty"/>
+                                <div>{browser.i18n.getMessage('tips_disabled')}</div>
+                            </div>
+                        }
                     </div>
-                    <Footer></Footer>
                 </main>
+                <Footer></Footer>
             </div>
         );
     }

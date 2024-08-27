@@ -3,33 +3,29 @@
  * @Author: Gouxinyu
  * @Date: 2022-09-19 22:53:23
  */
-
 import { defineComponent, inject } from "vue";
+import { VolumeHighOutline, VolumeMuteOutline } from "@vicons/ionicons5";
 import type { IRollConfig } from "../../../../types/type.d";
-import { FileTrayOutline, FileTrayFullOutline } from "@vicons/ionicons5";
-
-<ion-icon name="file-tray-outline"></ion-icon>
 import "./index.less";
 
 export default defineComponent({
-    name: "Store",
+    name: "Mute",
     setup() {
         const update = inject("update") as Function;
         const rollConfig = inject("rollConfig") as IRollConfig;
 
-        const setStore = () => {
-            rollConfig.store = !rollConfig.store;
-            update("store", rollConfig.store);
+        const setMuted = () => {
+            rollConfig.muted = !rollConfig.muted;
+            update("focus", rollConfig.focus);
         };
-
         return () => (
-            <div class={`video-roll-store video-roll-item ${rollConfig.store ? 'video-roll-on' : 'video-roll-off'}`} onClick={setStore}>
+            <div title='Muted' class={`video-roll-focus video-roll-item ${rollConfig.muted ? 'video-roll-on' : 'video-roll-off'}`} onClick={setMuted}>
                 <div class="video-roll-icon-box">
                     <span class="video-roll-label">
                         {
-                            rollConfig.store ? <FileTrayOutline
+                            rollConfig.muted ? <VolumeMuteOutline
                             class="video-roll-icon"
-                        ></FileTrayOutline> : <FileTrayFullOutline class="video-roll-icon"></FileTrayFullOutline>
+                        ></VolumeMuteOutline> : <VolumeHighOutline class="video-roll-icon"></VolumeHighOutline>
                         }
                     </span>
                 </div>

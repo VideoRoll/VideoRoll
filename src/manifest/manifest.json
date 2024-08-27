@@ -1,8 +1,8 @@
 {
-    "name": "Video Roll - All-in-One Video Enhancements",
-    "version": "1.1.6",
+    "name": "__MSG_extension_name__",
+    "version": "1.1.7",
     "manifest_version": 3,
-    "description": "Rotate, zoom, reposition, stretch, flip, download, playback, tune, volume and more. 旋转、缩放、移动、下载、调整比例、镜像翻转、调节音调、音量、倍速、专注、滤镜视频",
+    "description": "__MSG_extension_des__",
     "content_scripts": [
         {
             "matches": [
@@ -14,6 +14,7 @@
             "run_at": "document_start"
         }
     ],
+    "default_locale": "en_US",
     "options_ui": {
         "page": "options/index.html",
         "open_in_tab": true
@@ -33,7 +34,9 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "inject/index.js"
+                "inject/index.js",
+                "inject/capture.html",
+                "inject/capture.js"
             ],
             "matches": [
                 "https://*/*"

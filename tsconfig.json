@@ -22,22 +22,25 @@
             "es2021",
             "dom"
         ],
+        "typeRoots": ["./node_modules/@types"],
         "types": [
             "chrome",
             "jest",
             "node",
-            "webextension-polyfill"
+            "webextension-polyfill",
+            "lodash-es"
         ]
     },
     "isolatedModules": true,
     "exclude": [
+        "node_modules",
         "src/**/*.html",
         "src/popup/content/main.ts",
         "src/options/index.ts",
         "src/inject/jungle.js"
     ],
     "include": [
-        "src/*",
+        "src/inject/VideoRoll.ts",
         "src/**/*.ts",
         "src/**/*.tsx",
         "src/**/**/*.vue",

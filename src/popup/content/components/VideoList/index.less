@@ -1,0 +1,65 @@
+.video-item-box {
+    display: flex;
+    color: #fff;
+}
+
+.van-checkbox__label {
+    flex: 1;
+}
+
+.van-checkbox {
+    align-items: flex-start !important;
+}
+
+.van-notice-bar {
+    height: 30px !important;
+    padding: 0 !important;
+    color: #a494c6 !important;
+}
+
+.video-item {
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #2d2d31;
+    margin-bottom: 4px;
+
+    &:hover {
+        background-color: var(--van-sidebar-selected-background);
+    }
+
+    .video-poster-box {
+        width: 80px;
+        height: 100%;
+        display: flex;
+        .video-poster {
+            width: 80px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 5px;
+            background: radial-gradient(black, transparent);
+        }
+    }
+
+    .video-info {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        /* justify-content: flex-start; */
+        padding-left: 10px;
+        .video-info-name {
+            width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .video-tags {
+            width: 150px;
+            display: flex;
+
+            .van-tag:not(:last-child) {
+                margin-right: 5px;
+            }
+        }
+    }
+}

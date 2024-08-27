@@ -1,0 +1,251 @@
+{
+   "extension_name": {
+      "message": "Video Roll - Ein All-in-One-Toolkit für Webvideos"
+   },
+   "extension_des": {
+      "message": "Video-Toolbox: Drehen, Zoomen, PiP, Screenshot, Dunkelmodus, Loop, Shortcuts."
+   },
+   "tabs_video": {
+      "message": "Video"
+   },
+   "tabs_audio": {
+      "message": "Audio"
+   },
+   "tabs_list": {
+      "message": "Videoliste"
+   },
+   "tabs_more": {
+      "message": "Weitere Einstellungen"
+   },
+   "video_rotate": {
+      "message": "Drehen"
+   },
+   "video_loop": {
+      "message": "Schleifenwiedergabe"
+   },
+   "video_pic": {
+      "message": "Bild im Bild"
+   },
+   "video_download": {
+      "message": "Herunterladen"
+   },
+   "video_left": {
+      "message": "Links"
+   },
+   "video_right": {
+      "message": "Rechts"
+   },
+   "video_up": {
+      "message": "Oben"
+   },
+   "video_down": {
+      "message": "Unten"
+   },
+   "video_unset": {
+      "message": "Nicht gesetzt"
+   },
+   "video_custom": {
+      "message": "Benutzerdefiniert"
+   },
+   "video_horizental": {
+      "message": "Horizontal"
+   },
+   "video_vertical": {
+      "message": "Vertikal"
+   },
+   "video_reposition": {
+      "message": "Neu positionieren"
+   },
+   "video_stretch": {
+      "message": "Strecken"
+   },
+   "video_flip": {
+      "message": "Umdrehen"
+   },
+   "video_focus": {
+      "message": "Dunkelmodus"
+   },
+   "video_filter": {
+      "message": "Filter"
+   },
+   "video_screenshot": {
+      "message": "Screenshot"
+   },
+   "video_speed": {
+      "message": "Geschwindigkeit"
+   },
+   "video_zoom": {
+      "message": "Zoom"
+   },
+   "audio_muted": {
+      "message": "Stumm"
+   },
+   "audio_volume": {
+      "message": "Lautstärke"
+   },
+   "audio_pitch": {
+      "message": "Tonhöhe"
+   },
+   "list_main": {
+      "message": "Hauptvideo"
+   },
+   "more_save_preferences": {
+      "message": "Aktuelle Einstellungen speichern"
+   },
+   "more_auto_resize": {
+      "message": "Automatische Größenanpassung bei Drehung"
+   },
+   "action_reset": {
+      "message": "Zurücksetzen"
+   },
+   "tips_disabled": {
+      "message": "Auf dieser Website deaktiviert"
+   },
+   "tips_enabled": {
+      "message": "Auf dieser Website aktiviert"
+   },
+   "tips_setting": {
+      "message": "Einstellungen"
+   },
+   "tips_rating": {
+      "message": "Fünf-Sterne-Bewertung"
+   },
+   "tips_donate": {
+      "message": "Spendiere mir einen Kaffee"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "Alles löschen"
+   },
+   "tips_empty": {
+      "message": "Kein Video erkannt"
+   },
+   "tips_feedback": {
+      "message": "Feedback"
+   },
+   "options_general": {
+      "message": "Allgemein"
+   },
+   "options_shortcuts": {
+      "message": "Tastenkombinationen"
+   },
+   "options_cache_list": {
+      "message": "Cache-Liste"
+   },
+   "options_disabled_list": {
+      "message": "Deaktivierungsliste"
+   },
+   "options_contact": {
+      "message": "Kontakt"
+   },
+   "options_donate": {
+      "message": "Spenden"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "Nach links drehen"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "Nach rechts drehen"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "90 Grad drehen"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "180 Grad drehen"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "270 Grad drehen"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "0 Grad drehen"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "Horizontal umdrehen"
+   },
+   "options_shortcuts_vertically": {
+      "message": "Vertikal umdrehen"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "Umdrehen zurücksetzen"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "Vergrößern"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "Verkleinern"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "Horizontal strecken +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "Horizontal strecken -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "Vertikal strecken +"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "Vertikal strecken -"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "Strecken zurücksetzen"
+   },
+   "options_shortcut_move_right": {
+      "message": "Nach rechts bewegen"
+   },
+   "options_shortcut_move_left": {
+      "message": "Nach links bewegen"
+   },
+   "options_shortcut_move_up": {
+      "message": "Nach oben bewegen"
+   },
+   "options_shortcut_move_down": {
+      "message": "Nach unten bewegen"
+   },
+   "options_shortcut_volume_p": {
+      "message": "Lautstärke +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "Lautstärke -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "Geschwindigkeit +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "Geschwindigkeit -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "Screenshot"
+   },
+   "options_shortcut_focus": {
+      "message": "Dunkelmodus"
+   },
+   "options_general_focus": {
+      "message": "Dunkelmodus"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "Hintergrundfarbe"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "Hintergrundunschärfe"
+   },
+   "options_general_focus_rounded": {
+      "message": "Abgerundete Ecken für Video"
+   },
+   "options_ad": {
+      "message": "Werbekooperation"
+   },
+   "tips_mail": {
+      "message": "Kontakt per E-Mail: gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "WeChat Gruppe"
+   }
+}

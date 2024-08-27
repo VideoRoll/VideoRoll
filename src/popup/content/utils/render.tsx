@@ -1,11 +1,11 @@
 import { h } from 'vue';
-import { IComponentConfig, IContainerConfig, IRowConfig, ISwiperConfig, ITabConfig } from 'src/popup/content/utils/useComponents'
+import { IComponentConfig, IContainerConfig, IRowConfig, ISwiperConfig, ITabConfig, IFragmentConfig } from 'src/popup/content/utils/useComponents'
 
-export default function render(children: IRowConfig[] | IContainerConfig[] | IComponentConfig[] | ISwiperConfig[] | ITabConfig[]) {
+export default function render(children: IRowConfig[] | IContainerConfig[] | IComponentConfig[] | ISwiperConfig[] | ITabConfig[] | IFragmentConfig[]) {
     return children.map((item) => {
         switch (item.type) {
             case 'tab':
-                return <van-tab title={item.title}>
+                return <van-tab v-slots={{ title: () => item.title }}>
                     {
                         render(item.children)
                     }
@@ -25,11 +25,19 @@ export default function render(children: IRowConfig[] | IContainerConfig[] | ICo
             case 'container':
                 return <van-col span={item.col}>
                     {
-                        item.children ? <div class="video-roll-container" style={{...item.style}}>{
+                        item.children ? <div class={item.class ?? 'video-roll-container'} style={{...item.style}}>{
                             render(item.children)
                         }</div> : null
                     }{
                         item.showTitle ? <div class="video-roll-container-title">{item.title}</div> : null
+                    }
+                </van-col>
+            case 'fragment':
+                return <van-col span={item.col}>
+                    {
+                        item.children ? <div class={item.class ?? 'video-roll-fragment'} style={{...item.style}}>{
+                            render(item.children)
+                        }</div> : null
                     }
                 </van-col>
             case 'component':

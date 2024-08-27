@@ -1,0 +1,251 @@
+{
+   "extension_name": {
+      "message": "Video Roll - Caixa de ferramentas tudo-em-um para vídeos na web"
+   },
+   "extension_des": {
+      "message": "Ferramentas de vídeo: rotação, zoom, velocidade, janela flutuante, captura, modo escuro, loop, atalhos."
+   },
+   "tabs_video": {
+      "message": "Vídeo"
+   },
+   "tabs_audio": {
+      "message": "Áudio"
+   },
+   "tabs_list": {
+      "message": "Lista de vídeos"
+   },
+   "tabs_more": {
+      "message": "Mais configurações"
+   },
+   "video_rotate": {
+      "message": "Girar"
+   },
+   "video_loop": {
+      "message": "Reprodução em loop"
+   },
+   "video_pic": {
+      "message": "Imagem na imagem"
+   },
+   "video_download": {
+      "message": "Baixar"
+   },
+   "video_left": {
+      "message": "Esquerda"
+   },
+   "video_right": {
+      "message": "Direita"
+   },
+   "video_up": {
+      "message": "Cima"
+   },
+   "video_down": {
+      "message": "Baixo"
+   },
+   "video_unset": {
+      "message": "Não definido"
+   },
+   "video_custom": {
+      "message": "Personalizado"
+   },
+   "video_horizental": {
+      "message": "Horizontal"
+   },
+   "video_vertical": {
+      "message": "Vertical"
+   },
+   "video_reposition": {
+      "message": "Reposicionar"
+   },
+   "video_stretch": {
+      "message": "Esticar"
+   },
+   "video_flip": {
+      "message": "Inverter"
+   },
+   "video_focus": {
+      "message": "Modo de foco com luz apagada"
+   },
+   "video_filter": {
+      "message": "Filtro"
+   },
+   "video_screenshot": {
+      "message": "Captura de tela"
+   },
+   "video_speed": {
+      "message": "Velocidade"
+   },
+   "video_zoom": {
+      "message": "Zoom"
+   },
+   "audio_muted": {
+      "message": "Silenciado"
+   },
+   "audio_volume": {
+      "message": "Volume"
+   },
+   "audio_pitch": {
+      "message": "Tom"
+   },
+   "list_main": {
+      "message": "Vídeo principal"
+   },
+   "more_save_preferences": {
+      "message": "Salvar configurações atuais"
+   },
+   "more_auto_resize": {
+      "message": "Redimensionamento automático ao girar"
+   },
+   "action_reset": {
+      "message": "Redefinir"
+   },
+   "tips_disabled": {
+      "message": "Desativado neste site"
+   },
+   "tips_enabled": {
+      "message": "Ativado neste site"
+   },
+   "tips_setting": {
+      "message": "Configurações"
+   },
+   "tips_rating": {
+      "message": "Avaliação de cinco estrelas"
+   },
+   "tips_donate": {
+      "message": "Me compre um café"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "Limpar tudo"
+   },
+   "tips_empty": {
+      "message": "Nenhum vídeo detectado"
+   },
+   "tips_feedback": {
+      "message": "Feedback"
+   },
+   "options_general": {
+      "message": "Geral"
+   },
+   "options_shortcuts": {
+      "message": "Atalhos"
+   },
+   "options_cache_list": {
+      "message": "Lista de cache"
+   },
+   "options_disabled_list": {
+      "message": "Lista de desativação"
+   },
+   "options_contact": {
+      "message": "Contato"
+   },
+   "options_donate": {
+      "message": "Doar"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "Girar para a esquerda"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "Girar para a direita"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "Girar 90 graus"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "Girar 180 graus"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "Girar 270 graus"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "Girar 0 graus"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "Inverter horizontalmente"
+   },
+   "options_shortcuts_vertically": {
+      "message": "Inverter verticalmente"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "Redefinir inversão"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "Aumentar zoom"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "Reduzir zoom"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "Esticar horizontalmente +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "Esticar horizontalmente -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "Esticar verticalmente +"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "Esticar verticalmente -"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "Redefinir esticamento"
+   },
+   "options_shortcut_move_right": {
+      "message": "Mover para a direita"
+   },
+   "options_shortcut_move_left": {
+      "message": "Mover para a esquerda"
+   },
+   "options_shortcut_move_up": {
+      "message": "Mover para cima"
+   },
+   "options_shortcut_move_down": {
+      "message": "Mover para baixo"
+   },
+   "options_shortcut_volume_p": {
+      "message": "Volume +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "Volume -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "Velocidade +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "Velocidade -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "Captura de tela"
+   },
+   "options_shortcut_focus": {
+      "message": "Modo de foco com luz apagada"
+   },
+   "options_general_focus": {
+      "message": "Modo de foco com luz apagada"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "Cor de fundo"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "Desfoque de fundo"
+   },
+   "options_general_focus_rounded": {
+      "message": "Cantos arredondados para o vídeo"
+   },
+   "options_ad": {
+      "message": "Colaboração publicitária"
+   },
+   "tips_mail": {
+      "message": "Contato por e-mail: gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "Grupo WeChat"
+   }
+}

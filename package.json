@@ -1,6 +1,6 @@
 {
     "name": "video-roll",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "description": "Rotate, zoom, reposition, stretch, flip, tune, focus and filter videos",
     "author": "Gomi",
     "scripts": {
@@ -8,7 +8,7 @@
         "watch:inject": "parcel watch src/inject/injected.ts",
         "watch:background": "parcel watch src/background/background.ts",
         "preview": "parcel src/popup/index.html",
-        "dev:parcel": "parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts src/options/index.html --no-cache",
+        "dev:parcel": "parcel watch src/popup/index.html src/inject/index.ts src/background/index.ts src/options/index.html --no-cache -p 18160",
         "dev:chromium": "pnpm run clean && pnpm run copy:static && cross-env BROWSER=\"chromium\" pnpm run build:manifest && pnpm run dev:parcel",
         "dev:firefox": "pnpm run clean && pnpm run copy:static && cross-env BROWSER=\"firefox\" pnpm run build:manifest && pnpm run dev:parcel",
         "build:popup": "parcel build src/popup/index.html --dist-dir dist/popup/ --no-source-maps --no-content-hash",
@@ -18,7 +18,7 @@
         "build:manifest": "node scripts/generateManifest.js",
         "build": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background && pnpm run build:options && pnpm run build:zip",
         "build:report": "pnpm run clean && pnpm run copy:static && pnpm run build:popup && pnpm run build:inject && pnpm run build:background --reporter @parcel/reporter-bundle-analyzer",
-        "copy:static": "copyfiles -u 1 src/icons/* dist",
+        "copy:static": "copyfiles -u 1 src/icons/* src/inject/capture.* dist && copyfiles _locales/*/*.json dist",
         "build:zip": "node scripts/build.js",
         "clean": "rimraf dist && rimraf chromiumExt.zip && rimraf firefoxExt.zip",
         "start": "pnpm run dev",
@@ -56,10 +56,15 @@
     "dependencies": {
         "@vant/touch-emulator": "^1.4.0",
         "@vicons/ionicons5": "^0.11.0",
-        "audio-hacker": "^1.0.5",
+        "audio-hacker": "^1.0.6",
         "clipboard": "^2.0.11",
+        "floating-vue": "^5.2.2",
+        "hotkeys-js": "^3.13.7",
+        "lodash-es": "^4.17.21",
+        "nanoid": "^5.0.7",
         "vant": "4.8.5",
         "vue": "^3.2.41",
+        "vue3-colorpicker": "^2.3.0",
         "webextension-polyfill": "^0.10.0"
     },
     "devDependencies": {
@@ -72,6 +77,7 @@
         "@parcel/validator-typescript": "^2.8.3",
         "@types/chrome": "^0.0.227",
         "@types/jest": "^29.0.3",
+        "@types/lodash-es": "^4.17.12",
         "@types/node": "^18.8.4",
         "@types/webextension-polyfill": "^0.10.0",
         "@typescript-eslint/eslint-plugin": "^5.36.1",

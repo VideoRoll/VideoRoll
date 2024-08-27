@@ -1,0 +1,251 @@
+{
+   "extension_name": {
+      "message": "Video Roll - 多合一的网页视频百宝箱"
+   },
+   "extension_des": {
+      "message": "一个提升你网页视频观看体验的百宝箱，具备旋转、缩放、倍速、浮动窗口播放、截图、关灯专注、循环播放、突破最大音量限制、改变视频音调等功能，更有超方便的快捷键自定义设置"
+   },
+   "tabs_video": {
+      "message": "视频"
+   },
+   "tabs_audio": {
+      "message": "音频"
+   },
+   "tabs_list": {
+      "message": "视频列表"
+   },
+   "tabs_more": {
+      "message": "更多设置"
+   },
+   "video_rotate": {
+      "message": "旋转"
+   },
+   "video_loop": {
+      "message": "循环播放"
+   },
+   "video_pic": {
+      "message": "画中画"
+   },
+   "video_download": {
+      "message": "下载"
+   },
+   "video_left": {
+      "message": "左"
+   },
+   "video_right": {
+      "message": "右"
+   },
+   "video_up": {
+      "message": "上"
+   },
+   "video_down": {
+      "message": "下"
+   },
+   "video_unset": {
+      "message": "未设置"
+   },
+   "video_custom": {
+      "message": "自定义"
+   },
+   "video_horizental": {
+      "message": "横向"
+   },
+   "video_vertical": {
+      "message": "纵向"
+   },
+   "video_reposition": {
+      "message": "重新定位"
+   },
+   "video_stretch": {
+      "message": "拉伸"
+   },
+   "video_flip": {
+      "message": "翻转"
+   },
+   "video_focus": {
+      "message": "关灯专注"
+   },
+   "video_filter": {
+      "message": "滤镜"
+   },
+   "video_screenshot": {
+      "message": "截图"
+   },
+   "video_speed": {
+      "message": "倍速"
+   },
+   "video_zoom": {
+      "message": "缩放"
+   },
+   "audio_muted": {
+      "message": "静音"
+   },
+   "audio_volume": {
+      "message": "音量"
+   },
+   "audio_pitch": {
+      "message": "音高"
+   },
+   "list_main": {
+      "message": "主视频"
+   },
+   "more_save_preferences": {
+      "message": "保存当前设置"
+   },
+   "more_auto_resize": {
+      "message": "旋转时自动调整大小"
+   },
+   "action_reset": {
+      "message": "重置"
+   },
+   "tips_disabled": {
+      "message": "在此网站上禁用"
+   },
+   "tips_enabled": {
+      "message": "在此网站上启用"
+   },
+   "tips_setting": {
+      "message": "设置"
+   },
+   "tips_rating": {
+      "message": "五星好评"
+   },
+   "tips_donate": {
+      "message": "请我喝杯咖啡"
+   },
+   "tips_wechat": {
+      "message": "微信"
+   },
+   "tips_alipay": {
+      "message": "支付宝"
+   },
+   "tips_afdian": {
+      "message": "爱发电"
+   },
+   "tips_clearAll": {
+      "message": "清空所有"
+   },
+   "tips_empty": {
+      "message": "未检测到视频"
+   },
+   "tips_feedback": {
+      "message": "反馈"
+   },
+   "options_general": {
+      "message": "常规"
+   },
+   "options_shortcuts": {
+      "message": "快捷键"
+   },
+   "options_cache_list": {
+      "message": "缓存列表"
+   },
+   "options_disabled_list": {
+      "message": "禁用列表"
+   },
+   "options_contact": {
+      "message": "联系"
+   },
+   "options_donate": {
+      "message": "捐赠"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "向左旋转"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "向右旋转"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "旋转90度"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "旋转180度"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "旋转270度"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "旋转0度"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "水平翻转"
+   },
+   "options_shortcuts_vertically": {
+      "message": "垂直翻转"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "翻转重置"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "放大"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "缩小"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "水平拉伸+"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "水平拉伸-"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "垂直拉伸+"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "垂直拉伸-"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "拉伸重置"
+   },
+   "options_shortcut_move_right": {
+      "message": "向右移动"
+   },
+   "options_shortcut_move_left": {
+      "message": "向左移动"
+   },
+   "options_shortcut_move_up": {
+      "message": "向上移动"
+   },
+   "options_shortcut_move_down": {
+      "message": "向下移动"
+   },
+   "options_shortcut_volume_p": {
+      "message": "音量+"
+   },
+   "options_shortcut_volume_r": {
+      "message": "音量-"
+   },
+   "options_shortcut_speed_p": {
+      "message": "速度+"
+   },
+   "options_shortcut_speed_r": {
+      "message": "速度-"
+   },
+   "options_shortcut_screenshot": {
+      "message": "截图"
+   },
+   "options_shortcut_focus": {
+      "message": "关灯专注"
+   },
+   "options_general_focus": {
+      "message": "关灯专注"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "背景颜色"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "模糊效果"
+   },
+   "options_general_focus_rounded": {
+      "message": "视频圆角"
+   },
+   "options_ad": {
+      "message": "广告位合作"
+   },
+   "tips_mail": {
+      "message": "邮箱联系：gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "微信交流群"
+   }
+}

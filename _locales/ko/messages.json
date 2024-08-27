@@ -1,0 +1,251 @@
+{
+   "extension_name": {
+      "message": "비디오 롤 - 올인원 웹 비디오 도구 상자"
+   },
+   "extension_des": {
+      "message": "비디오 도구 상자: 회전, 확대, 속도, PIP, 스크린샷, 집중 모드, 반복 재생, 단축키 설정."
+   },
+   "tabs_video": {
+      "message": "비디오"
+   },
+   "tabs_audio": {
+      "message": "오디오"
+   },
+   "tabs_list": {
+      "message": "비디오 목록"
+   },
+   "tabs_more": {
+      "message": "추가 설정"
+   },
+   "video_rotate": {
+      "message": "회전"
+   },
+   "video_loop": {
+      "message": "반복 재생"
+   },
+   "video_pic": {
+      "message": "PIP 모드"
+   },
+   "video_download": {
+      "message": "다운로드"
+   },
+   "video_left": {
+      "message": "왼쪽"
+   },
+   "video_right": {
+      "message": "오른쪽"
+   },
+   "video_up": {
+      "message": "위쪽"
+   },
+   "video_down": {
+      "message": "아래쪽"
+   },
+   "video_unset": {
+      "message": "설정 안 됨"
+   },
+   "video_custom": {
+      "message": "사용자 지정"
+   },
+   "video_horizental": {
+      "message": "수평"
+   },
+   "video_vertical": {
+      "message": "수직"
+   },
+   "video_reposition": {
+      "message": "재배치"
+   },
+   "video_stretch": {
+      "message": "확장"
+   },
+   "video_flip": {
+      "message": "뒤집기"
+   },
+   "video_focus": {
+      "message": "집중 모드"
+   },
+   "video_filter": {
+      "message": "필터"
+   },
+   "video_screenshot": {
+      "message": "스크린샷"
+   },
+   "video_speed": {
+      "message": "속도"
+   },
+   "video_zoom": {
+      "message": "줌"
+   },
+   "audio_muted": {
+      "message": "음소거"
+   },
+   "audio_volume": {
+      "message": "볼륨"
+   },
+   "audio_pitch": {
+      "message": "피치"
+   },
+   "list_main": {
+      "message": "메인 비디오"
+   },
+   "more_save_preferences": {
+      "message": "현재 설정 저장"
+   },
+   "more_auto_resize": {
+      "message": "회전 시 자동 크기 조정"
+   },
+   "action_reset": {
+      "message": "초기화"
+   },
+   "tips_disabled": {
+      "message": "이 사이트에서 비활성화됨"
+   },
+   "tips_enabled": {
+      "message": "이 사이트에서 활성화됨"
+   },
+   "tips_setting": {
+      "message": "설정"
+   },
+   "tips_rating": {
+      "message": "5성 평가"
+   },
+   "tips_donate": {
+      "message": "커피 한 잔 사주세요"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "모두 지우기"
+   },
+   "tips_empty": {
+      "message": "비디오가 감지되지 않음"
+   },
+   "tips_feedback": {
+      "message": "피드백"
+   },
+   "options_general": {
+      "message": "일반"
+   },
+   "options_shortcuts": {
+      "message": "단축키"
+   },
+   "options_cache_list": {
+      "message": "캐시 목록"
+   },
+   "options_disabled_list": {
+      "message": "비활성 목록"
+   },
+   "options_contact": {
+      "message": "연락처"
+   },
+   "options_donate": {
+      "message": "기부"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "왼쪽으로 회전"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "오른쪽으로 회전"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "90도 회전"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "180도 회전"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "270도 회전"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "0도 회전"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "수평으로 뒤집기"
+   },
+   "options_shortcuts_vertically": {
+      "message": "수직으로 뒤집기"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "뒤집기 초기화"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "확대"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "축소"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "수평 확장 +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "수평 확장 -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "수직 확장 +"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "수직 확장 -"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "확장 초기화"
+   },
+   "options_shortcut_move_right": {
+      "message": "오른쪽으로 이동"
+   },
+   "options_shortcut_move_left": {
+      "message": "왼쪽으로 이동"
+   },
+   "options_shortcut_move_up": {
+      "message": "위로 이동"
+   },
+   "options_shortcut_move_down": {
+      "message": "아래로 이동"
+   },
+   "options_shortcut_volume_p": {
+      "message": "볼륨 +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "볼륨 -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "속도 +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "속도 -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "스크린샷"
+   },
+   "options_shortcut_focus": {
+      "message": "집중 모드"
+   },
+   "options_general_focus": {
+      "message": "집중 모드"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "배경 색상"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "배경 흐림"
+   },
+   "options_general_focus_rounded": {
+      "message": "비디오의 둥근 모서리"
+   },
+   "options_ad": {
+      "message": "광고 협력"
+   },
+   "tips_mail": {
+      "message": "이메일 연락처: gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "WeChat 그룹"
+   }
+}

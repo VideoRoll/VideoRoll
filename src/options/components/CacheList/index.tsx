@@ -15,7 +15,7 @@ export default defineComponent({
             browser.storage.sync.get().then((res) => {
                 Object.keys(res).forEach((key) => {
                     const data = res[key];
-                    if (key.startsWith("video-roll") && 'deg' in data) {
+                    if (key.startsWith("video-roll") && !key.startsWith("video-roll-disabled") && 'deg' in data) {
                         list.value.push({
                             url: data.url,
                             data
@@ -50,18 +50,16 @@ export default defineComponent({
 
         return () => (
             <div class="options-general">
-                <div class="options-content">
-                    <div class="options-inside-header">
-                        <van-button type="primary" size="small" onClick={clear}>Clear All</van-button>
-                    </div>
-                    {
-                        list.value.map((item: any) => <van-cell key={item.url} v-slots={{
-                            title: () => <span title={item.url} class="cell-title" onClick={() => toUrl(item.url)}>{item.url}</span>
-                        }}>
-                            <van-icon name="close" class="close-icon" color="#ee0a24" onClick={() => remove(item.url)} />
-                        </van-cell>)
-                    }
+                <div class="options-inside-header">
+                    <van-button type="primary" size="small" onClick={clear}>{browser.i18n.getMessage('tips_clearAll')}</van-button>
                 </div>
+                {
+                    list.value.map((item: any) => <van-cell key={item.url} v-slots={{
+                        title: () => <span title={item.url} class="cell-title" onClick={() => toUrl(item.url)}>{item.url}</span>
+                    }}>
+                        <van-icon name="close" class="close-icon" color="#ee0a24" onClick={() => remove(item.url)} />
+                    </van-cell>)
+                }
 
             </div>
         );

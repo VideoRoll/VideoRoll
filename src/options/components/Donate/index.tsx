@@ -1,5 +1,6 @@
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent } from "vue";
 import { createURL } from 'src/util';
+import browser from 'webextension-polyfill'
 import './index.less';
 
 export default defineComponent({
@@ -7,7 +8,7 @@ export default defineComponent({
     setup(props) {
 
         const toAfdian = () => {
-            createURL('https://afdian.net/a/gomi_gxy/plan');
+            createURL('https://afdian.com/a/gomi_gxy/plan');
         }
 
         const afdian = new URL(
@@ -27,10 +28,10 @@ export default defineComponent({
 
         return () => (
             <div class="options-general">
-                <div class="options-content options-content-h">
+                <div class="options-content-h">
                     <div class="options-donate-item" onClick={toAfdian}>
                         <img class="options-donate-img options-donate-afdian" src={afdian} />
-                        <div><a href="https://afdian.net/a/gomi_gxy/plan" target="_blank">爱发电</a></div>
+                        <div><a href="https://afdian.com/a/gomi_gxy/plan" target="_blank">{browser.i18n.getMessage('tips_afdian')}</a></div>
                     </div>
                     <div class="options-donate-item">
                         <img
@@ -38,7 +39,7 @@ export default defineComponent({
                             src={wechat}
                             alt="weChat"
                         />
-                        <div>WeChat</div>
+                        <div>{browser.i18n.getMessage('tips_wechat')}</div>
                     </div>
                     <div class="options-donate-item">
                         <img
@@ -46,7 +47,7 @@ export default defineComponent({
                             src={mayi}
                             alt="alipay"
                         />
-                        <div>Alipay</div>
+                        <div>{browser.i18n.getMessage('tips_alipay')}</div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,251 @@
+{
+   "extension_name": {
+      "message": "Video Roll - Универсальный набор инструментов для веб-видео"
+   },
+   "extension_des": {
+      "message": "Инструменты видео: вращение, масштаб, скорость, PiP, скриншоты, затемнение, цикл, громкость, горячие клавиши."
+   },
+   "tabs_video": {
+      "message": "Видео"
+   },
+   "tabs_audio": {
+      "message": "Аудио"
+   },
+   "tabs_list": {
+      "message": "Список видео"
+   },
+   "tabs_more": {
+      "message": "Больше настроек"
+   },
+   "video_rotate": {
+      "message": "Вращение"
+   },
+   "video_loop": {
+      "message": "Циклическое воспроизведение"
+   },
+   "video_pic": {
+      "message": "Картинка в картинке"
+   },
+   "video_download": {
+      "message": "Скачать"
+   },
+   "video_left": {
+      "message": "Лево"
+   },
+   "video_right": {
+      "message": "Право"
+   },
+   "video_up": {
+      "message": "Вверх"
+   },
+   "video_down": {
+      "message": "Вниз"
+   },
+   "video_unset": {
+      "message": "Не установлено"
+   },
+   "video_custom": {
+      "message": "Пользовательский"
+   },
+   "video_horizental": {
+      "message": "Горизонтальный"
+   },
+   "video_vertical": {
+      "message": "Вертикальный"
+   },
+   "video_reposition": {
+      "message": "Переместить"
+   },
+   "video_stretch": {
+      "message": "Растянуть"
+   },
+   "video_flip": {
+      "message": "Отразить"
+   },
+   "video_focus": {
+      "message": "Режим фокуса"
+   },
+   "video_filter": {
+      "message": "Фильтр"
+   },
+   "video_screenshot": {
+      "message": "Скриншот"
+   },
+   "video_speed": {
+      "message": "Скорость"
+   },
+   "video_zoom": {
+      "message": "Зум"
+   },
+   "audio_muted": {
+      "message": "Без звука"
+   },
+   "audio_volume": {
+      "message": "Громкость"
+   },
+   "audio_pitch": {
+      "message": "Тон"
+   },
+   "list_main": {
+      "message": "Основное видео"
+   },
+   "more_save_preferences": {
+      "message": "Сохранить текущие настройки"
+   },
+   "more_auto_resize": {
+      "message": "Автоматическое изменение размера при вращении"
+   },
+   "action_reset": {
+      "message": "Сбросить"
+   },
+   "tips_disabled": {
+      "message": "Отключено на этом сайте"
+   },
+   "tips_enabled": {
+      "message": "Включено на этом сайте"
+   },
+   "tips_setting": {
+      "message": "Настройки"
+   },
+   "tips_rating": {
+      "message": "Оценка пять звезд"
+   },
+   "tips_donate": {
+      "message": "Угостите меня чашкой кофе"
+   },
+   "tips_wechat": {
+      "message": "WeChat"
+   },
+   "tips_alipay": {
+      "message": "Alipay"
+   },
+   "tips_afdian": {
+      "message": "Afdian"
+   },
+   "tips_clearAll": {
+      "message": "Очистить все"
+   },
+   "tips_empty": {
+      "message": "Видео не обнаружено"
+   },
+   "tips_feedback": {
+      "message": "Обратная связь"
+   },
+   "options_general": {
+      "message": "Общие"
+   },
+   "options_shortcuts": {
+      "message": "Горячие клавиши"
+   },
+   "options_cache_list": {
+      "message": "Список кэша"
+   },
+   "options_disabled_list": {
+      "message": "Список отключений"
+   },
+   "options_contact": {
+      "message": "Контакты"
+   },
+   "options_donate": {
+      "message": "Пожертвовать"
+   },
+   "options_shortcuts_rotate_left": {
+      "message": "Повернуть влево"
+   },
+   "options_shortcuts_rotate_right": {
+      "message": "Повернуть вправо"
+   },
+   "options_shortcuts_rotate_90": {
+      "message": "Повернуть на 90 градусов"
+   },
+   "options_shortcuts_rotate_180": {
+      "message": "Повернуть на 180 градусов"
+   },
+   "options_shortcuts_rotate_270": {
+      "message": "Повернуть на 270 градусов"
+   },
+   "options_shortcuts_rotate_0": {
+      "message": "Повернуть на 0 градусов"
+   },
+   "options_shortcuts_flip_horizontally": {
+      "message": "Отразить по горизонтали"
+   },
+   "options_shortcuts_vertically": {
+      "message": "Отразить по вертикали"
+   },
+   "options_shortcuts_flip_reset": {
+      "message": "Сбросить отражение"
+   },
+   "options_shortcuts_zoomin": {
+      "message": "Увеличить"
+   },
+   "options_shortcuts_zoomout": {
+      "message": "Уменьшить"
+   },
+   "options_shortcut_stretch_horizontally_p": {
+      "message": "Растянуть горизонтально +"
+   },
+   "options_shortcut_stretch_horizontally_r": {
+      "message": "Растянуть горизонтально -"
+   },
+   "options_shortcut_stretch_vertically_p": {
+      "message": "Растянуть вертикально +"
+   },
+   "options_shortcut_stretch_vertically_r": {
+      "message": "Растянуть вертикально -"
+   },
+   "options_shortcut_stretch_reset": {
+      "message": "Сбросить растяжение"
+   },
+   "options_shortcut_move_right": {
+      "message": "Переместить вправо"
+   },
+   "options_shortcut_move_left": {
+      "message": "Переместить влево"
+   },
+   "options_shortcut_move_up": {
+      "message": "Переместить вверх"
+   },
+   "options_shortcut_move_down": {
+      "message": "Переместить вниз"
+   },
+   "options_shortcut_volume_p": {
+      "message": "Громкость +"
+   },
+   "options_shortcut_volume_r": {
+      "message": "Громкость -"
+   },
+   "options_shortcut_speed_p": {
+      "message": "Скорость +"
+   },
+   "options_shortcut_speed_r": {
+      "message": "Скорость -"
+   },
+   "options_shortcut_screenshot": {
+      "message": "Скриншот"
+   },
+   "options_shortcut_focus": {
+      "message": "Режим фокуса"
+   },
+   "options_general_focus": {
+      "message": "Режим фокуса"
+   },
+   "options_general_focus_backgroundColor": {
+      "message": "Цвет фона"
+   },
+   "options_general_focus_backgroundBlur": {
+      "message": "Размытие фона"
+   },
+   "options_general_focus_rounded": {
+      "message": "Закругленные углы для видео"
+   },
+   "options_ad": {
+      "message": "Рекламное сотрудничество"
+   },
+   "tips_mail": {
+      "message": "Контакт по электронной почте: gxy880520@gmail.com"
+   },
+   "tips_wechatGroup": {
+      "message": "Группа WeChat"
+   }
+}

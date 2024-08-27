@@ -7,6 +7,7 @@ export default function debounce(func: Function, time: number) {
         }
     
         timer = setTimeout(() => {
+            //@ts-ignore
             func.apply(this, args);
             timer = null;
         }, time);
