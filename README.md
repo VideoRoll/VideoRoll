@@ -28,7 +28,7 @@ English | [简体中文](README-zh_CN.md)
 
 ### ✨ Describe
 
-Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, download, flip, tune, volume++, playback, focus and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support the same-origin iframe's video(dailymotion.com).Support shortcut key:Ctrl+Up/Right/Down/Left/B.We provide an excellent memory system to help the next time you enter the website to take effect directly.
+Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, download, flip, tune, volume++, playback, focus and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support shortcut key.We provide an excellent memory system to help the next time you enter the website to take effect directly.
 
 ---
 
@@ -41,31 +41,19 @@ Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, 
 -   ✅Zoom
 -   ✅Reposition
 -   ✅Stretch
--   ✅Download
+-   ✅Loop
+-   ✅Screenshot
 -   ✅Rotate 0/90/180/270deg
--   ✅Tune(Pitch)
+-   ✅Pitch
+-   ✅Muted
 -   ✅Volume
--   ✅Playback
+-   ✅Speed Control
 -   ✅Focus
 -   ✅Filter
--   ✅Download video guide
 -   ✅Memory system(You can save all the configuration of the current website so that it will take effect directly next time)
 -   ✅Support shortcut key
--   ✅Support same-origin iframe
 -   ✅Automatically calculates video scaling
 -   ✅Respect user privacy
-
----
-
-### ✨ Shortcut Key useage
-#### Rotate
--   ctrl+ArrowUp(0deg)
--   ctrl+ArrowRight(90deg)
--   ctrl+ArrowDown(180deg)
--   ctrl+ArrowLeft(270deg)
-
-#### Focus
-ctrl+B  
 
 ---
 
@@ -84,15 +72,18 @@ ctrl+B
 
 ### ✨ Sponsoring
 
--   [afdian](https://afdian.net/a/gomi_gxy/plan)
+-   [afdian](https://afdian.com/a/gomi_gxy/plan)
 -   [official(last page)](https://gomi.site/VideoRoll)
 
 ---
 
-### ✨ Bug Report
+### ✨ Feedback
 
-If you have any questions, please commit a issue.
+If you have any questions, please commit a issue or join our wechat group.
 
+<p align="left">
+  <img width="230" src="src/options/components/Contact/images/qun.jpg">
+</p>
 ---
 
 ### ✨ Contribution

@@ -154,7 +154,8 @@ export default class VideoRoll {
 
     static getSourceElementSrc(video: HTMLVideoElement) {
         if (!video.src) {
-            const src = video.querySelector('source')?.src ?? '';
+            // twitch has no src
+            const src = video.querySelector('source')?.src ?? 'no-src';
             return src;
         }
         return video.src;
