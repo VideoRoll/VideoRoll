@@ -28,5 +28,18 @@ export function useGeneralConfig() {
                 }
             ]
         },
+        {
+            type: 'group',
+            title: browser.i18n.getMessage('video_focus'),
+            key: 'crossorigin',
+            config: [
+                {
+                    type: 'switch',
+                    title: browser.i18n.getMessage('options_general_focus_backgroundBlur'),
+                    key: 'crossorigin',
+                    value: false
+                }
+            ]
+        },
     ])
 }

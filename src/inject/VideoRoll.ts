@@ -5,11 +5,13 @@
  */
 import WEBSITE from "../website";
 import Audiohacker from "audio-hacker";
-import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, OriginElementPosition, IRealVideoPlayer, VideoListItem } from '../types/type.d';
+import { Flip, IMove, IFilter, Focus, FilterUnit, IRollConfig, FlipType, VideoSelector, VideoElement, OriginElementPosition, IRealVideoPlayer, VideoListItem, ActionType } from '../types/type.d';
 import { nanoid } from "nanoid";
-import { isVisible } from "src/util";
+import { isVisible, sendRuntimeMessage } from "src/util";
 import debounce from "src/util/debounce";
 import { getName } from "./utils/getName";
+import { domToPng } from "modern-screenshot";
+import domtoimage from 'dom-to-image-more';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
@@ -109,6 +111,11 @@ export default class VideoRoll {
     static updateDocuments() {
         const iframes = document.querySelectorAll("iframe") ?? [];
         const iframeEls: HTMLIFrameElement[] = Array.from(iframes).filter((v) => v.contentDocument);
+
+        this.setRollConfig({
+            ...this.rollConfig,
+            iframes: Array.from(iframes).map((v) => v.src)
+        })
 
         this.documents = [document, ...(iframeEls.map((v) => {
             if (v.contentDocument) {
@@ -326,15 +333,7 @@ export default class VideoRoll {
     }
 
     static toggleMuted() {
-        const muted = this.rollConfig.muted;
-
-        try {
-            this.videoElements.forEach((video) => {
-                (video as HTMLVideoElement).muted = muted;
-            })
-        } catch (err) {
-            console.debug(err);
-        }
+        sendRuntimeMessage(this.rollConfig.tabId, { type: ActionType.MUTED, muted: this.rollConfig.muted })
     }
 
     static resetAudio() {
@@ -738,7 +737,7 @@ export default class VideoRoll {
         return intersectionObserver;
     }
 
-    static capture(video = this.realVideoPlayer.player) {
+    static capture(video = this.realVideoPlayer.player): Promise<any> {
         const rect = (video as HTMLVideoElement).getBoundingClientRect();
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
@@ -748,45 +747,55 @@ export default class VideoRoll {
 
         context?.drawImage((video as HTMLVideoElement), 0, 0, canvas.width, canvas.height);
         // 获取canvas内容作为图像
-        return canvas.toDataURL('image/png');
+        return Promise.resolve(canvas.toDataURL('image/png'));
     }
 
     static getVideoInfo(video: HTMLVideoElement, index: number) {
         const src = this.getSourceElementSrc(video);
         const time = Math.ceil(video.duration * 10 / 60) / 10;
         const duration = isNaN(time) ? 0 : time;
-        video.setAttribute('crossorigin', 'anonymous');
+        if (this.rollConfig.crossorigin) {
+            video.setAttribute('crossorigin', 'anonymous');
+        }
         let dataURL = '';
-        let name = `视频 ${index + 1}`;
+        let name = `video ${index + 1}`;
+        const isReal = this.realVideoPlayer.player === video;
         try {
             const url = new URL(src);
             name = getName(url);
-            dataURL = this.capture(video);
+            return this.capture(video).then((dataURL: string) => {
+                return {
+                    posterUrl: dataURL,
+                    duration,
+                    name,
+                    isReal
+                }
+            });
         } catch (err) {
             console.debug(err);
+            return Promise.resolve({
+                posterUrl: dataURL,
+                duration,
+                name,
+                isReal
+            })
         }
-
-        const isReal = this.realVideoPlayer.player === video;
-        return {
-            posterUrl: dataURL,
-            duration,
-            name,
-            isReal
-        }
+        
     }
 
-    static useVideoChanged(callback: Function) {
+    static async useVideoChanged(callback: Function) {
         const videoSelector = this.getVideoSelector(this.getHostName())
         this.updateDocuments().updateVideoElements(videoSelector);
 
         const videos = [...this.videoElements];
+        const infos = await Promise.all(videos.map((v, index) => this.getVideoInfo(v, index)))
+        
         this.videoList = videos.map((v, index) => {
-            const info = this.getVideoInfo(v, index);
             const item: any = {
                 id: v.dataset.rollId,
                 visible: v.dataset.rollVisible === 'true' ? true : false,
                 checked: v.dataset.rollCheck === 'true' ? true : false,
-                ...info
+                ...infos[index]
             };
 
             // item.visibleObserver = this.getVideoVisibleObserver(v, item, callback)

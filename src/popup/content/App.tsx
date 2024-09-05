@@ -5,11 +5,12 @@ import Footer from "./components/Footer";
 import GridPanel from './components/GridPanel';
 import { useConfig } from "../../use";
 import { initRollConfig, updateRollConfig, reloadPage } from "./utils";
-import { clone, getDomain, getSessionStorage, sendTabMessage } from "../../util";
+import { clone, getSessionStorage, sendTabMessage } from "../../util";
 import { ActionType } from "../../types/type.d";
 import { Close } from "@vicons/ionicons5";
 
 import "./index.less";
+import Iframe from "./components/Iframe";
 
 export default defineComponent({
     name: "App",
@@ -24,7 +25,7 @@ export default defineComponent({
         const onOpenSetting = (e: Event) => {
             isShow.value = !isShow.value;
         };
-        
+
         const onHoverVideo = (id: string, isIn: boolean) => {
             sendTabMessage(rollConfig.tabId, { id, type: ActionType.ON_HOVER_VIDEO, isIn })
         }
@@ -75,7 +76,7 @@ export default defineComponent({
             initRollConfig(rollConfig, tab);
 
             chrome.runtime.onMessage.addListener((a, b, c) => {
-                const { type, rollConfig: config, text, videoList: list, imgData } = a;
+                const { type, rollConfig: config, text, videoList: list, imgData, muted, iframes } = a;
 
                 if (a.tabId !== tabId.value) {
                     c("not current tab");
@@ -101,15 +102,36 @@ export default defineComponent({
                         const newUrl = chrome.runtime.getURL('inject/capture.html?imgData=' + encodeURIComponent(imgData));
                         chrome.tabs.create({ url: newUrl });
                         break;
+                    case ActionType.MUTED:
+                        chrome.tabs.get(tabId.value).then((tab) => {
+                            chrome.tabs.update(tabId.value, { muted });
+                        });
+                        break;
+                    case ActionType.UPDATE_IFRAMES:
+                        rollConfig.iframes = iframes;
+                        break;
                     default:
                         break;
                 }
 
                 c("update");
             });
-        
+
             sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.ON_MOUNTED })
         });
+
+        const renderComponent = () => {
+            if (rollConfig.enable) {
+                if (rollConfig.videoNumber === 0) return <Iframe></Iframe>
+
+                return <GridPanel></GridPanel>
+            }
+
+            return <div class="empty-box">
+                <Close class="logo-empty" />
+                <div>{browser.i18n.getMessage('tips_disabled')}</div>
+            </div>
+        }
 
         return () => (
             <div class={rollConfig.enable ? "video-roll-wrapper" : "video-roll-wrapper-empty"}>
@@ -117,10 +139,7 @@ export default defineComponent({
                 <main class={rollConfig.enable ? "video-roll-main" : "video-roll-main-empty"}>
                     <div class={rollConfig.enable ? "video-roll-content" : "video-roll-content-empty"}>
                         {
-                            rollConfig.enable ? <GridPanel></GridPanel> : <div class="empty-box">
-                                <Close class="logo-empty"/>
-                                <div>{browser.i18n.getMessage('tips_disabled')}</div>
-                            </div>
+                            renderComponent()
                         }
                     </div>
                 </main>
