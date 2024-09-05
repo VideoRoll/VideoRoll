@@ -6,7 +6,7 @@ export default function render(config: any, onChange: Function) {
     return config.map((item: any) => {
         switch (item.type) {
             case 'group':
-                return <div>
+                return <div class="general-group">
                     <div class="general-title">{item.title}</div>
                     <van-cell-group inset>
                         {render(item.config, onChange)}

@@ -55,9 +55,11 @@ const defaultConfig = {
     loop: false,
     muted: false,
     enable: true,
+    iframes: [],
     document: {
         title: ''
     },
+    crossorigin: false,
     videoSelector: { defaultDom: 'video' }
 } as IRollConfig;
 

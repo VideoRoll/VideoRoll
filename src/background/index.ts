@@ -6,9 +6,8 @@
 import { createURL } from 'src/util';
 import { ActionType } from '../types/type.d';
 import { sendTabMessage, setBadge, getBrowser } from '../util';
-import { shortcutsMap, useShortcuts } from 'src/use/useShortcuts';
+import { useShortcuts } from 'src/use/useShortcuts';
 import { useGeneralConfig } from 'src/options/use/useGeneralConfig';
-import { toRaw } from 'vue';
 
 let currentTabId: number | undefined;
 

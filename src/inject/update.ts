@@ -70,8 +70,9 @@ export async function updateOnMounted(tabId: number, rollConfig: IRollConfig) {
 
     sendRuntimeMessage(tabId, { rollConfig: config, type: ActionType.UPDATE_STORAGE, tabId })
     if (config.enable === false) return;
-    VideoRoll.setRollConfig(config).addStyleClass().updateAudio();
+    VideoRoll.setRollConfig(config).updateDocuments().addStyleClass().updateAudio();
     sendRuntimeMessage(tabId, { videoList: VideoRoll.videoList, type: ActionType.UPDATE_VIDEO_LIST, tabId })
+    sendRuntimeMessage(tabId, { iframes: VideoRoll.getRollConfig().iframes, type: ActionType.UPDATE_IFRAMES, tabId })
 }
 
 /**
@@ -233,6 +234,7 @@ export function updateEnable(tabId: number, rollConfig: IRollConfig) {
 }
 
 export function capture(tabId: number, rollConfig: IRollConfig) {
-    const url = VideoRoll.capture();
-    sendRuntimeMessage(tabId, { type: ActionType.CAPTURE, imgData: url })
+    VideoRoll.capture().then((url) => {
+        sendRuntimeMessage(tabId, { type: ActionType.CAPTURE, imgData: url })
+    });
 }

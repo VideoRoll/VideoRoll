@@ -14,12 +14,6 @@ import 'floating-vue/dist/style.css'
 
 import App from "./App";
 
-import {
-    // Directives
-    vTooltip
-} from 'floating-vue'
-
-
 import ConfigProvider from "vant/es/config-provider/index.mjs";
 import Sidebar from "vant/es/sidebar/index.mjs";
 import SidebarItem from "vant/es/sidebar-item/index.mjs";
