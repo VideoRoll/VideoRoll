@@ -16,10 +16,17 @@ export default defineComponent({
 
         return () => (
             <div>
-                <div>未识别到视频，但识别到iframe，点击查看</div>
+                <van-empty description={browser.i18n.getMessage('tips_empty')} />
+
                 <div>
                     {
-                        (rollConfig.iframes ?? []).map((url) => <div><a href={url} target="_blank">{url}</a></div>)
+                        rollConfig.iframes?.length ?
+                        <div>
+                            <p>检测到该页面存在iframe框架，点击跳转使用Video Roll</p>
+                            {
+                                (rollConfig.iframes).map((url) => <div><a href={url} target="_blank">{url}</a></div>) 
+                            }
+                        </div> : null  
                     }
                 </div>
             </div>
