@@ -10,8 +10,6 @@ import { nanoid } from "nanoid";
 import { isVisible, sendRuntimeMessage } from "src/util";
 import debounce from "src/util/debounce";
 import { getName } from "./utils/getName";
-import { domToPng } from "modern-screenshot";
-import domtoimage from 'dom-to-image-more';
 
 export default class VideoRoll {
     static rollConfig: IRollConfig;
