@@ -15,16 +15,16 @@ export default defineComponent({
         const rollConfig = inject("rollConfig") as IRollConfig;
 
         return () => (
-            <div>
-                <van-empty description={browser.i18n.getMessage('tips_empty')} />
-
+            <div class="">
+                <van-empty image="error" description={browser.i18n.getMessage('tips_empty')} />
                 <div>
                     {
                         rollConfig.iframes?.length ?
                         <div>
-                            <p>检测到该页面存在iframe框架，点击跳转使用Video Roll</p>
+                            <p>检测到该页面存在iframe框架</p>
+                            <p>点击跳转使用Video Roll</p>
                             {
-                                (rollConfig.iframes).map((url) => <div><a href={url} target="_blank">{url}</a></div>) 
+                                (rollConfig.iframes).map((url) => <div class="iframe-item"><a href={url} target="_blank">{url}</a></div>) 
                             }
                         </div> : null  
                     }

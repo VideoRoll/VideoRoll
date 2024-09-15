@@ -69,7 +69,7 @@ export default defineComponent({
                                 </div>
                             </van-checkbox>
                         </div>
-                    ) : <div><van-empty description={browser.i18n.getMessage('tips_empty')} /></div>}
+                    ) : <div><van-empty image="error" description={browser.i18n.getMessage('tips_empty')} /></div>}
                 </van-checkbox-group>
             </div>
         );
