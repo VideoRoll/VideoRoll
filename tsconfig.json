@@ -28,7 +28,8 @@
             "jest",
             "node",
             "webextension-polyfill",
-            "lodash-es"
+            "lodash-es",
+            "three"
         ]
     },
     "isolatedModules": true,

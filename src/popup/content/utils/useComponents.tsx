@@ -58,17 +58,17 @@ export default function useComponents() {
     const components = shallowReactive<ITabConfig[]>([
         {
             type: 'tab',
-            title: <Tooltip><div class="tab-title" v-tooltip={browser.i18n.getMessage('tabs_video')}><VideocamOutline class="tab-icon"/></div></Tooltip>,
+            title: <Tooltip><div class="tab-title" v-tooltip={browser.i18n.getMessage('tabs_video')}><VideocamOutline class="tab-icon" /></div></Tooltip>,
             children: [{
                 type: 'row',
                 style: {
                     margin: '30px 0',
-                    height: '120px'
+                    height: '40px'
                 },
                 children: [
                     {
                         type: 'container',
-                        col: 16,
+                        col: 12,
                         title: browser.i18n.getMessage('video_rotate'),
                         showTitle: true,
                         children: [{
@@ -78,54 +78,70 @@ export default function useComponents() {
                     },
                     {
                         type: "container",
-                        col: 8,
+                        col: 6,
+                        title: browser.i18n.getMessage('video_loop'),
+                        showTitle: true,
+                        // style: {
+                        //     flexDirection: "column",
+                        //     background: 'none',
+                        //     justifyContent: 'space-between',
+                        // },
+                        children: [
+                            // {
+                            //     type: 'row',
+                            //     style: {
+                            //         height: '45px'
+                            //     },
+                            //     children: [
+                            //         {
+                            //             type: 'container',
+                            //             title: browser.i18n.getMessage('video_loop'),
+                            //             showTitle: true,
+                            //             col: 24,
+                            //             children: [
+                            //                 {
+                            //                     type: 'component',
+                            //                     component: defineAsyncComponent(() => import("../components/Loop"))
+                            //                 }
+                            //             ]
+                            //         }
+                            //     ]
+                            // },
+                            {
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Loop"))
+                            },
+                            // {
+                            //     type: 'row',
+                            //     style: {
+                            //         height: '45px'
+                            //     },
+                            //     children: [
+                            //         {
+                            //             type: 'container',
+                            //             title: browser.i18n.getMessage('video_pic'),
+                            //             showTitle: false,
+                            //             col: 24,
+                            //             children: [
+                            //                 {
+                            //                     type: 'component',
+                            //                     component: defineAsyncComponent(() => import("../components/PictureInPicture"))
+                            //                 }
+                            //             ]
+                            //         }
+                            //     ]
+                            // }
+                        ]
+                    },
+                    {
+                        type: "container",
+                        col: 6,
                         title: browser.i18n.getMessage('video_pic'),
                         showTitle: true,
-                        style: {
-                            flexDirection: "column",
-                            background: 'none',
-                            justifyContent: 'space-between',
-                        },
                         children: [
                             {
-                                type: 'row',
-                                style: {
-                                    height: '45px'
-                                },
-                                children: [
-                                    {
-                                        type: 'container',
-                                        title: browser.i18n.getMessage('video_loop'),
-                                        showTitle: true,
-                                        col: 24,
-                                        children: [
-                                            {
-                                                type: 'component',
-                                                component: defineAsyncComponent(() => import("../components/Loop"))
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                type: 'row',
-                                style: {
-                                    height: '45px'
-                                },
-                                children: [
-                                    {
-                                        type: 'container',
-                                        title: browser.i18n.getMessage('video_pic'),
-                                        showTitle: false,
-                                        col: 24,
-                                        children: [
-                                            {
-                                                type: 'component',
-                                                component: defineAsyncComponent(() => import("../components/PictureInPicture"))
-                                            }
-                                        ]
-                                    }
-                                ]
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/PictureInPicture"))
                             }
                         ]
                     }
@@ -142,7 +158,7 @@ export default function useComponents() {
                         type: 'container',
                         title: browser.i18n.getMessage('video_reposition'),
                         showTitle: true,
-                        col: 8,
+                        col: 6,
                         children: [{
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Repostion"))
@@ -150,7 +166,7 @@ export default function useComponents() {
                     },
                     {
                         type: 'container',
-                        col: 8,
+                        col: 6,
                         title: browser.i18n.getMessage('video_stretch'),
                         showTitle: true,
                         children: [{
@@ -160,12 +176,22 @@ export default function useComponents() {
                     },
                     {
                         type: 'container',
-                        col: 8,
+                        col: 6,
                         title: browser.i18n.getMessage('video_flip'),
                         showTitle: true,
                         children: [{
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Flip"))
+                        }]
+                    },
+                    {
+                        type: 'container',
+                        title: browser.i18n.getMessage('video_filter'),
+                        showTitle: true,
+                        col: 6,
+                        children: [{
+                            type: 'component',
+                            component: defineAsyncComponent(() => import("../components/Filter"))
                         }]
                     },
                 ],
@@ -181,7 +207,7 @@ export default function useComponents() {
                         type: 'container',
                         title: browser.i18n.getMessage('video_focus'),
                         showTitle: true,
-                        col: 8,
+                        col: 6,
                         children: [
                             {
                                 type: 'component',
@@ -193,7 +219,7 @@ export default function useComponents() {
                         type: 'container',
                         title: browser.i18n.getMessage('video_filter'),
                         showTitle: true,
-                        col: 8,
+                        col: 6,
                         children: [{
                             type: 'component',
                             component: defineAsyncComponent(() => import("../components/Filter"))
@@ -203,11 +229,24 @@ export default function useComponents() {
                         type: 'container',
                         title: browser.i18n.getMessage('video_screenshot'),
                         showTitle: true,
-                        col: 8,
+                        col: 6,
                         children: [
                             {
                                 type: 'component',
                                 component: defineAsyncComponent(() => import("../components/Capture"))
+                            }
+                        ]
+                    },
+                    {
+                        type: 'container',
+                        title: 'VR',
+                        showTitle: true,
+                        class: 'container-badge-beta',
+                        col: 6,
+                        children: [
+                            {
+                                type: 'component',
+                                component: defineAsyncComponent(() => import("../components/Vr"))
                             }
                         ]
                     }
