@@ -35,7 +35,7 @@ export default defineComponent({
                     </div>
                 ))}
                 <div class="rotate-deg-text">
-                    {rollConfig.deg}
+                    {rollConfig.deg}°
                 </div>
             </div>
         );

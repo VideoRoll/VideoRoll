@@ -59,6 +59,10 @@ export type Pitch = {
     value: number;
 };
 
+export type Vr = {
+    on: boolean;
+}
+
 export interface IScale {
     mode: "auto" | 'custom',
     values: [number, number],
@@ -121,7 +125,8 @@ export interface IRollConfig {
     enable: boolean;
     document: Document,
     iframes: Iframes,
-    [key: string]: number | string | Iframes | Document | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
+    vr: Vr
+    [key: string]: number | string | Vr | Iframes | Document | Flip | IFilter | IScale | Zoom | Deg | IMove | Pitch | Focus | boolean | VideoSelector
 }
 
 export type VideoSelector = {

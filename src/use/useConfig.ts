@@ -59,6 +59,9 @@ const defaultConfig = {
     document: {
         title: ''
     },
+    vr: {
+        on: false
+    },
     crossorigin: false,
     videoSelector: { defaultDom: 'video' }
 } as IRollConfig;

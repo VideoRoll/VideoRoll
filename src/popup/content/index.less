@@ -65,12 +65,29 @@ body {
         margin-top: 0 !important;
     }
 
+    .container-badge-beta {
+        &::after {
+            content: "beta";
+            width: 20px;
+            height: 10px;
+            background-color: #1e90ff;
+            top: 0;
+            right: 0px;
+            position: absolute;
+            font-size: 10px;
+            padding: 2px;
+            color: #fff;
+            border-bottom-left-radius: 5px;
+        }
+    }
+
     .van-tabs.van-tabs--line {
         height: 100%;
 
         .van-tabs__content {
             height: calc(100% - 50px);
         }
+
         .van-swipe-item {
             overflow-y: auto;
         }
@@ -89,7 +106,8 @@ body {
         // overflow-y: auto;
         // padding-bottom: 15px;
 
-        .video-roll-setting-panel, .van-config-provider {
+        .video-roll-setting-panel,
+        .van-config-provider {
             height: 100%;
         }
     }
