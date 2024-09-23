@@ -116,6 +116,8 @@ export default class VideoRoll {
             iframes: Array.from(iframes).map((v) => v.src)
         })
 
+        console.log(this.rollConfig, '---rollConfig');
+
         this.documents = [document, ...(iframeEls.map((v) => {
             if (v.contentDocument) {
                 // @ts-ignore
@@ -283,7 +285,7 @@ export default class VideoRoll {
         rollConfig: IRollConfig
     ) {
         this.setRollConfig(rollConfig);
-        const { deg, flip, scale, zoom, move, filter, focus, pictureInPicture } = rollConfig;
+        const { deg, flip, scale, zoom, move, filter, focus, pictureInPicture, vr } = rollConfig;
 
         const videos = this.videoElements.values();
         for (const target of videos) {
@@ -317,6 +319,7 @@ export default class VideoRoll {
 
         this.updateFocus(this.realVideoPlayer.player as HTMLVideoElement, focus);
         this.togglePictureInPicture(pictureInPicture);
+        this.updateVr(this.realVideoPlayer.player as HTMLVideoElement, vr);
 
         return this;
     }
@@ -601,107 +604,145 @@ export default class VideoRoll {
         return this;
     }
 
-    static updateVr() {
-        // Initialize Three.js scene
-        let scene, camera, renderer, sphere, videoTexture, video;
-        let lon = 0, lat = 0;
-        let phi = 0, theta = 0;
-        let isUserInteracting = false;
-        let onPointerDownPointerX = 0, onPointerDownPointerY = 0;
-        let onPointerDownLon = 0, onPointerDownLat = 0;
+    static updateVr(video: HTMLVideoElement, vr: any) {
+        const mask = document.getElementById('video-roll-vr-mask');
+        const vrStyle = document.getElementById('video-roll-vr-style') as HTMLStyleElement;
 
-        function init() {
-            // Get video element and canvas
-            video = document.getElementById('vrVideo');
-            const canvas = document.getElementById('vrCanvas');
-
-            // Create Three.js renderer
-            renderer = new THREE.WebGLRenderer({ canvas });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            // Create scene and camera
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100);
-            camera.target = new THREE.Vector3(0, 0, 0);
-
-            // Create video texture
-            videoTexture = new THREE.VideoTexture(video);
-            videoTexture.minFilter = THREE.LinearFilter;
-            videoTexture.magFilter = THREE.LinearFilter;
-            videoTexture.format = THREE.RGBFormat;
-
-            // Create a sphere geometry and map video as texture
-            const geometry = new THREE.SphereGeometry(500, 60, 40);
-            geometry.scale(-1, 1, 1); // Invert sphere geometry to view from inside
-            const material = new THREE.MeshBasicMaterial({ map: videoTexture });
-            sphere = new THREE.Mesh(geometry, material);
-            scene.add(sphere);
-
-            // Add event listeners for mouse and touch controls
-            document.addEventListener('mousedown', onPointerDown, false);
-            document.addEventListener('mousemove', onPointerMove, false);
-            document.addEventListener('mouseup', onPointerUp, false);
-
-            document.addEventListener('touchstart', onPointerDown, false);
-            document.addEventListener('touchmove', onPointerMove, false);
-            document.addEventListener('touchend', onPointerUp, false);
-
-            // Resize canvas when window resizes
-            window.addEventListener('resize', onWindowResize, false);
+        if (vrStyle) {
+            vrStyle.innerHTML = `#video-roll-vr-mask {
+                display: ${vr.on ? 'block' : 'none'};
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 20000 !important;
+                background-color: #000;
+            }
+            
+            .video-roll-focus {
+                width: ${this.originElementPosition?.style.width}px;
+                height: ${this.originElementPosition?.style.height}px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }`
         }
 
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+        if (!video) return this;
+
+        if (!vr.on && mask) {
+            const canvas = document.getElementById('video-roll-vr');
+            canvas?.remove();
+
+            return this;
         }
 
-        function onPointerDown(event) {
-            isUserInteracting = true;
+        if (vr.on && mask) {
+            const canvas = document.createElement('canvas');
+            canvas.setAttribute('id', 'video-roll-vr')
+            mask.appendChild(canvas);
 
-            const clientX = event.clientX || event.touches[0].clientX;
-            const clientY = event.clientY || event.touches[0].clientY;
+            // Initialize Three.js scene
+            let scene, camera, renderer, sphere, videoTexture;
+            let lon = 0, lat = 0;
+            let phi = 0, theta = 0;
+            let isUserInteracting = false;
+            let onPointerDownPointerX = 0, onPointerDownPointerY = 0;
+            let onPointerDownLon = 0, onPointerDownLat = 0;
 
-            onPointerDownPointerX = clientX;
-            onPointerDownPointerY = clientY;
+            function init() {
+                // Create Three.js renderer
+                renderer = new THREE.WebGLRenderer({ canvas });
+                renderer.setSize(window.innerWidth, window.innerHeight);
 
-            onPointerDownLon = lon;
-            onPointerDownLat = lat;
-        }
+                // Create scene and camera
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100);
+                camera.target = new THREE.Vector3(0, 0, 0);
 
-        function onPointerMove(event) {
-            if (isUserInteracting) {
+                // Create video texture
+                videoTexture = new THREE.VideoTexture(video);
+                videoTexture.minFilter = THREE.LinearFilter;
+                videoTexture.magFilter = THREE.LinearFilter;
+                videoTexture.format = THREE.RGBFormat;
+
+                // Create a sphere geometry and map video as texture
+                const geometry = new THREE.SphereGeometry(500, 60, 40);
+                geometry.scale(-1, 1, 1); // Invert sphere geometry to view from inside
+                const material = new THREE.MeshBasicMaterial({ map: videoTexture });
+                sphere = new THREE.Mesh(geometry, material);
+                scene.add(sphere);
+
+                // Add event listeners for mouse and touch controls
+                document.addEventListener('mousedown', onPointerDown, false);
+                document.addEventListener('mousemove', onPointerMove, false);
+                document.addEventListener('mouseup', onPointerUp, false);
+
+                document.addEventListener('touchstart', onPointerDown, false);
+                document.addEventListener('touchmove', onPointerMove, false);
+                document.addEventListener('touchend', onPointerUp, false);
+
+                // Resize canvas when window resizes
+                window.addEventListener('resize', onWindowResize, false);
+            }
+
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+
+            function onPointerDown(event) {
+                isUserInteracting = true;
+
                 const clientX = event.clientX || event.touches[0].clientX;
                 const clientY = event.clientY || event.touches[0].clientY;
 
-                lon = (onPointerDownPointerX - clientX) * 0.1 + onPointerDownLon;
-                lat = (clientY - onPointerDownPointerY) * 0.1 + onPointerDownLat;
+                onPointerDownPointerX = clientX;
+                onPointerDownPointerY = clientY;
+
+                onPointerDownLon = lon;
+                onPointerDownLat = lat;
             }
+
+            function onPointerMove(event) {
+                if (isUserInteracting) {
+                    const clientX = event.clientX || event.touches[0].clientX;
+                    const clientY = event.clientY || event.touches[0].clientY;
+
+                    lon = (onPointerDownPointerX - clientX) * 0.1 + onPointerDownLon;
+                    lat = (clientY - onPointerDownPointerY) * 0.1 + onPointerDownLat;
+                }
+            }
+
+            function onPointerUp() {
+                isUserInteracting = false;
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                lat = Math.max(-85, Math.min(85, lat));
+                phi = THREE.MathUtils.degToRad(90 - lat);
+                theta = THREE.MathUtils.degToRad(lon);
+
+                camera.target.x = 500 * Math.sin(phi) * Math.cos(theta);
+                camera.target.y = 500 * Math.cos(phi);
+                camera.target.z = 500 * Math.sin(phi) * Math.sin(theta);
+                camera.lookAt(camera.target);
+
+                // Render the scene
+                renderer.render(scene, camera);
+            }
+
+            // Initialize and start animation
+            init();
+            animate();
         }
-
-        function onPointerUp() {
-            isUserInteracting = false;
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            lat = Math.max(-85, Math.min(85, lat));
-            phi = THREE.MathUtils.degToRad(90 - lat);
-            theta = THREE.MathUtils.degToRad(lon);
-
-            camera.target.x = 500 * Math.sin(phi) * Math.cos(theta);
-            camera.target.y = 500 * Math.cos(phi);
-            camera.target.z = 500 * Math.sin(phi) * Math.sin(theta);
-            camera.lookAt(camera.target);
-
-            // Render the scene
-            renderer.render(scene, camera);
-        }
-
-        // Initialize and start animation
-        init();
-        animate();
     }
 
     static createAudiohacker() {

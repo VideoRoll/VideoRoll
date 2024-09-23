@@ -139,6 +139,7 @@ export default defineComponent({
                 <main class={rollConfig.enable ? "video-roll-main" : "video-roll-main-empty"}>
                     <div class={rollConfig.enable ? "video-roll-content" : "video-roll-content-empty"}>
                         {
+
                             renderComponent()
                         }
                     </div>
