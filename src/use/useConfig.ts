@@ -18,7 +18,7 @@ const defaultFilterConfig = {
 
 const defaultConfig = {
     tabId: 0,
-    videoNumber: 0,
+    videoNumber: 1,
     url: '',
     name: '',
     flip: 'unset',

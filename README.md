@@ -50,6 +50,7 @@ Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, 
 -   ✅Speed Control
 -   ✅Focus
 -   ✅Filter
+-   ✅Detect Iframes
 -   ✅Memory system(You can save all the configuration of the current website so that it will take effect directly next time)
 -   ✅Support shortcut key
 -   ✅Automatically calculates video scaling

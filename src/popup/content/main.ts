@@ -43,6 +43,7 @@ import NoticeBar from "vant/es/notice-bar/index.mjs";
 import Form from "vant/es/form/index.mjs";
 import Field from "vant/es/field/index.mjs";
 import Empty  from "vant/es/empty/index.mjs";
+import Loading  from "vant/es/loading/index.mjs";
 
 import "vant/es/sidebar/style/index.mjs";
 import "vant/es/sidebar-item/style/index.mjs";
@@ -74,6 +75,7 @@ import "vant/es/notice-bar/style/index.mjs";
 import "vant/es/form/style/index.mjs";
 import "vant/es/field/style/index.mjs";
 import "vant/es/empty/style/index.mjs";
+import "vant/es/loading/style/index.mjs";
 
 createApp(App)
     .use(ConfigProvider)
@@ -106,5 +108,6 @@ createApp(App)
     .use(Form)
     .use(Field)
     .use(Empty)
+    .use(Loading)
     .use(FloatingVue)
     .mount("#app");

@@ -35,7 +35,6 @@ function setupStorage() {
 
 chrome.runtime.onInstalled.addListener((params: any) => {
     const reason = params.reason;
-
     switch (reason) {
         case 'install':
             createURL('https://videoroll.gomi.site');

@@ -330,6 +330,9 @@ export default class VideoRoll {
         return this;
     }
 
+    /**
+     * web muted
+     */
     static toggleMuted() {
         sendRuntimeMessage(this.rollConfig.tabId, { type: ActionType.MUTED, muted: this.rollConfig.muted })
     }

@@ -35,11 +35,11 @@ export default defineComponent({
         }
 
         const updateEnable = () => {
-            sendTabMessage(rollConfig.tabId, { rollConfig, type: ActionType.UPDATE_ENABLE })
+            sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.UPDATE_ENABLE })
         }
 
         const capture = () => {
-            sendTabMessage(rollConfig.tabId, { rollConfig, type: ActionType.CAPTURE })
+            sendTabMessage(rollConfig.tabId, { rollConfig: clone(rollConfig), type: ActionType.CAPTURE })
         }
 
         // current website config
@@ -99,12 +99,12 @@ export default defineComponent({
                         videoList.value = list;
                         break;
                     case ActionType.CAPTURE:
-                        const newUrl = chrome.runtime.getURL('inject/capture.html?imgData=' + encodeURIComponent(imgData));
-                        chrome.tabs.create({ url: newUrl });
+                        const newUrl = browser.runtime.getURL('inject/capture.html?imgData=' + encodeURIComponent(imgData));
+                        browser.tabs.create({ url: newUrl });
                         break;
                     case ActionType.MUTED:
-                        chrome.tabs.get(tabId.value).then((tab) => {
-                            chrome.tabs.update(tabId.value, { muted });
+                        browser.tabs.get(tabId.value).then((tab) => {
+                            browser.tabs.update(tabId.value, { muted });
                         });
                         break;
                     case ActionType.UPDATE_IFRAMES:
