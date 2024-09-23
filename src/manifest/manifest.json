@@ -1,6 +1,6 @@
 {
     "name": "__MSG_extension_name__",
-    "version": "1.1.7",
+    "version": "1.1.8",
     "manifest_version": 3,
     "description": "__MSG_extension_des__",
     "content_scripts": [

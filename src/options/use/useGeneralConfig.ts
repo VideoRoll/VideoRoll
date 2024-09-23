@@ -27,6 +27,6 @@ export function useGeneralConfig() {
                     value: false
                 }
             ]
-        },
+        }
     ])
 }
