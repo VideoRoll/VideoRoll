@@ -21,14 +21,25 @@ Video Roll
 [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
 [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
 [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons") |
-[Home Page](https://videoroll.gomi.site "Home Page")
+[Home Page](https://videoroll.app "Home Page")
+[Documentation](https://docs.videoroll.app "Documentation")
 
 English | [简体中文](README-zh_CN.md)
 </div>
 
+---
+
+## ⚠️ Important Notice
+
+**This repository contains the open-source version 1.1.8 of Video Roll, primarily used for issue collection and feedback. Video Roll versions after 1.1.8 are NOT open-source and are proprietary projects. Future open-source decisions will be considered based on circumstances. Please respect the copyright agreement of this project - violations will be prosecuted.**
+
+---
+
 ### ✨ Describe
 
-Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, download, flip, tune, volume++, playback, focus and filter HTML5 videos in any web pages. Works great on most sites(Youtube™/Bilibili/Vimeo/TikTok/Twitter, etc).Support shortcut key.We provide an excellent memory system to help the next time you enter the website to take effect directly.
+Video Roll is a comprehensive web extension that enhances your video viewing experience with 30+ powerful features. It helps you rotate, zoom, download, record, stretch, reposition, flip, control speed, boost volume, enable VR mode, AI video summarization, and much more for HTML5 videos on any website. Works great on most platforms including YouTube™, Bilibili, Vimeo, TikTok, Twitter, and more. Features custom shortcuts, layout configuration, and an intelligent memory system.
+
+**Important Notice:** Video Roll does not download videos from websites that explicitly prohibit such actions (e.g., YouTube) in order to comply with Chrome Web Store policies and website terms of service. We respect the privacy and copyright of all content creators.
 
 ---
 
@@ -36,51 +47,83 @@ Video Roll is a web extension that helps you rotate, stretch, zoom, reposition, 
 
 ![9603e49b7121b314caf11da224ab3667.png](https://i.mji.rip/2023/07/24/9603e49b7121b314caf11da224ab3667.png)
 
--   ✅Support all HTML5 Video
--   ✅Flip(horizontal/vertical)
--   ✅Zoom
--   ✅Reposition
--   ✅Stretch
--   ✅Loop
--   ✅Screenshot
--   ✅Rotate 0/90/180/270deg
--   ✅Pitch
--   ✅Muted
--   ✅Volume
--   ✅Speed Control
--   ✅Focus
--   ✅Filter
--   ✅Detect Iframes
--   ✅Memory system(You can save all the configuration of the current website so that it will take effect directly next time)
--   ✅Support shortcut key
--   ✅Automatically calculates video scaling
--   ✅Respect user privacy
+#### 🎬 Video Features
+-   ✅ Rotate (0°/90°/180°/270°) with adaptive sizing
+-   ✅ Zoom in/out with precise control
+-   ✅ Video download (respects website policies)
+-   ✅ Video recording
+-   ✅ Picture-in-Picture (PiP) & Advanced PiP
+-   ✅ Screenshot capture
+-   ✅ AB Loop & Loop playback
+-   ✅ VR Mode for immersive viewing
+-   ✅ AI Video Summarization
+-   ✅ Video filters and effects
+-   ✅ Focus mode (lights-off experience)
+-   ✅ Speed control (0.25x - 16x)
+-   ✅ Built-in video player
+-   ✅ Video stretching and repositioning
+-   ✅ Video URL extraction & QR code generation
+-   ✅ Flip (horizontal/vertical)
+
+#### 🔊 Audio Features
+-   ✅ Volume boost (beyond 100%)
+-   ✅ Pitch adjustment
+-   ✅ Audio delay compensation
+-   ✅ Stereo audio controls
+-   ✅ 3D Surround sound effects
+
+#### 🛠️ Other Features
+-   ✅ YouTube ad accelerator (not blocking)
+-   ✅ Multi-platform support
+-   ✅ One-click disable/enable
+-   ✅ Cache and disable lists management
+-   ✅ Custom keyboard shortcuts
+-   ✅ Custom layout configuration
+-   ✅ Iframe video detection
+-   ✅ Memory system (saves settings per website)
+-   ✅ Dark/light theme support
+-   ✅ Multi-language support (10+ languages)
+-   ✅ Privacy protection (no data collection)
 
 ---
 
 ### ✨ Installation
 
--   **crx**
-    - [chrome.zzzmh.cn](https://chrome.zzzmh.cn/info/cokngoholafkeghnhhdlmiadlojpindm)
-    - [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store")
-    - [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons")
+#### 🌐 Browser Extensions
+-   **Chrome** - [Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm)
+-   **Edge** - [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn)
+-   **Firefox** - [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/videoroll/)
 
+#### 📦 Alternative Sources
+-   **Third-party** - [chrome.zzzmh.cn](https://chrome.zzzmh.cn/info/cokngoholafkeghnhhdlmiadlojpindm)
 
--   **developer mode**
-    If you can't install crx，you can open chrome's developer mode.
+#### 🛠️ Developer Mode Installation
+If you can't install from the store, you can use developer mode:
+1. Download the latest release from [GitHub Releases](https://github.com/gxy5202/VideoRoll/releases)
+2. Extract the ZIP file
+3. Open Chrome/Edge and go to Extensions page
+4. Enable "Developer mode"
+5. Click "Load unpacked" and select the extracted folder
 
 ---
 
 ### ✨ Sponsoring
 
--   [afdian](https://afdian.com/a/gomi_gxy/plan)
--   [official(last page)](https://gomi.site/VideoRoll)
+Support the development of Video Roll:
+
+-   ☕ [Buy me a coffee](https://afdian.com/a/gomi_gxy/plan) - Afdian
+-   💝 WeChat/Alipay - Available in extension settings
 
 ---
 
-### ✨ Feedback
+### ✨ Feedback & Support
 
-If you have any questions, please commit a issue or join our wechat group.
+If you have any questions or suggestions:
+
+-   📧 **Email:** gxy880520@gmail.com
+-   💬 **WeChat Group:** Scan QR code below
+-   🐛 **Bug Reports:** [GitHub Issues](https://github.com/gxy5202/VideoRoll/issues)
+-   🌟 **Feature Requests:** [GitHub Discussions](https://github.com/gxy5202/VideoRoll/discussions)
 
 <p align="left">
   <img width="230" src="src/options/components/Contact/images/qun.jpg">
@@ -92,30 +135,48 @@ If you have any questions, please commit a issue or join our wechat group.
 If you like this extension，please star it.
 If you have any good idea, please commit a issue or send a PR.
 
-#### Development steps
+### ✨ Development
 
-1. clone this repo to your local.
-2. `pnpm install`
-3. dev: `pnpm run dev:chromium`, then you can drag and drop the dist folder into chrome's extension management.(make sure open developer mode). Parcel will do the hot reload work for you, just change your code, then reclick the popup button.
-4. build: `pnpm run build`. Both chromium zip and firefox zip will be done.
+#### Quick Start
+1. **Clone** this repository to your local machine
+2. **Install dependencies:** `pnpm install`
+3. **Development:** `pnpm run dev:chromium`
+   - Drag and drop the `dist` folder into Chrome's extension management
+   - Make sure developer mode is enabled
+   - Parcel will handle hot reload automatically
+4. **Build:** `pnpm run build`
+   - Generates both Chromium and Firefox packages
+
+#### Tech Stack
+- **Framework:** Vue.js + TypeScript
+- **Build Tool:** Parcel
+- **Testing:** Jest
+- **Styling:** Less + Vant UI
+- **Package Manager:** pnpm
+- **Browser APIs:** WebExtension Polyfill
 
 
 ---
 
 ### ✨ Acknowledgments
 
--   vue
--   parcel
--   parcel-namer-hashless
--   jest
--   jsx
--   typescript
--   copyfiles
--   jungle
--   node
--   less
--   vant
--   visual studio code
--   pnpm
--   yarn
--   webextension-polyfill
+Special thanks to the open source community and these amazing projects:
+
+-   **Frontend:** Vue.js, TypeScript, Vant UI, Less
+-   **Build Tools:** Parcel, Parcel-namer-hashless
+-   **Testing:** Jest
+-   **Package Management:** pnpm, yarn
+-   **Browser APIs:** WebExtension Polyfill
+-   **Development Tools:** Visual Studio Code, Node.js
+-   **AI Services:** Built-in browser AI capabilities
+-   **Media Processing:** M3U8-Parser, MPD-Parser
+
+### 📄 License
+
+This project is licensed under the Apache-2.0 license - see the [LICENSE](LICENSE) file for details.
+
+### 🌟 Star History
+
+If you find this project helpful, please consider giving it a star! ⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=gxy5202/VideoRoll&type=Date)](https://star-history.com/#gxy5202/VideoRoll&Date)
