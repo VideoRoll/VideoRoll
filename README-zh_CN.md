@@ -3,6 +3,7 @@
  * @Author: Gouxinyu
  * @Date: 2022-01-13 22:43:33
 -->
+
 <p align="center">
   <a href="https://gomi.site/VideoRoll">
     <img width="230" src="src/icons/icon_512.png">
@@ -17,48 +18,70 @@ Video Roll
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://img.shields.io/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
-[Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
-[Firefox Add-ons](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons") |
-[Home Page](https://videoroll.gomi.site "Home Page")
+[Chrome 网上应用店](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
+[Edge 扩展商店](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
+[Firefox 扩展](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons") |
+[官网](https://videoroll.app "Home Page") |
+[文档](https://docs.videoroll.app "Documentation")
 
 [English](README.md) | 简体中文
 </div>
 
-### ✨ 介绍
+---
 
-Video Roll 是一个帮助你旋转、缩放、移动、下载、调整比例、镜像翻转、调节音调、音量、倍速、专注和滤镜任意网页中 HTML5 视频的浏览器插件。在大部分网站上都表现出色(Youtube™/Bilibili/Vimeo/TikTok/Twitter 等)，支持旋转同源 iframe 下的视频(如 dailymotion.com)，支持快捷键: Ctrl+Up/Right/Down/Left/B。我们提供了超棒的记忆功能，帮助你一下次进入网站直接生效。
+## ⚠️ 重要声明
+
+**该仓库为Video Roll 1.1.8版本的开源仓库，主要用于issue收集和反馈。1.1.8版本后的Video Roll未采用开源协议，是非开源项目。后续会根据情况考虑是否开源，请尊重该项目的版权协议，违者必究。**
+
+### ✨ 项目介绍
+
+Video Roll 是一个功能全面的网页扩展，通过30+强大功能提升您的视频观看体验。它可以帮助您旋转、缩放、下载、录制、拉伸、重新定位、翻转、控制速度、增强音量、启用VR模式、AI视频总结等，适用于任何网站上的HTML5视频。在大多数平台上都能完美运行，包括YouTube™、哔哩哔哩、Vimeo、TikTok、Twitter等。支持自定义快捷键、布局配置和智能记忆系统。
+
+**重要声明：** Video Roll 不会从明确禁止此类行为的网站（例如 YouTube 等）下载视频，以遵守 Chrome 网上应用店政策和网站服务条款。我们尊重所有内容创作者的隐私和版权。
 
 ---
 
-### ✨ 主要特性
+### ✨ 功能特性
 
 ![9603e49b7121b314caf11da224ab3667.png](https://i.mji.rip/2023/07/24/9603e49b7121b314caf11da224ab3667.png)
 
----
+#### 🎬 视频功能
+-   ✅ 旋转（0°/90°/180°/270°）并自适应大小
+-   ✅ 精确的缩放控制
+-   ✅ 视频下载（遵守网站政策）
+-   ✅ 视频录制
+-   ✅ 画中画（PiP）和高级画中画
+-   ✅ 截图捕获
+-   ✅ AB循环和循环播放
+-   ✅ VR模式沉浸式观看
+-   ✅ AI视频总结
+-   ✅ 视频滤镜和特效
+-   ✅ 关灯专注模式
+-   ✅ 速度控制（0.25x - 16x）
+-   ✅ 内置视频播放器
+-   ✅ 视频拉伸和重新定位
+-   ✅ 视频URL提取和二维码生成
+-   ✅ 翻转（水平/垂直）
 
--   ✅ 可旋转任何网页中的 HTML5 视频，支持 0/90/180/270° 旋转
--   ✅ 支持镜像翻转（垂直/水平翻转）
--   ✅ 支持自定义缩放
--   ✅ 支持移动视频位置
--   ✅ 支持自定义比例调整
--   ✅ 支持下载视频
--   ✅ 支持调节视频音调
--   ✅ 支持调节视频音量，突破最大音量
--   ✅ 支持调节视频倍速
--   ✅ 专注模式
--   ✅ 支持设置滤镜效果
--   ✅ 发现Iframes
--   ✅ 记忆系统（保存当前网站的配置，下次进入网页直接生效）
--   ✅ 针对同源 iframe 中的视频做了优化，支持旋转同源 iframe 中的视频(如 dailymotion.com)
--   ✅ 旋转视频时，会自动根据视频容器和视频原始大小尺寸进行自适应，避免旋转后只能展示部分内容的情况
--   ✅ 重视安全性，插件不会收集任何用户信息
--   ✅ 支持快捷键 ctrl + 方向键
+#### 🔊 音频功能
+-   ✅ 音量增强（超过100%）
+-   ✅ 音高调节
+-   ✅ 音频延迟补偿
+-   ✅ 立体声控制
+-   ✅ 3D环绕音效
 
----
-
-### ✨ 快捷键使用方式
-- 打开设置页面查看和自定义
+#### 🛠️ 其他功能
+-   ✅ YouTube广告加速（非屏蔽）
+-   ✅ 多平台支持
+-   ✅ 一键禁用/启用
+-   ✅ 缓存和禁用列表管理
+-   ✅ 自定义键盘快捷键
+-   ✅ 自定义布局配置
+-   ✅ 内嵌视频检测
+-   ✅ 记忆系统（保存每个网站的设置）
+-   ✅ 深色/浅色主题支持
+-   ✅ 多语言支持（10+种语言）
+-   ✅ 隐私保护（不收集数据）
 
 ---
 
@@ -76,7 +99,6 @@ Video Roll 是一个帮助你旋转、缩放、移动、下载、调整比例、
 ### ✨ 捐赠
 
 -   [afdian](https://afdian.net/a/gomi_gxy/plan)
--   [official(最后一页)](https://gomi.site/VideoRoll)
 
 ---
 
@@ -94,26 +116,44 @@ Video Roll 是一个帮助你旋转、缩放、移动、下载、调整比例、
 
 #### 贡献步骤
 
-1. 将本仓库克隆到你的本地
-2. 在根目录下执行 `pnpm install`
-3. 开发模式: 执行 `pnpm run dev:chromium`, 然后可以将dist文件夹直接拖入chrome的扩展程序管理中.(确保打开了开发者模式). Parcel 将会帮你完成热更新，你只需要修改代码，然后重新点击popup按钮即可。
-4. 构建: 执行 `pnpm run build`. 将会打包出 chromium zip 和 firefox zip。
+1. **克隆** 此仓库到本地
+2. **安装依赖：** `pnpm install`
+3. **开发：** `pnpm run dev:chromium`
+   - 将 `dist` 文件夹拖放到Chrome的扩展管理页面
+   - 确保已启用开发者模式
+   - Parcel将自动处理热重载
+4. **构建：** `pnpm run build`
+   - 生成Chromium和Firefox包
+
+#### 技术栈
+- **框架：** Vue.js + TypeScript
+- **构建工具：** Parcel
+- **测试：** Jest
+- **样式：** Less + Vant UI
+- **包管理器：** pnpm
+- **浏览器API：** WebExtension Polyfill
+
 ---
 
-### ✨ 感谢以下开源项目
+### ✨ 致谢
 
--   vue
--   parcel
--   parcel-namer-hashless
--   jest
--   jsx
--   typescript
--   copyfiles
--   jungle
--   node
--   less
--   vant
--   visual Studio Code
--   pnpm
--   yarn
--   webextension-polyfill
+特别感谢开源社区和这些优秀的项目：
+
+-   **前端：** Vue.js、TypeScript、Vant UI、Less
+-   **构建工具：** Parcel、Parcel-namer-hashless
+-   **测试：** Jest
+-   **包管理：** pnpm、yarn
+-   **浏览器API：** WebExtension Polyfill
+-   **开发工具：** Visual Studio Code、Node.js
+-   **AI服务：** 内置浏览器AI功能
+-   **媒体处理：** M3U8-Parser、MPD-Parser
+
+### 📄 许可证
+
+本项目基于Apache-2.0许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+### 🌟 Star历史
+
+如果您觉得这个项目有帮助，请考虑给它点个星星！⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=gxy5202/VideoRoll&type=Date)](https://star-history.com/#gxy5202/VideoRoll&Date)
