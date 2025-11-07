@@ -18,11 +18,13 @@ Video Roll
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/cokngoholafkeghnhhdlmiadlojpindm?icon=chrome&color=0f9d58)](https://chrome.google.com/webstore/detail/cokngoholafkeghnhhdlmiadlojpindm?hl=en) ![](https://img.shields.io/chrome-web-store/rating/cokngoholafkeghnhhdlmiadlojpindm) ![](https://badgen.net/chrome-web-store/stars/cokngoholafkeghnhhdlmiadlojpindm) ![](https://img.shields.io/github/stars/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/v/gxy5202/VideoRoll) ![](https://img.shields.io/github/package-json/license/gxy5202/VideoRoll)
 
-[Chrome 网上应用店](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
-[Edge 扩展商店](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
-[Firefox 扩展](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons") |
-[官网](https://videoroll.app "Home Page") |
-[文档](https://docs.videoroll.app "Documentation")
+[videoroll.app](https://videoroll.app "Home Page") |
+[docs](https://docs.videoroll.app "Documentation")
+
+[Chrome Web Store](https://chrome.google.com/webstore/detail/video-roll/cokngoholafkeghnhhdlmiadlojpindm?hl=zh-CN&authuser=0 "Chrome Web Store") |
+[Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn "Edge Add-ons") |
+[Firefox Add-ons](https://addons.mozilla.org/firefox/addon/videoroll/ "Firefox Add-ons")
+
 
 [English](README.md) | 简体中文
 </div>
@@ -43,43 +45,43 @@ Video Roll 是一个功能全面的网页扩展，通过30+强大功能提升您
 
 ### ✨ 功能特性
 
-![9603e49b7121b314caf11da224ab3667.png](https://i.mji.rip/2023/07/24/9603e49b7121b314caf11da224ab3667.png)
+![7ca971701dcd6e1457207ca6fd535566.png](https://i.mji.rip/2025/11/07/7ca971701dcd6e1457207ca6fd535566.png)
 
 #### 🎬 视频功能
 -   ✅ 旋转（0°/90°/180°/270°）并自适应大小
 -   ✅ 精确的缩放控制
--   ✅ 视频下载（遵守网站政策）
--   ✅ 视频录制
--   ✅ 画中画（PiP）和高级画中画
+-   ✅ 视频下载（遵守网站政策）(version > v1.1.8)
+-   ✅ 视频录制 (version > v1.1.8)
+-   ✅ 画中画（PiP）和高级画中画 (version > v1.1.8)
 -   ✅ 截图捕获
--   ✅ AB循环和循环播放
--   ✅ VR模式沉浸式观看
--   ✅ AI视频总结
+-   ✅ AB循环和循环播放 (version > v1.1.8)
+-   ✅ VR模式沉浸式观看 (version > v1.1.8)
+-   ✅ AI视频总结 (version > v1.1.8)
 -   ✅ 视频滤镜和特效
 -   ✅ 关灯专注模式
 -   ✅ 速度控制（0.25x - 16x）
--   ✅ 内置视频播放器
+-   ✅ 内置视频播放器 (version > v1.1.8)
 -   ✅ 视频拉伸和重新定位
--   ✅ 视频URL提取和二维码生成
+-   ✅ 视频URL提取和二维码生成 (version > v1.1.8)
 -   ✅ 翻转（水平/垂直）
 
 #### 🔊 音频功能
 -   ✅ 音量增强（超过100%）
 -   ✅ 音高调节
--   ✅ 音频延迟补偿
--   ✅ 立体声控制
--   ✅ 3D环绕音效
+-   ✅ 音频延迟补偿 (version > v1.1.8)
+-   ✅ 立体声控制 (version > v1.1.8)
+-   ✅ 3D环绕音效 (version > v1.1.8)
 
 #### 🛠️ 其他功能
--   ✅ YouTube广告加速（非屏蔽）
+-   ✅ YouTube广告加速（非屏蔽） (version > v1.1.8)
 -   ✅ 多平台支持
 -   ✅ 一键禁用/启用
 -   ✅ 缓存和禁用列表管理
 -   ✅ 自定义键盘快捷键
--   ✅ 自定义布局配置
+-   ✅ 自定义布局配置 (version > v1.1.8)
 -   ✅ 内嵌视频检测
 -   ✅ 记忆系统（保存每个网站的设置）
--   ✅ 深色/浅色主题支持
+-   ✅ 深色/浅色主题支持 (version > v1.1.8)
 -   ✅ 多语言支持（10+种语言）
 -   ✅ 隐私保护（不收集数据）
 
